@@ -9,5 +9,5 @@ Class {
 { #category : 'as yet unclassified' }
 PBTInfer class >> enrich: schema for: targetMethod [
 
-	"TODO"
+	"TODO: Implement me"
 ]

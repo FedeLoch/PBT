@@ -20,9 +20,9 @@ PBTRunner class >> test: targetMethod from: schema [
 ]
 
 { #category : 'tests' }
-PBTRunner >> getReport: tests [
+PBTRunner >> getReport: tests since: time [
 
-	^ PBTResult resultFrom: tests
+	^ PBTResult resultFrom: tests since: time
 ]
 
 { #category : 'tests' }
@@ -69,7 +69,7 @@ PBTRunner >> schema: propSchema [
 { #category : 'tests' }
 PBTRunner >> shouldGenNext: currentTests since: aTime [
 
-	^ stopCriteria shouldGenNext: currentTests since: aTime
+	^ stopCriteria shouldGenNext: currentTests since: (Time millisecondsSince: aTime)
 ]
 
 { #category : 'accessing' }
@@ -86,7 +86,7 @@ PBTRunner >> test [
 	
 	time := Time microsecondClockValue.
 	tests := OrderedCollection new.
-	(self shouldGenNext: tests since: (Time millisecondsSince: time)) whileTrue: [ tests add: self getTest ].
+	(self shouldGenNext: tests since: time) whileTrue: [ tests add: self getTest ].
 	
-	^ self getReport: tests
+	^ self getReport: tests since: time
 ]
