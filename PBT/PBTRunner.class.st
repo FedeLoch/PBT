@@ -16,7 +16,7 @@ Class {
 { #category : 'tests' }
 PBTRunner class >> test: targetMethod from: schema [
 	
-	^ self new schema: (PBTInfer enrich: schema for: targetMethod); target: targetMethod; test
+	^ self new schema: (PBTPropsInfer enrich: schema for: targetMethod); target: targetMethod; test
 ]
 
 { #category : 'tests' }

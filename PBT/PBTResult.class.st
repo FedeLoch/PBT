@@ -17,6 +17,5 @@ PBTResult >> computeResult: tests since: time [
 	
 	| totalTime |
 	totalTime := Time millisecondsSince: time.
-
 	" TODO: Implement me"
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTInfer',
+	#name : 'PBTProps',
 	#superclass : 'Object',
 	#category : 'PBT-Property Specifcation',
 	#package : 'PBT',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTInfer class >> enrich: schema for: targetMethod [
+PBTProps class >> getProperties: aFile [
 
 	"TODO: Implement me"
 ]
