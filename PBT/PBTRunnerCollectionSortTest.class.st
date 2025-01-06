@@ -15,7 +15,7 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 		                     objectClass: OrderedCollection;
 		                     item: (PBTObjectConstraint new
 				                      objectClass: SmallInteger;
-				                      gen: [ 1 to: 100 ]).
+				                      gen: (PBTGen oneOf: (10 to: 100))).
 
 	assert := [ :coll :args :result | result = coll sort and: result size = coll size ].
 

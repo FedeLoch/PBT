@@ -11,7 +11,7 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 
 	| objectConstraints assert schema |
 
-	objectConstraints := PBTObjectConstraint new gen: [ 1 to: 100 ].
+	objectConstraints := PBTObjectConstraint new gen: (PBTGen oneOf: (10 to: 100)).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
 	schema := PBTSchema new objectConstraint: objectConstraints; assert: assert.
 
