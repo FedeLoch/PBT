@@ -86,7 +86,7 @@ PBTRunner >> test [
 	
 	time := Time microsecondClockValue.
 	tests := OrderedCollection new.
-	(self shouldGenNext: tests since: time) whileTrue: [ tests add: self getTest ].
+	[self shouldGenNext: tests since: time] whileTrue: [ tests add: self getTest ].
 	
 	^ self getReport: tests since: time
 ]
