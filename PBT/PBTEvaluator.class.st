@@ -7,8 +7,17 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTEvaluator >> evalTest: callResult from: target [
+PBTEvaluator >> eval: object method: target from: schema with: args [
 
-	"TODO: implement me"
-	" Consider coverage"
+	| coverageResult callResult assertResult |
+	
+	coverageResult := (CoverageCollector new methods: { target }) runOn: [
+		callResult := object withArgs: args executeMethod: target.
+	 ].
+	
+	[ assertResult := schema assert value: object value: args value: callResult ] on: Error do: [ :error |
+		^ PBTEvalError new stack: error signalerContext shortDebugStack
+	].
+
+	^  (assertResult ifTrue: [ PBTEvalSuccess ] ifFalse: [ PBTEvalFail ]) new callResult: callResult; coverageResult: coverageResult
 ]

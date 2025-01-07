@@ -1,9 +1,9 @@
 Class {
 	#name : 'PBTRunnerTest',
 	#superclass : 'TestCase',
-	#category : 'PBT-Runner',
+	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
-	#tag : 'Runner'
+	#tag : 'FrameworkTests'
 }
 
 { #category : 'running' }

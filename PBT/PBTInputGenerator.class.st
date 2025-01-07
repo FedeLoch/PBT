@@ -9,11 +9,14 @@ Class {
 { #category : 'as yet unclassified' }
 PBTInputGenerator >> genInputsFor: target from: schema [
 
+	schema inputConstraints ifNil: [ ^#() ].
+	1 halt.
 	"TODO: Implement me"
 ]
 
 { #category : 'as yet unclassified' }
 PBTInputGenerator >> genObjectFor: target from: schema [
-
-	"TODO: implement me"
+	
+	"Considerar una seed"
+	^ schema objectConstraint generator gen
 ]

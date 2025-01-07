@@ -3,9 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'target',
-		'callInputs',
-		'objectInput',
-		'callResult',
+		'arguments',
+		'object',
 		'result'
 	],
 	#category : 'PBT-Test generation',
@@ -14,21 +13,15 @@ Class {
 }
 
 { #category : 'accessing' }
-PBTTest >> callInputs: inputs [
+PBTTest >> arguments: inputs [
 
-	callInputs := inputs
+	arguments := inputs
 ]
 
 { #category : 'accessing' }
-PBTTest >> callResult: aResult [
+PBTTest >> object: anObject [
 
-	callResult := aResult 	
-]
-
-{ #category : 'accessing' }
-PBTTest >> objectInput: object [
-
-	objectInput := object
+	object := anObject
 ]
 
 { #category : 'accessing' }

@@ -11,3 +11,9 @@ PBTGen class >> oneOf: aRange [
 
 	^ PBTRangeGen new from: aRange.
 ]
+
+{ #category : 'as yet unclassified' }
+PBTGen >> gen [
+	
+	self subclassResponsibility 
+]

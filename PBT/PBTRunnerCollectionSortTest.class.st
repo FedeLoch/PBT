@@ -1,24 +1,34 @@
 Class {
 	#name : 'PBTRunnerCollectionSortTest',
 	#superclass : 'PBTRunnerTest',
-	#category : 'PBT-Runner',
+	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
-	#tag : 'Runner'
+	#tag : 'FrameworkTests'
 }
 
 { #category : 'tests' }
 PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResult [
 
-	| objectConstraints assert schema |
+	| objectConstraints assert pbtResult schema |
 	
 	objectConstraints := PBTIterableObjectConstraint new
 		                     objectClass: OrderedCollection;
 		                     item: (PBTObjectConstraint new
 				                      objectClass: SmallInteger;
-				                      gen: (PBTGen oneOf: (10 to: 100))).
+				                      generator: (PBTGen oneOf: (10 to: 100))).
 
 	assert := [ :coll :args :result | result = coll sort and: result size = coll size ].
 
 	schema := PBTSchema new objectConstraint: objectConstraints; assert: assert.
-	PBTRunner test: OrderedCollection >> #sort from: schema
+	pbtResult := PBTRunner test: OrderedCollection >> #sort from: schema.
+	1 halt.
+]
+
+{ #category : 'tests' }
+PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResultWithoutSchema [
+
+	| pbtResult |
+	
+	pbtResult := PBTRunner test: OrderedCollection >> #sort.
+	1 halt.
 ]

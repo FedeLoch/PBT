@@ -12,7 +12,7 @@ Class {
 { #category : 'asserting' }
 PBTCountCriteria >> shouldGenNext: currentTests since: aTime [
 
-	^ currentTests length < times
+	^ currentTests size < times
 ]
 
 { #category : 'as yet unclassified' }

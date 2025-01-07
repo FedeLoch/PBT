@@ -14,37 +14,39 @@ Class {
 }
 
 { #category : 'tests' }
+PBTRunner class >> test: targetMethod [
+	
+	^ self test: targetMethod from: PBTSchema new
+]
+
+{ #category : 'tests' }
 PBTRunner class >> test: targetMethod from: schema [
 	
-	^ self new schema: (PBTPropsInfer enrich: schema for: targetMethod); target: targetMethod; test
+	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod; test
 ]
 
 { #category : 'tests' }
-PBTRunner >> getReport: tests since: time [
+PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
-	^ PBTResult resultFrom: tests since: time
+	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult
 ]
 
 { #category : 'tests' }
-PBTRunner >> getTest [
+PBTRunner >> genTest [
 
-	| inputs object callResult testResult |
+	| inputs object testResult |
 	
 	"Setup based on the enriched schema"
 	inputs := generator genInputsFor: target from: schema.
 	object := generator genObjectFor: target from: schema.
 	
-	"Target call"
-	callResult := object withArgs: inputs executeMethod: target.
-	
-	"Eval result"
-	testResult := evaluator evalTest: callResult from: target.
+	"Target call and eval result"
+	testResult := evaluator eval: object method: target from: schema with: inputs.
 	
 	"Generate Test case"
 	^ PBTTest new target: target;
-		callInputs: inputs;
-		objectInput: object;
-		callResult: callResult;
+		arguments: inputs;
+		object: object;
 		result: testResult
 		
 ]
@@ -82,11 +84,13 @@ PBTRunner >> target: targetMethod [
 { #category : 'tests' }
 PBTRunner >> test [
 
-	| tests time |
+	| tests time totalCoverageResult |
 	
-	time := Time microsecondClockValue.
+	time := Time millisecondClockValue.
 	tests := OrderedCollection new.
-	[self shouldGenNext: tests since: time] whileTrue: [ tests add: self getTest ].
-	
-	^ self getReport: tests since: time
+	totalCoverageResult := (CoverageCollector new methods: { target }) runOn: [  
+		[self shouldGenNext: tests since: time] whileTrue: [ tests add: self genTest ].
+	].
+
+	^ self genReport: tests since: time withCoverage: totalCoverageResult
 ]

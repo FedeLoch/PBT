@@ -10,8 +10,14 @@ Class {
 	#tag : 'Property Specifcation'
 }
 
+{ #category : 'accessing' }
+PBTObjectConstraint >> generator [
+
+	^ generator 
+]
+
 { #category : 'as yet unclassified' }
-PBTObjectConstraint >> gen: aBlock [
+PBTObjectConstraint >> generator: aBlock [
 
 	generator := aBlock
 ]
