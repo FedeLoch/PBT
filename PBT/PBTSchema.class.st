@@ -29,6 +29,14 @@ PBTSchema >> assert: anAssertBlock [
 	assert := anAssertBlock
 ]
 
+{ #category : 'initialization' }
+PBTSchema >> initialize [ 
+
+	super initialize.
+	inputConstraints := #().
+	objectConstraint := nil.
+]
+
 { #category : 'accessing' }
 PBTSchema >> inputConstraints [
 
