@@ -44,5 +44,8 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 	| pbtResult |
 	
 	pbtResult := PBTRunner test: SmallInteger >> #factorial.
-	1 halt.
+	
+	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) size equals: 1.
+	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) keys first equals: PBTEvalSuccess.
 ]

@@ -25,7 +25,7 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 	schema := PBTSchema new objectConstraint: objectConstraints; assert: assert.
 	
 	pbtResult := PBTRunner test: SequenceableCollection >> #sort from: schema.
-	
+
 	self assert: (pbtResult tests size) equals: 1000.
 	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) size equals: 1.
 	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) keys first equals: PBTEvalSuccess.
@@ -39,5 +39,8 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 	| pbtResult |
 	
 	pbtResult := PBTRunner test: OrderedCollection >> #sort.
-	1 halt.
+	
+	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) size equals: 1.
+	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) keys first equals: PBTEvalSuccess.
 ]
