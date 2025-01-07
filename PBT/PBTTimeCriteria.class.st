@@ -12,7 +12,7 @@ Class {
 { #category : 'asserting' }
 PBTTimeCriteria >> shouldGenNext: currentTests since: aTime [
 
-	^ aTime < timeout 
+	^ aTime milliSeconds < timeout 
 ]
 
 { #category : 'as yet unclassified' }

@@ -25,6 +25,12 @@ PBTTest >> object: anObject [
 ]
 
 { #category : 'accessing' }
+PBTTest >> result [
+
+	^ result
+]
+
+{ #category : 'accessing' }
 PBTTest >> result: testResult [
 
 	result := testResult 

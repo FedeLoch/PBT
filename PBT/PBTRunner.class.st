@@ -26,6 +26,15 @@ PBTRunner class >> test: targetMethod from: schema [
 ]
 
 { #category : 'tests' }
+PBTRunner class >> test: targetMethod from: schema for: time [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTTimeCriteria new timeout: time);
+		target: targetMethod; test
+]
+
+{ #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
 	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult
@@ -93,4 +102,10 @@ PBTRunner >> test [
 	].
 
 	^ self genReport: tests since: time withCoverage: totalCoverageResult
+]
+
+{ #category : 'tests' }
+PBTRunner >> withCriteria: aCriteria [
+
+	stopCriteria := aCriteria 
 ]

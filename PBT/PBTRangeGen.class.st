@@ -16,7 +16,7 @@ PBTRangeGen >> from: aRange [
 ]
 
 { #category : 'as yet unclassified' }
-PBTRangeGen >> gen [ 
+PBTRangeGen >> gen: myConstraint [
 
 	^ range atRandom
 ]

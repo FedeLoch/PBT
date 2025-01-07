@@ -29,6 +29,12 @@ PBTResult >> computeResult: tests since: time [
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> tests [
+
+	^ tests 
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> tests: someTests [
 
 	tests := someTests
@@ -36,10 +42,22 @@ PBTResult >> tests: someTests [
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> totalCoverage [
+
+	^ totalCoverage 
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> totalCoverage: aTotalCoverage [
 
 	totalCoverage := aTotalCoverage
 
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> totalTime [
+
+	^ totalTime 
 ]
 
 { #category : 'as yet unclassified' }
