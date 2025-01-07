@@ -21,14 +21,6 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
-PBTResult >> computeResult: tests since: time [
-	
-	| totalTime |
-	totalTime := Time millisecondsSince: time.
-	" TODO: Implement me"
-]
-
-{ #category : 'as yet unclassified' }
 PBTResult >> tests [
 
 	^ tests 
