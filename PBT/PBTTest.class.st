@@ -18,6 +18,14 @@ PBTTest >> arguments: inputs [
 	arguments := inputs
 ]
 
+{ #category : 'converting' }
+PBTTest >> asPharoTest [
+	
+	"Returns the pharo code that reprensents the test which the same semantics"
+
+	"TODO: Implement me"
+]
+
 { #category : 'accessing' }
 PBTTest >> object: anObject [
 
