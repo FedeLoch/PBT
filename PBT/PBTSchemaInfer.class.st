@@ -1,29 +1,107 @@
 Class {
 	#name : 'PBTSchemaInfer',
 	#superclass : 'Object',
-	#instVars : [
-		'target'
-	],
 	#category : 'PBT-Property Specifcation',
 	#package : 'PBT',
 	#tag : 'Property Specifcation'
 }
 
 { #category : 'as yet unclassified' }
+PBTSchemaInfer class >> assertFor: method [
+
+	| expectedType |
+	
+	expectedType := TypeInferencer inferExpectedResultType: method.
+	
+	"ex: [ :n :args :result | args first + n = result ]"
+	"TODO: A naive approach for assert Results"
+	^ [ :instance :args :result | (TypeInferencer typeOf: result) = expectedType ]
+	
+]
+
+{ #category : 'as yet unclassified' }
 PBTSchemaInfer class >> enrich: schema for: targetMethod [
 
-	^ PBTSchemaInfer new target: targetMethod; enrichSchema: schema
+	^ schema merge: (self schemaFor: targetMethod)
+
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer >> enrichSchema: schema [
+PBTSchemaInfer class >> inputConstraintsFor: method [
 
-	"TODO: implement me "
-	^ schema
+	^ method ast arguments  collect: [ :argNode | self objectConstraintForVariable: argNode on: method ].
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer >> target: targetMethod [
+PBTSchemaInfer class >> isPrimitiveClass: class [
 
-	target := targetMethod
+	"TODO"
+	^ false
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> objectConstraint: class calling: methods [
+
+	| propConstraints |
+	
+	"If the class is a primitive like SmallInteger or Boolean, create a predefined generator for that class"
+	(self isPrimitiveClass: class) ifTrue: [ ^ self primitiveConstraint: class ].
+	
+	"Common case, complex object"
+	
+	"TODO: continue"
+	"If it's not possible to get the class, build an stubObject which know how to respond to all the methods"
+	
+   "agrupar, por cada instancia, todas las llamads a sus metodos
+	{
+		class -> [ method ]
+	},
+	llamar recursivamente y mergear esas constraints
+	"
+   propConstraints := class instanceVariables flatCollect: [ :ivar |
+            "Add constraints based on instance variables, e.g., their class types"
+            "constraints add: (PBTSchemaConstraint forVariable: ivar class: (eachClass classPool at: ivar ifAbsent: [ Object ]))"
+   ].
+
+   "^ PBTObjectConstraint new objectClass: methodClass; props: propConstraints; gen: (PBTGenerator genBy: methodClass from: propConstraints)"
+	^ nil
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> objectConstraintForVariable: argNode on: method [
+
+	"Take all their calls and return "
+	| class methods variableName |
+	
+	variableName := 'TODO'.
+	methods := {}.
+	class := TypeInferencer inferTypeFrom: methods withName: variableName.
+	
+	^ self objectConstraint: class calling: methods
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> primitiveConstraint: class [
+
+	"TODO"
+	1 halt.
+	^ false
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> schemaFor: method [
+
+	| objectConstraints inputConstraints assert |
+	
+	objectConstraints := self selfObjectConstraintOn: method.
+	inputConstraints := self inputConstraintsFor: method.
+	assert := self assertFor: method.
+	
+	^ PBTSchema new objectConstraint: objectConstraints; inputConstraints: inputConstraints; assert: assert.
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> selfObjectConstraintOn: method [
+
+	^ self objectConstraint: (method methodClass) calling: { method } 
 ]

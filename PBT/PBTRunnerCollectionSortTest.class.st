@@ -19,14 +19,14 @@ PBTRunnerCollectionSortTest >> setUp [
 	objectConstraints := PBTObjectConstraint new
 		                     objectClass: OrderedCollection;
 		                     generator:
-			                     (PBTGen onceInstance: [ :instance :props |
+			                     (PBTGenerator onceInstance: [ :instance :props |
 					                      (Random new nextIntegerBetween: 1 and: 100)
 						                      timesRepeat: [
 							                      instance add: (props at: 'item') gen ].
 					                      instance ]);
 		                     props: { ('item' -> (PBTObjectConstraint new
 					                       objectClass: SmallInteger;
-					                       generator: (PBTGen oneOf: (10 to: 100)))) }.
+					                       generator: (PBTGenerator oneOf: (10 to: 100)))) }.
 
 	assert := [ :coll :args :result |
 	          result = coll sort and: result size = coll size ]. "TODO: improve the assertion"

@@ -11,12 +11,6 @@ Class {
 	#tag : 'Property Specifcation'
 }
 
-{ #category : 'as yet unclassified' }
-PBTSchema class >> getProperties: aFile [
-
-	"TODO: Implement me"
-]
-
 { #category : 'accessing' }
 PBTSchema >> assert [
 
@@ -47,6 +41,34 @@ PBTSchema >> inputConstraints [
 PBTSchema >> inputConstraints: anInputConstraints [
 
 	inputConstraints := anInputConstraints.
+]
+
+{ #category : 'accessing' }
+PBTSchema >> merge: anotherSchema [
+
+	"TODO:
+		Think how to index the schema, for the moment the schema respect the next structure:
+		{
+			objectConstraint: Constraint,
+			inputConstraints: [ Constraint ],
+			assert: Block
+		},
+		But maybe the best structure could be:
+		{
+			[ Class/Type ]: {
+				objectConstraint: Constraint,
+				methods: {
+					[ method ]: { inputsConstraint: [ Constraint ], assert: aBlock }
+				}
+			}
+		}
+		
+		A Constraint looks as follow:
+		{
+			objectClass: Class, gen: aBlock, props: { variable: Class }
+		}
+	"
+	^ self
 ]
 
 { #category : 'accessing' }

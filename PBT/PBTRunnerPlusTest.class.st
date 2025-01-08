@@ -20,9 +20,9 @@ PBTRunnerPlusTest >> setUp [
 	super setUp.
 	
 	range := (SmallInteger minVal to: SmallInteger maxVal).
-	objectConstraints := PBTObjectConstraint new generator: (PBTGen oneOf: range).
+	objectConstraints := PBTObjectConstraint new generator: (PBTGenerator oneOf: range).
 	inputConstraints := {
-		PBTObjectConstraint new generator: (PBTGen oneOf: range)
+		PBTObjectConstraint new generator: (PBTGenerator oneOf: range)
 	}.
 	assert := [ :n :args :result | args first + n = result ].
 	schema := PBTSchema new objectConstraint: objectConstraints; inputConstraints: inputConstraints; assert: assert.

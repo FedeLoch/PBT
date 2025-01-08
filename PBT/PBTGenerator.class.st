@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGen',
+	#name : 'PBTGenerator',
 	#superclass : 'Object',
 	#category : 'PBT-Input Generation',
 	#package : 'PBT',
@@ -7,19 +7,19 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTGen class >> onceInstance: aBlock [
+PBTGenerator class >> onceInstance: aBlock [
 
-	^ PBTObjectGen new then: aBlock 
+	^ PBTObjectGenerator new then: aBlock 
 ]
 
 { #category : 'as yet unclassified' }
-PBTGen class >> oneOf: aRange [
+PBTGenerator class >> oneOf: aRange [
 
-	^ PBTRangeGen new from: aRange.
+	^ PBTRangeGenerator new from: aRange.
 ]
 
 { #category : 'as yet unclassified' }
-PBTGen >> gen: instance [
+PBTGenerator >> gen: instance [
 	
 	self subclassResponsibility 
 ]

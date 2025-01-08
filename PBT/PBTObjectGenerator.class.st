@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTObjectGen',
-	#superclass : 'PBTGen',
+	#name : 'PBTObjectGenerator',
+	#superclass : 'PBTGenerator',
 	#instVars : [
 		'then'
 	],
@@ -10,13 +10,13 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTObjectGen >> gen: myConstraint [
+PBTObjectGenerator >> gen: myConstraint [
 	
 	^ then value: (myConstraint objectClass new) value: (myConstraint props asDictionary)
 ]
 
 { #category : 'accessing' }
-PBTObjectGen >> then: aBlock [
+PBTObjectGenerator >> then: aBlock [
 
 	then := aBlock 
 ]

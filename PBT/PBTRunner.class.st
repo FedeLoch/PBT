@@ -74,7 +74,7 @@ PBTRunner >> initialize [
 	super initialize.
 	evaluator := PBTEvaluator new.
 	generator := PBTInputGenerator new.
-	stopCriteria := PBTCountCriteria new times: 1000.
+	stopCriteria := PBTCountCriteria new times: 100.
 	
 	
 ]

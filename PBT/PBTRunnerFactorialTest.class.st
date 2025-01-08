@@ -15,7 +15,7 @@ Class {
 PBTRunnerFactorialTest >> setUp [
 	super setUp.
 	
-	objectConstraints := PBTObjectConstraint new generator: (PBTGen oneOf: (10 to: 100)).
+	objectConstraints := PBTObjectConstraint new generator: (PBTGenerator oneOf: (10 to: 100)).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
 	schema := PBTSchema new objectConstraint: objectConstraints; assert: assert.
 ]
@@ -28,7 +28,7 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 	pbtResult := PBTRunner test: Integer >> #factorial from: schema.
 
 	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 100.
 ]
 
 { #category : 'tests' }
