@@ -43,7 +43,7 @@ PBTRunnerPBTTest >> setUp [
 PBTRunnerPBTTest >> testGivingThePBTRunnerSchemaThenValidatePBTFramework [
 
 	"This test has the intention to prove the framework itself"
-	"TODO: Not executable at the moment, we need to support schema inference"
+	"TODO: Not executable until we support schema inference"
 	| pbtResult |
 
 	pbtResult := PBTRunner test: PBTRunner class>>#test: from: schema times: 1000.

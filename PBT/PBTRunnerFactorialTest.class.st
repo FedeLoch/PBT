@@ -57,8 +57,8 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWithoutSchema [
 	
 	| pbtResult |
-	
-	pbtResult := PBTRunner test: SmallInteger >> #factorial.
+	"TODO: Not executable until we support schema inference"
+	pbtResult := PBTRunner test: Integer >> #factorial.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.

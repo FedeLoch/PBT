@@ -50,7 +50,7 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResultWithoutSchema [
 
 	| pbtResult |
-	
+	"TODO: Not executable until we support schema inference"
 	pbtResult := PBTRunner test: SequenceableCollection >> #sort.
 	
 	self assertSuccess: pbtResult.
