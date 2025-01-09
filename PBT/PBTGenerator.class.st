@@ -1,10 +1,16 @@
 Class {
 	#name : 'PBTGenerator',
 	#superclass : 'Object',
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }
+
+{ #category : 'as yet unclassified' }
+PBTGenerator class >> always: aValue [
+
+	^ PBTConstantGenerator new value: aValue.
+]
 
 { #category : 'as yet unclassified' }
 PBTGenerator class >> onceInstance: aBlock [

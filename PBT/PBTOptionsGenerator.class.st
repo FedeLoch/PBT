@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'range'
 	],
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }
 
 { #category : 'instance creation' }

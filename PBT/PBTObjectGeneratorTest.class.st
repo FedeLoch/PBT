@@ -1,19 +1,28 @@
 Class {
 	#name : 'PBTObjectGeneratorTest',
 	#superclass : 'PBTGeneratorTest',
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }
 
 { #category : 'tests' }
 PBTObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
 
-	| generator range |
+	| generator random constraint |
 	
-	range := (0 to: 100).
-	generator := PBTOptionsGenerator new from: range.
+	random := Random new nextIntegerBetween: 1 and: 40.
+	generator := PBTGenerator onceInstance: [ :instance :props |
+		             random timesRepeat: [
+			             instance add: (props at: 'item') gen ].
+		             instance ].
 
-	"it's not necessary to pass it a constraint argument"
-	self assert: (range includes: (generator gen: nil)) equals: true
+	constraint := PBTObjectConstraint new
+		              objectClass: OrderedCollection;
+		              props: { ('item' -> (PBTObjectConstraint new
+					                objectClass: SmallInteger;
+					                generator: (PBTGenerator always: 42))) }.
+
+	self assert: ((generator gen: constraint) size) equals: random.
+	self assert: ((generator gen: constraint) asSet size) equals: 1.
 ]

@@ -1,21 +1,20 @@
 Class {
 	#name : 'PBTGeneratorOptionsTest',
 	#superclass : 'PBTGeneratorTest',
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }
 
 { #category : 'tests' }
 PBTGeneratorOptionsTest >> testGenerateAnInstanceOfSmallIntegerByRange [
 
-	| generator range |
+	| generator |
 	
-	range := (0 to: 100).
-	generator := PBTOptionsGenerator new from: range.
+	generator := PBTOptionsGenerator new from: (0 to: 100).
 
 	"it's not necessary to pass it a constraint argument"
-	self assert: (range includes: (generator gen: nil)) equals: true
+	self assert: ((0 to: 100) includes: (generator gen: nil)) equals: true
 ]
 
 { #category : 'tests' }

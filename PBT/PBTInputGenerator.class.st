@@ -1,9 +1,9 @@
 Class {
 	#name : 'PBTInputGenerator',
 	#superclass : 'Object',
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }
 
 { #category : 'as yet unclassified' }

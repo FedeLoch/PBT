@@ -1,7 +1,7 @@
 Class {
 	#name : 'PBTGeneratorTest',
 	#superclass : 'TestCase',
-	#category : 'PBT-Input Generation',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Input Generation'
+	#tag : 'Generators'
 }

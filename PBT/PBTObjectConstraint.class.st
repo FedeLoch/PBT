@@ -6,9 +6,9 @@ Class {
 		'generator',
 		'props'
 	],
-	#category : 'PBT-Property Specifcation',
+	#category : 'PBT-Property Schema',
 	#package : 'PBT',
-	#tag : 'Property Specifcation'
+	#tag : 'Property Schema'
 }
 
 { #category : 'as yet unclassified' }
