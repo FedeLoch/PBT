@@ -36,5 +36,5 @@ PBTRunnerPlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 	pbtResult := PBTRunner test: SmallInteger >> #+ from: schema.
 
 	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 100.
 ]

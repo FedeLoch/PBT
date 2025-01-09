@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRangeGenerator',
+	#name : 'PBTOptionsGenerator',
 	#superclass : 'PBTGenerator',
 	#instVars : [
 		'range'
@@ -10,13 +10,13 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTRangeGenerator >> from: aRange [
+PBTOptionsGenerator >> from: aRange [
 
 	range := aRange.
 ]
 
 { #category : 'as yet unclassified' }
-PBTRangeGenerator >> gen: myConstraint [
+PBTOptionsGenerator >> gen: myConstraint [
 
 	^ range atRandom
 ]
