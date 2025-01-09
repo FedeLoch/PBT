@@ -58,10 +58,10 @@ PBTSchemaInfer class >> objectConstraint: class calling: methods [
 	},
 	llamar recursivamente y mergear esas constraints
 	"
-   propConstraints := class instanceVariables flatCollect: [ :ivar |
-            "Add constraints based on instance variables, e.g., their class types"
-            "constraints add: (PBTSchemaConstraint forVariable: ivar class: (eachClass classPool at: ivar ifAbsent: [ Object ]))"
-   ].
+"   propConstraints := class instanceVariables flatCollect: [ :ivar |
+            ""Add constraints based on instance variables, e.g., their class types""
+            ""constraints add: (PBTSchemaConstraint forVariable: ivar class: (eachClass classPool at: ivar ifAbsent: [ Object ]))""
+   ]."
 
    "^ PBTObjectConstraint new objectClass: methodClass; props: propConstraints; gen: (PBTGenerator genBy: methodClass from: propConstraints)"
 	^ nil

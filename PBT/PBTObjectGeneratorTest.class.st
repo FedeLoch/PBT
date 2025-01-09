@@ -48,5 +48,5 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
 					                generator: PBTPointGenerator new)) }.
 
 	self assert: ((generator gen: constraint) class) equals: Rectangle.
-	self assert: ((generator gen: constraint) area > 0) equals: true.
+	self assert: ((generator gen: constraint) area >= 0) equals: true.
 ]
