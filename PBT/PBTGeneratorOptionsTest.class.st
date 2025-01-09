@@ -7,6 +7,18 @@ Class {
 }
 
 { #category : 'tests' }
+PBTGeneratorOptionsTest >> testGenerateAnInstanceOfBoolean [
+
+	| generator options |
+	
+	options := { true . false }.
+	generator := PBTOptionsGenerator new from: options.
+
+	"it's not necessary to pass it a constraint argument"
+	self assert: (options includes: (generator gen: nil)) equals: true
+]
+
+{ #category : 'tests' }
 PBTGeneratorOptionsTest >> testGenerateAnInstanceOfSmallIntegerByRange [
 
 	| generator |
