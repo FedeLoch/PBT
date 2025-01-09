@@ -46,6 +46,9 @@ PBTSchema >> inputConstraints: anInputConstraints [
 { #category : 'accessing' }
 PBTSchema >> merge: anotherSchema [
 
+	self mergeObjectConstraint: anotherSchema objectConstraint.
+	self mergeInputConstraint: anotherSchema inputConstraints.
+	self mergeAssert: anotherSchema assert. 
 	"TODO:
 		Think how to index the schema, for the moment the schema respect the next structure:
 		{
@@ -69,6 +72,25 @@ PBTSchema >> merge: anotherSchema [
 		}
 	"
 	^ self
+]
+
+{ #category : 'accessing' }
+PBTSchema >> mergeAssert: anAssert [
+
+	assert ifNil: [ ^ assert := anAssert ].
+]
+
+{ #category : 'accessing' }
+PBTSchema >> mergeInputConstraint: someInputConstraints [
+
+	inputConstraints ifNil: [ ^ inputConstraints := someInputConstraints ].
+
+]
+
+{ #category : 'accessing' }
+PBTSchema >> mergeObjectConstraint: anObjectConstraint [
+
+	objectConstraint ifNil: [ objectConstraint := anObjectConstraint ].
 ]
 
 { #category : 'accessing' }
