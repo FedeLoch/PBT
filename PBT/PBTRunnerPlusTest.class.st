@@ -2,10 +2,10 @@ Class {
 	#name : 'PBTRunnerPlusTest',
 	#superclass : 'PBTRunnerTest',
 	#instVars : [
-		'objectConstraints',
+		'receiverConstraint',
 		'assert',
 		'schema',
-		'inputConstraints'
+		'argumentConstraints'
 	],
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -20,15 +20,15 @@ PBTRunnerPlusTest >> setUp [
 	super setUp.
 	
 	range := (SmallInteger minVal to: SmallInteger maxVal).
-	objectConstraints := PBTObjectConstraint new generator: (PBTGenerator oneOf: range).
-	inputConstraints := {
+	receiverConstraint := PBTObjectConstraint new generator: (PBTGenerator oneOf: range).
+	argumentConstraints := {
 		PBTObjectConstraint new generator: (PBTGenerator oneOf: range)
 	}.
 	assert := [ :n :args :result | args first + n = result ].
-	schema := PBTSchema new objectConstraint: objectConstraints; inputConstraints: inputConstraints; assert: assert.
+	schema := PBTSchema new receiverConstraint: receiverConstraint; argumentConstraints: argumentConstraints; assert: assert.
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRunnerPlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |

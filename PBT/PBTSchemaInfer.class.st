@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PBTSchemaInfer class >> argumentConstraintsFor: method [
+
+	^ method ast arguments  collect: [ :argNode | self receiverConstraintForVariable: argNode on: method ].
+]
+
+{ #category : 'as yet unclassified' }
 PBTSchemaInfer class >> assertFor: method [
 
 	| expectedType |
@@ -27,12 +33,6 @@ PBTSchemaInfer class >> enrich: schema for: targetMethod [
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer class >> inputConstraintsFor: method [
-
-	^ method ast arguments  collect: [ :argNode | self objectConstraintForVariable: argNode on: method ].
-]
-
-{ #category : 'as yet unclassified' }
 PBTSchemaInfer class >> isPrimitiveClass: class [
 
 	"TODO"
@@ -40,7 +40,15 @@ PBTSchemaInfer class >> isPrimitiveClass: class [
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer class >> objectConstraint: class calling: methods [
+PBTSchemaInfer class >> primitiveConstraint: class [
+
+	"TODO"
+	1 halt.
+	^ false
+]
+
+{ #category : 'as yet unclassified' }
+PBTSchemaInfer class >> receiverConstraint: class calling: methods [
 
 	| propConstraints |
 	
@@ -68,7 +76,7 @@ PBTSchemaInfer class >> objectConstraint: class calling: methods [
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer class >> objectConstraintForVariable: argNode on: method [
+PBTSchemaInfer class >> receiverConstraintForVariable: argNode on: method [
 
 	"Take all their calls and return "
 	| class methods variableName |
@@ -77,15 +85,7 @@ PBTSchemaInfer class >> objectConstraintForVariable: argNode on: method [
 	methods := {}.
 	class := TypeInferencer inferTypeFrom: methods withName: variableName.
 	
-	^ self objectConstraint: class calling: methods
-]
-
-{ #category : 'as yet unclassified' }
-PBTSchemaInfer class >> primitiveConstraint: class [
-
-	"TODO"
-	1 halt.
-	^ false
+	^ self receiverConstraint: class calling: methods
 ]
 
 { #category : 'as yet unclassified' }
@@ -93,15 +93,15 @@ PBTSchemaInfer class >> schemaFor: method [
 
 	| objectConstraints inputConstraints assert |
 	
-	objectConstraints := self selfObjectConstraintOn: method.
-	inputConstraints := self inputConstraintsFor: method.
+	objectConstraints := self selfReceiverConstraintOn: method.
+	inputConstraints := self argumentConstraintsFor: method.
 	assert := self assertFor: method.
 	
-	^ PBTSchema new objectConstraint: objectConstraints; inputConstraints: inputConstraints; assert: assert.
+	^ PBTSchema new receiverConstraint: objectConstraints; argumentConstraints: inputConstraints; assert: assert.
 ]
 
 { #category : 'as yet unclassified' }
-PBTSchemaInfer class >> selfObjectConstraintOn: method [
+PBTSchemaInfer class >> selfReceiverConstraintOn: method [
 
-	^ self objectConstraint: (method methodClass) calling: { method } 
+	^ self receiverConstraint: (method methodClass) calling: { method } 
 ]

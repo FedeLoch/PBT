@@ -2,10 +2,10 @@ Class {
 	#name : 'PBTRunnerRectangleAreaTest',
 	#superclass : 'PBTRunnerTest',
 	#instVars : [
-		'objectConstraints',
+		'receiverConstraint',
 		'assert',
 		'schema',
-		'inputConstraints'
+		'argumentConstraints'
 	],
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -24,7 +24,7 @@ PBTRunnerRectangleAreaTest >> setUp [
 			             point: (props at: 'corner') gen.
 		             instance ].
 
-	objectConstraints := PBTObjectConstraint new
+	receiverConstraint := PBTObjectConstraint new
 		                     objectClass: Rectangle;
 		                     generator: generator;
 		                     props: {
@@ -34,15 +34,15 @@ PBTRunnerRectangleAreaTest >> setUp [
 				                     ('corner' -> (PBTObjectConstraint new
 					                       objectClass: Point;
 					                       generator: PBTPointGenerator new)) }.
-	inputConstraints := {  }.
+	argumentConstraints := {  }.
 	assert := [ :rect :args :result | result >= 0 ].
 	schema := PBTSchema new
-		          objectConstraint: objectConstraints;
-		          inputConstraints: inputConstraints;
+		          receiverConstraint: receiverConstraint;
+		          argumentConstraints: argumentConstraints;
 		          assert: assert
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |

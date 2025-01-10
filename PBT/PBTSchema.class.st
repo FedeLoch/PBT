@@ -2,14 +2,26 @@ Class {
 	#name : 'PBTSchema',
 	#superclass : 'Object',
 	#instVars : [
-		'objectConstraint',
-		'inputConstraints',
-		'assert'
+		'assert',
+		'argumentConstraints',
+		'receiverConstraint'
 	],
 	#category : 'PBT-Property Schema',
 	#package : 'PBT',
 	#tag : 'Property Schema'
 }
+
+{ #category : 'accessing' }
+PBTSchema >> argumentConstraints [
+
+	^ argumentConstraints 
+]
+
+{ #category : 'accessing' }
+PBTSchema >> argumentConstraints: anArgumentConstraints [
+
+	argumentConstraints := anArgumentConstraints.
+]
 
 { #category : 'accessing' }
 PBTSchema >> assert [
@@ -27,27 +39,15 @@ PBTSchema >> assert: anAssertBlock [
 PBTSchema >> initialize [ 
 
 	super initialize.
-	inputConstraints := #().
-	objectConstraint := nil.
-]
-
-{ #category : 'accessing' }
-PBTSchema >> inputConstraints [
-
-	^ inputConstraints 
-]
-
-{ #category : 'accessing' }
-PBTSchema >> inputConstraints: anInputConstraints [
-
-	inputConstraints := anInputConstraints.
+	argumentConstraints := #().
+	receiverConstraint := nil.
 ]
 
 { #category : 'accessing' }
 PBTSchema >> merge: anotherSchema [
 
-	self mergeObjectConstraint: anotherSchema objectConstraint.
-	self mergeInputConstraint: anotherSchema inputConstraints.
+	self mergeReceiverConstraint: anotherSchema receiverConstraint.
+	self mergeArgumentConstraint: anotherSchema argumentConstraints.
 	self mergeAssert: anotherSchema assert. 
 	"TODO:
 		Think how to index the schema, for the moment the schema respect the next structure:
@@ -75,32 +75,32 @@ PBTSchema >> merge: anotherSchema [
 ]
 
 { #category : 'accessing' }
+PBTSchema >> mergeArgumentConstraint: someArgumentConstraints [
+
+	argumentConstraints ifNil: [ ^ argumentConstraints := someArgumentConstraints ].
+
+]
+
+{ #category : 'accessing' }
 PBTSchema >> mergeAssert: anAssert [
 
 	assert ifNil: [ ^ assert := anAssert ].
 ]
 
 { #category : 'accessing' }
-PBTSchema >> mergeInputConstraint: someInputConstraints [
+PBTSchema >> mergeReceiverConstraint: aReceiverConstraint [
 
-	inputConstraints ifNil: [ ^ inputConstraints := someInputConstraints ].
-
+	receiverConstraint ifNil: [ receiverConstraint := aReceiverConstraint ].
 ]
 
 { #category : 'accessing' }
-PBTSchema >> mergeObjectConstraint: anObjectConstraint [
+PBTSchema >> receiverConstraint [
 
-	objectConstraint ifNil: [ objectConstraint := anObjectConstraint ].
+	^ receiverConstraint
 ]
 
 { #category : 'accessing' }
-PBTSchema >> objectConstraint [
+PBTSchema >> receiverConstraint: aReceiverConstraint [
 
-	^ objectConstraint
-]
-
-{ #category : 'accessing' }
-PBTSchema >> objectConstraint: aObjectConstraint [
-
-	objectConstraint := aObjectConstraint.
+	receiverConstraint := aReceiverConstraint.
 ]

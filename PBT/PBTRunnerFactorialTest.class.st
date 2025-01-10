@@ -3,7 +3,7 @@ Class {
 	#superclass : 'PBTRunnerTest',
 	#instVars : [
 		'schema',
-		'objectConstraints',
+		'receiverConstraint',
 		'assert'
 	],
 	#category : 'PBT-FrameworkTests',
@@ -15,9 +15,9 @@ Class {
 PBTRunnerFactorialTest >> setUp [
 	super setUp.
 	
-	objectConstraints := PBTObjectConstraint new generator: (PBTGenerator oneOf: (10 to: 100)).
+	receiverConstraint := PBTObjectConstraint new generator: (PBTGenerator oneOf: (10 to: 100)).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
-	schema := PBTSchema new objectConstraint: objectConstraints; assert: assert.
+	schema := PBTSchema new receiverConstraint: receiverConstraint; assert: assert.
 ]
 
 { #category : 'tests' }

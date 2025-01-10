@@ -3,7 +3,7 @@ Class {
 	#superclass : 'PBTRunnerTest',
 	#instVars : [
 		'schema',
-		'objectConstraints',
+		'receiverConstraint',
 		'assert'
 	],
 	#category : 'PBT-FrameworkTests',
@@ -16,7 +16,7 @@ PBTRunnerCollectionSortTest >> setUp [
 
 	super setUp.
 
-	objectConstraints := PBTObjectConstraint new
+	receiverConstraint := PBTObjectConstraint new
 		                     objectClass: OrderedCollection;
 		                     generator:
 			                     (PBTGenerator onceInstance: [ :instance :props |
@@ -31,7 +31,7 @@ PBTRunnerCollectionSortTest >> setUp [
 	assert := [ :coll :args :result |
 	          result = coll sort and: result size = coll size ]. "TODO: improve the assertion"
 	schema := PBTSchema new
-		          objectConstraint: objectConstraints;
+		          receiverConstraint: receiverConstraint ;
 		          assert: assert
 ]
 

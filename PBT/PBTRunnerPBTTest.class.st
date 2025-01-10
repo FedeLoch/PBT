@@ -2,10 +2,10 @@ Class {
 	#name : 'PBTRunnerPBTTest',
 	#superclass : 'PBTRunnerTest',
 	#instVars : [
-		'objectConstraints',
+		'receiverConstraint',
 		'assert',
 		'schema',
-		'inputConstraints'
+		'argumentConstraints'
 	],
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -20,12 +20,12 @@ PBTRunnerPBTTest >> setUp [
 
 	generator := PBTGenerator onceInstance: [ :instance :props | PBTRunner ].
 
-	objectConstraints := PBTObjectConstraint new
+	receiverConstraint := PBTObjectConstraint new
 		                     objectClass: PBTRunner;
 		                     generator: generator;
 		                     props: {}.
 	
-	inputConstraints := { PBTObjectConstraint new
+	argumentConstraints := { PBTObjectConstraint new
 		                     objectClass: CompiledMethod;
 		                     generator: (PBTGenerator oneOf: Object allMethods);
 		                     props: {}
@@ -34,12 +34,12 @@ PBTRunnerPBTTest >> setUp [
 	assert := [ :method :args :result | self assertSuccess: result ].
 	
 	schema := PBTSchema new
-		          objectConstraint: objectConstraints;
-		          inputConstraints: inputConstraints;
+		          receiverConstraint: receiverConstraint;
+		          argumentConstraints: argumentConstraints;
 		          assert: assert
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRunnerPBTTest >> testGivingThePBTRunnerSchemaThenValidatePBTFramework [
 
 	"This test has the intention to prove the framework itself"
