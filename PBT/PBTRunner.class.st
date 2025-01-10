@@ -50,21 +50,21 @@ PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 ]
 
 { #category : 'tests' }
-PBTRunner >> genTest [
+PBTRunner >> genTest: incrCoverage [
 
-	| inputs object testResult |
+	| arguments receiver testResult |
 	
 	"Setup based on the enriched schema"
-	inputs := generator genInputsFor: target from: schema.
-	object := generator genObjectFor: target from: schema.
+	receiver := generator genObjectFor: target from: schema.
+	arguments := generator genInputsFor: target from: schema.
 	
 	"Target call and eval result"
-	testResult := evaluator eval: object method: target from: schema with: inputs.
+	testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage.
 	
 	"Generate Test case"
 	^ PBTTest new target: target;
-		arguments: inputs;
-		object: object;
+		arguments: arguments;
+		object: receiver;
 		result: testResult
 		
 ]
@@ -102,15 +102,14 @@ PBTRunner >> target: targetMethod [
 { #category : 'tests' }
 PBTRunner >> test [
 
-	| tests time totalCoverageResult |
+	| tests time incrementalCoverage |
 	
 	time := Time millisecondClockValue.
 	tests := OrderedCollection new.
-	totalCoverageResult := (CoverageCollector new methods: { target }) runOn: [  
-		[self shouldGenNext: tests since: time] whileTrue: [ tests add: self genTest ].
-	].
+	incrementalCoverage := IncrementalCoverageResult for: { target }.
+	[self shouldGenNext: tests since: time] whileTrue: [ tests add: (self genTest: incrementalCoverage) ].
 
-	^ self genReport: tests since: time withCoverage: totalCoverageResult
+	^ self genReport: tests since: time withCoverage: incrementalCoverage
 ]
 
 { #category : 'tests' }
