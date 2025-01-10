@@ -12,8 +12,8 @@ PBTEvaluator >> eval: object method: target from: schema with: args [
 	| coverageResult callResult assertResult |
 	
 	coverageResult := (CoverageCollector new methods: { target }) runOn: [
-		callResult := object withArgs: args executeMethod: target.
-	 ].
+		callResult := object perform: target selector withArguments: args.
+	].
 	
 	[ assertResult := schema assert value: object value: args value: callResult ] on: Error do: [ :error |
 		^ PBTEvalError new stack: error signalerContext shortDebugStack
