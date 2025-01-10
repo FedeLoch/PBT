@@ -5,7 +5,8 @@ Class {
 		'target',
 		'arguments',
 		'object',
-		'result'
+		'result',
+		'time'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -48,4 +49,16 @@ PBTTest >> result: testResult [
 PBTTest >> target: targetMethod [
 
 	target := targetMethod
+]
+
+{ #category : 'accessing' }
+PBTTest >> time [
+
+	^ time
+]
+
+{ #category : 'accessing' }
+PBTTest >> time: aTime [
+
+	time := aTime
 ]

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'tests',
 		'totalTime',
-		'totalCoverage'
+		'totalCoverage',
+		'performanceResult'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -14,10 +15,22 @@ Class {
 { #category : 'as yet unclassified' }
 PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult [
 
-	| milliseconds |
-	"TODO: Improve this"
-	milliseconds := (Time millisecondsSince: time).
-	^ self new tests: tests; totalTime: (Duration milliSeconds: milliseconds); totalCoverage: totalCoverageResult 
+	| totalTime perfResult |
+	
+	totalTime := Duration milliSeconds: (Time millisecondsSince: time).
+	perfResult := PerformanceResult from: tests withTime: totalTime.
+	
+	^ self new tests: tests;
+		totalTime: totalTime;
+		totalCoverage: totalCoverageResult;
+		performanceResult: perfResult
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> performanceResult: aPerfResult [
+
+	performanceResult := aPerfResult
+
 ]
 
 { #category : 'as yet unclassified' }
