@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'asserting' }
-PBTStopCriteria >> shouldGenNext: currentTests since: aTime [
+PBTStopCriteria >> shouldGenNext: currentTests since: aTime withCoverage: aCoverage [
 
 	^ self subclassResponsibility 
 ]

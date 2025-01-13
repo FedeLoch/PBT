@@ -13,6 +13,12 @@ IncrementalCoverageResult class >> for: methods [
 ]
 
 { #category : 'as yet unclassified' }
+IncrementalCoverageResult >> asPercent [
+	collector ifNil: [ ^0 ].
+	^ self percentage
+]
+
+{ #category : 'as yet unclassified' }
 IncrementalCoverageResult >> incrementWith: anotherResult [
 	"Merge covered nodes"
 	nodes := nodes, anotherResult nodes.

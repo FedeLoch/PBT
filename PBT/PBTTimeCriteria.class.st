@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'asserting' }
-PBTTimeCriteria >> shouldGenNext: currentTests since: aTime [
+PBTTimeCriteria >> shouldGenNext: currentTests since: aTime withCoverage: aCoverage [
 
 	^ aTime milliSeconds < timeout 
 ]

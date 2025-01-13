@@ -52,3 +52,15 @@ PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResul
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.
 ]
+
+{ #category : 'as yet unclassified' }
+PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResultWithCoverageChangeTolerance [
+
+	| pbtResult |
+
+	pbtResult := PBTRunner test: Rectangle >> #area from: schema withCoverageTolerance: 100.
+
+	self assertSuccess: pbtResult.
+	self assert: (pbtResult totalCoverage percentage) equals: 100. 
+	self assert: (pbtResult tests size < 1000) equals: true.
+]

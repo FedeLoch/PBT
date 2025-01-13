@@ -44,6 +44,15 @@ PBTRunner class >> test: targetMethod from: schema times: times [
 ]
 
 { #category : 'tests' }
+PBTRunner class >> test: targetMethod from: schema withCoverageTolerance: tolerance [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTStopCoverageCriteria new tolerance: tolerance);
+		target: targetMethod; test
+]
+
+{ #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
 	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult
@@ -90,9 +99,9 @@ PBTRunner >> schema: propSchema [
 ]
 
 { #category : 'tests' }
-PBTRunner >> shouldGenNext: currentTests since: aTime [
+PBTRunner >> shouldGenNext: currentTests since: aTime withCoverage: aCoverage [
 
-	^ stopCriteria shouldGenNext: currentTests since: (Time millisecondsSince: aTime)
+	^ stopCriteria shouldGenNext: currentTests since: (Time millisecondsSince: aTime) withCoverage: aCoverage
 ]
 
 { #category : 'accessing' }
@@ -110,7 +119,7 @@ PBTRunner >> test [
 	time := Time millisecondClockValue.
 	tests := OrderedCollection new.
 	incrCoverage := IncrementalCoverageResult for: { target }.
-	[self shouldGenNext: tests since: time] whileTrue: [ tests add: (self genTest: incrCoverage) ].
+	[self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [ tests add: (self genTest: incrCoverage) ].
 
 	^ self genReport: tests since: time withCoverage: incrCoverage
 ]

@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'asserting' }
-PBTCountCriteria >> shouldGenNext: currentTests since: aTime [
+PBTCountCriteria >> shouldGenNext: currentTests since: aTime withCoverage: aCoverage [
 
 	^ currentTests size < times
 ]
