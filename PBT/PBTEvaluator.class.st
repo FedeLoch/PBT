@@ -11,7 +11,7 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 
 	| localCoverageResult callResult assertResult |
 	
-	localCoverageResult := (CoverageCollector new methods: { target }) runOn: [
+	localCoverageResult := (CoverageCollector new methods: target selfMethodAffected) runOn: [
 		callResult := object perform: target selector withArguments: args.
 	].
 

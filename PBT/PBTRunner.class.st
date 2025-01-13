@@ -64,8 +64,8 @@ PBTRunner >> genTest: incrCoverage [
 	| arguments receiver testResult time |
 	
 	"Setup based on the enriched schema"
-	receiver := generator genObjectFor: target from: schema.
-	arguments := generator genInputsFor: target from: schema.
+	receiver := generator genReceiverFor: target from: schema.
+	arguments := generator genArgumentsFor: target from: schema.
 	
 	"Target call and eval result"
 	time := [
