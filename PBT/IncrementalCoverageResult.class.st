@@ -22,6 +22,7 @@ IncrementalCoverageResult >> asPercent [
 IncrementalCoverageResult >> incrementWith: anotherResult [
 	"Merge covered nodes"
 	nodes := nodes, anotherResult nodes.
+	"TODO: Fix me, We should use set concatenation"
 	anotherResult methods do: [ :method |
 		((methods collect: #name) includes: method name) ifFalse: [ methods add: method ] ].
 	
