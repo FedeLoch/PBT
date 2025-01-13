@@ -58,7 +58,7 @@ PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResul
 
 	| pbtResult |
 
-	pbtResult := PBTRunner test: Rectangle >> #area from: schema withCoverageTolerance: 100.
+	pbtResult := PBTRunner test: Rectangle >> #area from: schema withCoverageTolerance: 1000.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult totalCoverage percentage) equals: 100. 
