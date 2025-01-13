@@ -9,7 +9,7 @@ Class {
 { #category : 'instance creation' }
 IncrementalCoverageResult class >> for: methods [
 
-	^ self new methods: methods; nodes: IdentitySet new 
+	^ self new methods: methods asSet; nodes: IdentitySet new 
 ]
 
 { #category : 'as yet unclassified' }
@@ -22,6 +22,8 @@ IncrementalCoverageResult >> asPercent [
 IncrementalCoverageResult >> incrementWith: anotherResult [
 	"Merge covered nodes"
 	nodes := nodes, anotherResult nodes.
-	"Naive, this assumes that we are being instrumenting the same set of methods"
+	anotherResult methods do: [ :method |
+		((methods collect: #name) includes: method name) ifFalse: [ methods add: method ] ].
+	
 	collector ifNil: [ collector := anotherResult collector ]
 ]
