@@ -47,12 +47,12 @@ PBTRunnerBlocBenchsTest >> blContainerConstraint [
 		  objectClass: BlElement;
 		  generator: (PBTGenerator onceInstance: [ :container :props |
 					   container layout:
-							   (BlGridLayout new columnCount: (4 to: 16) atRandom).
+							   (BlGridLayout new columnCount: (1 to: 200) atRandom).
 					   container layout cellSpacing: (1 to: 5) atRandom.
 					   container constraintsDo: [ :c |
 							   c vertical matchParent.
 							   c horizontal matchParent ].
-					   (100 to: 300) atRandom timesRepeat: [
+					   (100 to: 1000) atRandom timesRepeat: [
 							   container addChild: (props at: 'child') gen ].
 					   container beInSingleCompositionLayer.
 					   container ]);
@@ -89,11 +89,11 @@ PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
 					   spinner constraintsDo: [ :c |
 							   c frame vertical alignCenter.
 							   c frame horizontal alignCenter ].
-					   spinner height: (20 to: 50) atRandom.
-					   spinner width: (20 to: 50) atRandom.
+					   spinner height: (10 to: 100) atRandom.
+					   spinner width: (10 to: 100) atRandom.
 					   spinner background: (props at: 'color') gen.
 					   spinner addAnimation: ((BlTransformAnimation rotate: 180)
-								    duration: (0.5 to: 0.8) atRandom seconds;
+								    duration: (0.5 to: 5.0) atRandom seconds;
 								    easing: BlLinearInterpolator new;
 								    target: spinner;
 								    beInfinite;
@@ -129,7 +129,7 @@ PBTRunnerBlocBenchsTest >> setUp [
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
 												testCase element: (props at: 'element').
-												testCase duration: (100 to: 300) atRandom milliSeconds.
+												testCase duration: (200 to: 500) atRandom milliSeconds.
 												testCase ]
 										);
 		                      props: { ('element' -> self blElementConstraint) }.
