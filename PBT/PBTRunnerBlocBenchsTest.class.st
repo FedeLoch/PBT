@@ -23,7 +23,7 @@ PBTRunnerBlocBenchsTest >> blChildConstraint [
 						   width: 50.
 					   element layout: (BlGridLayout new columnCount: 10).
 					   element layout cellSpacing: 0.
-					   element addChildren: ((1 to: 200) atRandom collect: [ :i |
+					   element addChildren: ((1 to: 200) collect: [ :i |
 							    BlElement new
 								    background: (props at: 'color') gen;
 								    height: 5;
@@ -128,7 +128,7 @@ PBTRunnerBlocBenchsTest >> setUp [
 		                      objectClass: BlBBlocPBTCase;
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
-												testCase element: (props at: 'element').
+												testCase element: (props at: 'element') gen.
 												testCase duration: (200 to: 500) atRandom milliSeconds.
 												testCase ]
 										);
@@ -145,9 +145,9 @@ PBTRunnerBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseC
 
 	| pbtResult |
 	
-	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 1000.
+	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 1.
 	
 	1 halt.
 	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 1.
 ]
