@@ -1,6 +1,9 @@
 Class {
 	#name : 'IncrementalCoverageResult',
 	#superclass : 'CoverageResult',
+	#instVars : [
+		'methodNames'
+	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
 	#tag : 'Result'
@@ -19,12 +22,34 @@ IncrementalCoverageResult >> asPercent [
 ]
 
 { #category : 'as yet unclassified' }
+IncrementalCoverageResult >> hasMethod: aMethod [
+
+	^ methodNames includes: aMethod name
+]
+
+{ #category : 'as yet unclassified' }
 IncrementalCoverageResult >> incrementWith: anotherResult [
+
 	"Merge covered nodes"
 	nodes := nodes, anotherResult nodes.
-	"TODO: Fix me, We should use set concatenation"
-	anotherResult methods do: [ :method |
-		((methods collect: #name) includes: method name) ifFalse: [ methods add: method ] ].
+	self mergeMethods: anotherResult methods.
 	
 	collector ifNil: [ collector := anotherResult collector ]
+]
+
+{ #category : 'as yet unclassified' }
+IncrementalCoverageResult >> mergeMethods: someMethods [
+
+	| newMethods |
+	
+	newMethods := someMethods reject: [ :method | self hasMethod: method ].
+	methods := methods, newMethods.
+	methodNames := methodNames, (newMethods collect: #name).
+]
+
+{ #category : 'as yet unclassified' }
+IncrementalCoverageResult >> methods: someMethods [
+
+	super methods: someMethods.
+	methodNames := (methods collect: #name) asSet
 ]
