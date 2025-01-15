@@ -5,7 +5,8 @@ Class {
 		'tests',
 		'totalTime',
 		'totalCoverage',
-		'performanceResult'
+		'performanceResult',
+		'segmentedTests'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -42,8 +43,8 @@ PBTResult >> tests [
 { #category : 'as yet unclassified' }
 PBTResult >> tests: someTests [
 
-	tests := someTests
-
+	tests := someTests.
+	segmentedTests := someTests groupedBy: [ :test | test result class ].
 ]
 
 { #category : 'as yet unclassified' }

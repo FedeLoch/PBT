@@ -144,10 +144,10 @@ PBTRunnerBlocBenchsTest >> setUp [
 PBTRunnerBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
 
 	| pbtResult |
-	
-	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 1.
-	
-	1 halt.
+
+	self timeLimit: 5 minutes.
+	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 10.
+
 	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1.
+	self assert: (pbtResult tests size) equals: 10.
 ]

@@ -22,6 +22,12 @@ PBTRunnerDateParserTest >> dateConstraint [
 ]
 
 { #category : 'running' }
+PBTRunnerDateParserTest >> datePattern [
+
+	^ 'm-d-yyyy'
+]
+
+{ #category : 'running' }
 PBTRunnerDateParserTest >> setUp [
 
 	super setUp.
@@ -33,7 +39,7 @@ PBTRunnerDateParserTest >> setUp [
 					                       DateParser
 						                       readingFrom:
 							                       (props at: 'date') gen readStream
-						                       pattern: 'm-d-yyyy' ]);
+						                       pattern: self datePattern ]);
 		                      props: { ('date' -> self dateConstraint) }.
 
 	assert := [ :coll :args :result | result class = Date ].
@@ -48,8 +54,7 @@ PBTRunnerDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomI
 	| pbtResult |
 
 	pbtResult := PBTRunner test: DateParser >> #parse from: schema times: 1000.
-	
-	1 halt.
+
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.
 ]
