@@ -10,6 +10,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PBTEvalError >> coverageResult [
+
+	^ nil 
+]
+
+{ #category : 'accessing' }
 PBTEvalError >> stack: aStack [
 
 	stack := aStack 

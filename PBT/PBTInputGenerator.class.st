@@ -1,10 +1,19 @@
 Class {
 	#name : 'PBTInputGenerator',
 	#superclass : 'Object',
+	#instVars : [
+		'lastFeedback'
+	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
 	#tag : 'Generators'
 }
+
+{ #category : 'as yet unclassified' }
+PBTInputGenerator >> feedback: itWasAnImprovement [
+	
+	lastFeedback := itWasAnImprovement
+]
 
 { #category : 'as yet unclassified' }
 PBTInputGenerator >> genArgumentsFor: target from: schema [
@@ -15,7 +24,7 @@ PBTInputGenerator >> genArgumentsFor: target from: schema [
 { #category : 'as yet unclassified' }
 PBTInputGenerator >> genInstanceFor: target from: aConstraint [
 	
-	^ aConstraint gen
+	^ aConstraint genBy: lastFeedback
 ]
 
 { #category : 'as yet unclassified' }

@@ -29,3 +29,9 @@ PBTGenerator >> gen: instance [
 	
 	self subclassResponsibility 
 ]
+
+{ #category : 'as yet unclassified' }
+PBTGenerator >> gen: constraint by: aFeedback [
+
+	^ self gen: constraint 
+]

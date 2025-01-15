@@ -6,7 +6,8 @@ Class {
 		'stopCriteria',
 		'evaluator',
 		'generator',
-		'schema'
+		'schema',
+		'lastFeedback'
 	],
 	#category : 'PBT-Runner',
 	#package : 'PBT',
@@ -70,15 +71,20 @@ PBTRunner >> genTest: incrCoverage [
 	"Target call and eval result"
 	time := [
 		testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage
-		] timeToRun.
-	
+	] timeToRun.
+
+	"Feeds the generator with the test result"
+	generator feedback: (incrCoverage increaseCoverage: testResult coverageResult).
+
+	"Increment Incremental Coverage"
+	incrCoverage incrementWith: testResult coverageResult.
+
 	"Generate Test case"
 	^ PBTTest new target: target;
 		arguments: arguments;
 		object: receiver;
 		time: time;
-		result: testResult
-		
+		result: testResult		
 ]
 
 { #category : 'tests' }

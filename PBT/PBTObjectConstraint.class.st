@@ -17,6 +17,12 @@ PBTObjectConstraint >> gen [
 	^ generator gen: self
 ]
 
+{ #category : 'as yet unclassified' }
+PBTObjectConstraint >> genBy: aFeedback [
+
+	^ generator gen: self by: aFeedback
+]
+
 { #category : 'accessing' }
 PBTObjectConstraint >> generator [
 

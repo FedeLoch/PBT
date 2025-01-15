@@ -24,6 +24,12 @@ PBTEvalResult >> callResult: aCallResult [
 ]
 
 { #category : 'accessing' }
+PBTEvalResult >> coverageResult [
+
+	^ coverageResult 
+]
+
+{ #category : 'accessing' }
 PBTEvalResult >> coverageResult: aCoverageResult [
 	
 	coverageResult := aCoverageResult
