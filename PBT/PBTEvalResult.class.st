@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PBTEvalResult >> callResult [
+
+	^ callResult 
+]
+
+{ #category : 'accessing' }
 PBTEvalResult >> callResult: aCallResult [
 	
 	callResult := aCallResult

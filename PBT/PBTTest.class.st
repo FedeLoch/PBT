@@ -28,6 +28,12 @@ PBTTest >> asPharoTest [
 ]
 
 { #category : 'accessing' }
+PBTTest >> object [
+
+	^ object
+]
+
+{ #category : 'accessing' }
 PBTTest >> object: anObject [
 
 	object := anObject
@@ -43,6 +49,12 @@ PBTTest >> result [
 PBTTest >> result: testResult [
 
 	result := testResult 
+]
+
+{ #category : 'accessing' }
+PBTTest >> target [
+
+	^ target
 ]
 
 { #category : 'accessing' }
