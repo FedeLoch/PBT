@@ -18,8 +18,6 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 			                                     perform: target selector
 			                                     withArguments: args ].
 
-		incrCoverage incrementWith: localCoverageResult.
-
 		assertResult := schema assert
 		                value: object
 		                value: args

@@ -2,7 +2,8 @@ Class {
 	#name : 'PBTEvalError',
 	#superclass : 'Object',
 	#instVars : [
-		'stack'
+		'stack',
+		'coverageResult'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -12,7 +13,14 @@ Class {
 { #category : 'accessing' }
 PBTEvalError >> coverageResult [
 
-	^ nil 
+	^ coverageResult 
+]
+
+{ #category : 'accessing' }
+PBTEvalError >> coverageResult: aCoverageResult [
+	
+	coverageResult := aCoverageResult
+	
 ]
 
 { #category : 'accessing' }
