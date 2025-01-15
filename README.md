@@ -65,7 +65,44 @@ As a result, PBT Provides a **PBTResult** which has the following information:
 
 ### Stop criteria
 
+PBT could be executed by calling it with different methods, the default is just calling as above, which means that the framework will execute only 1000 test cases.
+
+```Smalltalk
+PBTRunner test: targetMethod from: schema
+```
+
+In case you want to specify the amount of time you want the framework to generate test cases, you can use the following method:
+
+```Smalltalk
+PBTRunner test: targetMethod from: schema for: time
+```
+
+In case you want to specify the number of generated tests:
+
+```Smalltalk
+PBTRunner test: targetMethod from: schema times: times
+```
+
+If you want to set out that you want the framework execute until get 100% of coverage or define a bound of tolerance for not improving coverages tests:
+
+```Smalltalk
+PBTRunner test: targetMethod from: schema withCoverageTolerance: numberOfTolerance
+```
+
 ## Generators
+
+We provide a number of built-in generators that must be enough to define generators for every object. However, you can define your generators to reduce code duplication. These built-in generators are:
+
+- **PBTConstantGenerator**: Generator that always returns the same value.
+- **PBTDyncamicSelectionGenerator**: Generator that receives a list of generators and, based on feedback, balances the weight of every option to probabilistically give more chance to generator that got good solutions.
+- **PBTGrammarGenerator**: Generator that receives a grammar and generates a random valid value accepted for that grammar.
+- **PBTObjectGenerator**: Generator that, given a block, fills the instance object.
+- **PBTOptionsGenerator**: Generator that returns a random value from a series of options.
+- **PBTPointGenerator**: Generator that returns a random point.
+
+## Performance result
+
+## Coverage result
 
 ## Other examples
 
