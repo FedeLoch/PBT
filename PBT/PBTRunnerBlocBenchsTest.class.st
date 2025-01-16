@@ -81,6 +81,13 @@ PBTRunnerBlocBenchsTest >> blElementConstraint [
 ]
 
 { #category : 'running' }
+PBTRunnerBlocBenchsTest >> blGeometryConstraint [
+
+	^ PBTObjectConstraint new
+		  generator: (PBTGenerator oneOf: { BlRectangleGeometry new . BlTriangleGeometry new ". BlCircleGeometry new" })
+]
+
+{ #category : 'running' }
 PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
 
 	^ PBTObjectConstraint new
@@ -91,6 +98,7 @@ PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
 							   c frame horizontal alignCenter ].
 					   spinner height: (10 to: 100) atRandom.
 					   spinner width: (10 to: 100) atRandom.
+						spinner geometry: (props at: 'geometry') gen.
 					   spinner background: (props at: 'color') gen.
 					   spinner addAnimation: ((BlTransformAnimation rotate: 180)
 								    duration: (0.5 to: 5.0) atRandom seconds;
@@ -99,7 +107,9 @@ PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
 								    beInfinite;
 								    yourself).
 					   spinner ]);
-		  props: { ('color' -> self blColorConstraint) }
+		  props: { 
+			('color' -> self blColorConstraint).
+			'geometry' -> self blGeometryConstraint }
 ]
 
 { #category : 'running' }
@@ -128,13 +138,14 @@ PBTRunnerBlocBenchsTest >> setUp [
 		                      objectClass: BlBBlocPBTCase;
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
+												testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new).
 												testCase element: (props at: 'element') gen.
-												testCase duration: (200 to: 500) atRandom milliSeconds.
+												testCase duration: 500 milliSeconds.
 												testCase ]
 										);
 		                      props: { ('element' -> self blElementConstraint) }.
 
-	assert := [ :coll :args :result | true ]. "TODO: We are only checking the framework and the benchmark performance/coverage"
+	assert := [ :coll :args :blbResult | blbResult hasError not ].
 	schema := PBTSchema new
 		          receiverConstraint: receiverConstraint;
 		          assert: assert

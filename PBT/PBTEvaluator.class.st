@@ -23,7 +23,7 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 		                value: args
 		                value: callResult
 		
-	] on: Error do: [ :error | ^ PBTEvalError new stack: error signalerContext shortDebugStack ].
+	] on: Error do: [ :error | ^ PBTEvalError new stack: (error signalerContext stackOfSize: 10); message: error messageText ].
 
 	^ (assertResult
 		   ifTrue: [ PBTEvalSuccess ]

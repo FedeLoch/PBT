@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'stack',
-		'coverageResult'
+		'coverageResult',
+		'message'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -21,6 +22,18 @@ PBTEvalError >> coverageResult: aCoverageResult [
 	
 	coverageResult := aCoverageResult
 	
+]
+
+{ #category : 'accessing' }
+PBTEvalError >> message [
+
+	^ message 
+]
+
+{ #category : 'accessing' }
+PBTEvalError >> message: aMessage [
+
+	message := aMessage 
 ]
 
 { #category : 'accessing' }

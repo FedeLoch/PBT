@@ -19,9 +19,9 @@ PBTGenerator class >> onceInstance: aBlock [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGenerator class >> oneOf: aRange [
+PBTGenerator class >> oneOf: options [
 
-	^ PBTOptionsGenerator new from: aRange.
+	^ PBTOptionsGenerator new from: options.
 ]
 
 { #category : 'as yet unclassified' }
