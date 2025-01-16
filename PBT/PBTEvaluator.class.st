@@ -12,6 +12,7 @@ PBTEvaluator >> analyzedMethods: target [
 	"target selfReachableMethods" "32, 5, 2, 3" 
 	"target package methods" "573, 694, 163, 1807"
 	"target sendReachableMethods" "573, 694, 99, 1807"
+
 	^ target selfReachableMethods
 ]
 

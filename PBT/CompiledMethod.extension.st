@@ -9,13 +9,18 @@ CompiledMethod >> selfReachableMethods [
 { #category : '*PBT' }
 CompiledMethod >> selfReachableMethods: seen [
 
-	(seen includes: self) ifTrue: [ ^seen ].
-	
-	^ seen, self selfMessages inject: { self } asSet into: [ :set :symbol | | class |
+	(seen includes: self) ifTrue: [ ^ seen ].
+	seen add: self.
+
+	self selfMessages do: [ :symbol |
+		| class |
 		class := self methodClass.
-		class methodDict at: symbol ifPresent: [
-			set, ((class compiledMethodAt: symbol) selfReachableMethods: set) ] ifAbsent: [ set ]
-	]
+		class methodDict
+			at: symbol
+			ifPresent: [
+			(class compiledMethodAt: symbol) selfReachableMethods: seen ] ].
+
+	^ seen
 ]
 
 { #category : '*PBT' }
