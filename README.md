@@ -55,7 +55,7 @@ schema := PBTSchema new
 ### PBT Result
 
 As a result, PBT Provides a **PBTResult** which has the following information:
-- **Tests**: The set of every PBT test, which represents every test instance, with its own generated receiver, arguments, results, coverage and time consumed.
+- **Tests**: The set of every PBT test, representing every test instance, with its own generated receiver, arguments, results, coverage and time consumed.
 - **Segmented tests**: The set of tests segmented by his result ( Success, Fail or Error ).
 - **Total time**: The total time it takes to perform the whole PBT Execution.
 - **Total Coverage**: An incremental coverage result with the union of all test executions.
@@ -65,7 +65,7 @@ As a result, PBT Provides a **PBTResult** which has the following information:
 
 ### Stop criteria
 
-PBT could be executed by calling it with different methods, the default is just calling as above, which means that the framework will execute only 1000 test cases.
+PBT can be executed by calling it with different methods, the default is just calling as above, which means that the framework will execute only 1000 test cases.
 
 ```Smalltalk
 PBTRunner test: targetMethod from: schema
@@ -83,7 +83,7 @@ In case you want to specify the number of generated tests:
 PBTRunner test: targetMethod from: schema times: times
 ```
 
-If you want to set out that you want the framework execute until get 100% of coverage or define a bound of tolerance for not improving coverages tests:
+If you want to set out that you want the framework to execute until you get 100% of coverage or define a bound of tolerance for not improving coverage tests:
 
 ```Smalltalk
 PBTRunner test: targetMethod from: schema withCoverageTolerance: numberOfTolerance
@@ -91,10 +91,10 @@ PBTRunner test: targetMethod from: schema withCoverageTolerance: numberOfToleran
 
 ## Generators
 
-We provide a number of built-in generators that must be enough to define generators for every object. However, you can define your generators to reduce code duplication. These built-in generators are:
+We provide several built-in generators that must be enough to define generators for every object. However, you can define your generators to reduce code duplication. These built-in generators are:
 
 - **PBTConstantGenerator**: Generator that always returns the same value.
-- **PBTDyncamicSelectionGenerator**: Generator that receives a list of generators and, based on feedback, balances the weight of every option to probabilistically give more chance to generator that got good solutions.
+- **PBTDyncamicSelectionGenerator**: Generator that receives a list of generators and, based on feedback, balances the weight of every option to give more chance to the generator that got good solutions probabilistically.
 - **PBTGrammarGenerator**: Generator that receives a grammar and generates a random valid value accepted for that grammar.
 - **PBTObjectGenerator**: Generator that, given a block, fills the instance object.
 - **PBTOptionsGenerator**: Generator that returns a random value from a series of options.
