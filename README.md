@@ -102,7 +102,12 @@ We provide several built-in generators that must be enough to define generators 
 
 ## Performance result
 
+The performance result provides complete information about running times, the maximum time taken by a case test, the minimum and the average time.
+Also, we are segmenting the test cases by execution time to provide a better feedback visualization.
+
 ## Coverage result
+
+The coverage result is an incremental coverage result with the union of all test executions, representing the union of every ran method and node executed by all test cases.
 
 ## Other examples
 
