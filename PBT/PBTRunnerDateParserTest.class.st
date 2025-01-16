@@ -55,6 +55,6 @@ PBTRunnerDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomI
 	
 	self timeLimit: 5 minutes.
 	pbtResult := PBTRunner test: DateParser >> #parse from: schema times: 1000.
-1 halt.
+
 	self assert: (pbtResult tests size) equals: 1000.
 ]
