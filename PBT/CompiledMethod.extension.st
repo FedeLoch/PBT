@@ -17,3 +17,23 @@ CompiledMethod >> selfReachableMethods: seen [
 			set, ((class compiledMethodAt: symbol) selfReachableMethods: set) ] ifAbsent: [ set ]
 	]
 ]
+
+{ #category : '*PBT' }
+CompiledMethod >> sendReachableMethods [
+
+	^ self sendReachableMethods: Set new
+]
+
+{ #category : '*PBT' }
+CompiledMethod >> sendReachableMethods: seen [
+
+	(seen includes: self) ifTrue: [ ^ seen ].
+
+	seen add: self.
+
+	self sendNodes do: [ :sendNode |
+		(self package allMethodsWith: sendNode selector) do: [ :method |
+			method sendReachableMethods: seen ] ].
+
+	^ seen
+]
