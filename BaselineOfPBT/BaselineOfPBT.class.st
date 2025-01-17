@@ -11,7 +11,7 @@ BaselineOfPBT >> baseline: spec [
 	<baseline>
 	spec for: #common do: [
 		spec baseline: 'Phuzzer' with: [ spec repository: 'github://Alamvic/phuzzer:main' ].
-		spec baseline: 'BlocBenchs' with: [ spec repository: 'github://pharo-graphics/BlocBenchs:refactoring-benchmarks/src' ].
+		spec baseline: 'BlocBenchs' with: [ spec repository: 'github://pharo-graphics/BlocBenchs:master/src' ].
 		spec baseline: 'Roassal' with: [ spec repository: 'github://pharo-graphics/Roassal/src' ].
 		spec package: 'PBT' with: [ spec requires: #( 'Phuzzer' 'BlocBenchs' 'Roassal' ) ]
 	]

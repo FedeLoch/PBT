@@ -35,24 +35,10 @@ PBTResult >> performanceResult: aPerfResult [
 ]
 
 { #category : 'as yet unclassified' }
-PBTResult >> plotByAllocatedMemory [
-
-	"TODO"
-]
-
-{ #category : 'as yet unclassified' }
-PBTResult >> plotByCoverage [
-
-	"TODO"
-]
-
-{ #category : 'as yet unclassified' }
-PBTResult >> plotByExecutionTime [
+PBTResult >> plotBy: x and: y [
 	
-	| composite plot shapes x y |
-
-	x := 1 to: tests size.
-	y := tests collect: [ :test | test time asMilliSeconds ].
+	| composite plot shapes |
+	
 	composite := RSCompositeChart new.
 	plot := RSScatterPlot new x: x y: y.
 	composite add: plot.
@@ -66,6 +52,25 @@ PBTResult >> plotByExecutionTime [
 	shapes translucent.
 
 	^ composite canvas
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByAllocatedMemory [
+
+	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test result allocatedMemory ])
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByCoverage [
+
+	"TODO"
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByExecutionTime [
+	
+	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test time asMilliSeconds ])
+
 ]
 
 { #category : 'as yet unclassified' }
