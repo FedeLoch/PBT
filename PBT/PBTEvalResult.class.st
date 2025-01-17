@@ -3,12 +3,25 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'callResult',
-		'coverageResult'
+		'coverageResult',
+		'allocatedMemory'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
 }
+
+{ #category : 'accessing' }
+PBTEvalResult >> allocatedMemory [
+
+	^ allocatedMemory 
+]
+
+{ #category : 'accessing' }
+PBTEvalResult >> allocatedMemory: memory [
+
+	allocatedMemory := memory 
+]
 
 { #category : 'accessing' }
 PBTEvalResult >> callResult [

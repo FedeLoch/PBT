@@ -40,6 +40,12 @@ PBTTest >> object: anObject [
 ]
 
 { #category : 'accessing' }
+PBTTest >> profiledRun [
+
+	^ TimeProfiler spyOn: [ self run ]
+]
+
+{ #category : 'accessing' }
 PBTTest >> result [
 
 	^ result
@@ -49,6 +55,12 @@ PBTTest >> result [
 PBTTest >> result: testResult [
 
 	result := testResult 
+]
+
+{ #category : 'accessing' }
+PBTTest >> run [
+
+	^ object perform: target selector withArguments: arguments
 ]
 
 { #category : 'accessing' }

@@ -1,10 +1,19 @@
 Class {
 	#name : 'PBTEvaluator',
 	#superclass : 'Object',
+	#instVars : [
+		'collector'
+	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
 }
+
+{ #category : 'as yet unclassified' }
+PBTEvaluator >> allocatedMemory [
+
+	^ Smalltalk vm getParameters at: 34
+]
 
 { #category : 'as yet unclassified' }
 PBTEvaluator >> analyzedMethods: target [
@@ -17,27 +26,38 @@ PBTEvaluator >> analyzedMethods: target [
 ]
 
 { #category : 'as yet unclassified' }
+PBTEvaluator >> collector: target [
+
+	collector ifNil: [ collector := CoverageCollector new methods: (self analyzedMethods: target) ].
+	
+	^ collector
+]
+
+{ #category : 'as yet unclassified' }
 PBTEvaluator >> eval: object method: target from: schema with: args andCoverage: incrCoverage [
 
-	| localCoverageResult callResult assertResult |
-	
+	| localCoverageResult callResult assertResult allocatedMemory |
 	[
-		localCoverageResult := (CoverageCollector new methods:
-		                        (self analyzedMethods: target)) runOn: [
+	localCoverageResult := (self collector: target) runOn: [
+		                       allocatedMemory := self allocatedMemory.
 		                       callResult := object
 			                                     perform: target selector
 			                                     withArguments: args ].
-
-		assertResult := schema assert
+									  allocatedMemory := self allocatedMemory - allocatedMemory.
+	assertResult := schema assert
 		                value: object
 		                value: args
-		                value: callResult
-		
-	] on: Error do: [ :error | ^ PBTEvalError new stack: (error signalerContext stackOfSize: 10); message: error messageText ].
+		                value: callResult ]
+		on: Error
+		do: [ :error |
+			^ PBTEvalError new
+				  stack: (error signalerContext stackOfSize: 10);
+				  message: error messageText ].
 
 	^ (assertResult
 		   ifTrue: [ PBTEvalSuccess ]
 		   ifFalse: [ PBTEvalFail ]) new
 		  callResult: callResult;
+		  allocatedMemory: allocatedMemory;
 		  coverageResult: localCoverageResult
 ]
