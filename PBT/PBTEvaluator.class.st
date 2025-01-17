@@ -52,6 +52,7 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 		do: [ :error |
 			^ PBTEvalError new
 				  stack: (error signalerContext stackOfSize: 10);
+				  allocatedMemory: allocatedMemory;
 				  message: error messageText ].
 
 	^ (assertResult

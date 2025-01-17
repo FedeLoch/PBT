@@ -4,12 +4,25 @@ Class {
 	#instVars : [
 		'stack',
 		'coverageResult',
-		'message'
+		'message',
+		'allocatedMemory'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
 }
+
+{ #category : 'accessing' }
+PBTEvalError >> allocatedMemory [
+
+	^ allocatedMemory
+]
+
+{ #category : 'accessing' }
+PBTEvalError >> allocatedMemory: memory [
+
+	allocatedMemory := memory
+]
 
 { #category : 'accessing' }
 PBTEvalError >> coverageResult [
@@ -22,6 +35,13 @@ PBTEvalError >> coverageResult: aCoverageResult [
 	
 	coverageResult := aCoverageResult
 	
+]
+
+{ #category : 'initialization' }
+PBTEvalError >> initialize [ 
+
+	super initialize.
+	allocatedMemory := 0
 ]
 
 { #category : 'accessing' }

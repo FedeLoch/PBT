@@ -37,21 +37,11 @@ PBTResult >> performanceResult: aPerfResult [
 { #category : 'as yet unclassified' }
 PBTResult >> plotBy: x and: y [
 	
-	| composite plot shapes |
+	| composite plot |
 	
 	composite := RSCompositeChart new.
 	plot := RSScatterPlot new x: x y: y.
-	composite add: plot.
-	composite addDecoration: (RSHorizontalTick new doNotUseNiceLabel asFloat: 3).
-	composite addDecoration: RSVerticalTick new.
-	composite build.
-	shapes := plot ellipses.
-	
-	RSNormalizer size shapes: shapes; from: 2; to: 10; normalize: #yourself.
-	RSNormalizer color shapes: shapes; normalize: #yourself.
-	shapes translucent.
-
-	^ composite canvas
+	^ plot
 ]
 
 { #category : 'as yet unclassified' }
@@ -63,7 +53,8 @@ PBTResult >> plotByAllocatedMemory [
 { #category : 'as yet unclassified' }
 PBTResult >> plotByCoverage [
 
-	"TODO"
+	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test |
+		test result coverageResult ifNil: [ 0 ] ifNotNil: [ test result coverageResult percentage ] ])
 ]
 
 { #category : 'as yet unclassified' }

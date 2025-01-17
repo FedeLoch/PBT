@@ -48,3 +48,10 @@ PBTEvalResult >> coverageResult: aCoverageResult [
 	coverageResult := aCoverageResult
 	
 ]
+
+{ #category : 'accessing' }
+PBTEvalResult >> initialize [ 
+
+	super initialize.
+	allocatedMemory := 0
+]

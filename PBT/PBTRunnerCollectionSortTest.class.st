@@ -41,7 +41,7 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 	| pbtResult |
 	
 	pbtResult := PBTRunner test: SequenceableCollection >> #sort from: schema.
-	
+
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.
 ]
