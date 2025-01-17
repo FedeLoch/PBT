@@ -35,6 +35,40 @@ PBTResult >> performanceResult: aPerfResult [
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> plotByAllocatedMemory [
+
+	"TODO"
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByCoverage [
+
+	"TODO"
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByExecutionTime [
+	
+	| composite plot shapes x y |
+
+	x := 1 to: tests size.
+	y := tests collect: [ :test | test time asMilliSeconds ].
+	composite := RSCompositeChart new.
+	plot := RSScatterPlot new x: x y: y.
+	composite add: plot.
+	composite addDecoration: (RSHorizontalTick new doNotUseNiceLabel asFloat: 3).
+	composite addDecoration: RSVerticalTick new.
+	composite build.
+	shapes := plot ellipses.
+	
+	RSNormalizer size shapes: shapes; from: 2; to: 10; normalize: #yourself.
+	RSNormalizer color shapes: shapes; normalize: #yourself.
+	shapes translucent.
+
+	^ composite canvas
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> tests [
 
 	^ tests 
