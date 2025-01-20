@@ -13,6 +13,12 @@ PBTGenerator class >> always: aValue [
 ]
 
 { #category : 'as yet unclassified' }
+PBTGenerator class >> base: baseBlock mutating: mutationBlock [
+
+	^ PBTHillClimbingGenerator new genBase: baseBlock; mutate: mutationBlock 
+]
+
+{ #category : 'as yet unclassified' }
 PBTGenerator class >> onceInstance: aBlock [
 
 	^ PBTObjectGenerator new then: aBlock 
