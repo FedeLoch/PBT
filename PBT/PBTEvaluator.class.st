@@ -2,7 +2,7 @@ Class {
 	#name : 'PBTEvaluator',
 	#superclass : 'Object',
 	#instVars : [
-		'collector'
+		'collectors'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -28,9 +28,12 @@ PBTEvaluator >> analyzedMethods: target [
 { #category : 'as yet unclassified' }
 PBTEvaluator >> collector: target [
 
-	collector ifNil: [ collector := CoverageCollector new methods: (self analyzedMethods: target) ].
+	| key |
 	
-	^ collector
+	key := target name asString.
+	collectors at: key ifAbsentPut: [ CoverageCollector new methods: (self analyzedMethods: target) ].
+
+	^ collectors at: key
 ]
 
 { #category : 'as yet unclassified' }
@@ -61,4 +64,11 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 		  callResult: callResult;
 		  allocatedMemory: allocatedMemory;
 		  coverageResult: localCoverageResult
+]
+
+{ #category : 'as yet unclassified' }
+PBTEvaluator >> initialize [ 
+
+	super initialize.
+	collectors := IdentityDictionary new.
 ]
