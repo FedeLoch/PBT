@@ -6,7 +6,9 @@ Class {
 		'maxTime',
 		'minTime',
 		'totalTime',
-		'segmentedTests'
+		'segmentedTests',
+		'worstCase',
+		'betterCase'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -16,20 +18,34 @@ Class {
 { #category : 'instance creation' }
 PerformanceResult class >> from: tests withTime: totalTime [
 	
-	| times |
+	| worstAndBetter |
 	
-	times := tests collect: #time.
+	worstAndBetter := tests inject: {} into: [ :worstBetter :case |
+		worstBetter ifEmpty: [ { case . case } ] ifNotEmpty: [ {
+			(case time > worstBetter first time) ifTrue: [ case ] ifFalse: [ worstBetter first ].
+			(case time < worstBetter last time) ifTrue: [ case ] ifFalse: [ worstBetter last ].
+		}]
+	].
+
 	^ self new totalTime: totalTime;
 		averageTime: (totalTime / tests size); 
 		segmentedTests: (tests groupedBy: #time);
-		maxTime: times max;
-		minTime: times min
+		worstCase: worstAndBetter first;
+		maxTime: worstAndBetter first time;
+		betterCase: worstAndBetter last;
+		minTime: worstAndBetter last time
 ]
 
 { #category : 'accessing' }
 PerformanceResult >> averageTime: aTime [
 
 	averageTime := aTime
+]
+
+{ #category : 'accessing' }
+PerformanceResult >> betterCase: aCase [
+
+	betterCase := aCase 
 ]
 
 { #category : 'accessing' }
@@ -54,4 +70,10 @@ PerformanceResult >> segmentedTests: segmented [
 PerformanceResult >> totalTime: aTime [
 
 	totalTime := aTime
+]
+
+{ #category : 'accessing' }
+PerformanceResult >> worstCase: aCase [
+
+	worstCase := aCase 
 ]
