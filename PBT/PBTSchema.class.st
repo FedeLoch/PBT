@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'assert',
 		'argumentConstraints',
-		'receiverConstraint'
+		'receiverConstraint',
+		'score'
 	],
 	#category : 'PBT-Property Schema',
 	#package : 'PBT',
@@ -103,4 +104,16 @@ PBTSchema >> receiverConstraint [
 PBTSchema >> receiverConstraint: aReceiverConstraint [
 
 	receiverConstraint := aReceiverConstraint.
+]
+
+{ #category : 'accessing' }
+PBTSchema >> score [
+
+	^ score
+]
+
+{ #category : 'accessing' }
+PBTSchema >> score: aBlock [
+
+	score := aBlock 
 ]

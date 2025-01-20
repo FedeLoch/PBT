@@ -6,7 +6,8 @@ Class {
 		'arguments',
 		'object',
 		'result',
-		'time'
+		'time',
+		'score'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -61,6 +62,18 @@ PBTTest >> result: testResult [
 PBTTest >> run [
 
 	^ object perform: target selector withArguments: arguments
+]
+
+{ #category : 'accessing' }
+PBTTest >> score [
+
+	^ score 
+]
+
+{ #category : 'accessing' }
+PBTTest >> score: aScore [
+
+	score := aScore 
 ]
 
 { #category : 'accessing' }

@@ -65,6 +65,13 @@ PBTResult >> plotByExecutionTime [
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> plotByScore [
+	
+	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test score ])
+
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> tests [
 
 	^ tests 

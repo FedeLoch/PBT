@@ -62,7 +62,7 @@ PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 { #category : 'tests' }
 PBTRunner >> genTest: incrCoverage [
 
-	| arguments receiver testResult time |
+	| arguments receiver testResult time score |
 	
 	"Setup based on the enriched schema"
 	receiver := generator genReceiverFor: target from: schema.
@@ -75,6 +75,9 @@ PBTRunner >> genTest: incrCoverage [
 
 	"Feeds the generator with the test result"
 	generator feedback: (incrCoverage increaseCoverage: testResult coverageResult).
+	
+	"Score calculation"
+	score := self scoreFor: testResult.
 
 	"Increment Incremental Coverage"
 	incrCoverage incrementWith: testResult coverageResult.
@@ -84,6 +87,7 @@ PBTRunner >> genTest: incrCoverage [
 		arguments: arguments;
 		object: receiver;
 		time: time;
+		score: score;
 		result: testResult		
 ]
 
@@ -102,6 +106,12 @@ PBTRunner >> schema: propSchema [
 
 	schema := propSchema
 	
+]
+
+{ #category : 'tests' }
+PBTRunner >> scoreFor: testResult [
+
+	^ schema score ifNil: [ nil ] ifNotNil: [ schema score value: testResult ]
 ]
 
 { #category : 'tests' }

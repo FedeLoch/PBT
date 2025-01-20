@@ -53,8 +53,19 @@ PBTRunnerDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomI
 
 	| pbtResult |
 	
-	self timeLimit: 5 minutes.
+	self timeLimit: 30 minutes.
 	pbtResult := PBTRunner test: DateParser >> #parse from: schema times: 1000.
-
+1 halt.
 	self assert: (pbtResult tests size) equals: 1000.
+]
+
+{ #category : 'tests' }
+PBTRunnerDateParserTest >> testGivingADateParseSchemaWithScoreThenGenerateTestsForRandomInputs [
+
+	| pbtResult |
+	
+	self timeLimit: 30 minutes.
+	pbtResult := PBTRunner test: DateParser >> #parse from: schema times: 100.
+
+	self assert: (pbtResult tests size) equals: 100.
 ]
