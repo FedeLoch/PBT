@@ -6,7 +6,8 @@ Class {
 		'totalTime',
 		'totalCoverage',
 		'performanceResult',
-		'segmentedTests'
+		'segmentedTests',
+		'ranking'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -24,6 +25,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 	^ self new tests: tests;
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
+		ranking: (tests collect: #score) asSortedCollection reverse;
 		performanceResult: perfResult
 ]
 
@@ -68,6 +70,19 @@ PBTResult >> plotByExecutionTime [
 PBTResult >> plotByScore [
 	
 	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test score ])
+
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> ranking [
+
+	^ ranking
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> ranking: aRanking [
+
+	ranking := aRanking
 
 ]
 

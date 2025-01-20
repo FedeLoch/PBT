@@ -65,6 +65,9 @@ PBTRunnerDateParserTest >> testGivingADateParseSchemaWithScoreThenGenerateTestsF
 	| pbtResult |
 	
 	self timeLimit: 30 minutes.
+	
+	schema score: [ :testCase | testCase allocatedMemory ].
+	
 	pbtResult := PBTRunner test: DateParser >> #parse from: schema times: 100.
 
 	self assert: (pbtResult tests size) equals: 100.
