@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerFactorialWithOptionalGenTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTFactorialWithOptionalGenTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
 		'receiverConstraint',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerFactorialWithOptionalGenTest >> setUp [
+PBTFactorialWithOptionalGenTest >> setUp [
 	
 	| generators |
 	
@@ -30,7 +30,7 @@ PBTRunnerFactorialWithOptionalGenTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerFactorialWithOptionalGenTest >> testGivingASmallIntegerSchemaWithDynamicGeneratorsThenValidateFactorialResult [
+PBTFactorialWithOptionalGenTest >> testGivingASmallIntegerSchemaWithDynamicGeneratorsThenValidateFactorialResult [
 
 	| pbtResult |
 

@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerPlusTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTPlusTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'receiverConstraint',
 		'assert',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerPlusTest >> setUp [
+PBTPlusTest >> setUp [
 	
 	| range |
 	
@@ -29,7 +29,7 @@ PBTRunnerPlusTest >> setUp [
 ]
 
 { #category : 'as yet unclassified' }
-PBTRunnerPlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
+PBTPlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |
 

@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerRectangleAreaTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTRectangleAreaTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'receiverConstraint',
 		'assert',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerRectangleAreaTest >> setUp [
+PBTRectangleAreaTest >> setUp [
 
 	| generator |
 	super setUp.
@@ -43,7 +43,7 @@ PBTRunnerRectangleAreaTest >> setUp [
 ]
 
 { #category : 'as yet unclassified' }
-PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
+PBTRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |
 
@@ -53,7 +53,7 @@ PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResul
 ]
 
 { #category : 'as yet unclassified' }
-PBTRunnerRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResultWithCoverageChangeTolerance [
+PBTRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResultWithCoverageChangeTolerance [
 
 	| pbtResult |
 

@@ -1,13 +1,13 @@
 Class {
-	#name : 'PBTRunnerSimplerBlocBenchsTest',
-	#superclass : 'PBTRunnerBlocBenchsTest',
+	#name : 'PBTSimplerBlocBenchsTest',
+	#superclass : 'PBTBlocBenchsTest',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
 	#tag : 'FrameworkTests'
 }
 
 { #category : 'running' }
-PBTRunnerSimplerBlocBenchsTest >> setUp [
+PBTSimplerBlocBenchsTest >> setUp [
 
 	super setUp.
 
@@ -29,7 +29,7 @@ PBTRunnerSimplerBlocBenchsTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerSimplerBlocBenchsTest >> testGivingASimplerBlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
+PBTSimplerBlocBenchsTest >> testGivingASimplerBlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
 
 	| pbtResult |
 

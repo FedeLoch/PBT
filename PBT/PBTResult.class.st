@@ -25,7 +25,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 	^ self new tests: tests;
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
-		ranking: (tests collect: #score) asSortedCollection reverse;
+		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
 		performanceResult: perfResult
 ]
 

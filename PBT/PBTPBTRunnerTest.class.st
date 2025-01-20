@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerPBTTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTPBTRunnerTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'receiverConstraint',
 		'assert',
@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerPBTTest >> setUp [
+PBTPBTRunnerTest >> setUp [
 
 	| generator |
 	super setUp.
@@ -40,7 +40,7 @@ PBTRunnerPBTTest >> setUp [
 ]
 
 { #category : 'as yet unclassified' }
-PBTRunnerPBTTest >> testGivingThePBTRunnerSchemaThenValidatePBTFramework [
+PBTPBTRunnerTest >> testGivingThePBTRunnerSchemaThenValidatePBTFramework [
 
 	"This test has the intention to prove the framework itself"
 	"TODO: Not executable until we support schema inference"

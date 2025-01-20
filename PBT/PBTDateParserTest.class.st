@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerDateParserTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTDateParserTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
 		'receiverConstraint',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerDateParserTest >> dateConstraint [
+PBTDateParserTest >> dateConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: String;
@@ -22,13 +22,13 @@ PBTRunnerDateParserTest >> dateConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerDateParserTest >> datePattern [
+PBTDateParserTest >> datePattern [
 
 	^ 'm-d-yyyy'
 ]
 
 { #category : 'running' }
-PBTRunnerDateParserTest >> setUp [
+PBTDateParserTest >> setUp [
 
 	super setUp.
 
@@ -49,7 +49,7 @@ PBTRunnerDateParserTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomInputs [
+PBTDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomInputs [
 
 	| pbtResult |
 	
@@ -60,7 +60,7 @@ PBTRunnerDateParserTest >> testGivingADateParseSchemaThenGenerateTestsForRandomI
 ]
 
 { #category : 'tests' }
-PBTRunnerDateParserTest >> testGivingADateParseSchemaWithScoreThenGenerateTestsForRandomInputs [
+PBTDateParserTest >> testGivingADateParseSchemaWithScoreThenGenerateTestsForRandomInputs [
 
 	| pbtResult |
 	

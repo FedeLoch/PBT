@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerFactorialTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTFactorialTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
 		'receiverConstraint',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerFactorialTest >> setUp [
+PBTFactorialTest >> setUp [
 	super setUp.
 	
 	receiverConstraint := PBTObjectConstraint new generator: (PBTGenerator oneOf: (10 to: 100)).
@@ -21,7 +21,7 @@ PBTRunnerFactorialTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResult [
+PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResult [
 
 	| pbtResult |
 
@@ -32,7 +32,7 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 ]
 
 { #category : 'tests' }
-PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromSpecificCountOfIterations [
+PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromSpecificCountOfIterations [
 
 	| pbtResult |
 
@@ -43,7 +43,7 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 ]
 
 { #category : 'tests' }
-PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromTimeIsnteadOfIterations [
+PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromTimeIsnteadOfIterations [
 
 	| pbtResult |
 
@@ -54,7 +54,7 @@ PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResu
 ]
 
 { #category : 'tests' }
-PBTRunnerFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWithoutSchema [
+PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWithoutSchema [
 	
 	| pbtResult |
 	"TODO: Not executable until we support schema inference"

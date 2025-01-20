@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerCollectionSortTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTCollectionSortTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
 		'receiverConstraint',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerCollectionSortTest >> setUp [
+PBTCollectionSortTest >> setUp [
 
 	super setUp.
 
@@ -36,7 +36,7 @@ PBTRunnerCollectionSortTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResult [
+PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResult [
 
 	| pbtResult |
 	
@@ -47,7 +47,7 @@ PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSor
 ]
 
 { #category : 'tests' }
-PBTRunnerCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResultWithoutSchema [
+PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResultWithoutSchema [
 
 	| pbtResult |
 	"TODO: Not executable until we support schema inference"

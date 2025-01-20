@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRunnerTest',
+	#name : 'PBTFrameworkTest',
 	#superclass : 'TestCase',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -7,14 +7,14 @@ Class {
 }
 
 { #category : 'asserting' }
-PBTRunnerTest >> assertSuccess: pbtResult [
+PBTFrameworkTest >> assertSuccess: pbtResult [
 
 	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) size equals: 1.
 	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) keys first equals: PBTEvalSuccess.
 ]
 
 { #category : 'running' }
-PBTRunnerTest >> setUp [
+PBTFrameworkTest >> setUp [
 	super setUp.
 	
 

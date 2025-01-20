@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTRunnerBlocBenchsTest',
-	#superclass : 'PBTRunnerTest',
+	#name : 'PBTBlocBenchsTest',
+	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
 		'receiverConstraint',
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blChildConstraint [
+PBTBlocBenchsTest >> blChildConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: BlElement;
@@ -33,7 +33,7 @@ PBTRunnerBlocBenchsTest >> blChildConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blColorConstraint [
+PBTBlocBenchsTest >> blColorConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: Color;
@@ -41,7 +41,7 @@ PBTRunnerBlocBenchsTest >> blColorConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blContainerConstraint [
+PBTBlocBenchsTest >> blContainerConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: BlElement;
@@ -60,7 +60,7 @@ PBTRunnerBlocBenchsTest >> blContainerConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blElementConstraint [
+PBTBlocBenchsTest >> blElementConstraint [
 
 	^ 	PBTObjectConstraint new
 		                      objectClass: BlElement;
@@ -81,14 +81,14 @@ PBTRunnerBlocBenchsTest >> blElementConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blGeometryConstraint [
+PBTBlocBenchsTest >> blGeometryConstraint [
 
 	^ PBTObjectConstraint new
 		  generator: (PBTGenerator oneOf: { BlRectangleGeometry new . BlTriangleGeometry new ". BlCircleGeometry new" })
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
+PBTBlocBenchsTest >> blSpinnerConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: BlElement;
@@ -113,7 +113,7 @@ PBTRunnerBlocBenchsTest >> blSpinnerConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> blTransparentConstraint [
+PBTBlocBenchsTest >> blTransparentConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: BlElement;
@@ -130,7 +130,7 @@ PBTRunnerBlocBenchsTest >> blTransparentConstraint [
 ]
 
 { #category : 'running' }
-PBTRunnerBlocBenchsTest >> setUp [
+PBTBlocBenchsTest >> setUp [
 
 	super setUp.
 
@@ -152,7 +152,7 @@ PBTRunnerBlocBenchsTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRunnerBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
+PBTBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
 
 	| pbtResult |
 
