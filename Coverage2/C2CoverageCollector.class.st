@@ -110,11 +110,12 @@ C2CoverageCollector >> callgraph [
 { #category : 'basic' }
 C2CoverageCollector >> collectResult [
 
-	"Collect the results.
-	This also remaps the methods and resets the annotations."
+	| collectionResult |
 	
 	self remapMethods.
-	^ result collectResult
+	collectionResult := result collectResult: self.
+	self resetResult.
+	^ collectionResult 
 ]
 
 { #category : 'accessing' }
@@ -153,10 +154,6 @@ C2CoverageCollector >> install [
 	
 	Sequence nodes are also prepared. This enable a basic path coverage."
 
-	methods do: [ :meth | 
-		meth ast link: metalink.
-	].
-
 	nodes ifNil: [ self initializeNodes ].
 	nodes do: [ :node | 
 		self assert: node isSequence.
@@ -167,10 +164,10 @@ C2CoverageCollector >> install [
 { #category : 'running' }
 C2CoverageCollector >> installOn: aBlock [
 
-	"just run a block, with installation."
+	"just run a block, with installation and uninstallation."
 
 	self install.
-	aBlock value
+	aBlock ensure: [ self uninstall ].
 ]
 
 { #category : 'accessing' }
@@ -280,6 +277,12 @@ C2CoverageCollector >> remapMethods [
 
 	"Because of metalinks, CompiledMethods can by recompiled, so this method is called to updates the list of methods with the 'current' list of methods."
 	^ methods := methods collect: [ :m | m classBinding value >> m selector ]
+]
+
+{ #category : 'initialization' }
+C2CoverageCollector >> resetResult [
+
+	result := C2IncrementalResult new
 ]
 
 { #category : 'running' }

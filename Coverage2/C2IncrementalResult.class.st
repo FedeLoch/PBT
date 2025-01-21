@@ -9,14 +9,17 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-C2IncrementalResult >> collectResult [
+C2IncrementalResult >> collectResult: collector [
 
 	| nodes |
-	nodes := (coveredNodes collect: [ :tuple | self resolveNode: tuple ]) asSet.
-	
+	nodes := (coveredNodes collect: [ :tuple | self resolveNode: tuple ])
+		         asSet.
+
 	^ C2CoverageResult new
-		nodes: nodes;
-		methods: (nodes collect: [ :node | node methodNode method ]) asSet
+		  collector: collector;
+		  nodes: nodes;
+		  methods:
+			  (nodes collect: [ :node | node methodNode compiledMethod ]) asSet
 ]
 
 { #category : 'as yet unclassified' }
