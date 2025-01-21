@@ -10,14 +10,13 @@ Class {
 }
 
 { #category : 'instance creation' }
-IncrementalCoverageResult class >> for: methods [
+IncrementalCoverageResult class >> for: methods from: collector [
 
-	^ self new methods: methods asSet; nodes: IdentitySet new 
+	^ self new methods: methods asSet; nodes: IdentitySet new ; collector: collector
 ]
 
 { #category : 'as yet unclassified' }
 IncrementalCoverageResult >> asPercent [
-	collector ifNil: [ ^0 ].
 	^ self percentage
 ]
 
@@ -63,8 +62,6 @@ IncrementalCoverageResult >> incrementWith: anotherResult [
 	"Merge covered nodes"
 	nodes := nodes, anotherResult nodes.
 	self mergeMethods: anotherResult methods.
-	
-	collector ifNil: [ collector := anotherResult collector ]
 ]
 
 { #category : 'as yet unclassified' }

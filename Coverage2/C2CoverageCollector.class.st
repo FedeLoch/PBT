@@ -129,7 +129,7 @@ C2CoverageCollector >> initialize [
 	metalink := MetaLink new
 		            selector: #tagExecuted:;
 		            metaObject: self;
-						arguments: #( #node).
+						arguments: #( #node ).
 	methods := IdentitySet new.
 	result := C2IncrementalResult new.
 ]
@@ -300,7 +300,16 @@ C2CoverageCollector >> runOn: aBlock [
 { #category : 'callgraph' }
 C2CoverageCollector >> tagExecuted: node [
 
-	result coverNode: node
+	| process |
+	process := Processor activeProcess.
+	process isMeta ifTrue: [ ^ self ].
+
+	"Move to the meta level and call the before hook"
+	process shiftLevelUp.
+
+	result coverNode: node.
+	
+	process shiftLevelDown
 ]
 
 { #category : 'basic' }

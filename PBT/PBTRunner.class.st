@@ -103,12 +103,16 @@ PBTRunner >> initialize [
 
 { #category : 'tests' }
 PBTRunner >> reachableMethods [
-	
-	"target selfReachableMethods" "<- all self called methods"
-	"target package methods" "<- all package methods"
-	"target sendReachableMethods" "<- all send called methods"
 
-	^ target sendReachableMethods
+	"target selfReachableMethods <- all self called methods"
+
+	"target package methods <- all package methods"
+
+	"target sendReachableMethods <- all send called methods"
+
+	^ target sendReachableMethods reject: [ :method |
+		  method pragmas anySatisfy: [ :pragma |
+			  pragma selector = #noInstrumentation ] ]
 ]
 
 { #category : 'accessing' }
@@ -145,7 +149,7 @@ PBTRunner >> test [
 	time := Time millisecondClockValue.
 	tests := OrderedCollection new.
 	collector := C2CoverageCollector new methods: self reachableMethods.
-	incrCoverage := IncrementalCoverageResult for: { target }.
+	incrCoverage := IncrementalCoverageResult for: { target } from: collector.
 	
 	collector runOn: [
 		[

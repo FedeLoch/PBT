@@ -40,8 +40,9 @@ PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResul
 
 	| pbtResult |
 	
-	pbtResult := PBTRunner test: SequenceableCollection >> #sort from: schema.
-
+	self timeLimit: 5 minutes.
+	pbtResult := PBTRunner test: SequenceableCollection >> #sort from: schema times: 100.
+	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.
 ]
