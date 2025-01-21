@@ -14,9 +14,12 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThen
 
 	| pbtResult |
 	
-	pbtResult := PBTRunner test: Integer >> #factorial from: schema times: 1000.
+	pbtResult := PBTRunner test: Integer >> #factorial from: schema times: 10000.
+	"Definir la nocion de score y utilizar 
+	
+	PBTGenerator base: [ 'asdef' ] mutating: [ :value |"
 
 	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 10000.
 
 ]
