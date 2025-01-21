@@ -1,9 +1,6 @@
 Class {
 	#name : 'PBTEvaluator',
 	#superclass : 'Object',
-	#instVars : [
-		'collectors'
-	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
@@ -16,37 +13,18 @@ PBTEvaluator >> allocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
-PBTEvaluator >> analyzedMethods: target [
-	
-	"target selfReachableMethods" "32, 5, 2, 3" 
-	"target package methods" "573, 694, 163, 1807"
-	"target sendReachableMethods" "573, 694, 99, 1807"
-
-	^ target selfReachableMethods
-]
-
-{ #category : 'as yet unclassified' }
-PBTEvaluator >> collector: target [
-
-	| key |
-	
-	key := target name asString.
-	collectors at: key ifAbsentPut: [ CoverageCollector new methods: (self analyzedMethods: target) ].
-
-	^ collectors at: key
-]
-
-{ #category : 'as yet unclassified' }
-PBTEvaluator >> eval: object method: target from: schema with: args andCoverage: incrCoverage [
+PBTEvaluator >> eval: object method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
 	| localCoverageResult callResult assertResult allocatedMemory |
 	[
-	localCoverageResult := (self collector: target) runOn: [
-		                       allocatedMemory := self allocatedMemory.
-		                       callResult := object
-			                                     perform: target selector
-			                                     withArguments: args ].
-									  allocatedMemory := self allocatedMemory - allocatedMemory.
+	allocatedMemory := self allocatedMemory.
+	
+	"Reset the coverage result to avoid interference between tests"
+	collector resetResult.
+	callResult := object perform: target selector withArguments: args.
+	localCoverageResult := collector collectResult.
+	
+	allocatedMemory := self allocatedMemory - allocatedMemory.
 	assertResult := schema assert
 		                value: object
 		                value: args
@@ -64,11 +42,4 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 		  callResult: callResult;
 		  allocatedMemory: allocatedMemory;
 		  coverageResult: localCoverageResult
-]
-
-{ #category : 'as yet unclassified' }
-PBTEvaluator >> initialize [ 
-
-	super initialize.
-	collectors := IdentityDictionary new.
 ]

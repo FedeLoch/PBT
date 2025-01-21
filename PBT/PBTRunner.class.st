@@ -60,7 +60,7 @@ PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 ]
 
 { #category : 'tests' }
-PBTRunner >> genTest: incrCoverage [
+PBTRunner >> genTest: incrCoverage with: collector [
 
 	| arguments receiver testResult time score |
 	
@@ -70,7 +70,7 @@ PBTRunner >> genTest: incrCoverage [
 	
 	"Target call and eval result"
 	time := [
-		testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage
+		testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage collectingWith: collector
 	] timeToRun.
 
 	"Feeds the generator with the test result"
@@ -99,6 +99,16 @@ PBTRunner >> initialize [
 	stopCriteria := PBTCountCriteria new times: 100.
 	
 	
+]
+
+{ #category : 'tests' }
+PBTRunner >> reachableMethods [
+	
+	"target selfReachableMethods" "<- all self called methods"
+	"target package methods" "<- all package methods"
+	"target sendReachableMethods" "<- all send called methods"
+
+	^ target sendReachableMethods
 ]
 
 { #category : 'accessing' }
@@ -130,12 +140,19 @@ PBTRunner >> target: targetMethod [
 { #category : 'tests' }
 PBTRunner >> test [
 
-	| tests time incrCoverage |
+	| tests time collector incrCoverage |
 	
 	time := Time millisecondClockValue.
 	tests := OrderedCollection new.
+	collector := C2CoverageCollector new methods: self reachableMethods.
 	incrCoverage := IncrementalCoverageResult for: { target }.
-	[self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [ tests add: (self genTest: incrCoverage) ].
+	
+	collector runOn: [
+		[
+			self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
+			tests add: (self genTest: incrCoverage with: collector)
+		]
+	].
 
 	^ self genReport: tests since: time withCoverage: incrCoverage
 ]
