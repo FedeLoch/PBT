@@ -85,7 +85,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	"Generate Test case"
 	^ PBTTest new target: target;
 		arguments: arguments;
-		object: receiver;
+		receiver: receiver;
 		time: time;
 		score: score;
 		result: testResult		

@@ -13,7 +13,7 @@ PBTEvaluator >> allocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
-PBTEvaluator >> eval: object method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
+PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
 	| localCoverageResult callResult assertResult allocatedMemory |
 	[
@@ -21,12 +21,12 @@ PBTEvaluator >> eval: object method: target from: schema with: args andCoverage:
 	
 	"Reset the coverage result to avoid interference between tests"
 	collector resetResult.
-	callResult := object perform: target selector withArguments: args.
+	callResult := receiver perform: target selector withArguments: args.
 	localCoverageResult := collector collectResult.
 	
 	allocatedMemory := self allocatedMemory - allocatedMemory.
 	assertResult := schema assert
-		                value: object
+		                value: receiver
 		                value: args
 		                value: callResult ]
 		on: Error

@@ -4,10 +4,10 @@ Class {
 	#instVars : [
 		'target',
 		'arguments',
-		'object',
 		'result',
 		'time',
-		'score'
+		'score',
+		'receiver'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -29,21 +29,21 @@ PBTTest >> asPharoTest [
 ]
 
 { #category : 'accessing' }
-PBTTest >> object [
-
-	^ object
-]
-
-{ #category : 'accessing' }
-PBTTest >> object: anObject [
-
-	object := anObject
-]
-
-{ #category : 'accessing' }
 PBTTest >> profiledRun [
 
 	^ TimeProfiler spyOn: [ self run ]
+]
+
+{ #category : 'accessing' }
+PBTTest >> receiver [
+
+	^ receiver
+]
+
+{ #category : 'accessing' }
+PBTTest >> receiver: anObject [
+
+	receiver := anObject
 ]
 
 { #category : 'accessing' }
@@ -61,7 +61,7 @@ PBTTest >> result: testResult [
 { #category : 'accessing' }
 PBTTest >> run [
 
-	^ object perform: target selector withArguments: arguments
+	^ receiver perform: target selector withArguments: arguments
 ]
 
 { #category : 'accessing' }

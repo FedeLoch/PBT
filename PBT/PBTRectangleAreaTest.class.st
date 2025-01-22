@@ -48,6 +48,7 @@ PBTRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 	| pbtResult |
 
 	pbtResult := PBTRunner test: Rectangle >> #area from: schema times: 1000.
+	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.
 ]

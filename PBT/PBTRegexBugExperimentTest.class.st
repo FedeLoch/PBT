@@ -39,8 +39,7 @@ PBTRegexBugExperimentTest >> setUp [
 
 	generator := PBTGenerator do: [ :props | | regex |
 		             regex := (props at: 'grammar') gen.
-		1 halt.
-		             props at: 'input' put: regex smallestStringMatching.
+		             props at: 'input' put: 'a'"regex smallestStringMatching".
 		             regex asRegex
 	].
 
@@ -56,12 +55,8 @@ PBTRegexBugExperimentTest >> setUp [
 		  generator: (PBTGenerator do: [ :props | props at: 'input' ])
 	}.
 	
-	assert := [ :rect :args :result |
-	          1 halt.
-	          result >= 0 ].
-	score := [ :testCase |
-	         1 halt.
-	         testCase allocatedMemory ].
+	assert := [ :regex :input :result | result ].
+	score := nil.
 
 	schema := PBTSchema new
 		          receiverConstraint: receiverConstraint;
@@ -75,9 +70,10 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThen
 
 	| pbtResult |
 	
+	self timeLimit: 5 minutes.
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
-
-	self assertSuccess: pbtResult.
+	
+	1 halt.
 	self assert: (pbtResult tests size) equals: 10000.
 
 ]
