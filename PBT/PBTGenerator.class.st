@@ -19,6 +19,12 @@ PBTGenerator class >> base: baseBlock mutating: mutationBlock [
 ]
 
 { #category : 'as yet unclassified' }
+PBTGenerator class >> do: aBlock [
+
+	^ PBTGenericGenerator new do: aBlock.
+]
+
+{ #category : 'as yet unclassified' }
 PBTGenerator class >> onceInstance: aBlock [
 
 	^ PBTObjectGenerator new then: aBlock 

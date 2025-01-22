@@ -12,7 +12,7 @@ Class {
 { #category : 'as yet unclassified' }
 PBTObjectGenerator >> gen: myConstraint [
 	
-	^ then value: (myConstraint objectClass new) value: (myConstraint props asDictionary)
+	^ then value: (myConstraint objectClass new) value: myConstraint props
 ]
 
 { #category : 'accessing' }

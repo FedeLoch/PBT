@@ -54,7 +54,9 @@ PBTObjectConstraint >> props [
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectConstraint >> props: internalProperties [
+PBTObjectConstraint >> props: aPropObj [
 
-	props := internalProperties
+	props := aPropObj class = InternalConstraintProperties
+		         ifTrue: [ aPropObj ]
+		         ifFalse: [ InternalConstraintProperties from: aPropObj asDictionary ]
 ]
