@@ -77,7 +77,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	generator feedback: (incrCoverage increaseCoverage: testResult coverageResult).
 	
 	"Score calculation"
-	score := self scoreFor: testResult.
+	score := self scoreFor: receiver with: arguments and: testResult.
 
 	"Increment Incremental Coverage"
 	incrCoverage incrementWith: testResult coverageResult.
@@ -123,9 +123,9 @@ PBTRunner >> schema: propSchema [
 ]
 
 { #category : 'tests' }
-PBTRunner >> scoreFor: testResult [
+PBTRunner >> scoreFor: receiver with: arguments and: testResult [
 
-	^ schema score ifNil: [ nil ] ifNotNil: [ schema score value: testResult ]
+	^ schema score ifNil: [ nil ] ifNotNil: [ schema score value: receiver value: arguments value: testResult ]
 ]
 
 { #category : 'tests' }
