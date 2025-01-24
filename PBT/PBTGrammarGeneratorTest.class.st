@@ -6,7 +6,7 @@ Class {
 	#tag : 'Generators'
 }
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
 
 	| generator grammar |

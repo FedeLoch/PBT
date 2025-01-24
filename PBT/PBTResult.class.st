@@ -39,31 +39,54 @@ PBTResult >> performanceResult: aPerfResult [
 { #category : 'as yet unclassified' }
 PBTResult >> plotBy: x and: y [
 	
-	| composite plot |
-	
-	composite := RSCompositeChart new.
-	plot := RSScatterPlot new x: x y: y.
-	^ plot
+	^ RSScatterPlot new x: x y: y
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotBy: x and: y xlabel: xLabel ylabel: yLabel title: title [
+
+	^ RSScatterPlot new
+		  x: x y: y;
+		  xlabel: xLabel;
+		  ylabel: yLabel;
+		  title: title;
+		  yourself
 ]
 
 { #category : 'as yet unclassified' }
 PBTResult >> plotByAllocatedMemory [
 
-	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test result allocatedMemory ])
+	^ self
+		  plotBy: (1 to: tests size)
+		  and: (tests collect: [ :test | test result allocatedMemory ])
+		  xlabel: 'Number of cases'
+		  ylabel: 'Allocated memory'
+		  title: 'Allocated memory per case'
 ]
 
 { #category : 'as yet unclassified' }
 PBTResult >> plotByCoverage [
 
-	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test |
-		test result coverageResult ifNil: [ 0 ] ifNotNil: [ test result coverageResult percentage ] ])
+	^ self
+		  plotBy: (1 to: tests size)
+		  and: (tests collect: [ :test |
+				   test result coverageResult
+					   ifNil: [ 0 ]
+					   ifNotNil: [ test result coverageResult percentage ] ])
+		  xlabel: 'Number of cases'
+		  ylabel: 'Coverage achieved'
+		  title: 'Coverage achieved per case'
 ]
 
 { #category : 'as yet unclassified' }
 PBTResult >> plotByExecutionTime [
-	
-	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test time asMilliSeconds ])
 
+	^ self
+		  plotBy: (1 to: tests size)
+		  and: (tests collect: [ :test | test time asMilliSeconds ])
+		  xlabel: 'Number of cases'
+		  ylabel: 'Time consumed'
+		  title: 'Execution time consumed per case'
 ]
 
 { #category : 'as yet unclassified' }

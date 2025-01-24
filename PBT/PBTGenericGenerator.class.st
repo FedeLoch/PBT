@@ -22,7 +22,7 @@ PBTGenericGenerator >> do: aBlock [
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> gen: myConstraint [
-	
-	^ do value: myConstraint props
+PBTGenericGenerator >> gen: constraint by: aFeedback [
+
+	^ do value: (constraint ifNotNil: [ constraint props ] ifNil: nil) value: aFeedback
 ]

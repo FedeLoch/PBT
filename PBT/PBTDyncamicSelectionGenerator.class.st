@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PBTDyncamicSelectionGenerator >> gen: myConstraint [
+
+	^ self gen: myConstraint by: true 
+]
+
+{ #category : 'as yet unclassified' }
 PBTDyncamicSelectionGenerator >> gen: myConstraint by: previousFeedback [
 
 	"P(x) = \frac{\text{weight}(x)}{\text{sum of all weights}}"

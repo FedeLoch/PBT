@@ -44,6 +44,5 @@ PBTGenerator >> gen: instance [
 
 { #category : 'as yet unclassified' }
 PBTGenerator >> gen: constraint by: aFeedback [
-
 	^ self gen: constraint 
 ]

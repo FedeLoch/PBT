@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'grammar',
 		'fuzzer',
-		'maxHeight'
+		'generator'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -15,7 +15,7 @@ Class {
 PBTGrammarGenerator >> gen: myConstraint [
 
 	"Gen a random string that matchs with the instance variable grammar"
-	^ "fuzzer fuzz" grammar generate: (GncGrammarGenerator newUnbounded maxHeight: maxHeight; yourself)
+	^ "fuzzer fuzz" grammar generate: generator
 ]
 
 { #category : 'accessing' }
@@ -30,17 +30,17 @@ PBTGrammarGenerator >> initialize [
 
 	super initialize.
 	fuzzer := PzGrammarFuzzer new.
-	maxHeight := 20.
-]
-
-{ #category : 'accessing' }
-PBTGrammarGenerator >> maxHeight [
-
-	^ maxHeight 
+	generator := GncGrammarGenerator newUnbounded maxHeight: 20; maxSize: 20
 ]
 
 { #category : 'accessing' }
 PBTGrammarGenerator >> maxHeight: aHeight [
 
-	maxHeight := aHeight 
+	generator maxHeight: aHeight
+]
+
+{ #category : 'accessing' }
+PBTGrammarGenerator >> maxSize: aSize [
+
+	generator maxSize: aSize 
 ]

@@ -18,7 +18,7 @@ PBTRegexBugExperimentTest >> regexConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: String;
-		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 20)
+		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 40)
 ]
 
 { #category : 'running' }
@@ -31,9 +31,9 @@ PBTRegexBugExperimentTest >> setUp [
 		                    { ('grammar' -> self regexConstraint) }
 			                    asDictionary.
 
-	generator := PBTGenerator do: [ :props |
+	generator := PBTGenerator do: [ :props :feedback |
 		             | regex |
-		             regex := (props at: 'grammar') gen.
+		             regex := (props at: 'grammar') genBy: feedback.
 		             props at: 'input' put: regex minimalStringMatching.
 		             regex asRegex ].
 
@@ -46,7 +46,7 @@ PBTRegexBugExperimentTest >> setUp [
 		                        objectClass: String;
 		                        props: sharedProperties;
 		                        generator:
-			                        (PBTGenerator do: [ :props |
+			                        (PBTGenerator do: [ :props :feedback |
 					                         props at: 'input' ])) }.
 
 	assert := [ :regex :input :result | result ].
@@ -60,7 +60,7 @@ PBTRegexBugExperimentTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBug [
+PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBug [
 
 	| pbtResult |
 	
