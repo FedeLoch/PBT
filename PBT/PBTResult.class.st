@@ -37,10 +37,10 @@ PBTResult >> performanceResult: aPerfResult [
 ]
 
 { #category : 'as yet unclassified' }
-PBTResult >> plotBy: x and: y xlabel: xLabel ylabel: yLabel title: title [
+PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
 	^ RSScatterPlot new
-		  x: x y: y;
+		  rawData: tests x: xBlock y: ybloc;
 		  xlabel: xLabel;
 		  ylabel: yLabel;
 		  title: title;
@@ -51,8 +51,8 @@ PBTResult >> plotBy: x and: y xlabel: xLabel ylabel: yLabel title: title [
 PBTResult >> plotByAllocatedMemory [
 
 	^ self
-		  plotBy: (1 to: tests size)
-		  and: (tests collect: [ :test | test result allocatedMemory ])
+		  plotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test result allocatedMemory ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Allocated memory'
 		  title: 'Allocated memory per case'
@@ -62,11 +62,11 @@ PBTResult >> plotByAllocatedMemory [
 PBTResult >> plotByCoverage [
 
 	^ self
-		  plotBy: (1 to: tests size)
-		  and: (tests collect: [ :test |
+		  plotBy: [ :test | tests indexOf: test ]
+		  and: [ :test |
 				   test result coverageResult
 					   ifNil: [ 0 ]
-					   ifNotNil: [ test result coverageResult percentage ] ])
+					   ifNotNil: [ test result coverageResult percentage ] ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Coverage achieved'
 		  title: 'Coverage achieved per case'
@@ -76,8 +76,8 @@ PBTResult >> plotByCoverage [
 PBTResult >> plotByExecutionTime [
 
 	^ self
-		  plotBy: (1 to: tests size)
-		  and: (tests collect: [ :test | test time asMilliSeconds ])
+		  plotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test time asMilliSeconds ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Time consumed'
 		  title: 'Execution time consumed per case'
@@ -87,8 +87,8 @@ PBTResult >> plotByExecutionTime [
 PBTResult >> plotByScore [
 
 	^ self
-		  plotBy: (1 to: tests size)
-		  and: (tests collect: [ :test | test score ])
+		  plotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test score ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Score'
 		  title: 'Ranking'

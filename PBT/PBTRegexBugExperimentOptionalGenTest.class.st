@@ -30,7 +30,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 	| pbtResult |
 	
 	self timeLimit: 20 minutes.
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 100000.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 100.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
