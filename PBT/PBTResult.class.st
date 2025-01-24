@@ -37,12 +37,6 @@ PBTResult >> performanceResult: aPerfResult [
 ]
 
 { #category : 'as yet unclassified' }
-PBTResult >> plotBy: x and: y [
-	
-	^ RSScatterPlot new x: x y: y
-]
-
-{ #category : 'as yet unclassified' }
 PBTResult >> plotBy: x and: y xlabel: xLabel ylabel: yLabel title: title [
 
 	^ RSScatterPlot new
@@ -91,9 +85,13 @@ PBTResult >> plotByExecutionTime [
 
 { #category : 'as yet unclassified' }
 PBTResult >> plotByScore [
-	
-	^ self plotBy: (1 to: tests size) and: (tests collect: [ :test | test score ])
 
+	^ self
+		  plotBy: (1 to: tests size)
+		  and: (tests collect: [ :test | test score ])
+		  xlabel: 'Number of cases'
+		  ylabel: 'Score'
+		  title: 'Ranking'
 ]
 
 { #category : 'as yet unclassified' }
