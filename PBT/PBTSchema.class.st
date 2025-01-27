@@ -44,33 +44,33 @@ PBTSchema >> feedbackEvaluator [
 ]
 
 { #category : 'accessing' }
-PBTSchema >> guiadedBy: aBlock [
+PBTSchema >> guidedBy: aBlock [
 
 	feedbackEvaluator := FeedbackEvaluator from: aBlock
 ]
 
 { #category : 'accessing' }
-PBTSchema >> guiadedByAllocatedMemory [
+PBTSchema >> guidedByAllocatedMemory [
 
-	self guiadedBy: [ :test | test result allocatedMemory ]
+	self guidedBy: [ :test | test result allocatedMemory ]
 ]
 
 { #category : 'accessing' }
-PBTSchema >> guiadedByCoverage [
+PBTSchema >> guidedByCoverage [
 
-	self guiadedBy: [ :test | test result coverageResult percentage ]
+	self guidedBy: [ :test | test result coverageResult percentage ]
 ]
 
 { #category : 'accessing' }
-PBTSchema >> guiadedByExecutionTime [
+PBTSchema >> guidedByExecutionTime [
 
-	self guiadedBy: [ :test | test time asMilliSeconds ]
+	self guidedBy: [ :test | test time asMilliSeconds ]
 ]
 
 { #category : 'accessing' }
-PBTSchema >> guiadedByScore [
+PBTSchema >> guidedByScore [
 
-	self guiadedBy: [ :test | test score ]
+	self guidedBy: [ :test | test score ]
 ]
 
 { #category : 'initialization' }
@@ -79,7 +79,7 @@ PBTSchema >> initialize [
 	super initialize.
 	argumentConstraints := #().
 	receiverConstraint := nil.
-	self guiadedByCoverage
+	self guidedByCoverage
 ]
 
 { #category : 'accessing' }

@@ -27,12 +27,45 @@ PBTRegexBugExperimentOptionalGenTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBug [
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
 
 	| pbtResult |
 	
 	self timeLimit: 20 minutes.
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+	
+	schema guidedByAllocatedMemory.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 1000.
+	
+	self assert: (pbtResult tests size) equals: 1000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
+
+	| pbtResult |
+	
+	self timeLimit: 20 minutes.
+	
+	schema guidedByCoverage.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 1000.
+	
+	self assert: (pbtResult tests size) equals: 1000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
+
+	| pbtResult |
+	
+	self timeLimit: 20 minutes.
+	
+	schema guidedByExecutionTime.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 1000.
 	
 	self assert: (pbtResult tests size) equals: 1000.
 

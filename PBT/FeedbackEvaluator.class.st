@@ -20,7 +20,7 @@ FeedbackEvaluator class >> from: aBlock [
 FeedbackEvaluator >> compareWith: newEval [
 
 	"Support other comparations"
-	^ newEval >= lastEval
+	^ newEval > lastEval
 ]
 
 { #category : 'accessing' }
@@ -41,8 +41,8 @@ FeedbackEvaluator >> eval: pbtCase [
 	| newEval feedback |
 	
 	newEval := criteria value: pbtCase.
-	feedback := lastEval ifNil: [ true ] ifNotNil: [ self compareWith: newEval ].
-	lastEval := feedback ifTrue: [ newEval ] ifFalse: [ lastEval ].
+	feedback := lastEval isNotNil and: [ self compareWith: newEval ].
+	lastEval := newEval.
 	
 	^ feedback
 ]
