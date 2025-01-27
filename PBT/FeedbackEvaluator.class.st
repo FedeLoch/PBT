@@ -34,8 +34,10 @@ FeedbackEvaluator >> eval: pbtCase [
 	| newEval feedback |
 	"TODO: this compare with the last better result"
 	newEval := criteria value: pbtCase.
-	feedback := better isNotNil and: [ newEval > better ].
-	better ifNil: [ newEval ] ifNotNil: [ better max: newEval ].
+	feedback := (better isNotNil) and: [ newEval > better ].
+	better := better ifNil: [ newEval ] ifNotNil: [ (better / 2) max: newEval ].
+	"
+	feedback ifTrue: [ 1 halt ]."
 	
 	^ feedback
 ]

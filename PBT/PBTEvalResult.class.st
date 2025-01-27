@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'callResult',
 		'coverageResult',
-		'allocatedMemory'
+		'allocatedMemory',
+		'time'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -53,5 +54,19 @@ PBTEvalResult >> coverageResult: aCoverageResult [
 PBTEvalResult >> initialize [ 
 
 	super initialize.
-	allocatedMemory := 0
+	allocatedMemory := 0.
+	time := 0
+]
+
+{ #category : 'accessing' }
+PBTEvalResult >> time [
+
+	^ time
+]
+
+{ #category : 'accessing' }
+PBTEvalResult >> time: aTime [
+	
+	time := aTime
+	
 ]

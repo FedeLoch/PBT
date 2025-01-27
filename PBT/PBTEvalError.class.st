@@ -5,7 +5,8 @@ Class {
 		'stack',
 		'coverageResult',
 		'message',
-		'allocatedMemory'
+		'allocatedMemory',
+		'time'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -41,7 +42,8 @@ PBTEvalError >> coverageResult: aCoverageResult [
 PBTEvalError >> initialize [ 
 
 	super initialize.
-	allocatedMemory := 0
+	allocatedMemory := 0.
+	time := 0
 ]
 
 { #category : 'accessing' }
@@ -60,4 +62,16 @@ PBTEvalError >> message: aMessage [
 PBTEvalError >> stack: aStack [
 
 	stack := aStack 
+]
+
+{ #category : 'initialization' }
+PBTEvalError >> time [
+
+	^ time
+]
+
+{ #category : 'initialization' }
+PBTEvalError >> time: aTime [
+
+	time := aTime 
 ]
