@@ -5,7 +5,8 @@ Class {
 		'assert',
 		'argumentConstraints',
 		'receiverConstraint',
-		'score'
+		'score',
+		'feedbackEvaluator'
 	],
 	#category : 'PBT-Property Schema',
 	#package : 'PBT',
@@ -36,12 +37,49 @@ PBTSchema >> assert: anAssertBlock [
 	assert := anAssertBlock
 ]
 
+{ #category : 'accessing' }
+PBTSchema >> feedbackEvaluator [
+
+	^ feedbackEvaluator
+]
+
+{ #category : 'accessing' }
+PBTSchema >> guiadedBy: aBlock [
+
+	feedbackEvaluator := FeedbackEvaluator from: aBlock
+]
+
+{ #category : 'accessing' }
+PBTSchema >> guiadedByAllocatedMemory [
+
+	self guiadedBy: [ :test | test result allocatedMemory ]
+]
+
+{ #category : 'accessing' }
+PBTSchema >> guiadedByCoverage [
+
+	self guiadedBy: [ :test | test result coverageResult percentage ]
+]
+
+{ #category : 'accessing' }
+PBTSchema >> guiadedByExecutionTime [
+
+	self guiadedBy: [ :test | test time asMilliSeconds ]
+]
+
+{ #category : 'accessing' }
+PBTSchema >> guiadedByScore [
+
+	self guiadedBy: [ :test | test score ]
+]
+
 { #category : 'initialization' }
 PBTSchema >> initialize [ 
 
 	super initialize.
 	argumentConstraints := #().
 	receiverConstraint := nil.
+	self guiadedByCoverage
 ]
 
 { #category : 'accessing' }

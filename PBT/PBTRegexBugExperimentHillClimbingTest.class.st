@@ -24,13 +24,31 @@ PBTRegexBugExperimentHillClimbingTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBug [
+PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
 
 	| pbtResult |
 	
 	self timeLimit: 20 minutes.
+	
+	schema guiadedByCoverage.
+	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
 	
 	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
+
+	| pbtResult |
+	
+	self timeLimit: 20 minutes.
+	
+	schema guiadedByExecutionTime.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+	
+	self assert: (pbtResult tests size) equals: 1000.
 
 ]

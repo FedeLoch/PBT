@@ -62,7 +62,7 @@ PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 { #category : 'tests' }
 PBTRunner >> genTest: incrCoverage with: collector [
 
-	| arguments receiver testResult time score |
+	| arguments receiver testResult time score test |
 	
 	"Setup based on the enriched schema"
 	receiver := generator genReceiverFor: target from: schema.
@@ -72,9 +72,6 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	time := Duration milliSeconds: ([
 		testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage collectingWith: collector
 	] timeToRunWithoutGC).
-
-	"Feeds the generator with the test result"
-	generator feedback: (incrCoverage increaseCoverage: testResult coverageResult).
 	
 	"Score calculation"
 	score := self scoreFor: receiver with: arguments and: testResult.
@@ -83,12 +80,17 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	incrCoverage incrementWith: testResult coverageResult.
 
 	"Generate Test case"
-	^ PBTTest new target: target;
+	test := PBTTest new target: target;
 		arguments: arguments;
 		receiver: receiver;
 		time: time;
 		score: score;
-		result: testResult		
+		result: testResult.
+	
+	"Feeds the generator with the test result"
+	generator feedback: (schema feedbackEvaluator eval: test).
+	
+	^ test
 ]
 
 { #category : 'tests' }
