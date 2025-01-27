@@ -22,17 +22,14 @@ PBTRectangleAreaTest >> setUp [
 		             instance
 			             setPoint: (props at: 'origin') gen
 			             point: (props at: 'corner') gen.
-		             instance ].
+		             instance ] of: Rectangle.
 
 	receiverConstraint := PBTObjectConstraint new
-		                     objectClass: Rectangle;
 		                     generator: generator;
 		                     props: {
 				                     ('origin' -> (PBTObjectConstraint new
-						                       objectClass: Point;
 						                       generator: PBTPointGenerator new)).
 				                     ('corner' -> (PBTObjectConstraint new
-					                       objectClass: Point;
 					                       generator: PBTPointGenerator new)) }.
 	argumentConstraints := {  }.
 	assert := [ :rect :args :result | result >= 0 ].

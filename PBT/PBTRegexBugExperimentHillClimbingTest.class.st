@@ -32,9 +32,9 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	
 	schema guidedByAllocatedMemory.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 1000.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
 	
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 10000.
 
 ]
 
@@ -47,9 +47,9 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	
 	schema guidedByCoverage.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 1000.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
 	
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (pbtResult tests size) equals: 10000.
 
 ]
 

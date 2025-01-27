@@ -15,7 +15,6 @@ Class {
 PBTBlocBenchsTest >> blChildConstraint [
 
 	^ PBTObjectConstraint new
-		  objectClass: BlElement;
 		  generator: (PBTGenerator onceInstance: [ :element :props |
 					   element
 						   background: (props at: 'color') gen;
@@ -28,7 +27,7 @@ PBTBlocBenchsTest >> blChildConstraint [
 								    background: (props at: 'color') gen;
 								    height: 5;
 								    width: 5 ]).
-					   element ]);
+					   element ] of: BlElement);
 		  props: { ('color' -> self blColorConstraint) }
 ]
 
@@ -44,7 +43,6 @@ PBTBlocBenchsTest >> blColorConstraint [
 PBTBlocBenchsTest >> blContainerConstraint [
 
 	^ PBTObjectConstraint new
-		  objectClass: BlElement;
 		  generator: (PBTGenerator onceInstance: [ :container :props |
 					   container layout:
 							   (BlGridLayout new columnCount: (1 to: 200) atRandom).
@@ -55,7 +53,7 @@ PBTBlocBenchsTest >> blContainerConstraint [
 					   (100 to: 1000) atRandom timesRepeat: [
 							   container addChild: (props at: 'child') gen ].
 					   container beInSingleCompositionLayer.
-					   container ]);
+					   container ] of: BlElement);
 		  props: { ('child' -> self blChildConstraint) }
 ]
 
@@ -63,7 +61,6 @@ PBTBlocBenchsTest >> blContainerConstraint [
 PBTBlocBenchsTest >> blElementConstraint [
 
 	^ 	PBTObjectConstraint new
-		                      objectClass: BlElement;
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :element :props |
 					                       element constraintsDo: [ :c |
@@ -73,7 +70,7 @@ PBTBlocBenchsTest >> blElementConstraint [
 							                       (props at: 'container') gen.
 					                       element addChild:
 							                       (props at: 'transparent') gen.
-					                       element ]);
+					                       element ] of: BlElement);
 		                      props: {
 										('container' -> self blContainerConstraint) .
 										('transparent' -> self blTransparentConstraint)
@@ -91,7 +88,6 @@ PBTBlocBenchsTest >> blGeometryConstraint [
 PBTBlocBenchsTest >> blSpinnerConstraint [
 
 	^ PBTObjectConstraint new
-		  objectClass: BlElement;
 		  generator: (PBTGenerator onceInstance: [ :spinner :props |
 					   spinner constraintsDo: [ :c |
 							   c frame vertical alignCenter.
@@ -106,7 +102,7 @@ PBTBlocBenchsTest >> blSpinnerConstraint [
 								    target: spinner;
 								    beInfinite;
 								    yourself).
-					   spinner ]);
+					   spinner ] of: BlElement);
 		  props: { 
 			('color' -> self blColorConstraint).
 			'geometry' -> self blGeometryConstraint }
@@ -116,7 +112,6 @@ PBTBlocBenchsTest >> blSpinnerConstraint [
 PBTBlocBenchsTest >> blTransparentConstraint [
 
 	^ PBTObjectConstraint new
-		  objectClass: BlElement;
 		  generator: (PBTGenerator onceInstance: [ :transparent :props |
 					   transparent layout: BlFrameLayout new.
 					   transparent background: (props at: 'color') gen.
@@ -125,7 +120,7 @@ PBTBlocBenchsTest >> blTransparentConstraint [
 							   c horizontal matchParent ].
 					   transparent addChild: (props at: 'spinner') gen.
 					   transparent beInSingleCompositionLayer.
-					   transparent ]);
+					   transparent ] of: BlElement);
 		  props: { ('spinner' -> self blSpinnerConstraint) . ('color' -> self blColorConstraint) }
 ]
 
@@ -135,13 +130,12 @@ PBTBlocBenchsTest >> setUp [
 	super setUp.
 
 	receiverConstraint := PBTObjectConstraint new
-		                      objectClass: BlBBlocPBTCase;
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
 												testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new).
 												testCase element: (props at: 'element') gen.
 												testCase duration: 500 milliSeconds.
-												testCase ]
+												testCase ] of: BlBBlocPBTCase
 										);
 		                      props: { ('element' -> self blElementConstraint) }.
 

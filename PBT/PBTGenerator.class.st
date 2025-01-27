@@ -31,6 +31,12 @@ PBTGenerator class >> onceInstance: aBlock [
 ]
 
 { #category : 'as yet unclassified' }
+PBTGenerator class >> onceInstance: aBlock of: aClass [
+
+	^ PBTObjectGenerator new then: aBlock; objectClass: aClass
+]
+
+{ #category : 'as yet unclassified' }
 PBTGenerator class >> oneOf: options [
 
 	^ PBTOptionsGenerator new from: options.

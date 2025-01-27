@@ -18,10 +18,9 @@ PBTPBTRunnerTest >> setUp [
 	| generator |
 	super setUp.
 
-	generator := PBTGenerator onceInstance: [ :instance :props | PBTRunner ].
+	generator := PBTGenerator onceInstance: [ :instance :props | PBTRunner ] of: PBTRunner.
 
 	receiverConstraint := PBTObjectConstraint new
-		                     objectClass: PBTRunner;
 		                     generator: generator;
 		                     props: {}.
 	

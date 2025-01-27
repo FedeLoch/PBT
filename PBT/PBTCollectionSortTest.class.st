@@ -17,13 +17,12 @@ PBTCollectionSortTest >> setUp [
 	super setUp.
 
 	receiverConstraint := PBTObjectConstraint new
-		                     objectClass: OrderedCollection;
 		                     generator:
 			                     (PBTGenerator onceInstance: [ :instance :props |
 					                      (Random new nextIntegerBetween: 1 and: 100)
 						                      timesRepeat: [
 							                      instance add: (props at: 'item') gen ].
-					                      instance ]);
+					                      instance ] of: OrderedCollection);
 		                     props: { ('item' -> (PBTObjectConstraint new
 					                       objectClass: SmallInteger;
 					                       generator: (PBTGenerator oneOf: (10 to: 100)))) }.

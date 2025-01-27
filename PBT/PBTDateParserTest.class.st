@@ -33,13 +33,13 @@ PBTDateParserTest >> setUp [
 	super setUp.
 
 	receiverConstraint := PBTObjectConstraint new
-		                      objectClass: DateParser;
-		                      generator:
-			                      (PBTGenerator onceInstance: [ :parser :props |
+		                      generator: (PBTGenerator
+				                       onceInstance: [ :parser :props |
 					                       DateParser
 						                       readingFrom:
 							                       (props at: 'date') gen readStream
-						                       pattern: self datePattern ]);
+						                       pattern: self datePattern ]
+				                       of: DateParser);
 		                      props: { ('date' -> self dateConstraint) }.
 
 	assert := [ :coll :args :result | result class = Date ].

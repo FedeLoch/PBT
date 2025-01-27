@@ -15,10 +15,9 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
 	generator := PBTGenerator onceInstance: [ :instance :props |
 		             random timesRepeat: [
 			             instance add: (props at: 'item') gen ].
-		             instance ].
+		             instance ] of: OrderedCollection.
 
 	constraint := PBTObjectConstraint new
-		              objectClass: OrderedCollection;
 		              props: { ('item' -> (PBTObjectConstraint new
 					                objectClass: SmallInteger;
 					                generator: (PBTGenerator always: 42))) }.
@@ -35,10 +34,9 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
 		             instance
 			             setPoint: (props at: 'origin') gen
 			             point: (props at: 'corner') gen.
-		             instance ].
+		             instance ] of: Rectangle.
 
 	constraint := PBTObjectConstraint new
-		              objectClass: Rectangle;
 		              props: {
 				              ('origin' -> (PBTObjectConstraint new
 						                objectClass: Point;
