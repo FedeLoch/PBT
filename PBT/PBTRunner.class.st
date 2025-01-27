@@ -69,9 +69,9 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	arguments := generator genArgumentsFor: target from: schema.
 	
 	"Target call and eval result"
-	time := [
+	time := Duration milliSeconds: ([
 		testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage collectingWith: collector
-	] timeToRun.
+	] timeToRunWithoutGC).
 
 	"Feeds the generator with the test result"
 	generator feedback: (incrCoverage increaseCoverage: testResult coverageResult).

@@ -30,6 +30,32 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
+
+"	| popup container |
+	
+	container := RSCompositeChart new.
+	popup := RSPopupDecoration new.
+
+	container add:(RSScatterPlot new
+		  rawData: tests x: xBlock y: ybloc;
+		  xlabel: xLabel;
+		  ylabel: yLabel;
+		  title: title;
+		  yourself).
+		
+	container addDecoration: popup.
+	^ container"
+	
+	^ RSLinePlot new
+		  rawData: tests x: xBlock y: ybloc;
+		  xlabel: xLabel;
+		  ylabel: yLabel;
+		  title: title;
+		  yourself
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> performanceResult: aPerfResult [
 
 	performanceResult := aPerfResult
@@ -60,6 +86,21 @@ PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: titl
 		  ylabel: yLabel;
 		  title: title;
 		  yourself
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByAccumulatedCoverage [
+
+	| result |
+	result := IncrementalCoverageResult for: { } from: tests first result coverageResult collector. 
+	^ self
+		  lineplotBy: [ :test | tests indexOf: test ]
+		  and: [ :test |
+			result incrementWith: test result coverageResult. 
+			result percentage ]
+		  xlabel: 'Number of cases'
+		  ylabel: 'Incremental coverage achieved'
+		  title: 'Total coverage achieved'
 ]
 
 { #category : 'as yet unclassified' }
