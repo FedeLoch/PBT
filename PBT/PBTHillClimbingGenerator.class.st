@@ -19,8 +19,8 @@ PBTHillClimbingGenerator >> gen: constraint by: aFeedback [
 	
 	base := (aFeedback notNil and: [ aFeedback ]) ifTrue: [ lastMutated ] ifFalse: [ base ].
 	
-	lastMutated := self mutateBase.
-
+	lastMutated := mutate value: base.
+	
 	^ lastMutated
 	
 ]
@@ -43,10 +43,4 @@ PBTHillClimbingGenerator >> generateBase [
 PBTHillClimbingGenerator >> mutate: aBlock [
 
 	mutate := aBlock
-]
-
-{ #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> mutateBase [
-
-	^ mutate value: base
 ]

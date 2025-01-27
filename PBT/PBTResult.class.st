@@ -107,7 +107,7 @@ PBTResult >> plotByAccumulatedCoverage [
 PBTResult >> plotByAllocatedMemory [
 
 	^ self
-		  plotBy: [ :test | tests indexOf: test ]
+		  lineplotBy: [ :test | tests indexOf: test ]
 		  and: [ :test | test result allocatedMemory ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Allocated memory'
@@ -132,7 +132,7 @@ PBTResult >> plotByCoverage [
 PBTResult >> plotByExecutionTime [
 
 	^ self
-		  plotBy: [ :test | tests indexOf: test ]
+		  lineplotBy: [ :test | tests indexOf: test ]
 		  and: [ :test | test time asMilliSeconds ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Time consumed'

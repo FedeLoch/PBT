@@ -3,7 +3,7 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'criteria',
-		'lastEval'
+		'better'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -14,13 +14,6 @@ Class {
 FeedbackEvaluator class >> from: aBlock [
 
 	^ self new criteria: aBlock 
-]
-
-{ #category : 'accessing' }
-FeedbackEvaluator >> compareWith: newEval [
-
-	"Support other comparations"
-	^ newEval > lastEval
 ]
 
 { #category : 'accessing' }
@@ -39,10 +32,10 @@ FeedbackEvaluator >> criteria: aBlock [
 FeedbackEvaluator >> eval: pbtCase [
 	
 	| newEval feedback |
-	
+	"TODO: this compare with the last better result"
 	newEval := criteria value: pbtCase.
-	feedback := lastEval isNotNil and: [ self compareWith: newEval ].
-	lastEval := newEval.
+	feedback := better isNotNil and: [ newEval > better ].
+	better ifNil: [ newEval ] ifNotNil: [ better max: newEval ].
 	
 	^ feedback
 ]
