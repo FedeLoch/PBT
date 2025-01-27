@@ -17,7 +17,7 @@ PBTHillClimbingGenerator >> gen: constraint by: aFeedback [
 
 	base ifNil: [ self generateBase ].
 	
-	base := aFeedback ifTrue: [ lastMutated ] ifFalse: [ base ].
+	base := (aFeedback notNil and: [ aFeedback ]) ifTrue: [ lastMutated ] ifFalse: [ base ].
 	
 	lastMutated := self mutateBase.
 

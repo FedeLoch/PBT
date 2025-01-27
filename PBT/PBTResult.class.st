@@ -39,6 +39,21 @@ PBTResult >> performanceResult: aPerfResult [
 { #category : 'as yet unclassified' }
 PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
+"	| popup container |
+	
+	container := RSCompositeChart new.
+	popup := RSPopupDecoration new.
+
+	container add:(RSScatterPlot new
+		  rawData: tests x: xBlock y: ybloc;
+		  xlabel: xLabel;
+		  ylabel: yLabel;
+		  title: title;
+		  yourself).
+		
+	container addDecoration: popup.
+	^ container"
+	
 	^ RSScatterPlot new
 		  rawData: tests x: xBlock y: ybloc;
 		  xlabel: xLabel;

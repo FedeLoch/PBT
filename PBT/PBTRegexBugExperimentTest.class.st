@@ -18,7 +18,7 @@ PBTRegexBugExperimentTest >> regexConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: String;
-		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 40)
+		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
 
 { #category : 'running' }
@@ -66,7 +66,7 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 	
 	self timeLimit: 20 minutes.
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
-	
+
 	self assert: (pbtResult tests size) equals: 10000.
 
 ]
