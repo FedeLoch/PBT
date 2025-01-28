@@ -1,42 +1,14 @@
 Class {
 	#name : 'PBTEvalError',
-	#superclass : 'Object',
+	#superclass : 'PBTEvalResult',
 	#instVars : [
 		'stack',
-		'coverageResult',
-		'message',
-		'allocatedMemory',
-		'time'
+		'message'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
 }
-
-{ #category : 'accessing' }
-PBTEvalError >> allocatedMemory [
-
-	^ allocatedMemory
-]
-
-{ #category : 'accessing' }
-PBTEvalError >> allocatedMemory: memory [
-
-	allocatedMemory := memory
-]
-
-{ #category : 'accessing' }
-PBTEvalError >> coverageResult [
-
-	^ coverageResult 
-]
-
-{ #category : 'accessing' }
-PBTEvalError >> coverageResult: aCoverageResult [
-	
-	coverageResult := aCoverageResult
-	
-]
 
 { #category : 'accessing' }
 PBTEvalError >> message [
@@ -54,16 +26,4 @@ PBTEvalError >> message: aMessage [
 PBTEvalError >> stack: aStack [
 
 	stack := aStack 
-]
-
-{ #category : 'initialization' }
-PBTEvalError >> time [
-
-	^ time
-]
-
-{ #category : 'initialization' }
-PBTEvalError >> time: aTime [
-
-	time := aTime 
 ]

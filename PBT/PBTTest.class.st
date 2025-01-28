@@ -5,7 +5,6 @@ Class {
 		'target',
 		'arguments',
 		'result',
-		'time',
 		'score',
 		'receiver'
 	],
@@ -91,11 +90,5 @@ PBTTest >> target: targetMethod [
 { #category : 'accessing' }
 PBTTest >> time [
 
-	^ time
-]
-
-{ #category : 'accessing' }
-PBTTest >> time: aTime [
-
-	time := aTime
+	^ result time
 ]

@@ -18,16 +18,18 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 	| localCoverageResult callResult assertResult allocatedMemory time |
 	[
 	allocatedMemory := self allocatedMemory.
-	
+
 	"Reset the coverage result to avoid interference between tests"
 	collector resetResult.
-	
-	time := Duration milliSeconds: ([
-		callResult := receiver perform: target selector withArguments: args.
-	] timeToRunWithoutGC).
-	
+
+	time := Duration milliSeconds:
+		        [
+		        callResult := receiver
+			                      perform: target selector
+			                      withArguments: args ] timeToRunWithoutGC.
+
 	localCoverageResult := collector collectResult.
-	
+
 	allocatedMemory := self allocatedMemory - allocatedMemory.
 	assertResult := schema assert
 		                value: receiver
@@ -38,6 +40,8 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 			^ PBTEvalError new
 				  stack: (error signalerContext stackOfSize: 10);
 				  allocatedMemory: allocatedMemory;
+				  coverageResult: localCoverageResult;
+				  time: time;
 				  message: error messageText ].
 
 	^ (assertResult

@@ -81,7 +81,6 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	test := PBTTest new target: target;
 		arguments: arguments;
 		receiver: receiver;
-		time: testResult time;
 		score: score;
 		result: testResult.
 	
