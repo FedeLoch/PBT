@@ -143,7 +143,7 @@ PBTResult >> plotByExecutionTime [
 PBTResult >> plotByScore [
 
 	^ self
-		  plotBy: [ :test | tests indexOf: test ]
+		  lineplotBy: [ :test | tests indexOf: test ]
 		  and: [ :test | test score ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Score'

@@ -38,14 +38,6 @@ PBTEvalError >> coverageResult: aCoverageResult [
 	
 ]
 
-{ #category : 'initialization' }
-PBTEvalError >> initialize [ 
-
-	super initialize.
-	allocatedMemory := 0.
-	time := 0
-]
-
 { #category : 'accessing' }
 PBTEvalError >> message [
 

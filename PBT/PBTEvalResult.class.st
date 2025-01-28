@@ -55,7 +55,7 @@ PBTEvalResult >> initialize [
 
 	super initialize.
 	allocatedMemory := 0.
-	time := 0
+	time := Duration microSeconds: 0
 ]
 
 { #category : 'accessing' }

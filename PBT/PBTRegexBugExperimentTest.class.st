@@ -50,7 +50,12 @@ PBTRegexBugExperimentTest >> setUp [
 					                         props at: 'input' ])) }.
 
 	assert := [ :regex :input :result | result ].
-	score := [ :re :arg :res | re asString size ].
+	
+	score := [ :re :inputs :res | | coreScore gnoccoScore | "Replicating the score experiment"
+		coreScore := res time asMilliSeconds.
+		gnoccoScore := [ (inputs first asRegex) matches: inputs first ] timeToRunWithoutGC.
+		coreScore / (gnoccoScore max: 1) "This allows us to avoid division by zero"
+	].
 
 	schema := PBTSchema new
 		          receiverConstraint: receiverConstraint;
