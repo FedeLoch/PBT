@@ -118,7 +118,7 @@ PBTResult >> plotByAllocatedMemory [
 PBTResult >> plotByCoverage [
 
 	^ self
-		  plotBy: [ :test | tests indexOf: test ]
+		  lineplotBy: [ :test | tests indexOf: test ]
 		  and: [ :test |
 				   test result coverageResult
 					   ifNil: [ 0 ]
