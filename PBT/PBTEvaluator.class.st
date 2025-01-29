@@ -16,35 +16,33 @@ PBTEvaluator >> allocatedMemory [
 PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
 	| localCoverageResult callResult assertResult allocatedMemory time |
+	
 	[
-	allocatedMemory := self allocatedMemory.
+		allocatedMemory := self allocatedMemory.
 
-	"Reset the coverage result to avoid interference between tests"
-	collector resetResult.
+		"Reset the coverage result to avoid interference between tests"
+		collector resetResult.
 
-	time := Duration milliSeconds: [
-		callResult := receiver perform: target selector withArguments: args
-	] timeToRunWithoutGC.
+		time := Duration milliSeconds: [
+			callResult := receiver perform: target selector withArguments: args
+		] timeToRunWithoutGC.
 
-	localCoverageResult := collector collectResult.
+		localCoverageResult := collector collectResult.
 
-	allocatedMemory := self allocatedMemory - allocatedMemory.
-	assertResult := schema assert
+		allocatedMemory := self allocatedMemory - allocatedMemory.
+		assertResult := schema assert
 		                value: receiver
 		                value: args
-		                value: callResult ]
-		on: Error
-		do: [ :error |
-			^ PBTEvalError new
-				  stack: (error signalerContext stackOfSize: 10);
-				  allocatedMemory: allocatedMemory;
-				  coverageResult: localCoverageResult;
-				  time: time;
-				  message: error messageText ].
+		                value: callResult
+	] on: Error do: [ :error | ^ PBTEvalError new
+			stack: (error signalerContext stackOfSize: 10);
+			allocatedMemory: allocatedMemory;
+			coverageResult: localCoverageResult;
+			time: time;
+			message: error messageText
+	].
 
-	^ (assertResult
-		   ifTrue: [ PBTEvalSuccess ]
-		   ifFalse: [ PBTEvalFail ]) new
+	^ (assertResult ifTrue: [ PBTEvalSuccess ] ifFalse: [ PBTEvalFail ]) new
 		  callResult: callResult;
 		  time: time;
 		  allocatedMemory: allocatedMemory;

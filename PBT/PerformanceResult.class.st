@@ -63,7 +63,7 @@ PerformanceResult >> minTime: aTime [
 { #category : 'accessing' }
 PerformanceResult >> segmentedTests: segmented [
 
-	segmentedTests := segmented associations
+	segmentedTests := segmented associations sorted reverse 
 ]
 
 { #category : 'accessing' }
