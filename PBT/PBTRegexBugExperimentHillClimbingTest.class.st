@@ -28,8 +28,6 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByAllocatedMemory.
 	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
@@ -42,8 +40,6 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
 
 	| pbtResult |
-	
-	self timeLimit: 20 minutes.
 	
 	schema guidedByAllocatedMemory.
 	
@@ -58,8 +54,6 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByCoverage.
 	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
@@ -73,11 +67,9 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByCoverage.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -87,8 +79,6 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
 
 	| pbtResult |
-	
-	self timeLimit: 20 minutes.
 	
 	schema guidedByExecutionTime.
 	
@@ -103,11 +93,9 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByExecutionTime.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -117,8 +105,6 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScore [
 
 	| pbtResult |
-	
-	self timeLimit: 20 minutes.
 	
 	schema guidedByScore.
 	
@@ -133,11 +119,9 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByScore.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

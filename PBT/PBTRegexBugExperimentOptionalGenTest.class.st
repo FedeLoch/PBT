@@ -31,11 +31,22 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByAllocatedMemory.
 	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
+
+	| pbtResult |
+	
+	schema guidedByAllocatedMemory.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -46,11 +57,22 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByCoverage.
 	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+
+	| pbtResult |
+	
+	schema guidedByCoverage.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -61,11 +83,22 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
-	
 	schema guidedByExecutionTime.
 	
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
+
+	| pbtResult |
+	
+	schema guidedByExecutionTime.
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

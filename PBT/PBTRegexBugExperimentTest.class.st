@@ -25,7 +25,9 @@ PBTRegexBugExperimentTest >> regexConstraint [
 PBTRegexBugExperimentTest >> setUp [
 
 	| generator sharedProperties |
+	
 	super setUp.
+	self timeLimit: 20 minutes.
 
 	sharedProperties := InternalConstraintProperties from:
 		                    { ('grammar' -> self regexConstraint) }
@@ -69,8 +71,18 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 
 	| pbtResult |
 	
-	self timeLimit: 20 minutes.
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBugByTime [
+
+	| pbtResult |
+	
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
