@@ -52,6 +52,18 @@ RxMatcher class >> mutate: stringRegex using: otherString [
 ]
 
 { #category : '*PBT' }
+RxMatcher >> score [
+
+	| input score1 score2 |
+
+	input := asString minimalStringMatching.
+	score1 := [ self matches: input ] timeToRunWithoutGC.
+	score2 := [ input asRegex matches: input ] timeToRunWithoutGC.
+	
+	^ score1 / (score2 max: 1)
+]
+
+{ #category : '*PBT' }
 RxMatcher >> string: aString [
 
 	asString := aString
