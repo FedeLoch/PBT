@@ -5,7 +5,8 @@ Class {
 		'callResult',
 		'coverageResult',
 		'allocatedMemory',
-		'time'
+		'time',
+		'profilingResult'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
