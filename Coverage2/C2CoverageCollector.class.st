@@ -36,12 +36,12 @@ Class {
 	#name : 'C2CoverageCollector',
 	#superclass : 'Object',
 	#instVars : [
-		'metalink',
 		'methods',
 		'nodes',
 		'edges',
 		'coveredNodes',
-		'result'
+		'result',
+		'links'
 	],
 	#category : 'Coverage2',
 	#package : 'Coverage2'
@@ -126,12 +126,9 @@ C2CoverageCollector >> edges [
 { #category : 'initialization' }
 C2CoverageCollector >> initialize [
 
-	metalink := MetaLink new
-		            selector: #tagExecuted:;
-		            metaObject: self;
-						arguments: #( #node ).
 	methods := IdentitySet new.
 	result := C2IncrementalResult new.
+	links := OrderedCollection new.
 ]
 
 { #category : 'initialization' }
@@ -150,6 +147,7 @@ C2CoverageCollector >> initializeNodes [
 { #category : 'basic' }
 C2CoverageCollector >> install [
 
+	| metalink |
 	"Prepare the metalink. This can be slow.
 	
 	Sequence nodes are also prepared. This enable a basic path coverage."
@@ -157,6 +155,12 @@ C2CoverageCollector >> install [
 	nodes ifNil: [ self initializeNodes ].
 	nodes do: [ :node | 
 		self assert: node isSequence.
+			metalink := MetaLink new
+		            selector: #tagExecuted:inMethod:;
+		            metaObject: self;
+						arguments: { RBLiteralValueNode value: node path . RBLiteralValueNode value: node methodNode compiledMethod name };
+						optionCompileOnLinkInstallation: true.
+		links add: metalink.
 		node link: metalink.
 	].
 ]
@@ -168,12 +172,6 @@ C2CoverageCollector >> installOn: aBlock [
 
 	self install.
 	aBlock ensure: [ self uninstall ].
-]
-
-{ #category : 'accessing' }
-C2CoverageCollector >> metalink [
-
-	^ metalink
 ]
 
 { #category : 'accessing' }
@@ -298,7 +296,7 @@ C2CoverageCollector >> runOn: aBlock [
 ]
 
 { #category : 'callgraph' }
-C2CoverageCollector >> tagExecuted: node [
+C2CoverageCollector >> tagExecuted: aNodePath inMethod: aMethodName [
 
 	| process |
 	process := Processor activeProcess.
@@ -307,7 +305,7 @@ C2CoverageCollector >> tagExecuted: node [
 	"Move to the meta level and call the before hook"
 	process shiftLevelUp.
 
-	result coverNode: node.
+	result coverNode: aNodePath inMethod: aMethodName.
 	
 	process shiftLevelDown
 ]
@@ -319,5 +317,5 @@ C2CoverageCollector >> uninstall [
 	
 	Use `runOn:` or `installOn:` that automatically ensures that `uninstall` is called."
 
-	metalink uninstall
+	links do: #uninstall
 ]

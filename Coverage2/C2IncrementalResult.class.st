@@ -31,6 +31,14 @@ C2IncrementalResult >> coverNode: aNode [
 ]
 
 { #category : 'as yet unclassified' }
+C2IncrementalResult >> coverNode: aNodePath inMethod: aMethodName [
+
+	coveredNodes add: {
+			aMethodName.
+			aNodePath }
+]
+
+{ #category : 'as yet unclassified' }
 C2IncrementalResult >> initialize [
 
 	super initialize.
@@ -43,4 +51,12 @@ C2IncrementalResult >> resolveNode: tuple [
 	^(Object readFrom: tuple first) ast childAtPath: tuple second 
 	
 
+]
+
+{ #category : 'as yet unclassified' }
+C2IncrementalResult >> tagExecuted: aNodePath inMethod: aMethodName [
+
+	coveredNodes add: {
+			aMethodName.
+			aNodePath }
 ]
