@@ -48,7 +48,7 @@ PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: 
 	^ container"
 	
 	^ RSLinePlot new
-		  rawData: tests x: xBlock y: ybloc;
+		  rawData: tests x: xBlock y: ybloc; yLog;
 		  xlabel: xLabel;
 		  ylabel: yLabel;
 		  title: title;
