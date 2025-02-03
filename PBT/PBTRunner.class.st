@@ -93,13 +93,13 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema withCoverageTolera
 { #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
-	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult
+	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema
 ]
 
 { #category : 'tests' }
 PBTRunner >> genTest: incrCoverage with: collector [
 
-	| arguments receiver testResult score test |
+	| arguments receiver testResult score feedback test |
 	
 	"Setup based on the enriched schema"
 	receiver := generator genReceiverFor: target from: schema.
@@ -122,7 +122,9 @@ PBTRunner >> genTest: incrCoverage with: collector [
 		result: testResult.
 	
 	"Feeds the generator with the test result"
-	generator feedback: (schema feedbackEvaluator eval: test).
+	feedback := (schema feedbackEvaluator eval: test).
+	generator feedback: feedback.
+	test feedback: feedback.
 	
 	^ test
 ]

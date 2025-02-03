@@ -33,11 +33,17 @@ FeedbackEvaluator >> eval: pbtCase [
 	
 	| newEval feedback |
 	
-	newEval := criteria value: pbtCase.
+	newEval := self value: pbtCase.
 	better ifNil: [ better := newEval ].
 	
 	feedback := newEval >= better.
 	better := (better / 2) max: newEval.
 	
 	^ feedback
+]
+
+{ #category : 'accessing' }
+FeedbackEvaluator >> value: pbtCase [
+	
+	^ criteria value: pbtCase
 ]

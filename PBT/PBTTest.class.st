@@ -6,7 +6,8 @@ Class {
 		'arguments',
 		'result',
 		'score',
-		'receiver'
+		'receiver',
+		'feedback'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -25,6 +26,18 @@ PBTTest >> asPharoTest [
 	"Returns the pharo code that reprensents the test which the same semantics"
 
 	"TODO: Implement me"
+]
+
+{ #category : 'accessing' }
+PBTTest >> feedback [
+
+	^ feedback
+]
+
+{ #category : 'accessing' }
+PBTTest >> feedback: aFeedback [
+
+	feedback := aFeedback
 ]
 
 { #category : 'accessing' }

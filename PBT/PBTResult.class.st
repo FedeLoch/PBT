@@ -7,7 +7,8 @@ Class {
 		'totalCoverage',
 		'performanceResult',
 		'segmentedTests',
-		'ranking'
+		'ranking',
+		'schema'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -15,7 +16,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult [
+PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema [
 
 	| totalTime perfResult |
 	
@@ -26,6 +27,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
 		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
+		schema: schema;
 		performanceResult: perfResult
 ]
 
@@ -140,6 +142,17 @@ PBTResult >> plotByExecutionTime [
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> plotByFeedback [
+
+	^ self
+		  plotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test feedback ifTrue: [ schema feedbackEvaluator value: test ] ifFalse: [ 0 ] ]
+		  xlabel: 'Number of cases'
+		  ylabel: 'Improves last better solution'
+		  title: 'Improvement of global case'
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> plotByScore [
 
 	^ self
@@ -161,6 +174,18 @@ PBTResult >> ranking: aRanking [
 
 	ranking := aRanking
 
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> schema [
+
+	^ schema 
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> schema: aSchema [
+
+	schema := aSchema
 ]
 
 { #category : 'as yet unclassified' }
