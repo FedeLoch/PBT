@@ -55,6 +55,12 @@ PBTRunner class >> test: targetMethod from: schema withCoverageTolerance: tolera
 ]
 
 { #category : 'tests' }
+PBTRunner class >> testWithLowCost: targetMethod from: schema [
+	
+	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod; withLowCost; test
+]
+
+{ #category : 'tests' }
 PBTRunner class >> testWithLowCost: targetMethod from: schema for: time [
 
 	^ self new
@@ -71,6 +77,16 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema times: times [
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
 		target: targetMethod
+		withLowCost; test
+]
+
+{ #category : 'tests' }
+PBTRunner class >> testWithLowCost: targetMethod from: schema withCoverageTolerance: tolerance [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTStopCoverageCriteria new tolerance: tolerance);
+		target: targetMethod;
 		withLowCost; test
 ]
 
