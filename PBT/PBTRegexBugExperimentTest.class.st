@@ -56,7 +56,7 @@ PBTRegexBugExperimentTest >> setUp [
 	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex | "Replicating the score experiment"
 		coreScore := res time asMilliSeconds.
 		anotherRegex := inputs first asRegex.
-		gnoccoScore := [ anotherRegex matches: inputs first ] millisecondsToRun.
+		gnoccoScore := [ anotherRegex matches: inputs first ] timeToRunWithoutGC.
 		coreScore / (gnoccoScore max: 1) "This allows us to avoid division by zero"
 	].
 
