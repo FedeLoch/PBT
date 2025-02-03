@@ -179,7 +179,11 @@ As part of the PBT result, we can create charts that facilitate the preview of o
 
 - **plotByAccumulatedCoverage**
 
+![Screenshot 2025-02-03 at 11 51 12](https://github.com/user-attachments/assets/e1fce841-7f38-421a-a51f-d9f30cffa76c)
+
 - **plotByCoverage**
+
+![Screenshot 2025-02-03 at 11 51 37](https://github.com/user-attachments/assets/0881ac91-c5e7-4de0-8438-535af28d161b)
   
 - **plotByAllocatedMemory**
 
@@ -286,4 +290,53 @@ PBTRunner test: DateParser >> #parse from: schema
 ```
 ### Complex regex grammar generation
 
-// TODO
+```Smalltalk
+
+randomGenerator := PBTObjectConstraint new
+		  objectClass: String;
+		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
+
+	regexGenerator := PBTGenerator base: [ randomGenerator gen ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
+
+regexConstraint := PBTObjectConstraint new generator: regexGenerator
+
+sharedProperties := InternalConstraintProperties from:
+		                    { ('grammar' -> regexConstraint) }
+			                    asDictionary.
+
+	generator := PBTGenerator do: [ :props :feedback |
+		             | regex |
+		             regex := (props at: 'grammar') genBy: feedback.
+		             props at: 'input' put: regex minimalStringMatching.
+		             regex asRegex ].
+
+	receiverConstraint := PBTObjectConstraint new
+		                      objectClass: RxMatcher;
+		                      generator: generator;
+		                      props: sharedProperties.
+
+	argumentConstraints := { (PBTObjectConstraint new
+		                        objectClass: String;
+		                        props: sharedProperties;
+		                        generator:
+			                        (PBTGenerator do: [ :props :feedback |
+					                         props at: 'input' ])) }.
+
+	assert := [ :regex :input :result | result ].
+	
+	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex | "Replicating the score experiment"
+		coreScore := res time asMilliSeconds.
+		anotherRegex := inputs first asRegex.
+		gnoccoScore := [ anotherRegex matches: inputs first ] millisecondsToRun.
+		coreScore / (gnoccoScore max: 1) "This allows us to avoid division by zero"
+	].
+
+	schema := PBTSchema new
+		          receiverConstraint: receiverConstraint;
+		          argumentConstraints: argumentConstraints;
+		          score: score;
+			  guidedByScore;
+		          assert: assert
+
+	PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes
+```
