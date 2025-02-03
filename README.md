@@ -99,8 +99,8 @@ We provide several built-in generators that must be enough to define generators 
 - **PBTObjectGenerator**: Given a block, fill the instance object.
 - **PBTOptionsGenerator**: Returns a random value from a series of options.
 - **PBTPointGenerator**: Returns a random point.
-- **GenericGenerator**: Receives a block and executes that block every time it is called, delegating the responsibility of how to create the object to the user.
-- **HillClimbingGenerator**: Implements a hill Climbing Algorithm, where mutating the last better solution based on feedback.
+- **PBTGenericGenerator**: Receives a block and executes that block every time it is called, delegating the responsibility of how to create the object to the user.
+- **PBTHillClimbingGenerator**: Implements a hill Climbing Algorithm, where mutating the last better solution based on feedback.
 
 ## Performance result
 
