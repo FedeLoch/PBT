@@ -192,7 +192,7 @@ C2CoverageCollector >> nodeDistances: aNodeOrMethod isBackward: isBackward [
 	"Simple BFS to discover the distance of reachble nodes from a staring node.
 	 Edges can be followed forward or backward."
 
-	| aNode todo result todoLater depth |
+	| aNode todo todoLater depth |
 	
 	aNode := (aNodeOrMethod isCompiledMethod or: [aNodeOrMethod class = ReflectiveMethod])
 		ifTrue: [ aNodeOrMethod ast body ]
@@ -230,6 +230,7 @@ C2CoverageCollector >> nodeDistances: aNodeOrMethod isBackward: isBackward [
 		todoLater := tmp.
 		todoLater removeAll.
 	].
+
 	^ result.
 ]
 

@@ -126,3 +126,16 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	self assert: (pbtResult tests size) equals: 10000.
 
 ]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
+
+	| pbtResult |
+	
+	schema guidedByScore.
+
+	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 hour.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]

@@ -27,7 +27,7 @@ PBTRegexBugExperimentTest >> setUp [
 	| generator sharedProperties |
 	
 	super setUp.
-	self timeLimit: 20 minutes.
+	self timeLimit: 5 hours.
 
 	sharedProperties := InternalConstraintProperties from:
 		                    { ('grammar' -> self regexConstraint) }
@@ -56,7 +56,7 @@ PBTRegexBugExperimentTest >> setUp [
 	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex | "Replicating the score experiment"
 		coreScore := res time asMilliSeconds.
 		anotherRegex := inputs first asRegex.
-		gnoccoScore := [ anotherRegex matches: inputs first ] timeToRunWithoutGC.
+		gnoccoScore := [ anotherRegex matches: inputs first ] millisecondsToRun.
 		coreScore / (gnoccoScore max: 1) "This allows us to avoid division by zero"
 	].
 
@@ -86,5 +86,4 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 
 	self assert: (pbtResult tests size) equals: 10000.
-
 ]

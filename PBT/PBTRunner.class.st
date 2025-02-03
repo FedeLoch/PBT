@@ -7,7 +7,8 @@ Class {
 		'evaluator',
 		'generator',
 		'schema',
-		'lastFeedback'
+		'lastFeedback',
+		'methodsToInstrument'
 	],
 	#category : 'PBT-Runner',
 	#package : 'PBT',
@@ -51,6 +52,26 @@ PBTRunner class >> test: targetMethod from: schema withCoverageTolerance: tolera
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTStopCoverageCriteria new tolerance: tolerance);
 		target: targetMethod; test
+]
+
+{ #category : 'tests' }
+PBTRunner class >> testWithLowCost: targetMethod from: schema for: time [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTTimeCriteria new timeout: time);
+		target: targetMethod;
+		withLowCost; test
+]
+
+{ #category : 'tests' }
+PBTRunner class >> testWithLowCost: targetMethod from: schema times: times [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTCountCriteria new times: times);
+		target: targetMethod
+		withLowCost; test
 ]
 
 { #category : 'tests' }
@@ -103,13 +124,7 @@ PBTRunner >> initialize [
 { #category : 'tests' }
 PBTRunner >> reachableMethods [
 
-	"target selfReachableMethods <- all self called methods"
-
-	"target package methods <- all package methods"
-
-	"target sendReachableMethods <- all send called methods"
-
-	^ target sendReachableMethods reject: [ :method |
+	^ methodsToInstrument reject: [ :method |
 		  method pragmas anySatisfy: [ :pragma |
 			  pragma selector = #noInstrumentation ] ]
 ]
@@ -136,7 +151,14 @@ PBTRunner >> shouldGenNext: currentTests since: aTime withCoverage: aCoverage [
 { #category : 'accessing' }
 PBTRunner >> target: targetMethod [
 
-	target := targetMethod
+	"target selfReachableMethods <- all self called methods"
+
+	"target package methods <- all package methods"
+
+	"target sendReachableMethods <- all send called methods"
+	
+	target := targetMethod.
+	methodsToInstrument := target sendReachableMethods.
 	
 ]
 
@@ -164,4 +186,10 @@ PBTRunner >> test [
 PBTRunner >> withCriteria: aCriteria [
 
 	stopCriteria := aCriteria 
+]
+
+{ #category : 'tests' }
+PBTRunner >> withLowCost [
+
+	methodsToInstrument := { target } "target selfReachableMethods"
 ]

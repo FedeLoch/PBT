@@ -23,26 +23,16 @@ C2IncrementalResult >> collectResult: collector [
 ]
 
 { #category : 'as yet unclassified' }
-C2IncrementalResult >> coverNode: aNode [
-
-	coveredNodes add: {
-			aNode methodNode compiledMethod name.
-			aNode path }
-]
-
-{ #category : 'as yet unclassified' }
 C2IncrementalResult >> coverNode: aNodePath inMethod: aMethodName [
 
-	coveredNodes add: {
-			aMethodName.
-			aNodePath }
+	coveredNodes add: { aMethodName. aNodePath }
 ]
 
 { #category : 'as yet unclassified' }
 C2IncrementalResult >> initialize [
 
 	super initialize.
-	coveredNodes := Set new
+	coveredNodes := OrderedCollection new
 ]
 
 { #category : 'as yet unclassified' }
