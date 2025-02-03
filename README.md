@@ -292,15 +292,15 @@ PBTRunner test: DateParser >> #parse from: schema
 
 ```Smalltalk
 
-randomGenerator := PBTObjectConstraint new
+	randomGenerator := PBTObjectConstraint new
 		  objectClass: String;
 		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
 
 	regexGenerator := PBTGenerator base: [ randomGenerator gen ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
 
-regexConstraint := PBTObjectConstraint new generator: regexGenerator
+	regexConstraint := PBTObjectConstraint new generator: regexGenerator
 
-sharedProperties := InternalConstraintProperties from:
+	sharedProperties := InternalConstraintProperties from:
 		                    { ('grammar' -> regexConstraint) }
 			                    asDictionary.
 
