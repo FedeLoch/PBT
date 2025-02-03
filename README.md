@@ -28,8 +28,8 @@ What we are saying to the framework
 
 But for the framework to be able to test the method we need to create a schema with the following information:
 
-- **ReceiverConstraint**: An Object Constraint specification of how to generate the message's receiver.
-- **ArgumentConstraints:**: An array of Object Constraint specifications of how to generate each message's argument.
+- **ReceiverConstraint**: An object constraint specification on how to generate the message's receiver.
+- **ArgumentConstraints:**: An array of Object Constraint specifications for generating each message's argument.
 - **Assert**: A block that will validate whether a result is accomplished with your properties or not.
 
 Following the previous usage, to be able to test the addition method of the class SmallInteger we are going to provide the next schema:
@@ -93,12 +93,14 @@ PBTRunner test: targetMethod from: schema withCoverageTolerance: numberOfToleran
 
 We provide several built-in generators that must be enough to define generators for every object. However, you can define your generators to reduce code duplication. These built-in generators are:
 
-- **PBTConstantGenerator**: Generator that always returns the same value.
-- **PBTDyncamicSelectionGenerator**: Generator that receives a list of generators and, based on feedback, balances the weight of every option to give more chance to the generator that got good solutions probabilistically.
-- **PBTGrammarGenerator**: Generator that receives a grammar and generates a random valid value accepted for that grammar.
-- **PBTObjectGenerator**: Generator that, given a block, fills the instance object.
-- **PBTOptionsGenerator**: Generator that returns a random value from a series of options.
-- **PBTPointGenerator**: Generator that returns a random point.
+- **PBTConstantGenerator**: Always returns the same value.
+- **PBTDyncamicSelectionGenerator**: Receives a list of generators and, based on feedback, balances the weight of every option to give more chance to the generator that got good solutions probabilistically.
+- **PBTGrammarGenerator**: Receives a grammar and generates a random valid value accepted for that grammar.
+- **PBTObjectGenerator**: Given a block, fill the instance object.
+- **PBTOptionsGenerator**: Returns a random value from a series of options.
+- **PBTPointGenerator**: Returns a random point.
+- **PBTGenericGenerator**: Receives a block and executes that block every time it is called, delegating the responsibility of how to create the object to the user.
+- **PBTHillClimbingGenerator**: Implements a hill Climbing Algorithm, where mutating the last better solution based on feedback.
 
 ## Performance result
 
@@ -108,6 +110,94 @@ Also, we are segmenting the test cases by execution time to provide a better fee
 ## Coverage result
 
 The coverage result is an incremental coverage result with the union of all test executions, representing the union of every ran method and node executed by all test cases.
+
+## Score
+
+The schema is able to receives a scoring block, which represents a custom metric that the user wants to have to receive a score-based ranking as part of the result. To do this is enough to provide a block that receives the object, the inputs and the PBTResult.
+
+```Smalltalk
+	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex |
+		coreScore := res time asMilliSeconds.
+		anotherRegex := inputs first asRegex.
+		gnoccoScore := [ anotherRegex matches: inputs first ] millisecondsToRun.
+		coreScore / (gnoccoScore max: 1)
+	].
+
+	PBTSchema new ...; score: score;
+```
+
+## Shared properties
+
+PBT provides support to shared properties between schema constraints.
+To do this, we can define an instance of **InternalConstraintProperties** as follows:
+
+```Smalltalk
+	sharedProperties := InternalConstraintProperties from:
+		{ ('grammar' -> self regexConstraint) } asDictionary.
+```
+
+Then, inside each schema constraint, you can share this instance, which will be propagated between all the schema constraints. This entity is stateful and supports some common methods, such as `at:` and `at:put:`.
+
+## Feedback
+
+PBT provides some generations that depend on previous exploration, which facilitates their ability to guide exploration. For that reason, we introduced the idea of a Feedback validator, who will be in charge of feed generation with feedback ( a boolean ).
+
+The feedback evaluator always will provide feedback based on specific criteria.
+
+## Feedback-oriented exploration
+
+To implement Feedback on your input exploration, you just have to tell the scheme what the feedback criteria are, calling it a method.
+
+The schema supports four methods:
+
+- **guidedByAllocatedMemory**
+- **guidedByCoverage**
+- **guidedByExecutionTime**
+- **guidedByScore**
+
+Note that the score is a custom user metric, you can use it to guide your exploration, guiding the runner to generate object that maximize this value.
+
+If you want to guide the exploration based on another metric, you can call the method **guidedBy:** which receives a block that receives a pbt test case and return a value ( This is the criteria ).
+
+## Low-cost API
+
+The common PBT API is based on have a huge coverage of all the code in which impact our target method. This means that we are instrumenting a lot of code in our executions, even if we have incremental coverage and we are avoiding to reinstrument code more than once, instrument a whole package is expensive. 
+This means that have a great code coverage impact directly on the performance and the time consumed to find outliers.
+
+For this reason, we are providing a "low cost" API, which sacrifices complete coverage instrumentation to earn more computational cost, being able to generate x40 more cases.
+
+The PBT Low-Cost API is the same, but adding "WithLowCost" to the prefix.
+
+- **testWithLowCost: targetMethod from: schema**
+- **testWithLowCost: targetMethod from: schema for: time**
+- **testWithLowCost: targetMethod from: schema times: times**
+- **testWithLowCost: targetMethod from: schema withCoverageTolerance: tolerance**
+
+## Charts to identify outlier
+
+As part of the PBT result, we can create charts that facilitate the preview of outliers, here are some examples:
+
+- **plotByAccumulatedCoverage**
+
+![Screenshot 2025-02-03 at 11 51 12](https://github.com/user-attachments/assets/e1fce841-7f38-421a-a51f-d9f30cffa76c)
+
+- **plotByCoverage**
+
+![Screenshot 2025-02-03 at 11 51 37](https://github.com/user-attachments/assets/0881ac91-c5e7-4de0-8438-535af28d161b)
+  
+- **plotByAllocatedMemory**
+
+![Screenshot 2025-02-03 at 11 47 44](https://github.com/user-attachments/assets/7acb4b94-0ff3-4466-816a-67730c420a58)
+
+- **plotByExecutionTime**
+
+![Screenshot 2025-02-03 at 11 47 19](https://github.com/user-attachments/assets/047f66fb-48af-40b6-bb5a-a462c1143ab8)
+
+- **plotByScore**
+
+![Screenshot 2025-02-03 at 11 45 50](https://github.com/user-attachments/assets/cf8a8090-39cd-468b-873c-914949c7a31b)
+
+- **plotByFeedback**
 
 ## Other examples
 
@@ -197,4 +287,56 @@ schema := PBTSchema new
                 assert: assert
 
 PBTRunner test: DateParser >> #parse from: schema
+```
+### Complex regex grammar generation
+
+```Smalltalk
+
+	randomGenerator := PBTObjectConstraint new
+		  objectClass: String;
+		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
+
+	regexGenerator := PBTGenerator base: [ randomGenerator gen ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
+
+	regexConstraint := PBTObjectConstraint new generator: regexGenerator
+
+	sharedProperties := InternalConstraintProperties from:
+		                    { ('grammar' -> regexConstraint) }
+			                    asDictionary.
+
+	generator := PBTGenerator do: [ :props :feedback |
+		             | regex |
+		             regex := (props at: 'grammar') genBy: feedback.
+		             props at: 'input' put: regex minimalStringMatching.
+		             regex asRegex ].
+
+	receiverConstraint := PBTObjectConstraint new
+		                      objectClass: RxMatcher;
+		                      generator: generator;
+		                      props: sharedProperties.
+
+	argumentConstraints := { (PBTObjectConstraint new
+		                        objectClass: String;
+		                        props: sharedProperties;
+		                        generator:
+			                        (PBTGenerator do: [ :props :feedback |
+					                         props at: 'input' ])) }.
+
+	assert := [ :regex :input :result | result ].
+	
+	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex | "Replicating the score experiment"
+		coreScore := res time asMilliSeconds.
+		anotherRegex := inputs first asRegex.
+		gnoccoScore := [ anotherRegex matches: inputs first ] millisecondsToRun.
+		coreScore / (gnoccoScore max: 1) "This allows us to avoid division by zero"
+	].
+
+	schema := PBTSchema new
+		          receiverConstraint: receiverConstraint;
+		          argumentConstraints: argumentConstraints;
+		          score: score;
+			  guidedByScore;
+		          assert: assert
+
+	PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes
 ```
