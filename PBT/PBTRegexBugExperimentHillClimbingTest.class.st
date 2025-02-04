@@ -18,7 +18,10 @@ PBTRegexBugExperimentHillClimbingTest >> regexConstraint [
 		  objectClass: String;
 		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
 
-	regexGenerator := PBTGenerator base: [ randomGenerator gen ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
+	regexGenerator := PBTGenerator base: [ | re |
+		re := randomGenerator gen.
+		[ re size = 40 ] whileFalse: [ re := randomGenerator gen ].
+		re ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
 
 	^ PBTObjectConstraint new generator: regexGenerator
 ]
