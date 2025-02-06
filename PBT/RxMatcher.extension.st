@@ -7,6 +7,26 @@ RxMatcher >> asString [
 ]
 
 { #category : '*PBT' }
+RxMatcher class >> invertOptionalByStarts: stringRegex [
+
+	^ stringRegex copyReplaceAll: '?' with: '*'
+]
+
+{ #category : '*PBT' }
+RxMatcher class >> invertPlusByStarts: stringRegex [
+
+	^ stringRegex copyReplaceAll: '+' with: '*'
+
+]
+
+{ #category : '*PBT' }
+RxMatcher class >> invertStarsByPlus: stringRegex [
+
+	^ stringRegex copyReplaceAll: '*' with: '+'
+
+]
+
+{ #category : '*PBT' }
 RxMatcher class >> mutate: stringRegex [
 
 	| result |
@@ -31,7 +51,7 @@ RxMatcher class >> mutate: stringRegex [
 ]
 
 { #category : '*PBT' }
-RxMatcher class >> mutate: stringRegex using: otherString [
+RxMatcher class >> mutateCharacter: stringRegex using: otherString [
 
 	| result |
 	result := nil.
@@ -52,6 +72,17 @@ RxMatcher class >> mutate: stringRegex using: otherString [
 ]
 
 { #category : '*PBT' }
+RxMatcher class >> mutateCharacter: stringRegex using: otherString times: n [
+
+	| current |
+	
+	current := stringRegex.
+	n timesRepeat: [ current := self mutateCharacter: current using: otherString ].
+
+	^ current
+]
+
+{ #category : '*PBT' }
 RxMatcher >> score [
 
 	| input minRegex score1 score2 |
@@ -62,6 +93,25 @@ RxMatcher >> score [
 	score2 := [ minRegex matches: input ] timeToRunWithoutGC.
 	
 	^ score1 / (score2 max: 1)
+]
+
+{ #category : '*PBT' }
+RxMatcher class >> shiftUntilValid: stringRegex [
+
+	| result shifted |
+	result := nil.
+	shifted := stringRegex.
+	
+	[result] whileNil: [ [
+		shifted := shifted allButFirst, shifted first asString.
+		shifted asRegex.
+		result := shifted 
+	] on: Error
+			do: [  ] ].
+
+	^ result
+
+
 ]
 
 { #category : '*PBT' }

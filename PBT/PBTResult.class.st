@@ -32,6 +32,23 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> exportExecutionValues [
+
+	| writer total |
+	'exportExecutionValues.csv' asFileReference writeStreamDo: [ :stream |
+		writer := (NeoCSVWriter on: stream)
+			writeHeader: #( testStartTime totalMilliseconds );
+			fieldWriter: #raw;
+			yourself.
+		total := 0.
+		tests do: [ :test |
+			total := (total + test time asMilliSeconds) max: 0.
+			writer nextPut: {
+					total.
+					test time asMilliSeconds } ] ]
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
 "	| popup container |
@@ -133,8 +150,11 @@ PBTResult >> plotByCoverage [
 { #category : 'as yet unclassified' }
 PBTResult >> plotByExecutionTime [
 
+	| total |
+	total := 0.
+	
 	^ self
-		  lineplotBy: [ :test | tests indexOf: test ]
+		  lineplotBy: [ :test | total := total + test time asMilliSeconds. total ]
 		  and: [ :test | test time asMilliSeconds ]
 		  xlabel: 'Number of cases'
 		  ylabel: 'Time consumed'

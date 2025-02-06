@@ -11,7 +11,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationBa
 
 	| generator |
 	
-	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value |
+	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value :constraint :feedback |
 		             value
 			             copyReplaceFrom: 5
 			             to: 5
@@ -25,7 +25,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWi
 
 	| generator |
 	
-	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value |
+	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value :constraint :feedback |
 						| where |
 						where := value last isUppercase ifTrue: [ 1 ] ifFalse: [ value size ].
 		             value
@@ -43,7 +43,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWi
 
 	| generator |
 	
-	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value |
+	generator := PBTGenerator base: [ 'asdef' ] mutating: [ :value :constraint :feedback |
 						| where |
 						where := value last isUppercase ifTrue: [ 1 ] ifFalse: [ value size ].
 		             value

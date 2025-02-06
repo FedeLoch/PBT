@@ -21,7 +21,7 @@ PBTRegexBugExperimentHillClimbingTest >> regexConstraint [
 	regexGenerator := PBTGenerator base: [ | re |
 		re := randomGenerator gen.
 		[ re size = 40 ] whileFalse: [ re := randomGenerator gen ].
-		re ] mutating: [ :regexString | RxMatcher mutate: regexString using: randomGenerator gen ].
+		re ] mutating: [ :regexString :constraint :feedback | RxMatcher mutateCharacter: regexString using: randomGenerator gen ].
 
 	^ PBTObjectConstraint new generator: regexGenerator
 ]
@@ -72,7 +72,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	
 	schema guidedByCoverage.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -124,7 +124,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	
 	schema guidedByScore.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -137,7 +137,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	
 	schema guidedByScore.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
