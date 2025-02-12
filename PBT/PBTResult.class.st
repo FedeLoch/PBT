@@ -79,6 +79,12 @@ PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: 
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> minimumTimeNeeded [
+
+	^ (topCases collect: [ :test | test result time ]) sum
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> performanceResult: aPerfResult [
 
 	performanceResult := aPerfResult
@@ -261,4 +267,10 @@ PBTResult >> totalTime: aTotalTime [
 
 	totalTime := aTotalTime
 
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> unnecessaryExplorationTime [
+
+	^ totalTime - self minimumTimeNeeded 
 ]
