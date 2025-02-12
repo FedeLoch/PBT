@@ -19,14 +19,17 @@ Class {
 { #category : 'as yet unclassified' }
 PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema [
 
-	| totalTime perfResult |
+	| totalTime perfResult topCases |
 	
 	totalTime := Duration milliSeconds: (Time millisecondsSince: time).
 	perfResult := PerformanceResult from: tests withTime: totalTime.
+	topCases := tests allButFirst inject: { tests first } asOrderedCollection into: [ :col :test |
+		((schema feedbackEvaluator value: test) > (schema feedbackEvaluator value: col last)) ifTrue: [ col add: test ]. col ].
 	
 	^ self new tests: tests;
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
+		topCases: topCases;
 		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
 		schema: schema;
 		performanceResult: perfResult
