@@ -8,22 +8,44 @@ RxMatcher >> asString [
 
 { #category : '*PBT' }
 RxMatcher class >> invertOptionalByStarts: stringRegex [
-
-	^ stringRegex copyReplaceAll: '?' with: '*'
+	
+	| expr |
+	
+	expr := stringRegex copyReplaceAll: '?' with: '*'.
+	
+	^ (self isValid: expr) ifTrue: [ expr ] ifFalse: [ stringRegex ]
 ]
 
 { #category : '*PBT' }
 RxMatcher class >> invertPlusByStarts: stringRegex [
 
-	^ stringRegex copyReplaceAll: '+' with: '*'
+	| expr |
+	
+	expr := stringRegex copyReplaceAll: '+' with: '*'.
+	
+	^ (self isValid: expr) ifTrue: [ expr ] ifFalse: [ stringRegex ]
 
 ]
 
 { #category : '*PBT' }
 RxMatcher class >> invertStarsByPlus: stringRegex [
 
-	^ stringRegex copyReplaceAll: '*' with: '+'
+	| expr |
+	
+	expr := stringRegex copyReplaceAll: '*' with: '+'.
+	
+	^ (self isValid: expr) ifTrue: [ expr ] ifFalse: [ stringRegex ]
 
+]
+
+{ #category : '*PBT' }
+RxMatcher class >> isValid: stringRegex [
+
+	[ stringRegex asRegex ] on: Error do: [ ^ false ].
+
+	^ true
+
+	
 ]
 
 { #category : '*PBT' }

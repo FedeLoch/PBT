@@ -37,7 +37,7 @@ FeedbackEvaluator >> eval: pbtCase [
 	better ifNil: [ better := newEval ].
 	
 	feedback := newEval >= better.
-	better := (better / 1) max: newEval.
+	better := (better / 2) max: newEval.
 	
 	^ feedback
 ]

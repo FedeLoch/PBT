@@ -23,8 +23,8 @@ PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> regexConstraint [
 		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher mutateCharacter: regex using: randomGenerator gen ]). "Basic one mutating a random character"
 		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher mutateCharacter: regex using: randomGenerator gen times: (2 to: 10) atRandom ]).
 		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher invertOptionalByStarts: regex ]).
-		"PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher invertPlusByStarts: regex ])."
-"		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher invertStarsByPlus: regex ])."
+		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher invertPlusByStarts: regex ]).
+		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher invertStarsByPlus: regex ]).
 		PBTGenerator always: (PBTMutator mutate: [ :regex  | RxMatcher shiftUntilValid: regex ])
 	}.
 

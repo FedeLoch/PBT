@@ -8,7 +8,8 @@ Class {
 		'performanceResult',
 		'segmentedTests',
 		'ranking',
-		'schema'
+		'schema',
+		'topCases'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -219,6 +220,18 @@ PBTResult >> tests: someTests [
 
 	tests := someTests.
 	segmentedTests := someTests groupedBy: [ :test | test result class ].
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> topCases [
+
+	^ topCases 
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> topCases: someTopCases [
+
+	topCases := someTopCases 
 ]
 
 { #category : 'as yet unclassified' }
