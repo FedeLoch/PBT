@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'criteria',
-		'better'
+		'better',
+		'betterValue'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -29,17 +30,21 @@ FeedbackEvaluator >> criteria: aBlock [
 ]
 
 { #category : 'accessing' }
-FeedbackEvaluator >> eval: pbtCase [
+FeedbackEvaluator >> eval: current [
 	
-	| newEval feedback |
+	| newValue prevBetter feedback |
 	
-	newEval := self value: pbtCase.
-	better ifNil: [ better := newEval ].
+	newValue := self value: current.
 	
-	feedback := newEval >= better.
-	better := (better / 2) max: newEval.
+	prevBetter := better.
+
+	better ifNil: [ better := current. betterValue := newValue ].
 	
-	^ feedback
+	feedback := newValue >= (betterValue / 2).
+	
+	feedback ifTrue: [ better := current. betterValue := newValue ].
+	
+	^ Feedback having: prevBetter current: current with: newValue isBetter: feedback
 ]
 
 { #category : 'accessing' }

@@ -10,9 +10,9 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTInputGenerator >> feedback: itWasAnImprovement [
+PBTInputGenerator >> feedback: aFeedback [
 	
-	lastFeedback := itWasAnImprovement
+	lastFeedback := aFeedback
 ]
 
 { #category : 'as yet unclassified' }

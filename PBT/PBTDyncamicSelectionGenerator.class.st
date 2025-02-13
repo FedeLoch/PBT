@@ -62,5 +62,5 @@ PBTDyncamicSelectionGenerator >> updateWeight: previousFeedback [
 
 	lastChosen ifNil: [ ^nil ].
 
-	previousFeedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
+	previousFeedback feedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
 ]
