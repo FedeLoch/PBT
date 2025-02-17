@@ -3,7 +3,6 @@ Class {
 	#superclass : 'PBTGenerator',
 	#instVars : [
 		'grammar',
-		'fuzzer',
 		'generator'
 	],
 	#category : 'PBT-Generators',
@@ -15,21 +14,19 @@ Class {
 PBTGrammarGenerator >> gen: myConstraint [
 
 	"Gen a random string that matchs with the instance variable grammar"
-	^ "fuzzer fuzz" grammar generate: generator
+	^ grammar generate: generator
 ]
 
 { #category : 'accessing' }
 PBTGrammarGenerator >> grammar: aGrammar [
 
 	grammar := aGrammar.
-	fuzzer grammar: grammar
 ]
 
 { #category : 'accessing' }
 PBTGrammarGenerator >> initialize [ 
 
 	super initialize.
-	fuzzer := PzGrammarFuzzer new.
 	generator := GncGrammarGenerator newUnbounded maxHeight: 20; maxSize: 20
 ]
 
