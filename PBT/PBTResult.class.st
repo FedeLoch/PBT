@@ -52,7 +52,7 @@ PBTResult >> exportExecutionValues [
 					test time asMilliSeconds } ] ]
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
 "	| popup container |
@@ -84,14 +84,63 @@ PBTResult >> minimumTimeNeeded [
 	^ (topCases collect: [ :test | test result time ]) sum
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'outliers' }
+PBTResult >> outliersBy: valueBlock [
+
+	| sortedTests q1 q3 iqr upperBound min |
+	
+	sortedTests := tests sorted: [ :a :b | (valueBlock value: a) < (valueBlock value: b) ].
+	
+	min := valueBlock value: (sortedTests first).
+	"We are ignoring cases with min values, the idea is to avoid biased the sample"
+	sortedTests := sortedTests select: [ :test | (valueBlock value: test) > min ].
+
+	sortedTests ifEmpty: [ ^sortedTests ].
+	
+	q1 := (valueBlock value: (sortedTests at: (sortedTests size * 0.25) ceiling)).
+	q3 := (valueBlock value: (sortedTests at: (sortedTests size * 0.75) ceiling)).
+
+	iqr := q3 - q1.
+	upperBound := q3 + (1.5 * iqr).
+
+	^ sortedTests select: [ :each | (valueBlock value: each) > upperBound ]
+]
+
+{ #category : 'outliers' }
+PBTResult >> outliersByAllocatedMemory [
+
+	^ self outliersBy: [ : test | test result allocatedMemory ]
+]
+
+{ #category : 'outliers' }
+PBTResult >> outliersByCoverage [
+
+	^ self outliersBy: [ :test |
+		  test result coverageResult
+			  ifNil: [ 0 ]
+			  ifNotNil: [ test result coverageResult percentage ] ]
+]
+
+{ #category : 'outliers' }
+PBTResult >> outliersByExecutionTime [
+
+	^ self outliersBy: [ : test | test time asMilliSeconds ]
+]
+
+{ #category : 'outliers' }
+PBTResult >> outliersByScore [
+
+	^ self outliersBy: [ : test | test score max: 0 ]
+]
+
+{ #category : 'setter' }
 PBTResult >> performanceResult: aPerfResult [
 
 	performanceResult := aPerfResult
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
 "	| popup container |
@@ -117,7 +166,7 @@ PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: titl
 		  yourself
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByAccumulatedCoverage [
 
 	| result |
@@ -132,7 +181,7 @@ PBTResult >> plotByAccumulatedCoverage [
 		  title: 'Total coverage achieved'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByAllocatedMemory [
 
 	^ self
@@ -143,7 +192,7 @@ PBTResult >> plotByAllocatedMemory [
 		  title: 'Allocated memory per case'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByCoverage [
 
 	^ self
@@ -157,7 +206,7 @@ PBTResult >> plotByCoverage [
 		  title: 'Coverage achieved per case'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByExecutionTime [
 
 	| total |
@@ -171,7 +220,7 @@ PBTResult >> plotByExecutionTime [
 		  title: 'Execution time consumed per case'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByFeedback [
 
 	^ self
@@ -182,7 +231,7 @@ PBTResult >> plotByFeedback [
 		  title: 'Improvement of global case'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
 PBTResult >> plotByScore [
 
 	^ self
@@ -193,76 +242,110 @@ PBTResult >> plotByScore [
 		  title: 'Ranking'
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'plot' }
+PBTResult >> plotOutliers [
+
+	| scoreOutliers allocatedMemoryOutliers executionTimeOutliers coverageOutliers scorePlot allocatedMemoryPlot executionTimeOutliersPlot coverageOutliersPlot canvas |
+	
+	scoreOutliers := self outliersByScore.
+	allocatedMemoryOutliers := self outliersByAllocatedMemory.
+	executionTimeOutliers := self outliersByExecutionTime.
+	coverageOutliers := self outliersByCoverage.
+
+	scorePlot := RSBoxPlot new y: (scoreOutliers collect: [ :t | t score ]); yLog; yourself.
+	scorePlot horizontalTick numberOfTicks: scoreOutliers size.
+	scorePlot ylabel: 'Score'; title: 'Boxplot of score outliers'.
+	
+	allocatedMemoryPlot := RSBoxPlot new y: (allocatedMemoryOutliers collect: [ :t | t result allocatedMemory ]); yLog; yourself.
+	allocatedMemoryPlot horizontalTick numberOfTicks: allocatedMemoryOutliers size.
+	allocatedMemoryPlot ylabel: 'Allocated memory'; title: 'Boxplot of allocated memory outliers'.
+	
+	executionTimeOutliersPlot := RSBoxPlot new y: (executionTimeOutliers collect: [ :t | t result time asMilliSeconds ]); yLog; yourself.
+	executionTimeOutliersPlot horizontalTick numberOfTicks: executionTimeOutliers size.
+	executionTimeOutliersPlot ylabel: 'Time execution in milliseconds'; title: 'Boxplot of execution time outliers'.
+	
+	coverageOutliersPlot := RSBoxPlot new y: (coverageOutliers ifEmpty: [ { 1 } ] ifNotEmpty: [ (coverageOutliers collect: [ :t | t result coverageResult percentage ]) ]); yLog; yourself.
+	coverageOutliersPlot horizontalTick numberOfTicks: coverageOutliers size.
+	coverageOutliersPlot ylabel: 'Coverage reached'; title: 'Boxplot of code coverage outliers'.
+		
+	canvas := RSCanvas new @ RSCanvasController. canvas addAll: {  scorePlot asShape . allocatedMemoryPlot asShape . executionTimeOutliersPlot asShape . coverageOutliersPlot asShape }.
+	
+	RSHorizontalLineLayout new alignBottom; on: canvas shapes.
+	
+	^ canvas
+
+]
+
+{ #category : 'getter' }
 PBTResult >> ranking [
 
 	^ ranking
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> ranking: aRanking [
 
 	ranking := aRanking
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PBTResult >> schema [
 
 	^ schema 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> schema: aSchema [
 
 	schema := aSchema
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PBTResult >> tests [
 
 	^ tests 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> tests: someTests [
 
 	tests := someTests.
 	segmentedTests := someTests groupedBy: [ :test | test result class ].
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PBTResult >> topCases [
 
 	^ topCases 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> topCases: someTopCases [
 
 	topCases := someTopCases 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PBTResult >> totalCoverage [
 
 	^ totalCoverage 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> totalCoverage: aTotalCoverage [
 
 	totalCoverage := aTotalCoverage
 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'getter' }
 PBTResult >> totalTime [
 
 	^ totalTime 
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'setter' }
 PBTResult >> totalTime: aTotalTime [
 
 	totalTime := aTotalTime
