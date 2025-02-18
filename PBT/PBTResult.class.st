@@ -252,23 +252,24 @@ PBTResult >> plotOutliers [
 	executionTimeOutliers := self outliersByExecutionTime.
 	coverageOutliers := self outliersByCoverage.
 
-	scorePlot := RSBoxPlot new y: (scoreOutliers collect: [ :t | t score ]); yLog; yourself.
+	scorePlot := RSBoxPlot new y: (scoreOutliers ifEmpty: [ { 1 } ] ifNotEmpty: [ (scoreOutliers collect: [ :t | t score ]) ]); yLog; yourself.
 	scorePlot horizontalTick numberOfTicks: scoreOutliers size.
-	scorePlot ylabel: 'Score'; title: 'Boxplot of score outliers'.
+	scorePlot ylabel: 'Score'; xlabel: '( ', scoreOutliers size asString, ' cases )'.
 	
-	allocatedMemoryPlot := RSBoxPlot new y: (allocatedMemoryOutliers collect: [ :t | t result allocatedMemory ]); yLog; yourself.
+	allocatedMemoryPlot := RSBoxPlot new y: (allocatedMemoryOutliers ifEmpty: [ { 1 } ] ifNotEmpty: [ (allocatedMemoryOutliers collect: [ :t | t result allocatedMemory ]) ]); yLog; yourself.
 	allocatedMemoryPlot horizontalTick numberOfTicks: allocatedMemoryOutliers size.
-	allocatedMemoryPlot ylabel: 'Allocated memory'; title: 'Boxplot of allocated memory outliers'.
+	allocatedMemoryPlot ylabel: 'Allocated memory'; xlabel: '( ', allocatedMemoryOutliers size asString, ' cases )'.
 	
-	executionTimeOutliersPlot := RSBoxPlot new y: (executionTimeOutliers collect: [ :t | t result time asMilliSeconds ]); yLog; yourself.
+	executionTimeOutliersPlot := RSBoxPlot new y: (executionTimeOutliers ifEmpty: [ { 1 } ] ifNotEmpty: [ (executionTimeOutliers collect: [ :t | t result time asMilliSeconds ]) ]); yLog; yourself.
 	executionTimeOutliersPlot horizontalTick numberOfTicks: executionTimeOutliers size.
-	executionTimeOutliersPlot ylabel: 'Time execution in milliseconds'; title: 'Boxplot of execution time outliers'.
+	executionTimeOutliersPlot ylabel: 'Time execution in milliseconds'; xlabel: '( ', executionTimeOutliers size asString, ' cases )'.
 	
 	coverageOutliersPlot := RSBoxPlot new y: (coverageOutliers ifEmpty: [ { 1 } ] ifNotEmpty: [ (coverageOutliers collect: [ :t | t result coverageResult percentage ]) ]); yLog; yourself.
 	coverageOutliersPlot horizontalTick numberOfTicks: coverageOutliers size.
-	coverageOutliersPlot ylabel: 'Coverage reached'; title: 'Boxplot of code coverage outliers'.
+	coverageOutliersPlot ylabel: 'Coverage reached'; xlabel: '( ', coverageOutliers size asString, ' cases )'.
 		
-	canvas := RSCanvas new @ RSCanvasController. canvas addAll: {  scorePlot asShape . allocatedMemoryPlot asShape . executionTimeOutliersPlot asShape . coverageOutliersPlot asShape }.
+	canvas := RSCanvas new @ RSCanvasController.
+	canvas addAll: {  scorePlot asShape . allocatedMemoryPlot asShape . executionTimeOutliersPlot asShape . coverageOutliersPlot asShape }.
 	
 	RSHorizontalLineLayout new alignBottom; on: canvas shapes.
 	
