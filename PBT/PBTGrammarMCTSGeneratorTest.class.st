@@ -5,3 +5,31 @@ Class {
 	#package : 'PBT',
 	#tag : 'Generators'
 }
+
+{ #category : 'tests' }
+PBTGrammarMCTSGeneratorTest >> feedback: value [
+
+	^ Feedback having: nil current: nil with: nil isBetter: value
+]
+
+{ #category : 'tests' }
+PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAGrammar [
+
+	| generator |
+	
+	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
+
+	self assert: (Date readFrom: (generator gen: nil by: (self feedback: nil)) pattern: 'm-d-y') class equals: Date
+]
+
+{ #category : 'tests' }
+PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAGrammarGuidedByFeedback [
+
+	| generator |
+	
+	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
+	
+	generator gen: nil by: (self feedback: true).
+
+	self assert: (Date readFrom: (generator gen: nil by: (self feedback: false)) pattern: 'm-d-y') class equals: Date
+]
