@@ -49,24 +49,29 @@ PBTGrammarMCTSGenerator >> explorationConstant: aNumber [
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
-
 	"We are starting with this step because the feedback is got as a result of the last generation"
+
 	self backpropagate: previousFeedback.
-	
+
 	"We update the production tree selected"
 	lastDerivationTree := self getDerivationTree.
 	totalGenerations := totalGenerations + 1.
-	
+
 	"We return its string representation"
-	^ lastDerivationTree asString.
-	
-	
+
+	^ String streamContents: [ :stream |
+		  lastDerivationTree generateInto: stream ]
 ]
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> getDerivationTree [
+	
+	^ grammar start generateMCTSAst: self
 
-	^ grammar start generateMCTSDerivation: totalGenerations maxSize: maxSize explorationConstant: explorationConstant
+"	^ grammar start
+		  generateMCTSAst: totalGenerations
+		  maxSize: maxSize
+		  explorationConstant: explorationConstant"
 ]
 
 { #category : 'setter' }
@@ -89,4 +94,68 @@ PBTGrammarMCTSGenerator >> initialize [
 PBTGrammarMCTSGenerator >> maxSize: aSize [
 
 	maxSize := aSize 
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> ruleWithMoreUTC: rules [
+
+	^ (rules sort: [ :rule :rule2 |
+		   (rule utc: totalGenerations by: explorationConstant) >= rule2
+			   utc: totalGenerations
+			   by: explorationConstant ]) detect: [ :rule |
+		  rule minSize < maxSize ]
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> selectRule: rules [
+
+	| notVisited |
+	notVisited := rules reject: #visited.
+
+	^ notVisited
+		  ifEmpty: [ self ruleWithMoreUTC: rules ]
+		  ifNotEmpty: [ notVisited first ]
+]
+
+{ #category : 'visiting' }
+PBTGrammarMCTSGenerator >> visitNonTerminal: nonTerminal [
+
+	^ (self selectRule: nonTerminal rules) visit: self
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> visitRule: rule [
+
+	| result availableSize |
+	
+	availableSize := maxSize - 1.
+	
+	rule fragments do: [ :fragment |
+		availableSize := availableSize - fragment minSize ].
+	
+	result := rule fragments collect: [ :fragment |
+					| node |
+					availableSize := availableSize + fragment minSize.
+					node := fragment visit: (self withSize: availableSize).
+					node grammarRule: rule.
+					availableSize := availableSize - node treeSize.
+					node ].
+	
+	^ GncInnerNode with: result
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> visitTerminal: terminal [
+
+	maxSize update: [ :size | size - 1 ].
+	^ terminal generateMCTSAst: self
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> withSize: size [
+
+	"TODO: omit this later, there is not necessary to clone all the time the same generator"
+	^ self clone
+		  maxSize: size;
+		  yourself
 ]

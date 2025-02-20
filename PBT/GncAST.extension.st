@@ -3,9 +3,16 @@ Extension { #name : 'GncAST' }
 { #category : '*PBT' }
 GncAST >> backPropagateIteration: reward [
 
-	grammarRule visit.
-	grammarRule newReward: reward.
-	self children do: [ :child | child backPropagateIteration: reward ]
+	grammarRule ifNotNil: [
+		grammarRule visit.
+		grammarRule newReward: reward ].
+	self backPropagateToChildren: reward.
+]
+
+{ #category : '*PBT' }
+GncAST >> backPropagateToChildren: reward [
+
+	self subclassResponsibility 
 ]
 
 { #category : '*PBT' }
