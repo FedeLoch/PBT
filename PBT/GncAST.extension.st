@@ -4,7 +4,7 @@ Extension { #name : 'GncAST' }
 GncAST >> backPropagateIteration: reward [
 
 	grammarRule ifNotNil: [
-		grammarRule newReward: reward ].
+		grammarRule backPropagate: reward ].
 	self backPropagateToChildren: reward.
 ]
 

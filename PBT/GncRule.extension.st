@@ -1,6 +1,13 @@
 Extension { #name : 'GncRule' }
 
 { #category : '*PBT' }
+GncRule >> backPropagate: newReward [
+
+	reward := (reward + newReward) max: 0.
+	weight set: ((weight get + newReward) max: 1).
+]
+
+{ #category : '*PBT' }
 GncRule >> initialize [
 
 	fragments := OrderedCollection new.
@@ -9,12 +16,6 @@ GncRule >> initialize [
 	minSize := Float infinity.
 	visits := 0.
 	reward := 0.
-]
-
-{ #category : '*PBT' }
-GncRule >> newReward: newReward [
-
-	reward := reward + newReward.
 ]
 
 { #category : '*PBT' }
