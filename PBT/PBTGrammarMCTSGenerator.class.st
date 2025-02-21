@@ -21,17 +21,13 @@ PBTGrammarMCTSGenerator class >> from: grammar [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> backpropagate: previousFeedback [
+PBTGrammarMCTSGenerator >> backpropagate: prevFeedback [
 
-	| reward |
-	
 	lastDerivationTree ifNil: [ ^ nil ].
-	
-	reward := (previousFeedback isNotNil and: [ previousFeedback feedback ]) ifTrue: [ 1 ] ifFalse: [ -1 ].
 	
 	"Update grammar reference production increasing total iterations and updating its reward.
 	 Applies it recursively to the root"
-	lastDerivationTree backPropagateIteration: reward
+	lastDerivationTree backPropagateIteration: (self reward: prevFeedback)
 ]
 
 { #category : 'getter' }
@@ -59,7 +55,6 @@ PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
 	totalGenerations := totalGenerations + 1.
 
 	"We return its string representation"
-
 	^ String streamContents: [ :stream |
 		  lastDerivationTree generateInto: stream ]
 ]
@@ -101,6 +96,14 @@ PBTGrammarMCTSGenerator >> initialize [
 PBTGrammarMCTSGenerator >> maxSize: aSize [
 
 	maxSize := aSize 
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> reward: prevFeedback [
+
+	prevFeedback ifNil: [ ^ 0 ].
+
+	^ prevFeedback feedback ifTrue: [ 1 ] ifFalse: [ -1 ]
 ]
 
 { #category : 'as yet unclassified' }
