@@ -11,10 +11,10 @@ Class {
 }
 
 { #category : 'accessing' }
-GrammarMCTSGenerator >> explorationConstant: aNumber [
+GrammarMCTSGenerator >> explorationConstant: c [
 
 	"The C in the formula of UTC"
-	explorationConstant := aNumber
+	explorationConstant := c
 ]
 
 { #category : 'as yet unclassified' }
@@ -24,13 +24,14 @@ GrammarMCTSGenerator >> ruleWithMoreUTC: rules [
 		   (rule utc: totalGenerations by: explorationConstant) >= (rule2
 			   utc: totalGenerations
 			   by: explorationConstant) ]) detect: [ :rule |
-		  rule minSize < maxSize ] ifNone: [ ^ nil ]
+		  rule minSize <= maxSize ] ifNone: [ ^ nil ]
 ]
 
 { #category : 'private' }
 GrammarMCTSGenerator >> selectRule: rules [
 
 	| notVisited |
+	
 	notVisited := rules reject: #visited.
 
 	^ notVisited
@@ -50,10 +51,9 @@ GrammarMCTSGenerator >> visitNonTerminal: nonTerminal [
 	| rule |
 	
 	rule := self selectRule: nonTerminal rules.
+
+	^ rule ifNil: [ ^ GncInnerNode with: {} ] ifNotNil: [ rule visit: self ]
 	
-	rule ifNil: [ ^GncInnerNode with: {}  ].
-	
-	^ rule visit: self
 ]
 
 { #category : 'visiting' }
@@ -62,20 +62,19 @@ GrammarMCTSGenerator >> visitRule: rule [
 	| result availableSize |
 	
 	rule visit.
-	
 	availableSize := maxSize - 1.
-	
+
 	rule fragments do: [ :fragment |
 		availableSize := availableSize - fragment minSize ].
-	
+
 	result := rule fragments collect: [ :fragment |
-					| node |
-					availableSize := availableSize + fragment minSize.
-					node := fragment visit: (self withSize: availableSize).
-					node grammarRule: rule.
-					availableSize := availableSize - node treeSize.
-					node ].
-	
+		          | node |
+		          availableSize := availableSize + fragment minSize.
+		          node := fragment visit: (self withSize: availableSize).
+		          node grammarRule: rule.
+		          availableSize := availableSize - node treeSize.
+		          node ].
+
 	^ GncInnerNode with: result
 ]
 
@@ -83,5 +82,6 @@ GrammarMCTSGenerator >> visitRule: rule [
 GrammarMCTSGenerator >> visitTerminal: terminal [
 
 	maxSize update: [ :size | size - 1 ].
+	
 	^ terminal generateMCTSAst: self
 ]

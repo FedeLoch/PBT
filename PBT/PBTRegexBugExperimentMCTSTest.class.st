@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBTRegexBugExperimentMCTSTest',
 	#superclass : 'PBTRegexBugExperimentTest',
+	#instVars : [
+		'grammarRegex'
+	],
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
 	#tag : 'FrameworkTests'
@@ -9,17 +12,32 @@ Class {
 { #category : 'running' }
 PBTRegexBugExperimentMCTSTest >> regexConstraint [
 
-	^ PBTObjectConstraint new generator: (PBTGrammarMCTSGenerator from: GncRegexGrammar new)
+	grammarRegex := GncRegexGrammar new.
+	
+	^ PBTObjectConstraint new generator: (PBTGrammarMCTSGenerator from: grammarRegex)
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
+PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
+
+	| pbtResult |
+	
+	schema guidedByExecutionTime.
+
+	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
 	
 	schema guidedByScore.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

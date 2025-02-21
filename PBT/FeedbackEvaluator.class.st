@@ -40,7 +40,7 @@ FeedbackEvaluator >> eval: current [
 
 	better ifNil: [ better := current. betterValue := newValue ].
 	
-	feedback := newValue >= (betterValue / 2).
+	feedback := newValue >= betterValue.
 	
 	feedback ifTrue: [ better := current. betterValue := newValue ].
 	

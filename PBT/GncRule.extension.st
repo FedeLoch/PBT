@@ -21,7 +21,8 @@ GncRule >> newReward: newReward [
 GncRule >> utc: totalVisits by: c [
 	 
 	"UCT = (reward(rule) / visits(rule)) + C * sqrt(log(total_visits) / visits(rule)))"
-	^ (reward / (visits max: 1)) + (c * ((totalVisits log) / visits) sqrt)
+	
+	^ (reward / visits) + (c * ((totalVisits log / visits) sqrt))
 ]
 
 { #category : '*PBT' }

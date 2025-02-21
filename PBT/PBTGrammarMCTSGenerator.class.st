@@ -6,7 +6,8 @@ Class {
 		'explorationConstant',
 		'lastDerivationTree',
 		'grammar',
-		'maxSize'
+		'maxSize',
+		'generator'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -65,13 +66,13 @@ PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> getDerivationTree [
-	
-	^ grammar start generateMCTSAst: (
-		GrammarMCTSGenerator new maxHeight: 0;
-			maxSize: maxSize + 60;
-			totalGenerations: totalGenerations;
-			explorationConstant: explorationConstant
-	)
+
+	generator
+		maxSize: maxSize + 60;
+		totalGenerations: totalGenerations;
+		explorationConstant: explorationConstant.
+
+	^ grammar start generateMCTSAst: generator
 ]
 
 { #category : 'setter' }
@@ -88,6 +89,12 @@ PBTGrammarMCTSGenerator >> initialize [
 	totalGenerations := 0.
 	explorationConstant := 1.41.
 	maxSize := 40.
+	generator := (
+		GrammarMCTSGenerator new maxHeight: 0;
+			maxSize: maxSize + 60;
+			totalGenerations: totalGenerations;
+			explorationConstant: explorationConstant
+	)
 ]
 
 { #category : 'setter' }
