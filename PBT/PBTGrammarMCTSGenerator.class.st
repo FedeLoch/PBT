@@ -7,7 +7,8 @@ Class {
 		'lastDerivationTree',
 		'grammar',
 		'maxSize',
-		'generator'
+		'generator',
+		'generatedTextInputs'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -21,13 +22,29 @@ PBTGrammarMCTSGenerator class >> from: grammar [
 ]
 
 { #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> aDerivation [
+
+	generator
+		maxSize: maxSize + 60;
+		totalGenerations: totalGenerations;
+		explorationConstant: explorationConstant.
+
+	^ grammar start generateMCTSAst: generator level: 0
+]
+
+{ #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> backpropagate: prevFeedback [
 
-	lastDerivationTree ifNil: [ ^ nil ].
+	| reward |
 	
+	lastDerivationTree ifNil: [ ^ nil ].
+
 	"Update grammar reference production increasing total iterations and updating its reward.
 	 Applies it recursively to the root"
-	lastDerivationTree backPropagateIteration: (self reward: prevFeedback)
+	
+	reward := self reward: prevFeedback.
+	
+	lastDerivationTree backPropagateToChildren: reward level: 0
 ]
 
 { #category : 'getter' }
@@ -46,28 +63,33 @@ PBTGrammarMCTSGenerator >> explorationConstant: aNumber [
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
-	"We are starting with this step because the feedback is got as a result of the last generation"
 
+	"We are starting with this step because the feedback is got as a result of the last generation"
 	self backpropagate: previousFeedback.
 
 	"We update the production tree selected"
+
 	lastDerivationTree := self getDerivationTree.
 	totalGenerations := totalGenerations + 1.
+	generatedTextInputs at: lastDerivationTree asStringInput put: true.
 
 	"We return its string representation"
-	^ String streamContents: [ :stream |
-		  lastDerivationTree generateInto: stream ]
+	^ lastDerivationTree asStringInput
 ]
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> getDerivationTree [
+	
+	| result |
+	
+	result := self aDerivation.
+	
+	[ generatedTextInputs includesKey: result asStringInput ] whileTrue: [
+		result backPropagateToChildren: -1 level: 0. "TODO: It's a test"
+		result := self aDerivation
+	].
 
-	generator
-		maxSize: maxSize + 60;
-		totalGenerations: totalGenerations;
-		explorationConstant: explorationConstant.
-
-	^ grammar start generateMCTSAst: generator
+	^ result
 ]
 
 { #category : 'setter' }
@@ -89,7 +111,8 @@ PBTGrammarMCTSGenerator >> initialize [
 			maxSize: maxSize + 60;
 			totalGenerations: totalGenerations;
 			explorationConstant: explorationConstant
-	)
+	).
+	generatedTextInputs := Dictionary new.
 ]
 
 { #category : 'setter' }

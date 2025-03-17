@@ -1,11 +1,35 @@
 Extension { #name : 'GncAST' }
 
 { #category : '*PBT' }
-GncAST >> backPropagateIteration: reward [
+GncAST >> allChildren [
 
-	grammarRule ifNotNil: [
-		grammarRule backPropagate: reward ].
+	self subclassResponsibility
+]
+
+{ #category : '*PBT' }
+GncAST >> asStringInput [
+
+	^ String streamContents: [ :stream | self generateInto: stream ]
+]
+
+{ #category : '*PBT' }
+GncAST >> backPropagate: reward [
+
+	grammarRule ifNotNil: [ grammarRule backPropagate: reward ].
+]
+
+{ #category : '*PBT' }
+GncAST >> backPropagateRecursive: reward [
+
+	grammarRule ifNotNil: [ grammarRule backPropagate: reward ].
 	self backPropagateToChildren: reward.
+]
+
+{ #category : '*PBT' }
+GncAST >> backPropagateRecursive: reward level: level [
+
+	grammarRule ifNotNil: [ grammarRule backPropagate: reward level: level. grammarRule visitIn: level ].
+	self backPropagateToChildren: reward level: level + 1.
 ]
 
 { #category : '*PBT' }
@@ -15,7 +39,19 @@ GncAST >> backPropagateToChildren: reward [
 ]
 
 { #category : '*PBT' }
+GncAST >> backPropagateToChildren: reward level: level [
+
+	self subclassResponsibility 
+]
+
+{ #category : '*PBT' }
 GncAST >> grammarRule: gncRule [
 
 	grammarRule := gncRule.
+]
+
+{ #category : '*PBT' }
+GncAST >> visited [
+	
+	^ false 
 ]

@@ -193,7 +193,7 @@ PBTRunner >> test [
 	collector runOn: [
 		[
 			self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
-			tests add: (self genTest: incrCoverage with: collector)
+			tests add: (self genTest: incrCoverage with: collector).
 		]
 	].
 

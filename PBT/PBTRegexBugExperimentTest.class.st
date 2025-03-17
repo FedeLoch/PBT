@@ -14,6 +14,25 @@ Class {
 }
 
 { #category : 'running' }
+PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
+	""
+
+	| regex |
+	regex := nil.
+
+	[ regex ] whileNil: [
+		[
+		| maybe |
+		maybe := (props at: 'grammar') genBy: feedback.
+		maybe asRegex.
+		regex := maybe ]
+			on: Error
+			do: [  ] ].
+
+	^ regex
+]
+
+{ #category : 'running' }
 PBTRegexBugExperimentTest >> regexConstraint [
 
 	^ PBTObjectConstraint new
@@ -35,7 +54,7 @@ PBTRegexBugExperimentTest >> setUp [
 
 	generator := PBTGenerator do: [ :props :feedback |
 		             | regex |
-		             regex := (props at: 'grammar') genBy: feedback.
+		             regex := self regexByProp: props and: feedback. "(props at: 'grammar') genBy: feedback."
 		             props at: 'input' put: regex minimalStringMatching.
 		             regex asRegex ].
 

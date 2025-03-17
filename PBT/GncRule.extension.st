@@ -1,10 +1,17 @@
 Extension { #name : 'GncRule' }
 
 { #category : '*PBT' }
-GncRule >> backPropagate: newReward [
+GncRule >> backPropagate: bla [
 
-	reward := (reward + newReward) max: 0.
-	weight set: ((weight get + newReward) max: 1).
+	"TODO: delete me"
+]
+
+{ #category : '*PBT' }
+GncRule >> backPropagate: newReward level: level [
+
+	rewards at: level ifAbsentPut: [ 0 ].
+	
+	rewards at: level update: [ :v | (v + newReward) max: 1 ]
 ]
 
 { #category : '*PBT' }
@@ -14,26 +21,88 @@ GncRule >> initialize [
 	weight := 1 asWeight.
 	minHeight := Float infinity.
 	minSize := Float infinity.
-	visits := 0.
-	reward := 0.
+	visits := Dictionary new.
+	rewards := Dictionary new.
+]
+
+{ #category : '*PBT' }
+GncRule >> reward [
+
+	^ reward 
+]
+
+{ #category : '*PBT' }
+GncRule >> rewardBy: level [
+	
+	rewards at: level ifAbsent: [ ^0 ].
+	
+	^ rewards at: level
 ]
 
 { #category : '*PBT' }
 GncRule >> utc: totalVisits by: c [
 	 
 	"UCT = (reward(rule) / visits(rule)) + C * sqrt(log(total_visits) / visits(rule)))"
+
+	^ (reward / visits) + (c * ((totalVisits log / visits) sqrt))
+]
+
+{ #category : '*PBT' }
+GncRule >> utc: totalVisits by: c level: level [
+	 
+	"UCT = (reward(rule) / visits(rule)) + C * sqrt(log(total_visits) / visits(rule)))"
+	| levelReward levelVisits |
 	
-	^ ((reward" * weight get") / visits) + (c * ((totalVisits log / visits) sqrt))
+	levelReward := self rewardBy: level.
+	levelVisits := self visitsBy: level.
+	
+	^ (levelReward / levelVisits) + (c * ((totalVisits log / levelVisits) sqrt))
 ]
 
 { #category : '*PBT' }
 GncRule >> visit [
 
-	visits := visits + 1
+	"TODO: delete me"
+]
+
+{ #category : '*PBT' }
+GncRule >> visit: visitor level: level [
+
+	^ visitor visitRule: self level: level
+]
+
+{ #category : '*PBT' }
+GncRule >> visitIn: level [
+
+	visits at: level ifAbsentPut: [ 0 ].
+	
+	visits at: level update: [ :visit | visit + 1 ]
 ]
 
 { #category : '*PBT' }
 GncRule >> visited [
 
-	^ visits > 0
+	"todo: delete me"
+]
+
+{ #category : '*PBT' }
+GncRule >> visitedIn: level [
+
+	visits at: level ifPresent: [ ^ true ].
+	
+	^ false
+]
+
+{ #category : '*PBT' }
+GncRule >> visits [
+
+	"todo: delete me"
+]
+
+{ #category : '*PBT' }
+GncRule >> visitsBy: level [
+	
+	visits at: level ifAbsent: [ ^0 ].
+	
+	^ visits at: level
 ]

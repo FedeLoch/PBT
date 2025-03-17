@@ -12,8 +12,7 @@ Class {
 C2IncrementalResult >> collectResult: collector [
 
 	| nodes |
-	nodes := (coveredNodes collect: [ :tuple | self resolveNode: tuple ])
-		         asSet.
+	nodes := coveredNodes collect: [ :tuple | self resolveNode: tuple ].
 
 	^ C2CoverageResult new
 		  collector: collector;
@@ -32,7 +31,7 @@ C2IncrementalResult >> coverNode: aNodePath inMethod: aMethodName [
 C2IncrementalResult >> initialize [
 
 	super initialize.
-	coveredNodes := OrderedCollection new
+	coveredNodes := Set new
 ]
 
 { #category : 'as yet unclassified' }

@@ -7,7 +7,13 @@ GncTerminal >> aMCTSValue [
 ]
 
 { #category : '*PBT' }
-GncTerminal >> generateMCTSAst: generator [
+GncTerminal >> generateMCTSAst: generator level: level [
 
 	^ GncLeaf withToken: self aMCTSValue
+]
+
+{ #category : '*PBT' }
+GncTerminal >> visit: visitor level: level [
+
+	^ visitor visitTerminal: self level: level
 ]

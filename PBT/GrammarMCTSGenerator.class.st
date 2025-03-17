@@ -18,24 +18,26 @@ GrammarMCTSGenerator >> explorationConstant: c [
 ]
 
 { #category : 'as yet unclassified' }
-GrammarMCTSGenerator >> ruleWithMoreUTC: rules [
+GrammarMCTSGenerator >> ruleWithMoreUTC: rules level: level [
 
 	^ (rules sort: [ :rule :rule2 |
-		   (rule utc: totalGenerations by: explorationConstant) >= (rule2
-			   utc: totalGenerations
-			   by: explorationConstant) ]) detect: [ :rule |
-		  rule minSize <= maxSize ] ifNone: [ ^ nil ]
+		   (rule utc: totalGenerations by: explorationConstant level: level)
+		   >=
+		   (rule2 utc: totalGenerations by: explorationConstant level: level) ])
+		  first
 ]
 
 { #category : 'private' }
-GrammarMCTSGenerator >> selectRule: rules [
+GrammarMCTSGenerator >> selectRule: rules level: level [
 
 	| notVisited |
 	
-	notVisited := rules reject: #visited.
-
+	rules detect: [ :rule | rule minSize <= maxSize ] ifNone: [ ^ nil ].
+	
+	notVisited := rules reject: [ :rule | rule visitedIn: level ].
+	
 	^ notVisited
-		  ifEmpty: [ self ruleWithMoreUTC: rules ]
+		  ifEmpty: [ self ruleWithMoreUTC: rules level: level ]
 		  ifNotEmpty: [ notVisited first ]
 ]
 
@@ -46,22 +48,21 @@ GrammarMCTSGenerator >> totalGenerations: aNumber [
 ]
 
 { #category : 'visiting' }
-GrammarMCTSGenerator >> visitNonTerminal: nonTerminal [
+GrammarMCTSGenerator >> visitNonTerminal: nonTerminal level: level [
 	
 	| rule |
 	
-	rule := self selectRule: nonTerminal rules.
+	rule := self selectRule: nonTerminal rules level: level.
 
-	^ rule ifNil: [ ^ GncInnerNode with: {} ] ifNotNil: [ rule visit: self ]
+	^ rule ifNil: [ ^ GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]
 	
 ]
 
 { #category : 'visiting' }
-GrammarMCTSGenerator >> visitRule: rule [
+GrammarMCTSGenerator >> visitRule: rule level: level [
 
 	| result availableSize |
-	
-	rule visit.
+
 	availableSize := maxSize - 1.
 
 	rule fragments do: [ :fragment |
@@ -70,7 +71,7 @@ GrammarMCTSGenerator >> visitRule: rule [
 	result := rule fragments collect: [ :fragment |
 		          | node |
 		          availableSize := availableSize + fragment minSize.
-		          node := fragment visit: (self withSize: availableSize).
+		          node := fragment visit: (self withSize: availableSize) level: level + 1.
 		          node grammarRule: rule.
 		          availableSize := availableSize - node treeSize.
 		          node ].
@@ -79,9 +80,9 @@ GrammarMCTSGenerator >> visitRule: rule [
 ]
 
 { #category : 'visiting' }
-GrammarMCTSGenerator >> visitTerminal: terminal [
+GrammarMCTSGenerator >> visitTerminal: terminal level: level [
 
 	maxSize update: [ :size | size - 1 ].
 	
-	^ terminal generateMCTSAst: self
+	^ terminal generateMCTSAst: self level: level
 ]
