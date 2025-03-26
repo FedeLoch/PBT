@@ -7,12 +7,18 @@ Class {
 		'result',
 		'score',
 		'receiver',
-		'feedback'
+		'feedback',
+		'assert'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
 	#tag : 'Test generation'
 }
+
+{ #category : 'running' }
+PBTTest >> announce: anAnnouncementClass withResult: result [
+
+]
 
 { #category : 'accessing' }
 PBTTest >> arguments: inputs [
@@ -26,6 +32,18 @@ PBTTest >> asPharoTest [
 	"Returns the pharo code that reprensents the test which the same semantics"
 
 	"TODO: Implement me"
+]
+
+{ #category : 'accessing' }
+PBTTest >> assert [
+
+	^ assert
+]
+
+{ #category : 'accessing' }
+PBTTest >> assert: anAssert [
+
+	assert := anAssert
 ]
 
 { #category : 'accessing' }
@@ -73,7 +91,21 @@ PBTTest >> result: testResult [
 { #category : 'accessing' }
 PBTTest >> run [
 
-	^ receiver perform: target selector withArguments: arguments
+	| callResult |
+
+	callResult := receiver perform: target selector withArguments: arguments.
+	^ PBTTestResult new result: (assert value: receiver value: arguments value: callResult)
+]
+
+{ #category : 'running' }
+PBTTest >> run: aResult [
+	aResult runCase: self
+]
+
+{ #category : 'running' }
+PBTTest >> runCaseManaged [ 
+	"TODO: This is a test to integrate"
+	self run
 ]
 
 { #category : 'accessing' }
@@ -86,6 +118,11 @@ PBTTest >> score [
 PBTTest >> score: aScore [
 
 	score := aScore 
+]
+
+{ #category : 'accessing' }
+PBTTest >> selector [
+	^ self hash asString asSymbol 
 ]
 
 { #category : 'accessing' }

@@ -23,12 +23,12 @@ PBTGrammarMCTSGenerator class >> from: grammar [
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> aDerivation [
-
+	
 	generator
 		maxSize: maxSize + 60;
 		totalGenerations: totalGenerations;
 		explorationConstant: explorationConstant.
-
+		
 	^ grammar start generateMCTSAst: generator level: 0
 ]
 
@@ -79,15 +79,13 @@ PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
 
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> getDerivationTree [
-	
+
 	| result |
-	
 	result := self aDerivation.
-	
+
 	[ generatedTextInputs includesKey: result asStringInput ] whileTrue: [
-		result backPropagateToChildren: -1 level: 0. "TODO: It's a test"
-		result := self aDerivation
-	].
+		result backPropagateToChildren: -1 level: 0.
+		result := self aDerivation ].
 
 	^ result
 ]
@@ -127,13 +125,4 @@ PBTGrammarMCTSGenerator >> reward: prevFeedback [
 	prevFeedback ifNil: [ ^ 0 ].
 
 	^ prevFeedback feedback ifTrue: [ 1 ] ifFalse: [ -1 ]
-]
-
-{ #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> withSize: size [
-
-	"TODO: omit this later, there is not necessary to clone all the time the same generator"
-	^ self clone
-		  maxSize: size;
-		  yourself
 ]

@@ -28,7 +28,7 @@ GncRule >> initialize [
 { #category : '*PBT' }
 GncRule >> reward [
 
-	^ reward 
+	"DELETE ME"
 ]
 
 { #category : '*PBT' }
@@ -41,10 +41,8 @@ GncRule >> rewardBy: level [
 
 { #category : '*PBT' }
 GncRule >> utc: totalVisits by: c [
-	 
-	"UCT = (reward(rule) / visits(rule)) + C * sqrt(log(total_visits) / visits(rule)))"
 
-	^ (reward / visits) + (c * ((totalVisits log / visits) sqrt))
+	"DELETE ME"
 ]
 
 { #category : '*PBT' }
@@ -56,6 +54,8 @@ GncRule >> utc: totalVisits by: c level: level [
 	levelReward := self rewardBy: level.
 	levelVisits := self visitsBy: level.
 	
+	levelReward = 0 ifTrue: [1 halt.].
+	levelVisits = 0 ifTrue: [1 halt.].
 	^ (levelReward / levelVisits) + (c * ((totalVisits log / levelVisits) sqrt))
 ]
 

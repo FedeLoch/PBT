@@ -17,18 +17,30 @@ PBTBugDetectionExperiment class >> bugDetectionAnalysis [
 ]
 
 { #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> analysisFrom: config withMutantGen: mutantGenerator [
+
+	^ MTAnalysis new
+		  classesToMutate: self classesToMutate;
+		  mutantGenerationStrategy: mutantGenerator;
+		  mutantSelectionStrategy: MTRandomMethodMutantSelectionStrategy new;
+		  testClasses: config tests
+]
+
+{ #category : 'as yet unclassified' }
 PBTBugDetectionExperiment >> bugDetectionAnalysis [
 
-	^ pbtTests collectWithIndex: [ :instanceTests :index |
+	| mutantGenerator |
+	mutantGenerator := MTManualMutatedMethodGenerationStrategy new
+		                   targetMethods: self target sendReachableMethods.
+	1 halt.
+	^ pbtConfigurations inject: Dictionary new into: [ :dict :config |
 		  | analysis |
-		  analysis := MutationTestingAnalysis
-			              testCasesFrom: instanceTests
-			              mutating: self classesToMutate
-			              using: MutantOperator contents
-			              with: AllTestsMethodsRunningTestSelectionStrategy new.
+		  analysis := self
+			              analysisFrom: config
+			              withMutantGen: mutantGenerator.
 		  analysis run.
-		  { (pbtConfigurations at: index) title. analysis generalResult }
-	]
+		  dict at: config title put: analysis generalResult.
+		  dict ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -38,17 +50,34 @@ PBTBugDetectionExperiment >> classesToMutate [
 ]
 
 { #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> executionConfig: schema called: title [
+
+	schema guidedByExecutionTime.
+	^ PBTExperimentConfig new schema: schema; title: title; time: self time; target: self target
+]
+
+{ #category : 'as yet unclassified' }
 PBTBugDetectionExperiment >> initialize [
 
 	super initialize.
 	pbtConfigurations := self pbtConfigurations.
-	pbtTests := pbtConfigurations collect: [ :config |
-		(PBTRunner testWithLowCost: config target from: config schema for: config time) mutalkTests
-	]
+	pbtConfigurations do: #generateTests
 ]
 
 { #category : 'as yet unclassified' }
 PBTBugDetectionExperiment >> pbtConfigurations [
 
 	self subclassResponsibility
+]
+
+{ #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> target [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> time [
+
+	self subclassResponsibility 
 ]

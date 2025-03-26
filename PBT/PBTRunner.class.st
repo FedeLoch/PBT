@@ -125,6 +125,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	feedback := (schema feedbackEvaluator eval: test).
 	generator feedback: feedback.
 	test feedback: feedback.
+	test assert: schema assert.
 	
 	^ test
 ]

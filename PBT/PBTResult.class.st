@@ -84,6 +84,12 @@ PBTResult >> minimumTimeNeeded [
 	^ (topCases collect: [ :test | test result time ]) sum
 ]
 
+{ #category : 'as yet unclassified' }
+PBTResult >> mutalkTest [
+
+	^ MTTestPBTCaseReference for: (PBTTestsuit from: tests)
+]
+
 { #category : 'outliers' }
 PBTResult >> outliersBy: valueBlock [
 

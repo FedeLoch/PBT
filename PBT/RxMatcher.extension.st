@@ -3,7 +3,7 @@ Extension { #name : 'RxMatcher' }
 { #category : '*PBT' }
 RxMatcher >> asString [ 
 
-	^ asString 
+	^ asString
 ]
 
 { #category : '*PBT' }
