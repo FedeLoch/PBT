@@ -36,6 +36,16 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> bloxplotByTime [
+	
+	| plot |
+	plot := RSBoxPlot new y: (tests collect: [ :t | t result time asMilliSeconds ]); yLog; yourself.
+	plot horizontalTick numberOfTicks: tests size.
+	
+	^ plot
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> exportExecutionValues [
 
 	| writer total |

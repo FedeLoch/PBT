@@ -11,33 +11,25 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTBugDetectionExperiment class >> bugDetectionAnalysis [
+PBTBugDetectionExperiment class >> analyze [
 
-	^ self new bugDetectionAnalysis
+	^ self new analyze
 ]
 
 { #category : 'as yet unclassified' }
-PBTBugDetectionExperiment >> analysisFrom: config withMutantGen: mutantGenerator [
+PBTBugDetectionExperiment >> analyze [
 
-	^ MTAnalysis new
-		  classesToMutate: self classesToMutate;
-		  mutantGenerationStrategy: mutantGenerator;
-		  mutantSelectionStrategy: MTRandomMethodMutantSelectionStrategy new;
-		  testClasses: config tests
-]
+	| analysis |
+	analysis := MTAnalysis new
+		            classesToMutate: self classesToMutate;
+		            mutantGenerationStrategy:
+			            (MTManualMutatedMethodGenerationStrategy new
+				             targetMethods: self target sendReachableMethods);
+		            mutantSelectionStrategy:
+			            MTRandomMethodMutantSelectionStrategy new.
 
-{ #category : 'as yet unclassified' }
-PBTBugDetectionExperiment >> bugDetectionAnalysis [
-
-	| mutantGenerator |
-	mutantGenerator := MTManualMutatedMethodGenerationStrategy new
-		                   targetMethods: self target sendReachableMethods.
-	1 halt.
 	^ pbtConfigurations inject: Dictionary new into: [ :dict :config |
-		  | analysis |
-		  analysis := self
-			              analysisFrom: config
-			              withMutantGen: mutantGenerator.
+		  analysis testCases: config tests first testCase tests.
 		  analysis run.
 		  dict at: config title put: analysis generalResult.
 		  dict ]

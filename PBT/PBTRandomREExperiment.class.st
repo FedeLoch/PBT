@@ -196,5 +196,5 @@ PBTRandomREExperiment >> target [
 { #category : 'as yet unclassified' }
 PBTRandomREExperiment >> time [
 
-	^ 1 minutes "2 minutes"
+	^ 2 minute "2 minutes"
 ]

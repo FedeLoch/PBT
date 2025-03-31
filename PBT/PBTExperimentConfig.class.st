@@ -6,7 +6,8 @@ Class {
 		'title',
 		'tests',
 		'target',
-		'time'
+		'time',
+		'pbtResult'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -16,7 +17,21 @@ Class {
 { #category : 'accessing' }
 PBTExperimentConfig >> generateTests [
 
-	tests := { (PBTRunner testWithLowCost: target from: schema for: time) mutalkTest }
+	pbtResult := self run.
+	tests := {  pbtResult mutalkTest }.
+	
+]
+
+{ #category : 'accessing' }
+PBTExperimentConfig >> result [
+
+	^ pbtResult
+]
+
+{ #category : 'accessing' }
+PBTExperimentConfig >> run [
+
+	^ PBTRunner testWithLowCost: target from: schema for: time
 ]
 
 { #category : 'accessing' }

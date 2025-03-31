@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTTest',
-	#superclass : 'Object',
+	#superclass : 'TestCase',
 	#instVars : [
 		'target',
 		'arguments',
@@ -8,7 +8,8 @@ Class {
 		'score',
 		'receiver',
 		'feedback',
-		'assert'
+		'assert',
+		'lastResult'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -59,6 +60,17 @@ PBTTest >> feedback: aFeedback [
 ]
 
 { #category : 'accessing' }
+PBTTest >> lastResult [
+	
+	^ lastResult
+]
+
+{ #category : 'accessing' }
+PBTTest >> lastTimeToRun [
+	^ result time
+]
+
+{ #category : 'accessing' }
 PBTTest >> profiledRun [
 
 	^ TimeProfiler spyOn: [ self run ]
@@ -92,9 +104,10 @@ PBTTest >> result: testResult [
 PBTTest >> run [
 
 	| callResult |
-
+	
 	callResult := receiver perform: target selector withArguments: arguments.
-	^ PBTTestResult new result: (assert value: receiver value: arguments value: callResult)
+	lastResult := PBTTestResult new result: (assert value: receiver value: arguments value: callResult).
+	^ lastResult 
 ]
 
 { #category : 'running' }
@@ -123,6 +136,12 @@ PBTTest >> score: aScore [
 { #category : 'accessing' }
 PBTTest >> selector [
 	^ self hash asString asSymbol 
+]
+
+{ #category : 'asserting' }
+PBTTest >> shouldPass [
+
+	^ true
 ]
 
 { #category : 'accessing' }
