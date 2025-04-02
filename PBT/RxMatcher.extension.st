@@ -107,14 +107,20 @@ RxMatcher class >> mutateCharacter: stringRegex using: otherString times: n [
 { #category : '*PBT' }
 RxMatcher >> score [
 
-	| input minRegex score1 score2 |
+	| input minRegex score1 score2 baseTime |
 
 	input := asString minimalStringMatching.
 	minRegex := input asRegex.
-	score1 := [ self matches: input ] timeToRunWithoutGC.
-	score2 := [ minRegex matches: input ] timeToRunWithoutGC.
 	
-	^ score1 / (score2 max: 1)
+	baseTime := Smalltalk highResClock.
+	self matches: input.
+	score1 := Smalltalk highResClock - baseTime.
+	
+	baseTime := Smalltalk highResClock.
+	minRegex matches: input.
+	score2 := Smalltalk highResClock - baseTime.
+	
+	^ (score1 / (score2 max: 1)) asFloat
 ]
 
 { #category : '*PBT' }

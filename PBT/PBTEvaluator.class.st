@@ -24,11 +24,7 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		collector resetResult.
 		
 		timeBefore := Smalltalk highResClock.
-		
-		callResult := receiver perform: target selector withArguments: args
-		"time := Duration milliSeconds: [
-		callResult := receiver perform: target selector withArguments: args
-		] timeToRunWithoutGC".
+		callResult := receiver perform: target selector withArguments: args.
 		time := Duration milliSeconds: (Smalltalk highResClock) - timeBefore.
 
 		localCoverageResult := collector collectResult.

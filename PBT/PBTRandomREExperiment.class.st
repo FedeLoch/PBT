@@ -173,12 +173,15 @@ PBTRandomREExperiment >> schemaWith: regexConstraint [
 
 	assert := [ :regex :input :result | (regex matches: input) = result ].
 	score := [ :re :inputs :res |
-	         | coreScore gnoccoScore anotherRegex |
+	         | coreScore gnoccoScore anotherRegex base |
 	         coreScore := res time asMilliSeconds.
 	         anotherRegex := inputs first asRegex.
-	         gnoccoScore := [ anotherRegex matches: inputs first ]
-		                        timeToRunWithoutGC.
-	         coreScore / (gnoccoScore max: 1) ].
+	
+				base := Smalltalk highResClock.
+				anotherRegex matches: inputs first.
+				
+	         gnoccoScore := Smalltalk highResClock - base.
+	         (coreScore / (gnoccoScore max: 1)) asFloat ].
 
 	^ PBTSchema new
 		  receiverConstraint: receiverConstraint;
