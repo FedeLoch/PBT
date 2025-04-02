@@ -3,7 +3,8 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'sensitivity',
-		'comparisons'
+		'comparisons',
+		'baseline'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -11,14 +12,23 @@ Class {
 }
 
 { #category : 'adding' }
-PBTAnalysisResult >> add: result for: baseResult called: label forMutant: mutantName [
+PBTAnalysisResult >> add: result called: label forMutant: mutantName [
 	| baseMedian currentMedia |
 	
 	currentMedia := result bloxplotByTime median.
-	baseMedian := baseResult bloxplotByTime median.
+	baseMedian := baseline bloxplotByTime median.
 	
 	comparisons at: mutantName ifAbsentPut: Dictionary new. 
-	comparisons at: mutantName at: label put: currentMedia >= (baseMedian * (1 + sensitivity )).
+	comparisons at: mutantName at: label put: {
+		currentMedia >= (baseMedian * (1 + sensitivity )).
+		result
+	}.
+]
+
+{ #category : 'as yet unclassified' }
+PBTAnalysisResult >> baseline: aBaseline [
+
+	baseline := aBaseline.
 ]
 
 { #category : 'adding' }

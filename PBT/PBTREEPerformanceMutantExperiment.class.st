@@ -21,10 +21,11 @@ PBTREEPerformanceMutantExperiment >> analyze [
 			3.1 - Per each config c_j, we generate N inputs ( MM )
 			3.2 - We compare each MM_k with respect to the boxplot and we select the outliers number for m_i
 			3.3 - We save the amount of outliers who identified the effect of m_i"
-	^ mutants inject: (PBTAnalysisResult new sensitivity: sensitivity) into: [ :result :mutant |
+
+	^ mutants inject: (PBTAnalysisResult new sensitivity: sensitivity; baseline: baseline) into: [ :result :mutant |
 		mutant install.
 		pbtConfigurations do: [ :config |
-			result add: config run for: baseline called: config title forMutant: mutant title.
+			result add: config run called: config title forMutant: mutant title.
 		].
 		mutant uninstall.
 		result.
