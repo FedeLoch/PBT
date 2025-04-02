@@ -2,7 +2,8 @@ Class {
 	#name : 'PBTAnalysisResult',
 	#superclass : 'Object',
 	#instVars : [
-		'sensitivity'
+		'sensitivity',
+		'comparisons'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -10,15 +11,21 @@ Class {
 }
 
 { #category : 'adding' }
-PBTAnalysisResult >> add: cases for: baseCases to: label [
-
-	"TODO"
+PBTAnalysisResult >> add: result for: baseResult called: label forMutant: mutantName [
+	| baseMedian currentMedia |
+	
+	currentMedia := result bloxplotByTime median.
+	baseMedian := baseResult bloxplotByTime median.
+	
+	comparisons at: mutantName ifAbsentPut: Dictionary new. 
+	comparisons at: mutantName at: label put: currentMedia >= (baseMedian * (1 + sensitivity )).
 ]
 
 { #category : 'adding' }
 PBTAnalysisResult >> initialize [ 
 
 	super initialize.
+	comparisons := Dictionary new.
 	
 ]
 

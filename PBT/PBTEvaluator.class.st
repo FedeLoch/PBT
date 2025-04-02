@@ -15,17 +15,21 @@ PBTEvaluator >> allocatedMemory [
 { #category : 'as yet unclassified' }
 PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
-	| localCoverageResult callResult assertResult allocatedMemory time |
+	| localCoverageResult callResult assertResult allocatedMemory time timeBefore |
 	
 	[
 		allocatedMemory := self allocatedMemory.
 
 		"Reset the coverage result to avoid interference between tests"
 		collector resetResult.
-
-		time := Duration milliSeconds: [
-			callResult := receiver perform: target selector withArguments: args
-		] timeToRunWithoutGC.
+		
+		timeBefore := Smalltalk highResClock.
+		
+		callResult := receiver perform: target selector withArguments: args
+		"time := Duration milliSeconds: [
+		callResult := receiver perform: target selector withArguments: args
+		] timeToRunWithoutGC".
+		time := Duration milliSeconds: (Smalltalk highResClock) - timeBefore.
 
 		localCoverageResult := collector collectResult.
 

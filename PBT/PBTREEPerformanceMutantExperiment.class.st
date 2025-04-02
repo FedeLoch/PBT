@@ -3,7 +3,8 @@ Class {
 	#superclass : 'PBTRandomREExperiment',
 	#instVars : [
 		'sensitivity',
-		'mutants'
+		'mutants',
+		'baseline'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -14,17 +15,16 @@ Class {
 PBTREEPerformanceMutantExperiment >> analyze [
 
 	"Given a sensitivity level T,
-		1 - We generate a base sample of N inputs ( MI ) per each PBT config c_i.
+		1 - We generate a base sample of N inputs.
 		2 - We generate a box plot for each result.
 		3 - Per each Mutant m_i, we install it
 			3.1 - Per each config c_j, we generate N inputs ( MM )
 			3.2 - We compare each MM_k with respect to the boxplot and we select the outliers number for m_i
 			3.3 - We save the amount of outliers who identified the effect of m_i"
-
 	^ mutants inject: (PBTAnalysisResult new sensitivity: sensitivity) into: [ :result :mutant |
 		mutant install.
 		pbtConfigurations do: [ :config |
-			result add: config run for: config result to: mutant title.
+			result add: config run for: baseline called: config title forMutant: mutant title.
 		].
 		mutant uninstall.
 		result.
@@ -32,9 +32,19 @@ PBTREEPerformanceMutantExperiment >> analyze [
 ]
 
 { #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment >> baseLinePbtConfiguration [
+
+	^ self
+		  executionConfig:
+		  (self schemaWith: self simpleRegexConfig)
+		  called: 'Baseline'
+]
+
+{ #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> initialize [ 
 
-	super initialize.
+	pbtConfigurations := self pbtConfigurations.
+	baseline := self baseLinePbtConfiguration run.
 	mutants := self mutants.
 	sensitivity := 0.05.
 	
@@ -42,16 +52,10 @@ PBTREEPerformanceMutantExperiment >> initialize [
 
 { #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> mutants [
-	| analysis mutants |
-	"TODO: review me"
-	analysis := MTAnalysis new
-		            classesToMutate: self classesToMutate;
-		            mutantGenerationStrategy:
-			            (MTManualMutatedMethodGenerationStrategy new
-				             targetMethods: self target sendReachableMethods);
-		            mutantSelectionStrategy:
-			            MTRandomMethodMutantSelectionStrategy new.
-	^ analysis generateMutations.
+
+	^ (MTManualMutatedMethodGenerationStrategy new targetMethods:
+		   self target sendReachableMethods) mutationsFor:
+		  PBTPerformanceOperations
 ]
 
 { #category : 'as yet unclassified' }
@@ -64,6 +68,13 @@ PBTREEPerformanceMutantExperiment >> sensitivity [
 PBTREEPerformanceMutantExperiment >> sensitivity: aSensitivy [
 
 	sensitivity := aSensitivy
+]
+
+{ #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment >> simpleRegexConfig [
+
+	^ PBTObjectConstraint new generator:
+		  (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
 
 { #category : 'as yet unclassified' }
