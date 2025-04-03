@@ -46,7 +46,7 @@ MTAddSleepOperator >> newNodeFrom: aSequenceNode [
 	copy := aSequenceNode copy.
 	copy statements: { self node parent: copy; yourself }, copy statements.
 	
-	^ aSequenceNode
+	^ copy
 ]
 
 { #category : 'accessing' }
