@@ -55,8 +55,7 @@ PBTREEPerformanceMutantExperiment >> initialize [
 PBTREEPerformanceMutantExperiment >> mutants [
 
 	^ (MTManualMutatedMethodGenerationStrategy new targetMethods:
-		   self target sendReachableMethods) mutationsFor:
-		  PBTPerformanceOperations
+		   self target sendReachableMethods) mutationsFor: PBTPerformanceOperations
 ]
 
 { #category : 'as yet unclassified' }

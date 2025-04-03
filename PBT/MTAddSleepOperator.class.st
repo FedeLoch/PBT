@@ -1,15 +1,24 @@
 Class {
 	#name : 'MTAddSleepOperator',
 	#superclass : 'MTPredicateBasedMutantOperator',
+	#instVars : [
+		'milliseconds'
+	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
 	#tag : 'BugDetection'
 }
 
+{ #category : 'accessing' }
+MTAddSleepOperator class >> time: milliseconds [
+
+	^ self new milliseconds: milliseconds 
+]
+
 { #category : 'printing' }
 MTAddSleepOperator >> appliesToNode: aNode [
 
-	^ aNode isMethod 
+	^ aNode isSequence
 ]
 
 { #category : 'printing' }
@@ -21,17 +30,23 @@ MTAddSleepOperator >> description [
 { #category : 'as yet unclassified' }
 MTAddSleepOperator >> milliseconds [
 
-	^ 10
+	^ milliseconds
+]
+
+{ #category : 'as yet unclassified' }
+MTAddSleepOperator >> milliseconds: someMilliseconds [
+
+	milliseconds := someMilliseconds
 ]
 
 { #category : 'printing' }
-MTAddSleepOperator >> newNodeFrom: anOldNode [
+MTAddSleepOperator >> newNodeFrom: aSequenceNode [
 
-	| body |
-	body := anOldNode body copy.
-	body statements: { self node parent: body; yourself }, body statements.
+	| copy |
+	copy := aSequenceNode copy.
+	copy statements: { self node parent: copy; yourself }, copy statements.
 	
-	^ anOldNode copy body: body; yourself
+	^ aSequenceNode
 ]
 
 { #category : 'accessing' }

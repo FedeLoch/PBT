@@ -9,5 +9,10 @@ Class {
 { #category : 'accessing' }
 PBTPerformanceOperations class >> operators [
 
-	^ { MTAddSleepOperator new }
+	^ {
+		  (MTAddSleepOperator time: 1) .
+		  (MTAddSleepOperator time: 10) .
+		  (MTAddSleepOperator time: 50) .
+		  (MTAddSleepOperator time: 100)
+	}
 ]
