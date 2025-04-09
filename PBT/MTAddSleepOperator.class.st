@@ -24,7 +24,7 @@ MTAddSleepOperator >> appliesToNode: aNode [
 { #category : 'printing' }
 MTAddSleepOperator >> description [
 
-	^ 'Add a sleep of X seconds at the beginning of a method'
+	^ 'Add a sleep of ', self milliseconds asString
 ]
 
 { #category : 'as yet unclassified' }
@@ -52,4 +52,10 @@ MTAddSleepOperator >> newNodeFrom: aSequenceNode [
 { #category : 'accessing' }
 MTAddSleepOperator >> node [
 	^ RBParser parseExpression: '(Delay forMilliseconds:', self milliseconds asString, ') wait'.
+]
+
+{ #category : 'accessing' }
+MTAddSleepOperator >> title [
+	
+	^ self description.
 ]

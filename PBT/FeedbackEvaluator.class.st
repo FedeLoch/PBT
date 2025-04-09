@@ -33,7 +33,7 @@ FeedbackEvaluator >> criteria: aBlock [
 FeedbackEvaluator >> eval: current [
 	
 	| newValue prevBetter feedback |
-	
+
 	newValue := self value: current.
 	
 	prevBetter := better.

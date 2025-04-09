@@ -60,7 +60,7 @@ PBTDyncamicSelectionGenerator >> selectOne [
 { #category : 'as yet unclassified' }
 PBTDyncamicSelectionGenerator >> updateWeight: previousFeedback [
 
-	lastChosen ifNil: [ ^nil ].
+	(lastChosen isNil or: [previousFeedback isNil]) ifTrue: [ ^nil ].
 
 	previousFeedback feedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
 ]

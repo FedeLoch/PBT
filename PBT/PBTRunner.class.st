@@ -123,6 +123,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	
 	"Feeds the generator with the test result"
 	feedback := (schema feedbackEvaluator eval: test).
+	feedback ifNil: [ 1 halt. ].
 	generator feedback: feedback.
 	test feedback: feedback.
 	test assert: schema assert.

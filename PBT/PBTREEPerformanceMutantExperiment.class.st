@@ -25,7 +25,7 @@ PBTREEPerformanceMutantExperiment >> analyze [
 	^ mutants inject: (PBTAnalysisResult new sensitivity: sensitivity; baseline: baseline) into: [ :result :mutant |
 		mutant install.
 		pbtConfigurations do: [ :config |
-			result add: config run called: config title forMutant: mutant title.
+			result add: config run called: config title forMutant: mutant.
 		].
 		mutant uninstall.
 		result.
@@ -55,7 +55,8 @@ PBTREEPerformanceMutantExperiment >> initialize [
 PBTREEPerformanceMutantExperiment >> mutants [
 
 	^ (MTManualMutatedMethodGenerationStrategy new targetMethods:
-		   self target sendReachableMethods) mutationsFor: PBTPerformanceOperations
+		   self target sendReachableMethods) mutationsFor:
+		  PBTPerformanceOperations
 ]
 
 { #category : 'as yet unclassified' }
@@ -80,5 +81,5 @@ PBTREEPerformanceMutantExperiment >> simpleRegexConfig [
 { #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> time [
 
-	^ 10 seconds "2 minutes"
+	^ 5 seconds "2 minutes"
 ]
