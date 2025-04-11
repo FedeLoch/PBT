@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBTRandomREExperiment',
 	#superclass : 'PBTBugDetectionExperiment',
+	#instVars : [
+		'time'
+	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
 	#tag : 'BugDetection'
@@ -70,7 +73,7 @@ PBTRandomREExperiment >> hillClimbingAndOptConfig [
 	^ self
 		  executionConfig:
 		  (self schemaWith: self hillClimbingAndOpRegexConstraint)
-		  called: 'HillClimbing with optional regex constraint Config'
+		  called: 'HillClimbing with optional regex constraint'
 ]
 
 { #category : 'as yet unclassified' }
@@ -79,7 +82,7 @@ PBTRandomREExperiment >> hillClimbingConfig [
 	^ self
 		  executionConfig:
 		  (self schemaWith: self hillClimbingRegexConstraint)
-		  called: 'HillClimbing Config'
+		  called: 'HillClimbing'
 ]
 
 { #category : 'as yet unclassified' }
@@ -113,7 +116,7 @@ PBTRandomREExperiment >> mctsConfig [
 
 	^ self
 		  executionConfig: (self schemaWith: self mctsRegexConstraint)
-		  called: 'MCTS Config'
+		  called: 'MCTS'
 ]
 
 { #category : 'as yet unclassified' }
@@ -199,5 +202,11 @@ PBTRandomREExperiment >> target [
 { #category : 'as yet unclassified' }
 PBTRandomREExperiment >> time [
 
-	^ 2 minute "2 minutes"
+	^ time
+]
+
+{ #category : 'as yet unclassified' }
+PBTRandomREExperiment >> time: aTime [
+
+	time := aTime 
 ]

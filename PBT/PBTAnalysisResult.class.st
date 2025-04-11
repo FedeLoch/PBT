@@ -6,7 +6,8 @@ Class {
 		'comparisons',
 		'baseline',
 		'threshold',
-		'mutants'
+		'mutants',
+		'title'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -80,6 +81,7 @@ PBTAnalysisResult >> plot [
 	
 	plt xlabel: 'mutation time'.
 	plt ylabel: 'rate of detected mutants'.
+	plt title: title.
 	
 	plt build.
 	legend build.
@@ -91,4 +93,10 @@ PBTAnalysisResult >> plot [
 PBTAnalysisResult >> sensitivity: aSensitivity [
 
 	sensitivity := aSensitivity.
+]
+
+{ #category : 'adding' }
+PBTAnalysisResult >> title: aTitle [
+
+	title := aTitle 
 ]
