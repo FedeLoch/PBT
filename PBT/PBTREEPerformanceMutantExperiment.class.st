@@ -2,9 +2,9 @@ Class {
 	#name : 'PBTREEPerformanceMutantExperiment',
 	#superclass : 'PBTRandomREExperiment',
 	#instVars : [
-		'sensitivity',
 		'mutants',
-		'baseline'
+		'baseline',
+		'threshold'
 	],
 	#category : 'PBT-BugDetection',
 	#package : 'PBT',
@@ -12,9 +12,21 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment class >> analyze [
+
+	^ self new time: 1 seconds; analyze
+]
+
+{ #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment class >> performExperimentsWithTimes: times [
 
 	^ times collect: [ :time | self new time: time; analyze ]
+]
+
+{ #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment class >> performExperimentsWithTimes: times threshold: aThreshold [
+
+	^ times collect: [ :time | self new time: time; threshold: aThreshold; analyze ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -28,9 +40,11 @@ PBTREEPerformanceMutantExperiment >> analyze [
 			3.2 - We compare each MM_k with respect to the boxplot and we select the outliers number for m_i
 			3.3 - We save the amount of outliers who identified the effect of m_i"
 	| title |
+	pbtConfigurations := self pbtConfigurations.
+	baseline := self baseLinePbtConfiguration run.
 	title := 'Result running ', self time humanReadablePrintString, ' each configuration '. 
 
-	^ mutants inject: (PBTAnalysisResult new sensitivity: sensitivity; baseline: baseline; title: title) into: [ :result :mutant |
+	^ mutants inject: (PBTAnalysisResult new threshold: threshold; baseline: baseline; title: title) into: [ :result :mutant |
 		mutant install.
 		pbtConfigurations do: [ :config |
 			result add: config run called: config title forMutant: mutant.
@@ -52,10 +66,8 @@ PBTREEPerformanceMutantExperiment >> baseLinePbtConfiguration [
 { #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> initialize [ 
 
-	pbtConfigurations := self pbtConfigurations.
-	baseline := self baseLinePbtConfiguration run.
 	mutants := self mutants.
-	sensitivity := 0.05.
+	threshold := 20 percent.
 	
 ]
 
@@ -68,18 +80,6 @@ PBTREEPerformanceMutantExperiment >> mutants [
 ]
 
 { #category : 'as yet unclassified' }
-PBTREEPerformanceMutantExperiment >> sensitivity [
-
-	^ sensitivity
-]
-
-{ #category : 'as yet unclassified' }
-PBTREEPerformanceMutantExperiment >> sensitivity: aSensitivy [
-
-	sensitivity := aSensitivy
-]
-
-{ #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> simpleRegexConfig [
 
 	^ PBTObjectConstraint new generator:
@@ -87,7 +87,13 @@ PBTREEPerformanceMutantExperiment >> simpleRegexConfig [
 ]
 
 { #category : 'as yet unclassified' }
-PBTREEPerformanceMutantExperiment >> time [
+PBTREEPerformanceMutantExperiment >> threshold [
 
-	^ time "2 minutes"
+	^ threshold
+]
+
+{ #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment >> threshold: aThreshold [
+
+	threshold := aThreshold
 ]

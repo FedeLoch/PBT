@@ -8,6 +8,12 @@ GncNonTerminal >> generateMCTSAst: generator level: level [
 ]
 
 { #category : '*PBT' }
+GncNonTerminal >> isTerminal [
+
+	^ false
+]
+
+{ #category : '*PBT' }
 GncNonTerminal >> visit: visitor level: level [
 
 	^ visitor visitNonTerminal: self level: level

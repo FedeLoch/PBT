@@ -18,7 +18,7 @@ PBTPerformanceOperations class >> operators [
 		  (MTAddSleepOperator time: 12).
 		  (MTAddSleepOperator time: 15).
 		  (MTAddSleepOperator time: 20).
-		  (MTAddSleepOperator time: 25)
-		  "(MTAddSleepOperator time: 50) .
-		  (MTAddSleepOperator time: 100)" }
+		  (MTAddSleepOperator time: 25).
+		  (MTAddSleepOperator time: 50).
+		  (MTAddSleepOperator time: 100) }
 ]

@@ -2,7 +2,6 @@ Class {
 	#name : 'PBTAnalysisResult',
 	#superclass : 'Object',
 	#instVars : [
-		'sensitivity',
 		'comparisons',
 		'baseline',
 		'threshold',
@@ -32,17 +31,16 @@ PBTAnalysisResult >> baseline: aBaseline [
 	
 	baseline := aBaseline.
 	times := aBaseline tests collect: [ :e | e result time asMilliSeconds ].
-	threshold := times max.
 ]
 
 { #category : 'adding' }
 PBTAnalysisResult >> incremental: result [
 
-	| threshold2 |
+	| upperBound |
 	
-	threshold2 := baseline bloxplotByTime median * (1 + sensitivity).
-	
-	^ (result bloxplotByTime median > threshold2) ifTrue: [ 1 ] ifFalse: [ 0 ]
+	upperBound := baseline bloxplotByTime median * threshold.
+
+	^ (result bloxplotByTime median >= upperBound) ifTrue: [ 1 ] ifFalse: [ 0 ]
 ]
 
 { #category : 'adding' }
@@ -90,9 +88,9 @@ PBTAnalysisResult >> plot [
 ]
 
 { #category : 'as yet unclassified' }
-PBTAnalysisResult >> sensitivity: aSensitivity [
+PBTAnalysisResult >> threshold: aThreshold [
 
-	sensitivity := aSensitivity.
+	threshold := aThreshold.
 ]
 
 { #category : 'adding' }

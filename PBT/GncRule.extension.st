@@ -7,11 +7,11 @@ GncRule >> backPropagate: bla [
 ]
 
 { #category : '*PBT' }
-GncRule >> backPropagate: newReward level: level [
+GncRule >> backPropagate: reward level: level [
 
-	rewards at: level ifAbsentPut: [ 0 ].
-	
-	rewards at: level update: [ :v | (v + newReward) max: 1 ]
+	rewards at: level ifAbsentPut: [ 1 ].
+	 
+	rewards at: level update: [ :v | (v + reward) max: 1 ]
 ]
 
 { #category : '*PBT' }
@@ -54,8 +54,6 @@ GncRule >> utc: totalVisits by: c level: level [
 	levelReward := self rewardBy: level.
 	levelVisits := self visitsBy: level.
 	
-	levelReward = 0 ifTrue: [1 halt.].
-	levelVisits = 0 ifTrue: [1 halt.].
 	^ (levelReward / levelVisits) + (c * ((totalVisits log / levelVisits) sqrt))
 ]
 
@@ -105,4 +103,12 @@ GncRule >> visitsBy: level [
 	visits at: level ifAbsent: [ ^0 ].
 	
 	^ visits at: level
+]
+
+{ #category : '*PBT' }
+GncRule >> weightAt: level [
+	
+	rewards at: level ifAbsent: [ ^ weight get max: 1 ].
+	
+	^ ((rewards at: level) + weight get) max: 1 
 ]

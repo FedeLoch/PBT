@@ -128,7 +128,7 @@ PBTRandomREExperiment >> mctsRegexConstraint [
 { #category : 'as yet unclassified' }
 PBTRandomREExperiment >> pbtConfigurations [
 
-	^ { self mctsConfig . self hillClimbingConfig . self hillClimbingAndOptConfig }
+	^ { self mctsConfig . self hillClimbingConfig . self hillClimbingAndOptConfig . self sdGenConfig }
 ]
 
 { #category : 'as yet unclassified' }
@@ -191,6 +191,23 @@ PBTRandomREExperiment >> schemaWith: regexConstraint [
 		  argumentConstraints: argumentConstraints;
 		  score: score;
 		  assert: assert
+]
+
+{ #category : 'as yet unclassified' }
+PBTRandomREExperiment >> sdGenConfig [
+
+	^ self
+		  executionConfig: (self schemaWith: self sdGenRegexConstraint)
+		  called: 'SdGen'
+]
+
+{ #category : 'as yet unclassified' }
+PBTRandomREExperiment >> sdGenRegexConstraint [
+	
+	| grammarRegex |
+	grammarRegex := GncRegexGrammar new.
+	
+	^ PBTObjectConstraint new generator: (PBTGrammarSdGenGenerator from: grammarRegex ofDepth: 10)
 ]
 
 { #category : 'as yet unclassified' }
