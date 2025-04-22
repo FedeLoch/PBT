@@ -7,12 +7,6 @@ Class {
 }
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> feedback: value [
-
-	^ Feedback having: nil current: nil with: nil isBetter: value
-]
-
-{ #category : 'tests' }
 PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
 
 	| generator |

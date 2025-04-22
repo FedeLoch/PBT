@@ -17,7 +17,7 @@ PBTRegexBugExperimentMCTSTest >> regexConstraint [
 	^ PBTObjectConstraint new generator: (PBTGrammarMCTSGenerator from: grammarRegex)
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
@@ -30,7 +30,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
@@ -43,7 +43,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 
 ]
 
-{ #category : 'tests' }
+{ #category : 'as yet unclassified' }
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |

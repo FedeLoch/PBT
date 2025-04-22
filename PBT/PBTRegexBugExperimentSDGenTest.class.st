@@ -18,7 +18,7 @@ PBTRegexBugExperimentSDGenTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 	
@@ -31,7 +31,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeF
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
+PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
 	
@@ -44,7 +44,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeF
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
+PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndSDGenSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
 	

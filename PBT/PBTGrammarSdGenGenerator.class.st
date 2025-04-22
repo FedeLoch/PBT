@@ -74,19 +74,15 @@ PBTGrammarSdGenGenerator >> expandFragments: fragments depth: aDepth accumulator
 
 	result := self expand: fragments first depth: aDepth.
 	
-	^ self expandFragments: fragments allButFirst depth: aDepth accumulator: acc , result
+	^ self expandFragments: fragments allButFirst depth: aDepth accumulator: acc , result asString
 ]
 
 { #category : 'as yet unclassified' }
 PBTGrammarSdGenGenerator >> gen: constraint by: previousFeedback [
 
-	| r |
-	self backpropagate: previousFeedback.
-	
-	r := self expand: grammar start depth: 0.
-"	1 halt."
-	^ r.
-"	^ self expand: grammar start depth: 0"
+	self backpropagate: previousFeedback.	
+
+	^ self expand: grammar start depth: 0
 ]
 
 { #category : 'as yet unclassified' }

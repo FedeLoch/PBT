@@ -17,7 +17,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationBa
 			             to: 5
 			             with: (value at: 5) asUppercase asString ].
 
-	self assert: (generator gen: nil by: false) equals: 'asdeF'
+	self assert: (generator gen: nil by: (self feedback: false)) equals: 'asdeF'
 ]
 
 { #category : 'tests' }
@@ -33,9 +33,9 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWi
 			             to: where
 			             with: (value at: where) asUppercase asString ].
 		
-	generator gen: nil by: false.
+	generator gen: nil by: (self feedback: false).
 
-	self assert: (generator gen: nil by: false) equals: 'asdeF'
+	self assert: (generator gen: nil by: (self feedback: false)) equals: 'asdeF'
 ]
 
 { #category : 'tests' }
@@ -51,7 +51,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWi
 			             to: where
 			             with: (value at: where) asUppercase asString ].
 		
-	generator gen: nil by: true.
+	generator gen: nil by: (self feedback: true).
 
-	self assert: (generator gen: nil by: true) equals: 'AsdeF'
+	self assert: (generator gen: nil by: (self feedback: true)) equals: 'AsdeF'
 ]
