@@ -16,6 +16,20 @@ PBTRandomREExperiment >> classesToMutate [
 ]
 
 { #category : 'as yet unclassified' }
+PBTRandomREExperiment >> gramatronConfig [
+
+	^ self
+		  executionConfig: (self schemaWith: self gramatronRegexConstraint)
+		  called: 'Gramatron'
+]
+
+{ #category : 'as yet unclassified' }
+PBTRandomREExperiment >> gramatronRegexConstraint [
+
+	^ PBTObjectConstraint new generator: (PBTGrammarGramatronGenerator from: GnfRegexGrammar new ofDepth: 10)
+]
+
+{ #category : 'as yet unclassified' }
 PBTRandomREExperiment >> hillClimbingAndOpRegexConstraint [
 
 	| randomGenerator mutationGeneration regexGenerator |
@@ -128,7 +142,13 @@ PBTRandomREExperiment >> mctsRegexConstraint [
 { #category : 'as yet unclassified' }
 PBTRandomREExperiment >> pbtConfigurations [
 
-	^ { self mctsConfig . self hillClimbingConfig . self hillClimbingAndOptConfig . self sdGenConfig }
+	^ {
+		  self mctsConfig.
+		  self hillClimbingConfig.
+		  self hillClimbingAndOptConfig.
+		  self sdGenConfig.
+		  self gramatronConfig.
+	}
 ]
 
 { #category : 'as yet unclassified' }
