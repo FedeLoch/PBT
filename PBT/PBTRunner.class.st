@@ -76,7 +76,7 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema times: times [
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
-		target: targetMethod
+		target: targetMethod;
 		withLowCost; test
 ]
 

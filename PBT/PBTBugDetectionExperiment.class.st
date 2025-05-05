@@ -3,11 +3,12 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'pbtTests',
-		'pbtConfigurations'
+		'pbtConfigurations',
+		'countOfCases'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'as yet unclassified' }
@@ -42,10 +43,22 @@ PBTBugDetectionExperiment >> classesToMutate [
 ]
 
 { #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> countOfCases [
+
+	^ countOfCases
+]
+
+{ #category : 'as yet unclassified' }
+PBTBugDetectionExperiment >> countOfCases: anAmount [
+
+	countOfCases := anAmount 
+]
+
+{ #category : 'as yet unclassified' }
 PBTBugDetectionExperiment >> executionConfig: schema called: title [
 
 	schema guidedByExecutionTime.
-	^ PBTExperimentConfig new schema: schema; title: title; time: self time; target: self target
+	^ PBTExperimentConfig new schema: schema; title: title; cases: self countOfCases; time: self time; target: self target
 ]
 
 { #category : 'as yet unclassified' }

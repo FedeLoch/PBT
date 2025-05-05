@@ -18,7 +18,7 @@ Class {
 { #category : 'instance creation' }
 PerformanceResult class >> from: tests withTime: totalTime [
 	
-	| worstAndBetter |
+	| worstAndBetter result |
 	
 	worstAndBetter := tests inject: {} into: [ :worstBetter :case |
 		worstBetter ifEmpty: [ { case . case } ] ifNotEmpty: [ {
@@ -27,9 +27,13 @@ PerformanceResult class >> from: tests withTime: totalTime [
 		}]
 	].
 
-	^ self new totalTime: totalTime;
-		averageTime: (totalTime / tests size); 
-		segmentedTests: (tests groupedBy: #time);
+	result := self new totalTime: totalTime;
+		averageTime: (totalTime / ((tests size) max: 1) ); 
+		segmentedTests: (tests groupedBy: #time); yourself.
+		
+	worstAndBetter ifEmpty: [ ^ result ].
+
+	^ result
 		worstCase: worstAndBetter first;
 		maxTime: worstAndBetter first time;
 		betterCase: worstAndBetter last;

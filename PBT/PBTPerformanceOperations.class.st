@@ -1,9 +1,9 @@
 Class {
 	#name : 'PBTPerformanceOperations',
 	#superclass : 'Object',
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'accessing' }

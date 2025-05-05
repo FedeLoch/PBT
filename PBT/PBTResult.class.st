@@ -23,9 +23,11 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 	
 	totalTime := Duration milliSeconds: (Time millisecondsSince: time).
 	perfResult := PerformanceResult from: tests withTime: totalTime.
-	topCases := tests allButFirst inject: { tests first } asOrderedCollection into: [ :col :test |
-		((schema feedbackEvaluator value: test) > (schema feedbackEvaluator value: col last)) ifTrue: [ col add: test ]. col ].
-	
+	topCases := tests ifEmpty: [ {} ] ifNotEmpty: [ 
+	tests allButFirst inject: { tests first } asOrderedCollection into: [ :col :test |
+		((schema feedbackEvaluator value: test) > (schema feedbackEvaluator value: col last)) ifTrue: [ col add: test ]. col ]
+	].
+
 	^ self new tests: tests;
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
@@ -39,7 +41,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 PBTResult >> bloxplotByTime [
 	
 	| plot |
-	plot := RSBoxPlot new y: (tests collect: [ :t | t result time asMilliSeconds ]); yLog; yourself.
+	plot := RSBoxPlot new y: self times; yLog; yourself.
 	plot horizontalTick numberOfTicks: tests size.
 	
 	^ plot
@@ -329,6 +331,12 @@ PBTResult >> tests: someTests [
 
 	tests := someTests.
 	segmentedTests := someTests groupedBy: [ :test | test result class ].
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> times [
+	
+	^ tests collect: [ :t | t result time asMilliSeconds ]
 ]
 
 { #category : 'getter' }

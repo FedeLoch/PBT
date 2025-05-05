@@ -7,12 +7,19 @@ Class {
 		'tests',
 		'target',
 		'time',
-		'pbtResult'
+		'pbtResult',
+		'cases'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
+
+{ #category : 'accessing' }
+PBTExperimentConfig >> cases: amount [ 
+	
+	cases := amount
+]
 
 { #category : 'accessing' }
 PBTExperimentConfig >> generateTests [
@@ -31,7 +38,11 @@ PBTExperimentConfig >> result [
 { #category : 'accessing' }
 PBTExperimentConfig >> run [
 
-	^ PBTRunner testWithLowCost: target from: schema for: time
+	^ time ifNil: [
+		PBTRunner testWithLowCost: target from: schema times: cases
+	] ifNotNil: [
+		PBTRunner testWithLowCost: target from: schema for: time
+	]
 ]
 
 { #category : 'accessing' }

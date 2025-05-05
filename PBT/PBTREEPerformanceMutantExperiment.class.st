@@ -6,15 +6,21 @@ Class {
 		'baseline',
 		'threshold'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment class >> analyze [
 
 	^ self new time: 1 seconds; analyze
+]
+
+{ #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment class >> performExperimentsByCounOfCases: cases [
+
+	^ cases collect: [ :amount | self new countOfCases: amount; analyze ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -40,11 +46,12 @@ PBTREEPerformanceMutantExperiment >> analyze [
 			3.2 - We compare each MM_k with respect to the boxplot and we select the outliers number for m_i
 			3.3 - We save the amount of outliers who identified the effect of m_i"
 	| title |
+	
 	pbtConfigurations := self pbtConfigurations.
 	baseline := self baseLinePbtConfiguration run.
-	title := 'Result running ', self time humanReadablePrintString, ' each configuration '. 
+	title := 'Result running ', self criteriaLabel, ' each configuration '. 
 
-	^ mutants inject: (PBTAnalysisResult new threshold: threshold; baseline: baseline; title: title) into: [ :result :mutant |
+	^ mutants inject: (PBTAnalysisResult new baseline: baseline; title: title) into: [ :result :mutant |
 		mutant install.
 		pbtConfigurations do: [ :config |
 			result add: config run called: config title forMutant: mutant.
@@ -64,10 +71,16 @@ PBTREEPerformanceMutantExperiment >> baseLinePbtConfiguration [
 ]
 
 { #category : 'as yet unclassified' }
+PBTREEPerformanceMutantExperiment >> criteriaLabel [
+
+	^ time ifNil: [ countOfCases asString, ' times' ] ifNotNil: [ self time humanReadablePrintString ]
+]
+
+{ #category : 'as yet unclassified' }
 PBTREEPerformanceMutantExperiment >> initialize [ 
 
 	mutants := self mutants.
-	threshold := 20 percent.
+"	threshold := 20 percent."
 	
 ]
 

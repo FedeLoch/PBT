@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'time'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'as yet unclassified' }

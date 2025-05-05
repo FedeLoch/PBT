@@ -8,9 +8,9 @@ Class {
 		'mutants',
 		'title'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'adding' }
@@ -36,11 +36,7 @@ PBTAnalysisResult >> baseline: aBaseline [
 { #category : 'adding' }
 PBTAnalysisResult >> incremental: result [
 
-	| upperBound |
-	
-	upperBound := baseline bloxplotByTime median * threshold.
-
-	^ (result bloxplotByTime median >= upperBound) ifTrue: [ 1 ] ifFalse: [ 0 ]
+	^ (result times average >= self threshold) ifTrue: [ 1 ] ifFalse: [ 0 ]
 ]
 
 { #category : 'adding' }
@@ -85,6 +81,14 @@ PBTAnalysisResult >> plot [
 	legend build.
 
 	^ plt yLog; canvas
+]
+
+{ #category : 'adding' }
+PBTAnalysisResult >> threshold [
+
+	threshold ifNotNil: [ ^ threshold ].
+
+	^ baseline bloxplotByTime median + baseline times stdev
 ]
 
 { #category : 'as yet unclassified' }

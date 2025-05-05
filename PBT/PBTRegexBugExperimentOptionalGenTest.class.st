@@ -98,7 +98,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 	
 	schema guidedByExecutionTime.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 1 second.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

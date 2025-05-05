@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'milliseconds'
 	],
-	#category : 'PBT-BugDetection',
+	#category : 'PBT-Experimentation',
 	#package : 'PBT',
-	#tag : 'BugDetection'
+	#tag : 'Experimentation'
 }
 
 { #category : 'accessing' }
