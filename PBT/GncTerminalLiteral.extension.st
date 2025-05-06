@@ -5,3 +5,8 @@ GncTerminalLiteral >> aMCTSValue [
 
 	^ literal
 ]
+
+{ #category : '*PBT' }
+GncTerminalLiteral >> name [
+	^ literal
+]

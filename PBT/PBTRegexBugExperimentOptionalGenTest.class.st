@@ -46,7 +46,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 	
 	schema guidedByAllocatedMemory.
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 
 	self assert: (pbtResult tests size) equals: 10000.
 

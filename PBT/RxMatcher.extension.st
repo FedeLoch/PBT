@@ -112,10 +112,12 @@ RxMatcher >> score [
 	input := asString minimalStringMatching.
 	minRegex := input asRegex.
 	
+	Smalltalk garbageCollect.
 	baseTime := Smalltalk highResClock.
 	self matches: input.
 	score1 := Smalltalk highResClock - baseTime.
 	
+	Smalltalk garbageCollect.
 	baseTime := Smalltalk highResClock.
 	minRegex matches: input.
 	score2 := Smalltalk highResClock - baseTime.

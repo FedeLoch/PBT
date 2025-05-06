@@ -76,6 +76,7 @@ PBTRegexBugExperimentTest >> setUp [
 		coreScore := res time asMilliSeconds.
 		anotherRegex := inputs first asRegex.
 		
+		Smalltalk garbageCollect.
 		base := Smalltalk highResClock.
 		anotherRegex matches: inputs first.
 		gnoccoScore := Smalltalk highResClock - base.
