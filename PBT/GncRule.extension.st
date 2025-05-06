@@ -15,17 +15,6 @@ GncRule >> backPropagate: reward level: level [
 ]
 
 { #category : '*PBT' }
-GncRule >> initialize [
-
-	fragments := OrderedCollection new.
-	weight := 1 asWeight.
-	minHeight := Float infinity.
-	minSize := Float infinity.
-	visits := Dictionary new.
-	rewards := Dictionary new.
-]
-
-{ #category : '*PBT' }
 GncRule >> reward [
 
 	"DELETE ME"
