@@ -91,6 +91,16 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema withCoverageTolera
 ]
 
 { #category : 'tests' }
+PBTRunner class >> testWithLowCost: targetMethod from: schema withCriteria: aBlock [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTStopBlockCriteria new block: aBlock);
+		target: targetMethod;
+		withLowCost; test
+]
+
+{ #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
 	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema
