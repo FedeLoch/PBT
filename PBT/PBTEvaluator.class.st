@@ -22,7 +22,6 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		"Reset the coverage result to avoid interference between tests"
 		collector resetResult.
 		
-		Smalltalk garbageCollect.
 		timeBefore := Smalltalk highResClock.
 		callResult := receiver perform: target selector withArguments: args.
 		time := Duration milliSeconds: (Smalltalk highResClock) - timeBefore.
