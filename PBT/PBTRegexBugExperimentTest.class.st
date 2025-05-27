@@ -24,7 +24,7 @@ PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
 		[
 		| maybe |
 		maybe := (props at: 'grammar') genBy: feedback.
-		maybe asRegex.
+		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
 			do: [ :e | "1 halt." ] ].
@@ -56,7 +56,7 @@ PBTRegexBugExperimentTest >> setUp [
 		             | regex |
 		             regex := self regexByProp: props and: feedback. "(props at: 'grammar') genBy: feedback."
 		             props at: 'input' put: regex minimalStringMatching.
-		             regex asRegex ].
+						 PBTRegex fromString: regex ].
 
 	receiverConstraint := PBTObjectConstraint new
 		                      objectClass: RxMatcher;

@@ -7,7 +7,7 @@ String >> asRegex [
 	This is a part of the Regular Expression Matcher package, (c) 1996, 1999 Vassili Bykov.
 	Refer to `documentation' protocol of RxParser class for details."
 
-	^(RxParser preferredMatcherClass for: (RxParser new parse: self)) string: self
+	^(RxParser preferredMatcherClass for: (RxParser new parse: self))
 ]
 
 { #category : '*PBT' }
