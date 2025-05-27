@@ -17,6 +17,12 @@ Class {
 	#tag : 'Test generation'
 }
 
+{ #category : 'ston-core' }
+PBTTest class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( target assert )
+]
+
 { #category : 'running' }
 PBTTest >> announce: anAnnouncementClass withResult: result [
 

@@ -13,6 +13,12 @@ Class {
 	#tag : 'Property Schema'
 }
 
+{ #category : 'ston-core' }
+PBTSchema class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( #assert #score )
+]
+
 { #category : 'accessing' }
 PBTSchema >> argumentConstraints [
 

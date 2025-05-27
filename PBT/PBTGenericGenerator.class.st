@@ -9,6 +9,12 @@ Class {
 	#tag : 'Generators'
 }
 
+{ #category : 'ston-core' }
+PBTGenericGenerator class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( do )
+]
+
 { #category : 'accessing' }
 PBTGenericGenerator >> do [
 

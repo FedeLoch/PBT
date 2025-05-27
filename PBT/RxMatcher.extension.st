@@ -7,6 +7,14 @@ RxMatcher >> asString [
 ]
 
 { #category : '*PBT' }
+RxMatcher class >> fromSton: stonReader [
+
+	| representation |
+	representation := stonReader parseMapOrListRepresentation.
+	^ representation first asRegex
+]
+
+{ #category : '*PBT' }
 RxMatcher class >> invertOptionalByStarts: stringRegex [
 	
 	| expr |
@@ -140,6 +148,18 @@ RxMatcher class >> shiftUntilValid: stringRegex [
 	^ result
 
 
+]
+
+{ #category : '*PBT' }
+RxMatcher >> stonContainSubObjects [
+	^ false
+]
+
+{ #category : '*PBT' }
+RxMatcher >> stonOn: stonWriter [
+	"Use a hex representation"
+
+	stonWriter writeObject: self listSingleton: self asString
 ]
 
 { #category : '*PBT' }

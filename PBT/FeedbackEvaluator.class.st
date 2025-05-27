@@ -17,6 +17,12 @@ FeedbackEvaluator class >> from: aBlock [
 	^ self new criteria: aBlock 
 ]
 
+{ #category : 'ston-core' }
+FeedbackEvaluator class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( criteria )
+]
+
 { #category : 'accessing' }
 FeedbackEvaluator >> criteria [
 
