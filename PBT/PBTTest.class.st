@@ -9,7 +9,8 @@ Class {
 		'receiver',
 		'feedback',
 		'assert',
-		'lastResult'
+		'lastResult',
+		'autoTunedIterations'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -47,6 +48,23 @@ PBTTest >> assert: anAssert [
 	assert := anAssert
 ]
 
+{ #category : 'as yet unclassified' }
+PBTTest >> autoTuneIterationsFor: duration [
+	
+	| count startTime deadline |
+	
+	autoTunedIterations ifNotNil: [ self error: 'che esto ya esta autotuneado' ].
+	
+	deadline := duration asMilliSeconds.
+	startTime := Time now asMilliSeconds.
+	count := 0.
+
+	[ self runTime . count := count + 1 ]
+		doWhileTrue: [ (Time now asMilliSeconds - startTime) <= deadline ].
+	
+	^ autoTunedIterations := count.
+]
+
 { #category : 'accessing' }
 PBTTest >> feedback [
 
@@ -68,6 +86,12 @@ PBTTest >> lastResult [
 { #category : 'accessing' }
 PBTTest >> lastTimeToRun [
 	^ result time
+]
+
+{ #category : 'accessing' }
+PBTTest >> name [
+	
+	^ self identityHash 
 ]
 
 { #category : 'accessing' }
@@ -119,6 +143,42 @@ PBTTest >> run: aResult [
 PBTTest >> runCaseManaged [ 
 	"TODO: This is a test to integrate"
 	self run
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> runTime [
+
+	^ (self runTimes: 1) first
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> runTimeAutotuned [
+
+	^ (self runTimes: 1 withInternalIterations: autoTunedIterations) first
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> runTimes: count [
+
+	^ (1 to: count) collect: [ :i | | timeBefore |		
+		Smalltalk garbageCollect.
+		timeBefore := Smalltalk highResClock.
+		receiver perform: target selector withArguments: arguments.
+		(Smalltalk highResClock) - timeBefore.
+	]
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> runTimes: count withInternalIterations: iterations [
+
+	^ (1 to: count) collect: [ :i | | timeBefore |		
+		Smalltalk garbageCollect.
+		timeBefore := Smalltalk highResClock.
+		1 to: iterations do: [ :_ |
+			receiver perform: target selector withArguments: arguments.		
+		].
+		(Smalltalk highResClock) - timeBefore.
+	]
 ]
 
 { #category : 'accessing' }

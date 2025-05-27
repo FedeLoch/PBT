@@ -27,7 +27,7 @@ PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
 		maybe asRegex.
 		regex := maybe ]
 			on: Error
-			do: [ :e | 1 halt. ] ].
+			do: [ :e | "1 halt." ] ].
 
 	^ regex
 ]
