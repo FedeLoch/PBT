@@ -16,6 +16,8 @@ BaselineOfPBT >> baseline: spec [
 		spec baseline: 'Gnocco' with: [ spec repository: 'github://FedeLoch/gnocco:pbt-experimentation/src' ].
 		spec baseline: 'MuTalk' with: [ spec repository: 'github://pharo-contributions/mutalk:v2.6.0/src' ].
 		spec baseline: 'OSSubprocess' with: [ spec repository: 'github://pharo-contributions/OSSubprocess:master/repository' ].
-		spec package: 'PBT' with: [ spec requires: #( 'Phuzzer' 'BlocBenchs' 'Roassal' 'OSSubprocess' 'Gnocco' ) ]
+		
+		spec package: 'PBT' with: [ spec requires: #( 'Coverage2' 'Phuzzer' 'BlocBenchs' 'Roassal' 'OSSubprocess' 'Gnocco' ) ].
+		spec package: 'Coverage2'
 	]
 ]
