@@ -1,5 +1,4 @@
 # PBT - Property-Based Testing Framework for Pharo
-###  ⚠️ This framework is currently a work in progress
 
 ## Getting started
 
