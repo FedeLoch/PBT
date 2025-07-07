@@ -10,7 +10,9 @@ Class {
 		'feedback',
 		'assert',
 		'lastResult',
-		'autoTunedIterations'
+		'autoTunedIterations',
+		'id',
+		'targetSelector'
 	],
 	#category : 'PBT-Test generation',
 	#package : 'PBT',
@@ -72,6 +74,11 @@ PBTTest >> autoTuneIterationsFor: duration [
 ]
 
 { #category : 'accessing' }
+PBTTest >> autoTunedIterations [
+	^ autoTunedIterations
+]
+
+{ #category : 'accessing' }
 PBTTest >> feedback [
 
 	^ feedback
@@ -97,7 +104,9 @@ PBTTest >> lastTimeToRun [
 { #category : 'accessing' }
 PBTTest >> name [
 	
-	^ self identityHash 
+	id ifNil: [ id := self identityHash ].
+	
+	^ id
 ]
 
 { #category : 'accessing' }
@@ -118,6 +127,12 @@ PBTTest >> receiver: anObject [
 	receiver := anObject
 ]
 
+{ #category : 'as yet unclassified' }
+PBTTest >> resetAutotune [
+
+	autoTunedIterations := nil.
+]
+
 { #category : 'accessing' }
 PBTTest >> result [
 
@@ -133,10 +148,12 @@ PBTTest >> result: testResult [
 { #category : 'accessing' }
 PBTTest >> run [
 
-	| callResult |
+	| callResult testResult |
 	
-	callResult := receiver perform: target selector withArguments: arguments.
-	lastResult := PBTTestResult new result: (assert value: receiver value: arguments value: callResult).
+	callResult := receiver perform: targetSelector withArguments: arguments.
+	testResult := assert ifNil:
+		[ true ] ifNotNil: [ assert value: receiver value: arguments value: callResult ].
+	lastResult := PBTTestResult new result: testResult.
 	^ lastResult 
 ]
 
@@ -169,7 +186,7 @@ PBTTest >> runTimes: count [
 	^ (1 to: count) collect: [ :i | | timeBefore |		
 		Smalltalk garbageCollect.
 		timeBefore := Smalltalk highResClock.
-		receiver perform: target selector withArguments: arguments.
+		receiver perform: targetSelector withArguments: arguments.
 		(Smalltalk highResClock) - timeBefore.
 	]
 ]
@@ -181,7 +198,7 @@ PBTTest >> runTimes: count withInternalIterations: iterations [
 		Smalltalk garbageCollect.
 		timeBefore := Smalltalk highResClock.
 		1 to: iterations do: [ :_ |
-			receiver perform: target selector withArguments: arguments.		
+			receiver perform: targetSelector withArguments: arguments.		
 		].
 		(Smalltalk highResClock) - timeBefore.
 	]
@@ -219,7 +236,14 @@ PBTTest >> target [
 { #category : 'accessing' }
 PBTTest >> target: targetMethod [
 
-	target := targetMethod
+	target := targetMethod.
+	targetSelector := target selector
+]
+
+{ #category : 'accessing' }
+PBTTest >> targetSelector: selector [
+
+	targetSelector := selector
 ]
 
 { #category : 'accessing' }

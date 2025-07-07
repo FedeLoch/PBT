@@ -101,6 +101,24 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema withCriteria: aBlo
 ]
 
 { #category : 'tests' }
+PBTRunner class >> testWithPackageCoverage: targetMethod from: schema for: time [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTTimeCriteria new timeout: time);
+		targetAndPackageCoverage: targetMethod; test
+]
+
+{ #category : 'tests' }
+PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: times [
+
+	^ self new
+		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
+		withCriteria: (PBTCountCriteria new times: times);
+		target: targetMethod; test
+]
+
+{ #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
 	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema
@@ -189,6 +207,20 @@ PBTRunner >> target: targetMethod [
 	
 	target := targetMethod.
 	methodsToInstrument := target sendReachableMethods.
+	
+]
+
+{ #category : 'accessing' }
+PBTRunner >> targetAndPackageCoverage: targetMethod [
+
+	"target selfReachableMethods <- all self called methods"
+
+	"target package methods <- all package methods"
+
+	"target sendReachableMethods <- all send called methods"
+	
+	target := targetMethod.
+	methodsToInstrument := target package methods.
 	
 ]
 
