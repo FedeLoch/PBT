@@ -18,6 +18,12 @@ Class {
 	#package : 'Coverage2'
 }
 
+{ #category : 'ston-core' }
+C2CoverageResult class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( methods )
+]
+
 { #category : 'accessing' }
 C2CoverageResult >> collector [
 

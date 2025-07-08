@@ -9,5 +9,5 @@ Class {
 { #category : 'ston-core' }
 PBTEvalSuccess class >> stonAllInstVarNames [
 
-	^ super stonAllInstVarNames copyWithoutAll: #( coverageResult )
+	^ super stonAllInstVarNames copyWithoutAll: #( )
 ]

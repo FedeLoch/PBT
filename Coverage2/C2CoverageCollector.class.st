@@ -47,6 +47,12 @@ Class {
 	#package : 'Coverage2'
 }
 
+{ #category : 'ston-core' }
+C2CoverageCollector class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( methods )
+]
+
 { #category : 'installation' }
 C2CoverageCollector class >> uninstalAll [
 
