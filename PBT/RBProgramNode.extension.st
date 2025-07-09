@@ -5,6 +5,8 @@ RBProgramNode >> childAtPath: path [
 
 	path ifEmpty: [  ^ self ].
 	
+	path first = 0 ifTrue: [ ^ self ].
+	
 	^ (self children at: path first) childAtPath: path allButFirst
 ]
 
