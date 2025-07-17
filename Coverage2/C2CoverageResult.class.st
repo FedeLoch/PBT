@@ -12,7 +12,8 @@ Class {
 	#instVars : [
 		'collector',
 		'methods',
-		'nodes'
+		'nodes',
+		'fixedPercentage'
 	],
 	#category : 'Coverage2',
 	#package : 'Coverage2'
@@ -67,6 +68,14 @@ C2CoverageResult >> crown [
 				c callers add: n ] ] ].
 
 	^ crown
+]
+
+{ #category : 'computation' }
+C2CoverageResult >> fixedPercentage [
+	
+	fixedPercentage ifNil: [ fixedPercentage := self percentage ].
+	
+	^ fixedPercentage
 ]
 
 { #category : 'accessing' }
