@@ -115,7 +115,7 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: tim
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
-		target: targetMethod; test
+		targetAndPackageCoverage: targetMethod; test
 ]
 
 { #category : 'tests' }
