@@ -177,7 +177,7 @@ PBTTest >> runTime [
 { #category : 'as yet unclassified' }
 PBTTest >> runTimeAutotuned [
 
-	^ (self runTimes: 1 withInternalIterations: autoTunedIterations) first
+	^ (self runTimes: 3 withInternalIterations: autoTunedIterations) last
 ]
 
 { #category : 'as yet unclassified' }
