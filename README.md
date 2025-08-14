@@ -7,7 +7,8 @@ To install the framework you must execute this Metacello script in your playgrou
 ```Smalltalk
 Metacello new
     baseline: 'PBT';
-    repository: 'github://FedeLoch/PBT/tree/main/src';
+    repository: 'github://FedeLoch/PBT:main';
+	onConflictUseIncoming;
     load
 ```
 
