@@ -9,9 +9,9 @@ Class {
 		'ntNonEmptyPure',
 		'ntNonEmptyConcatTail'
 	],
-	#category : 'PBT-Generators',
+	#category : 'PBT-Grammars',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Grammars'
 }
 
 { #category : 'initialization' }

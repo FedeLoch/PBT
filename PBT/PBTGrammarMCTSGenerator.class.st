@@ -64,6 +64,12 @@ PBTGrammarMCTSGenerator >> explorationConstant: aNumber [
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
 
+	^ (self genDerivation: constraint by: previousFeedback) asStringInput
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarMCTSGenerator >> genDerivation: constraint by: previousFeedback [
+
 	"We are starting with this step because the feedback is got as a result of the last generation"
 	self backpropagate: previousFeedback.
 
@@ -74,7 +80,7 @@ PBTGrammarMCTSGenerator >> gen: constraint by: previousFeedback [
 	generatedTextInputs at: lastDerivationTree asStringInput put: true.
 
 	"We return its string representation"
-	^ lastDerivationTree asStringInput
+	^ lastDerivationTree
 ]
 
 { #category : 'as yet unclassified' }

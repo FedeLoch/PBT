@@ -54,8 +54,8 @@ GrammarMCTSGenerator >> visitNonTerminal: nonTerminal level: level [
 	| rule |
 	
 	rule := self selectRule: nonTerminal rules level: level.
-	
-	^ rule ifNil: [ GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]
+
+	^ (rule ifNil: [ GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]) tag: nonTerminal name
 	
 ]
 

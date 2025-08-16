@@ -7,6 +7,12 @@ GncAST >> allChildren [
 ]
 
 { #category : '*PBT' }
+GncAST >> asPharoObject [
+
+	self subclassResponsibility 
+]
+
+{ #category : '*PBT' }
 GncAST >> asStringInput [
 
 	^ String streamContents: [ :stream | self generateInto: stream ]
@@ -42,6 +48,12 @@ GncAST >> backPropagateToChildren: reward [
 GncAST >> backPropagateToChildren: reward level: level [
 
 	self subclassResponsibility 
+]
+
+{ #category : '*PBT' }
+GncAST >> grammarRule [
+
+	^ grammarRule
 ]
 
 { #category : '*PBT' }

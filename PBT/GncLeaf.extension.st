@@ -17,3 +17,9 @@ GncLeaf >> backPropagateToChildren: reward level: level [
 
 	"Do nothing, it's a leaf"
 ]
+
+{ #category : '*PBT' }
+GncLeaf >> varName [
+
+	^ token allButLast
+]
