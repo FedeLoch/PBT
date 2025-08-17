@@ -13,6 +13,14 @@ GncAST >> asPharoObject [
 ]
 
 { #category : '*PBT' }
+GncAST >> asPrimitiveObject [
+
+	^ [ Object readFrom: self asStringInput ]
+		  on: Error
+		  do: [ :ex | self asStringInput ]
+]
+
+{ #category : '*PBT' }
 GncAST >> asStringInput [
 
 	^ String streamContents: [ :stream | self generateInto: stream ]

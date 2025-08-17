@@ -17,6 +17,7 @@ PersonGrammar >> defineGrammar [
 	super defineGrammar.
 	
 	ntRoot  --> ntPerson.
+	
 	ntPerson --> 'age:', ntAge, 'name:', ntName.
 	
 	ntAge --> 'age:', ntInteger.

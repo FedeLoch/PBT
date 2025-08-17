@@ -49,3 +49,17 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammarG
 
 	self assert: (generator gen: nil by: (self feedback: false)) asRegex class equals: RxMatcher
 ]
+
+{ #category : 'tests' }
+PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAStonGrammar [
+
+	| generator generated result |
+	generator := PBTGrammarMCTSGenerator from: GncStonGrammar new.
+	generated := generator gen: nil by: (self feedback: nil).
+
+	result := STON reader
+		          on: generated readStream;
+		          next.
+
+	self assert: (result class name beginsWith: 'GncFuzzyClass')
+]

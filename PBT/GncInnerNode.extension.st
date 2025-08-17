@@ -23,16 +23,6 @@ GncInnerNode >> asPharoObject [
 ]
 
 { #category : '*PBT' }
-GncInnerNode >> asPrimitiveObject [ 
-	
-	| string |
-	
-	string := self asStringInput.
-	
-	^ string isNumber ifTrue: [ string asNumber ] ifFalse: [ string ]
-]
-
-{ #category : '*PBT' }
 GncInnerNode >> backPropagateToChildren: reward [
 
 	self children do: [ :child | child backPropagateRecursive: reward ]

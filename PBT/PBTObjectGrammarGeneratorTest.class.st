@@ -1,0 +1,66 @@
+Class {
+	#name : 'PBTObjectGrammarGeneratorTest',
+	#superclass : 'PBTGeneratorTest',
+	#instVars : [
+		'generator'
+	],
+	#category : 'PBT-Generators',
+	#package : 'PBT',
+	#tag : 'Generators'
+}
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> setUp [ 
+
+	super setUp.
+	generator := PBTObjectGrammarGenerator from: nil
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
+
+
+	generator grammar: PzDateMDYYYYGrammar new.
+
+	self assert: (generator gen: nil by: nil) class equals: Date
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateAlwaysTheSameValue [
+
+	generator grammar: ConstantGrammar new.
+
+	self assert: (generator gen: nil by: nil) equals: 42
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfBoolean [
+
+	generator grammar: BooleanGrammar new.
+
+	self assert: (generator gen: nil by: nil) class superclass equals: Boolean
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfPerson [
+
+	generator grammar: PersonGrammar new.
+
+	self assert: (generator gen: nil by: nil) class equals: Person
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfRectangle [
+
+	generator grammar: RectangleGrammar new.
+
+	self assert: (generator gen: nil by: nil) class equals: Rectangle
+]
+
+{ #category : 'tests' }
+PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfSmallIntegerByRange [
+
+	generator grammar: DecimalGrammar new.
+
+	self assert: ((0 to: 100) includes: (generator gen: nil by: nil)) equals: true
+]

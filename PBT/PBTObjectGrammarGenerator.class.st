@@ -16,7 +16,7 @@ PBTObjectGrammarGenerator class >> from: anObjectGrammar [
 	| generator |
 	generator := PBTGrammarMCTSGenerator from: anObjectGrammar.
 
-	^ self new grammar: anObjectGrammar; grammarGenerator: generator
+	^ self new grammarGenerator: generator; grammar: anObjectGrammar
 ]
 
 { #category : 'as yet unclassified' }
@@ -34,7 +34,8 @@ PBTObjectGrammarGenerator >> generateObject: grammarNode [
 { #category : 'accessing' }
 PBTObjectGrammarGenerator >> grammar: anObjectGrammar [
 
-	grammar := anObjectGrammar 
+	grammar := anObjectGrammar.
+	grammarGenerator grammar: anObjectGrammar.
 ]
 
 { #category : 'accessing' }
