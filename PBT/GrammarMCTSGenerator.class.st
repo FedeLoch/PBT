@@ -22,7 +22,7 @@ GrammarMCTSGenerator >> ruleWithMoreUTC: rules level: level [
 
 	^ rules sort: [ :rule :rule2 |
 		  (rule utc: totalGenerations by: explorationConstant level: level)
-		  >=
+		  >
 		  (rule2 utc: totalGenerations by: explorationConstant level: level) ]
 ]
 
@@ -36,15 +36,14 @@ GrammarMCTSGenerator >> selectRule: rules level: level [
 	notVisited := rules reject: [ :rule | rule visitedIn: level ].
 	
 	taken := (notVisited
-		  ifEmpty: [ self ruleWithMoreUTC: rules level: level ]
-		  ifNotEmpty: [ notVisited ]) first.
+		  ifEmpty: [ (self ruleWithMoreUTC: rules level: level) atRandom ]
+		  ifNotEmpty: [ notVisited first ]).
 	
 	^ (maxSize - taken minSize) < -1 ifTrue: [ nil ] ifFalse: [ taken ] 
 ]
 
 { #category : 'accessing' }
 GrammarMCTSGenerator >> totalGenerations: aNumber [
-
 	totalGenerations := aNumber
 ]
 
@@ -63,21 +62,23 @@ GrammarMCTSGenerator >> visitNonTerminal: nonTerminal level: level [
 GrammarMCTSGenerator >> visitRule: rule level: level [
 
 	| result availableSize |
-	availableSize := maxSize" - 1".
+	availableSize := maxSize.
 
 	rule fragments do: [ :fragment |
 		availableSize := availableSize - fragment minSize ].
 
-	result := rule fragments collect: [ :fragment |
-		          | node |
+	result := rule fragments collect: [ :fragment | | node prevSize |
 		          availableSize := availableSize + fragment minSize.
-		          node := fragment
-			                  visit: (self withSize: availableSize)
-			                  level: level + 1.
+		          prevSize := maxSize.
+		          self maxSize: availableSize.
+
+		          node := fragment visit: self level: level + 1.
 		          node grammarRule: rule.
 
+		          self maxSize: prevSize.
 		          availableSize := availableSize - node treeSize.
-		          node ].
+		          node
+	].
 
 	^ GncInnerNode with: result
 ]
@@ -85,17 +86,7 @@ GrammarMCTSGenerator >> visitRule: rule level: level [
 { #category : 'visiting' }
 GrammarMCTSGenerator >> visitTerminal: terminal level: level [
 
-	maxSize update: [ :size | size - 1 ].
+"	maxSize update: [ :size | size - 1 ]."
 	
 	^ terminal generateMCTSAst: self level: level
-]
-
-{ #category : 'as yet unclassified' }
-GrammarMCTSGenerator >> withSize: size [
-
-	"TODO: omit this later, there is not necessary to clone all the time the same generator"
-	
-	^ self clone
-		  maxSize: size;
-		  yourself
 ]

@@ -42,7 +42,8 @@ GncAST >> backPropagateRecursive: reward [
 { #category : '*PBT' }
 GncAST >> backPropagateRecursive: reward level: level [
 
-	grammarRule ifNotNil: [ grammarRule backPropagate: reward level: level. grammarRule visitIn: level ].
+	grammarRule ifNotNil: [ grammarRule backPropagate: reward level: level. "grammarRule visitIn: level" ].
+
 	self backPropagateToChildren: reward level: level + 1.
 ]
 

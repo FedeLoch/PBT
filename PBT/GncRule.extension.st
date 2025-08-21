@@ -55,6 +55,8 @@ GncRule >> visit [
 { #category : '*PBT' }
 GncRule >> visit: visitor level: level [
 
+	self visitIn: level. "visit"
+	
 	^ visitor visitRule: self level: level
 ]
 

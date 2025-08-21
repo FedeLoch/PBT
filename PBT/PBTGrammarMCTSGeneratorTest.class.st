@@ -7,6 +7,14 @@ Class {
 }
 
 { #category : 'tests' }
+PBTGrammarMCTSGeneratorTest >> testGenerateARandomDemaProgramFromADemaGrammar [
+
+	| generator generated result |
+	generator := PBTGrammarMCTSGenerator from: DemaGrammar new.
+	generated := generator gen: nil by: (self feedback: nil).
+]
+
+{ #category : 'tests' }
 PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
 
 	| generator |

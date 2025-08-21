@@ -24,10 +24,8 @@ PBTGrammarMCTSGenerator class >> from: grammar [
 { #category : 'as yet unclassified' }
 PBTGrammarMCTSGenerator >> aDerivation [
 	
-	generator
-		maxSize: maxSize + 60;
-		totalGenerations: totalGenerations;
-		explorationConstant: explorationConstant.
+	totalGenerations := totalGenerations + 1.
+	generator totalGenerations: totalGenerations.
 		
 	^ grammar start generateMCTSAst: generator level: 0
 ]
@@ -76,7 +74,6 @@ PBTGrammarMCTSGenerator >> genDerivation: constraint by: previousFeedback [
 	"We update the production tree selected"
 
 	lastDerivationTree := self getDerivationTree.
-	totalGenerations := totalGenerations + 1.
 	generatedTextInputs at: lastDerivationTree asStringInput put: true.
 
 	"We return its string representation"
@@ -104,19 +101,18 @@ PBTGrammarMCTSGenerator >> grammar: aGrammar [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> initialize [ 
-	
+PBTGrammarMCTSGenerator >> initialize [
+
 	super initialize.
 	totalGenerations := 0.
 	explorationConstant := 1.41.
 	maxSize := 40.
-	generator := (
-		GrammarMCTSGenerator new maxHeight: 0;
-			maxSize: maxSize + 60;
-			totalGenerations: totalGenerations;
-			explorationConstant: explorationConstant
-	).
-	generatedTextInputs := Dictionary new.
+	generator := GrammarMCTSGenerator new
+		             maxHeight: 20;
+		             maxSize: maxSize + 60;
+		             totalGenerations: totalGenerations;
+		             explorationConstant: explorationConstant.
+	generatedTextInputs := Dictionary new
 ]
 
 { #category : 'setter' }
