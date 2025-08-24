@@ -3,7 +3,8 @@ Class {
 	#superclass : 'GncGrammarGenerator',
 	#instVars : [
 		'totalGenerations',
-		'explorationConstant'
+		'explorationConstant',
+		'randomSelectionProb'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -17,13 +18,23 @@ GrammarMCTSGenerator >> explorationConstant: c [
 	explorationConstant := c
 ]
 
+{ #category : 'initialization' }
+GrammarMCTSGenerator >> initialize [ 
+
+	super initialize.
+	randomSelectionProb := 15.
+]
+
 { #category : 'as yet unclassified' }
 GrammarMCTSGenerator >> ruleWithMoreUTC: rules level: level [
 
-	^ rules sort: [ :rule :rule2 |
+	| sorted |
+	sorted := rules sort: [ :rule :rule2 |
 		  (rule utc: totalGenerations by: explorationConstant level: level)
 		  >
-		  (rule2 utc: totalGenerations by: explorationConstant level: level) ]
+		  (rule2 utc: totalGenerations by: explorationConstant level: level) ].
+	
+	^ (1 to: 100) atRandom <= randomSelectionProb ifTrue: [ sorted atRandom ] ifFalse: [ sorted first ]
 ]
 
 { #category : 'private' }
@@ -36,9 +47,9 @@ GrammarMCTSGenerator >> selectRule: rules level: level [
 	notVisited := rules reject: [ :rule | rule visitedIn: level ].
 	
 	taken := (notVisited
-		  ifEmpty: [ (self ruleWithMoreUTC: rules level: level) atRandom ]
-		  ifNotEmpty: [ notVisited first ]).
-	
+		  ifEmpty: [ self ruleWithMoreUTC: rules level: level ]
+		  ifNotEmpty: [ notVisited atRandom ]).
+
 	^ (maxSize - taken minSize) < -1 ifTrue: [ nil ] ifFalse: [ taken ] 
 ]
 
