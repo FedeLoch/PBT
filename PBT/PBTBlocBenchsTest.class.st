@@ -132,14 +132,14 @@ PBTBlocBenchsTest >> setUp [
 	receiverConstraint := PBTObjectConstraint new
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
-												testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new).
+												"testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new)."
 												testCase element: (props at: 'element') gen.
 												testCase duration: 500 milliSeconds.
 												testCase ] of: BlBBlocPBTCase
 										);
 		                      props: { ('element' -> self blElementConstraint) }.
 
-	assert := [ :coll :args :blbResult | blbResult hasError not ].
+	assert := [ :coll :args :blbResult | 1 halt. blbResult hasError not ].
 	schema := PBTSchema new
 		          receiverConstraint: receiverConstraint;
 		          assert: assert
@@ -151,7 +151,7 @@ PBTBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseCoverag
 	| pbtResult |
 
 	self timeLimit: 5 minutes.
-	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 10.
+	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 2.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 10.

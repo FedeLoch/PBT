@@ -12,7 +12,8 @@ Class {
 		'ntMonth',
 		'ntDay',
 		'ntDecimal',
-		'ntPoint'
+		'ntPoint',
+		'ntColor'
 	],
 	#category : 'PBT-Grammars',
 	#package : 'PBT',
@@ -37,6 +38,8 @@ GenericGrammar >> defineGrammar [
 	ntMonth --> ntDigit | '11' | '10' | '12'.
 	
 	ntYear --> ntDigit, ntDigit, ntDigit, ntDigit.
+	
+	ntColor --> 'alpha:', ntInteger.
 	
 	"TODO: I need other kind of constructor declaration"
 	ntDate --> 'year:', ntYear, 'month:', ntMonth, 'day of week:', ntDay.

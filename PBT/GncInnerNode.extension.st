@@ -33,3 +33,15 @@ GncInnerNode >> backPropagateToChildren: reward level: level [
 
 	self children do: [ :child | child backPropagateRecursive: reward level: level ]
 ]
+
+{ #category : '*PBT' }
+GncInnerNode >> isClassObject [
+
+	^ children first isTypeVariable
+]
+
+{ #category : '*PBT' }
+GncInnerNode >> objectClass [
+
+	^ tag asClassInEnvironment: self class environment
+]

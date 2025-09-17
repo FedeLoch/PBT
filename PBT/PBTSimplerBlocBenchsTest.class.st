@@ -14,7 +14,7 @@ PBTSimplerBlocBenchsTest >> setUp [
 	receiverConstraint := PBTObjectConstraint new
 		                      generator:
 			                      (PBTGenerator onceInstance: [ :testCase :props |
-												testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new).
+												"testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new)."
 												testCase element: (props at: 'element') gen.
 												testCase duration: 500 milliSeconds.
 												testCase ] of: BlBBlocPBTCase

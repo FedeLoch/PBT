@@ -19,6 +19,12 @@ GncLeaf >> backPropagateToChildren: reward level: level [
 ]
 
 { #category : '*PBT' }
+GncLeaf >> isTypeVariable [
+
+	^ token class = ByteString and: [ token last = $: ]
+]
+
+{ #category : '*PBT' }
 GncLeaf >> varName [
 
 	^ token allButLast

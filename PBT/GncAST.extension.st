@@ -72,6 +72,12 @@ GncAST >> grammarRule: gncRule [
 ]
 
 { #category : '*PBT' }
+GncAST >> isTypeVariable [
+
+	^ false
+]
+
+{ #category : '*PBT' }
 GncAST >> visited [
 	
 	^ false 
