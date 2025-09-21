@@ -1,5 +1,5 @@
 Class {
-	#name : 'Feedback',
+	#name : 'PBTFeedback',
 	#superclass : 'Object',
 	#instVars : [
 		'previous',
@@ -13,55 +13,55 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-Feedback class >> having: prev current: pbtCase with: value isBetter: feedback [
+PBTFeedback class >> having: prev current: pbtCase with: value isBetter: feedback [
 
 	^ self new previous: prev; current: pbtCase; value: value; feedback: feedback
 ]
 
 { #category : 'accessing' }
-Feedback >> current [
+PBTFeedback >> current [
 
 	^ current
 ]
 
 { #category : 'accessing' }
-Feedback >> current: pbtCase [
+PBTFeedback >> current: pbtCase [
 
 	current := pbtCase
 ]
 
 { #category : 'accessing' }
-Feedback >> feedback [
+PBTFeedback >> feedback [
 
 	^ feedback 
 ]
 
 { #category : 'accessing' }
-Feedback >> feedback: someFeedback [
+PBTFeedback >> feedback: someFeedback [
 	
 	feedback := someFeedback 
 ]
 
 { #category : 'accessing' }
-Feedback >> previous [
+PBTFeedback >> previous [
 
 	^ previous 
 ]
 
 { #category : 'accessing' }
-Feedback >> previous: prev [
+PBTFeedback >> previous: prev [
 
 	previous := prev
 ]
 
 { #category : 'accessing' }
-Feedback >> value [
+PBTFeedback >> value [
 
 	^ value
 ]
 
 { #category : 'accessing' }
-Feedback >> value: aValue [
+PBTFeedback >> value: aValue [
 
 	value := aValue
 ]

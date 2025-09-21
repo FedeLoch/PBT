@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBTEvaluator',
 	#superclass : 'Object',
+	#instVars : [
+		'analyzer'
+	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
@@ -15,35 +18,34 @@ PBTEvaluator >> allocatedMemory [
 { #category : 'as yet unclassified' }
 PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
-	| localCoverageResult callResult assertResult allocatedMemory time timeBefore |
+	| localCoverageResult result assertResult case profilingResult |
 	
 	[
-		allocatedMemory := self allocatedMemory.
 		"Reset the coverage result to avoid interference between tests"
 		collector resetResult.
 		
-		timeBefore := Smalltalk highResClock.
-		callResult := receiver perform: target selector withArguments: args.
-		time := Duration milliSeconds: (Smalltalk highResClock) - timeBefore.
-
+		"Executing PB Analyzer"
+		case := PBAProgram from: [ result := receiver perform: target selector withArguments: args ].
+		profilingResult := analyzer analyze: case.
+		
 		localCoverageResult := collector collectResult.
-
-		allocatedMemory := self allocatedMemory - allocatedMemory.
-		assertResult := schema assert
-		                value: receiver
-		                value: args
-		                value: callResult
+		
+		assertResult := schema assert value: receiver value: args value: result
 	] on: Error do: [ :error | ^ PBTEvalError new
 			stack: (error signalerContext stackOfSize: 10);
-			allocatedMemory: allocatedMemory;
 			coverageResult: localCoverageResult;
-			time: time;
 			message: error messageText
 	].
 
 	^ (assertResult ifTrue: [ PBTEvalSuccess ] ifFalse: [ PBTEvalFail ]) new
-		  callResult: callResult;
-		  time: time;
-		  allocatedMemory: allocatedMemory;
+		  callResult: result;
+		  profilingResult: profilingResult;
 		  coverageResult: localCoverageResult
+]
+
+{ #category : 'initialization' }
+PBTEvaluator >> initialize [
+
+	super initialize.
+	analyzer := PBAnalyzer new.
 ]
