@@ -96,7 +96,9 @@ PBTFeedbackEvaluator >> methodsCalled: dict [
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> methodsCalledFrom: case [
 
-	^ case result profilingResult methodsCalled
+	^ case result profilingResult ifNil: [ Dictionary new ] ifNotNil: [
+		case result profilingResult methodsCalled
+	]
 ]
 
 { #category : 'accessing' }

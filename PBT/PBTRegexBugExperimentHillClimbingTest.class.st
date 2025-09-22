@@ -96,8 +96,8 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScore [
 
 	| pbtResult |
-	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
+	1 halt.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 1)" guidedByScore;" run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

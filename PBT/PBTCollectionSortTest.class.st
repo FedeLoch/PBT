@@ -15,6 +15,7 @@ Class {
 PBTCollectionSortTest >> setUp [
 
 	super setUp.
+	self timeLimit: 5 minutes.
 
 	receiverConstraint := PBTObjectConstraint new
 		                     generator:
@@ -39,7 +40,6 @@ PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResul
 
 	| pbtResult |
 	
-	self timeLimit: 5 minutes.
 	pbtResult := (PBTRunner test: SequenceableCollection >> #sort from: schema times: 100) run.
 	
 	self assertSuccess: pbtResult.
