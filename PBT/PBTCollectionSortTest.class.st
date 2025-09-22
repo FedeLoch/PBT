@@ -15,6 +15,7 @@ Class {
 PBTCollectionSortTest >> setUp [
 
 	super setUp.
+	self timeLimit: 5 minutes.
 
 	receiverConstraint := PBTObjectConstraint new
 		                     generator:
@@ -39,8 +40,7 @@ PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResul
 
 	| pbtResult |
 	
-	self timeLimit: 5 minutes.
-	pbtResult := PBTRunner test: SequenceableCollection >> #sort from: schema times: 100.
+	pbtResult := (PBTRunner test: SequenceableCollection >> #sort from: schema times: 100) run.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.
@@ -51,7 +51,7 @@ PBTCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResul
 
 	| pbtResult |
 	"TODO: Not executable until we support schema inference"
-	pbtResult := PBTRunner test: SequenceableCollection >> #sort.
+	pbtResult := (PBTRunner test: SequenceableCollection >> #sort) run.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.

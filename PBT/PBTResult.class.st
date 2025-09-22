@@ -8,7 +8,6 @@ Class {
 		'performanceResult',
 		'segmentedTests',
 		'ranking',
-		'schema',
 		'topCases'
 	],
 	#category : 'PBT-Result',
@@ -17,23 +16,19 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema [
+PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResult runner: runner [
 
 	| totalTime perfResult topCases |
 	
 	totalTime := Duration milliSeconds: (Time millisecondsSince: time).
 	perfResult := PerformanceResult from: tests withTime: totalTime.
-	topCases := tests ifEmpty: [ {} ] ifNotEmpty: [ 
-	tests allButFirst inject: { tests first } asOrderedCollection into: [ :col :test |
-		((schema feedbackEvaluator value: test) > (schema feedbackEvaluator value: col last)) ifTrue: [ col add: test ]. col ]
-	].
+	topCases := runner feedbackEvaluator topCases.
 
 	^ self new tests: tests;
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
 		topCases: topCases;
 		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
-		schema: schema;
 		performanceResult: perfResult
 ]
 
@@ -239,17 +234,6 @@ PBTResult >> plotByExecutionTime [
 ]
 
 { #category : 'plot' }
-PBTResult >> plotByFeedback [
-
-	^ self
-		  plotBy: [ :test | tests indexOf: test ]
-		  and: [ :test | test feedback ifTrue: [ schema feedbackEvaluator value: test ] ifFalse: [ 0 ] ]
-		  xlabel: 'Number of cases'
-		  ylabel: 'Improves last better solution'
-		  title: 'Improvement of global case'
-]
-
-{ #category : 'plot' }
 PBTResult >> plotByScore [
 
 	^ self
@@ -306,18 +290,6 @@ PBTResult >> ranking: aRanking [
 
 	ranking := aRanking
 
-]
-
-{ #category : 'getter' }
-PBTResult >> schema [
-
-	^ schema 
-]
-
-{ #category : 'setter' }
-PBTResult >> schema: aSchema [
-
-	schema := aSchema
 ]
 
 { #category : 'getter' }

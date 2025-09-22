@@ -249,5 +249,5 @@ PBTTest >> targetSelector: selector [
 { #category : 'accessing' }
 PBTTest >> time [
 
-	^ result time
+	^ result profilingResult ifNil: [ 0 ] ifNotNil: [ result profilingResult executionTime ]
 ]

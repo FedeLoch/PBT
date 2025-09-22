@@ -21,10 +21,8 @@ PBTRegexBugExperimentMCTSTest >> regexConstraint [
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
-	
-	schema guidedByCoverage.
 
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -34,10 +32,8 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
-	
-	schema guidedByExecutionTime.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -48,9 +44,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 
 	| pbtResult |
 	
-	schema guidedByScore.
-
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -60,10 +54,8 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByguidedByAllocatedMemoryByTimeWithShallow [
 
 	| pbtResult |
-	
-	schema guidedByAllocatedMemory.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByAllocatedMemory; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

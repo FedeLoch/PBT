@@ -8,7 +8,8 @@ Class {
 		'generator',
 		'schema',
 		'lastFeedback',
-		'methodsToInstrument'
+		'methodsToInstrument',
+		'feedbackEvaluator'
 	],
 	#category : 'PBT-Runner',
 	#package : 'PBT',
@@ -24,7 +25,7 @@ PBTRunner class >> test: targetMethod [
 { #category : 'tests' }
 PBTRunner class >> test: targetMethod from: schema [
 	
-	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod; test
+	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod
 ]
 
 { #category : 'tests' }
@@ -33,7 +34,7 @@ PBTRunner class >> test: targetMethod from: schema for: time [
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTTimeCriteria new timeout: time);
-		target: targetMethod; test
+		target: targetMethod
 ]
 
 { #category : 'tests' }
@@ -42,7 +43,7 @@ PBTRunner class >> test: targetMethod from: schema times: times [
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
-		target: targetMethod; test
+		target: targetMethod
 ]
 
 { #category : 'tests' }
@@ -51,13 +52,13 @@ PBTRunner class >> test: targetMethod from: schema withCoverageTolerance: tolera
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTStopCoverageCriteria new tolerance: tolerance);
-		target: targetMethod; test
+		target: targetMethod
 ]
 
 { #category : 'tests' }
 PBTRunner class >> testWithLowCost: targetMethod from: schema [
 	
-	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod; withLowCost; test
+	^ self new schema: (PBTSchemaInfer enrich: schema for: targetMethod); target: targetMethod; withLowCost
 ]
 
 { #category : 'tests' }
@@ -67,7 +68,7 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema for: time [
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTTimeCriteria new timeout: time);
 		target: targetMethod;
-		withLowCost; test
+		withLowCost
 ]
 
 { #category : 'tests' }
@@ -77,7 +78,7 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema times: times [
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
 		target: targetMethod;
-		withLowCost; test
+		withLowCost
 ]
 
 { #category : 'tests' }
@@ -87,7 +88,7 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema withCoverageTolera
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTStopCoverageCriteria new tolerance: tolerance);
 		target: targetMethod;
-		withLowCost; test
+		withLowCost
 ]
 
 { #category : 'tests' }
@@ -97,7 +98,7 @@ PBTRunner class >> testWithLowCost: targetMethod from: schema withCriteria: aBlo
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTStopBlockCriteria new block: aBlock);
 		target: targetMethod;
-		withLowCost; test
+		withLowCost
 ]
 
 { #category : 'tests' }
@@ -106,7 +107,7 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema for: time 
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTTimeCriteria new timeout: time);
-		targetAndPackageCoverage: targetMethod; test
+		targetAndPackageCoverage: targetMethod
 ]
 
 { #category : 'tests' }
@@ -115,48 +116,57 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: tim
 	^ self new
 		schema: (PBTSchemaInfer enrich: schema for: targetMethod);
 		withCriteria: (PBTCountCriteria new times: times);
-		targetAndPackageCoverage: targetMethod; test
+		targetAndPackageCoverage: targetMethod
+]
+
+{ #category : 'tests' }
+PBTRunner >> evaluator [
+
+	^ evaluator 
+]
+
+{ #category : 'tests' }
+PBTRunner >> feedbackEvaluator [
+
+	^ feedbackEvaluator
 ]
 
 { #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
-	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema
+	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult runner: self
 ]
 
 { #category : 'tests' }
 PBTRunner >> genTest: incrCoverage with: collector [
 
-	| arguments receiver testResult score feedback test |
+	| arguments receiver result score feedback test |
 	
 	"Setup based on the enriched schema"
 	receiver := generator genReceiverFor: target from: schema.
 	arguments := generator genArgumentsFor: target from: schema.
 	
 	"Target call and eval result"
-	testResult := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage collectingWith: collector.
+	result := evaluator eval: receiver method: target from: schema with: arguments andCoverage: incrCoverage collectingWith: collector.
 	
 	"Score calculation"
-	score := self scoreFor: receiver with: arguments and: testResult.
+	score := self scoreFor: receiver with: arguments and: result.
 
 	"Increment Incremental Coverage"
-	incrCoverage incrementWith: testResult coverageResult.
+	incrCoverage incrementWith: result coverageResult.
 
 	"Generate Test case"
 	test := PBTTest new target: target;
 		arguments: arguments;
 		receiver: receiver;
 		score: score;
-		result: testResult.
+		result: result.
 	
 	"Feeds the generator with the test result"
-	feedback := (schema feedbackEvaluator eval: test).
-	feedback ifNil: [ 1 halt. ].
+	feedback := feedbackEvaluator eval: test.
 	generator feedback: feedback.
-	test feedback: feedback.
-	test assert: schema assert.
 	
-	^ test
+	^ test feedback: feedback; assert: schema assert; yourself
 ]
 
 { #category : 'tests' }
@@ -164,6 +174,7 @@ PBTRunner >> initialize [
 	super initialize.
 	evaluator := PBTEvaluator new.
 	generator := PBTInputGenerator new.
+	feedbackEvaluator := PBTFeedbackEvaluator new.
 	stopCriteria := PBTCountCriteria new times: 100.
 	
 	
@@ -175,6 +186,26 @@ PBTRunner >> reachableMethods [
 	^ methodsToInstrument reject: [ :method |
 		  method pragmas anySatisfy: [ :pragma |
 			  pragma selector = #noInstrumentation ] ]
+]
+
+{ #category : 'tests' }
+PBTRunner >> run [
+
+	| tests time collector incrCoverage |
+	
+	time := Time millisecondClockValue.
+	tests := OrderedCollection new.
+	collector := C2CoverageCollector new methods: self reachableMethods.
+	incrCoverage := IncrementalCoverageResult for: { target } from: collector.
+	
+	collector runOn: [
+		[
+			self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
+			tests add: (self genTest: incrCoverage with: collector).
+		]
+	].
+
+	^ self genReport: tests since: time withCoverage: incrCoverage
 ]
 
 { #category : 'accessing' }
@@ -222,26 +253,6 @@ PBTRunner >> targetAndPackageCoverage: targetMethod [
 	target := targetMethod.
 	methodsToInstrument := target package methods.
 	
-]
-
-{ #category : 'tests' }
-PBTRunner >> test [
-
-	| tests time collector incrCoverage |
-	
-	time := Time millisecondClockValue.
-	tests := OrderedCollection new.
-	collector := C2CoverageCollector new methods: self reachableMethods.
-	incrCoverage := IncrementalCoverageResult for: { target } from: collector.
-	
-	collector runOn: [
-		[
-			self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
-			tests add: (self genTest: incrCoverage with: collector).
-		]
-	].
-
-	^ self genReport: tests since: time withCoverage: incrCoverage
 ]
 
 { #category : 'tests' }

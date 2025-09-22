@@ -34,7 +34,7 @@ PBTFactorialWithOptionalGenTest >> testGivingASmallIntegerSchemaWithDynamicGener
 
 	| pbtResult |
 
-	pbtResult := PBTRunner test: Integer >> #factorial from: schema times: 1000.
+	pbtResult := (PBTRunner test: Integer >> #factorial from: schema times: 1000) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.

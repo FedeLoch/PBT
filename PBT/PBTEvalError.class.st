@@ -11,12 +11,6 @@ Class {
 }
 
 { #category : 'accessing' }
-PBTEvalError >> allocatedMemory: memory [
-
-	allocatedMemory := memory ifNil: [ allocatedMemory ] ifNotNil: [ memory ]
-]
-
-{ #category : 'accessing' }
 PBTEvalError >> message [
 
 	^ message 
@@ -32,10 +26,4 @@ PBTEvalError >> message: aMessage [
 PBTEvalError >> stack: aStack [
 
 	stack := aStack 
-]
-
-{ #category : 'accessing' }
-PBTEvalError >> time: aTime [
-
-	time := aTime ifNil: [ time ] ifNotNil: [ aTime ]
 ]

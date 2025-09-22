@@ -5,9 +5,9 @@ Class {
 		'regexString',
 		'regex'
 	],
-	#category : 'PBT-FrameworkTests',
+	#category : 'PBT-Grammars',
 	#package : 'PBT',
-	#tag : 'FrameworkTests'
+	#tag : 'Grammars'
 }
 
 { #category : 'instance creation' }
@@ -18,7 +18,7 @@ PBTRegex class >> fromString: aString [
 		  yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : 'ston-core' }
 PBTRegex class >> stonAllInstVarNames [ 
 
 	^ super stonAllInstVarNames copyWithout: #regex
@@ -30,25 +30,25 @@ PBTRegex >> compileRegex [
 	^ regexString asRegex
 ]
 
-{ #category : 'compiling' }
+{ #category : 'testing' }
 PBTRegex >> matches: aString [ 
 	
 	^ self regex matches: aString
 ]
 
-{ #category : 'compiling' }
+{ #category : 'accessing' }
 PBTRegex >> regex [
 
 	^ regex ifNil: [ regex := regexString asRegex ]
 ]
 
-{ #category : 'compiling' }
+{ #category : 'accessing' }
 PBTRegex >> regexString [
 
 	^ regexString
 ]
 
-{ #category : 'compiling' }
+{ #category : 'accessing' }
 PBTRegex >> regexString: anObject [
 
 	regexString := anObject

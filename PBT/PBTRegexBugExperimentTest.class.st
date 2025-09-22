@@ -73,7 +73,7 @@ PBTRegexBugExperimentTest >> setUp [
 	assert := [ :regex :input :result | result ].
 	
 	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex base | "Replicating the score experiment"
-		coreScore := res time asMilliSeconds.
+		coreScore := res profilingResult executionTime.
 		anotherRegex := inputs first asRegex.
 		
 		base := Smalltalk highResClock.
@@ -94,7 +94,7 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 
 	| pbtResult |
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema times: 10000.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -105,7 +105,7 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 
 	| pbtResult |
 	
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 ]

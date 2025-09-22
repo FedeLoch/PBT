@@ -4,26 +4,12 @@ Class {
 	#instVars : [
 		'callResult',
 		'coverageResult',
-		'allocatedMemory',
-		'time',
 		'profilingResult'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
 	#tag : 'Evaluation'
 }
-
-{ #category : 'accessing' }
-PBTEvalResult >> allocatedMemory [
-
-	^ allocatedMemory 
-]
-
-{ #category : 'accessing' }
-PBTEvalResult >> allocatedMemory: memory [
-
-	allocatedMemory := memory 
-]
 
 { #category : 'accessing' }
 PBTEvalResult >> callResult [
@@ -52,22 +38,13 @@ PBTEvalResult >> coverageResult: aCoverageResult [
 ]
 
 { #category : 'accessing' }
-PBTEvalResult >> initialize [ 
+PBTEvalResult >> profilingResult [
 
-	super initialize.
-	allocatedMemory := 0.
-	time := Duration microSeconds: 0
+	^ profilingResult 
 ]
 
 { #category : 'accessing' }
-PBTEvalResult >> time [
+PBTEvalResult >> profilingResult: result [
 
-	^ time
-]
-
-{ #category : 'accessing' }
-PBTEvalResult >> time: aTime [
-	
-	time := aTime
-	
+	profilingResult := result 
 ]
