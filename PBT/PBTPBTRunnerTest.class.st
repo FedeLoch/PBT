@@ -7,9 +7,9 @@ Class {
 		'schema',
 		'argumentConstraints'
 	],
-	#category : 'PBT-FrameworkTests',
+	#category : 'PBT-Grammars',
 	#package : 'PBT',
-	#tag : 'FrameworkTests'
+	#tag : 'Grammars'
 }
 
 { #category : 'running' }

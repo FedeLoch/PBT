@@ -120,9 +120,21 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: tim
 ]
 
 { #category : 'tests' }
+PBTRunner >> evaluator [
+
+	^ evaluator 
+]
+
+{ #category : 'tests' }
+PBTRunner >> feedbackEvaluator [
+
+	^ feedbackEvaluator
+]
+
+{ #category : 'tests' }
 PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 
-	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult andSchema: schema
+	^ PBTResult resultFrom: tests since: time withCoverage: totalCoverageResult runner: self
 ]
 
 { #category : 'tests' }

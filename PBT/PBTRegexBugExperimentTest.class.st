@@ -73,7 +73,7 @@ PBTRegexBugExperimentTest >> setUp [
 	assert := [ :regex :input :result | result ].
 	
 	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex base | "Replicating the score experiment"
-		coreScore := res time asMilliSeconds.
+		coreScore := res profilingResult executionTime.
 		anotherRegex := inputs first asRegex.
 		
 		base := Smalltalk highResClock.

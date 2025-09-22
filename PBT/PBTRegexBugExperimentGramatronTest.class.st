@@ -35,7 +35,7 @@ PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGenerat
 
 	| pbtResult |
 	
-	schema guidedByScore.
+"	schema guidedByScore."
 
 	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes.
 	

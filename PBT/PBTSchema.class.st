@@ -48,7 +48,6 @@ PBTSchema >> initialize [
 	super initialize.
 	argumentConstraints := #().
 	receiverConstraint := nil.
-	self guidedByCoverage
 ]
 
 { #category : 'accessing' }

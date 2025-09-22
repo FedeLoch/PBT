@@ -25,9 +25,10 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		collector resetResult.
 		
 		"Executing PB Analyzer"
-		case := PBAProgram from: [ result := receiver perform: target selector withArguments: args ].
+		case := PBAProgram from:
+			[ result := receiver perform: target selector withArguments: args ] forClasses: target package classes.
 		profilingResult := analyzer analyze: case.
-		
+
 		localCoverageResult := collector collectResult.
 		
 		assertResult := schema assert value: receiver value: args value: result
@@ -48,4 +49,11 @@ PBTEvaluator >> initialize [
 
 	super initialize.
 	analyzer := PBAnalyzer new.
+	self profilingByMethodCalls. "by default it profile only method calls and execution time"
+]
+
+{ #category : 'initialization' }
+PBTEvaluator >> profilingByMethodCalls [
+
+	analyzer profilers: { PBACallBacksProfiler new . PBAMethodProfiler new }
 ]
