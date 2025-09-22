@@ -33,7 +33,7 @@ PBTSimplerBlocBenchsTest >> testGivingASimplerBlocBenchSchemaThenGenerateCasesTo
 	| pbtResult |
 
 	self timeLimit: 5 minutes.
-	pbtResult := PBTRunner test: BlBCase >> #run from: schema times: 10.
+	pbtResult := (PBTRunner test: BlBCase >> #run from: schema times: 10) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 10.

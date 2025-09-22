@@ -25,7 +25,7 @@ PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResult [
 
 	| pbtResult |
 
-	pbtResult := PBTRunner test: Integer >> #factorial from: schema.
+	pbtResult := (PBTRunner test: Integer >> #factorial from: schema) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.
@@ -36,7 +36,7 @@ PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFrom
 
 	| pbtResult |
 
-	pbtResult := PBTRunner test: Integer >> #factorial from: schema times: 2542.
+	pbtResult := (PBTRunner test: Integer >> #factorial from: schema times: 2542) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 2542.
@@ -47,7 +47,7 @@ PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFrom
 
 	| pbtResult |
 
-	pbtResult := PBTRunner test: Integer >> #factorial from: schema for: 2 seconds.
+	pbtResult := (PBTRunner test: Integer >> #factorial from: schema for: 2 seconds) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult totalTime >= 2 seconds) equals: true.
@@ -58,7 +58,7 @@ PBTFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWith
 	
 	| pbtResult |
 	"TODO: Not executable until we support schema inference"
-	pbtResult := PBTRunner test: Integer >> #factorial.
+	pbtResult := (PBTRunner test: Integer >> #factorial) run.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.

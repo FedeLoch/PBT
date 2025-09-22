@@ -22,9 +22,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWe
 
 	| pbtResult |
 	
-	schema guidedByCoverage.
-
-	pbtResult := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -34,10 +32,8 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWe
 PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
-	
-	schema guidedByExecutionTime.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -47,10 +43,8 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWe
 PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndSDGenSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
-	
-	schema guidedByScore.
 
-	pbtResult := PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
