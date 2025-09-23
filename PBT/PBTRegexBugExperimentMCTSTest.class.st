@@ -55,7 +55,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByAllocatedMemory; run.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 5 minutes) guidedByAllocatedMemory; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

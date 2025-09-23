@@ -169,6 +169,42 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	^ test feedback: feedback; assert: schema assert; yourself
 ]
 
+{ #category : 'as yet unclassified' }
+PBTRunner >> guidedByAllocatedMemory [
+
+	evaluator profilingByAllocatedMemory.
+	feedbackEvaluator feedbackByAllocatedMemory
+]
+
+{ #category : 'as yet unclassified' }
+PBTRunner >> guidedByCoverage [
+
+	evaluator profilingByCoverage.
+	feedbackEvaluator feedbackByCoverage
+]
+
+{ #category : 'as yet unclassified' }
+PBTRunner >> guidedByExecutionTime [
+	
+	evaluator profilingByExecutionTime.
+	feedbackEvaluator feedbackByExecutionTime
+]
+
+{ #category : 'as yet unclassified' }
+PBTRunner >> guidedByMethodsCalls [
+	
+	evaluator profilingByMethodCalls.
+	feedbackEvaluator feedbackByMethodsCalls
+]
+
+{ #category : 'as yet unclassified' }
+PBTRunner >> guidedByScore [
+	
+	evaluator profilingByScore.
+	feedbackEvaluator feedbackByScore
+	
+]
+
 { #category : 'tests' }
 PBTRunner >> initialize [ 
 	super initialize.

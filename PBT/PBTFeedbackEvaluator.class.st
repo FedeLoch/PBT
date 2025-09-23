@@ -6,7 +6,8 @@ Class {
 		'better',
 		'betterValue',
 		'methodsCalled',
-		'topCases'
+		'topCases',
+		'guide'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -23,6 +24,14 @@ PBTFeedbackEvaluator class >> from: aBlock [
 PBTFeedbackEvaluator class >> stonAllInstVarNames [
 
 	^ super stonAllInstVarNames copyWithoutAll: #( criteria )
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> category: value [
+	
+	value == 0 ifTrue: [ ^ 0 ].
+
+	^ value log floor
 ]
 
 { #category : 'accessing' }
@@ -64,27 +73,48 @@ PBTFeedbackEvaluator >> eval: case [
 ]
 
 { #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByAllocatedMemory [
+
+	guide := PBTMemoryGuide new
+]
+
+{ #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByCoverage [
+
+	guide := PBTCoverageGuide new
+]
+
+{ #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByExecutionTime [
+
+	guide := PBTExecutionTimeGuide new
+]
+
+{ #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByMethodsCalls [
+
+	guide := PBTMethodsCallsGuide new
+]
+
+{ #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByScore [
+
+	guide := PBTScoreGuide new
+]
+
+{ #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> improves: caseTable key: key [
 
-	^ ((methodsCalled includesKey: key) not) or: [ (caseTable at: key) > (methodsCalled at: key) ] 
+	^ ((methodsCalled includesKey: key) not) or: [ (caseTable at: key) > (methodsCalled at: key) ]
 ]
 
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> initialize [ 
 
 	super initialize.
-	"TODO: refactor me, this must to work with more than just methods called"
 	methodsCalled := Dictionary new.
 	topCases := OrderedCollection new.
-]
-
-{ #category : 'accessing' }
-PBTFeedbackEvaluator >> methodCalledCategories [
-	"TODO: Refactor me, this must to work with different type of values"
-"
-	^ {
-		PBTLowCategory
-	}"
+	self feedbackByMethodsCalls.
 ]
 
 { #category : 'accessing' }
@@ -97,7 +127,7 @@ PBTFeedbackEvaluator >> methodsCalled: dict [
 PBTFeedbackEvaluator >> methodsCalledFrom: case [
 
 	^ case result profilingResult ifNil: [ Dictionary new ] ifNotNil: [
-		case result profilingResult methodsCalled
+		case result profilingResult methodsCalled collect: [ :value | self category: value ]
 	]
 ]
 

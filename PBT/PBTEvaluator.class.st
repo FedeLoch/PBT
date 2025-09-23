@@ -64,7 +64,31 @@ PBTEvaluator >> initialize [
 ]
 
 { #category : 'initialization' }
+PBTEvaluator >> profilingByAllocatedMemory [
+
+	analyzer profilers: { PBACallBacksProfiler new . PBAIllimaniProfiler new }
+]
+
+{ #category : 'as yet unclassified' }
+PBTEvaluator >> profilingByCoverage [
+
+	analyzer profilers: { PBACallBacksProfiler new . PBACoverageCollectorProfiler new }
+]
+
+{ #category : 'as yet unclassified' }
+PBTEvaluator >> profilingByExecutionTime [
+
+	analyzer profilers: { PBACallBacksProfiler new }
+]
+
+{ #category : 'initialization' }
 PBTEvaluator >> profilingByMethodCalls [
 
 	analyzer profilers: { PBACallBacksProfiler new . PBAMethodProfiler new }
+]
+
+{ #category : 'initialization' }
+PBTEvaluator >> profilingByScore [
+
+	self profilingByExecutionTime 
 ]
