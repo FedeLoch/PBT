@@ -7,7 +7,11 @@ Class {
 		'betterValue',
 		'methodsCalled',
 		'topCases',
-		'guide'
+		'guide',
+		'memoryTable',
+		'coverageTable',
+		'performanceTable',
+		'customMetricsTable'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -35,16 +39,25 @@ PBTFeedbackEvaluator >> category: value [
 ]
 
 { #category : 'accessing' }
-PBTFeedbackEvaluator >> compareAndUpdateValues: caseTable [
+PBTFeedbackEvaluator >> compareAndUpdateValues: caseValues [
 
-	^ caseTable keys inject: false into: [ :isPositive :key | | improves |
-		"For the moment the comparision is literal, only if it increments the number is good enough"
-		improves := (self improves: caseTable key: key).
-		improves ifTrue: [ methodsCalled at: key put: (caseTable at: key) ].
+	^ caseValues keys inject: false into: [ :isPositive :key | | improves |
+		improves := self improves: caseValues key: key.
+		improves ifTrue: [ self updateKey: key value: (caseValues at: key) ].
 		isPositive or: [ improves ]
 	]
+]
 
-	
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> coverageTable [
+
+	^ coverageTable
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> coverageTable: aCoverageTable [
+
+	coverageTable := aCoverageTable 
 ]
 
 { #category : 'accessing' }
@@ -60,11 +73,23 @@ PBTFeedbackEvaluator >> criteria: aBlock [
 ]
 
 { #category : 'accessing' }
+PBTFeedbackEvaluator >> customMetricsTable [
+
+	^ customMetricsTable
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> customMetricsTable: dict [
+
+	customMetricsTable := dict
+]
+
+{ #category : 'accessing' }
 PBTFeedbackEvaluator >> eval: case [
 	
 	| isPositive |
 	
-	isPositive := self compareAndUpdateValues: (self tableOfValues: case).
+	isPositive := self compareAndUpdateValues: (self values: case).
 	
 	isPositive ifTrue: [ topCases add: case ].
 
@@ -75,46 +100,71 @@ PBTFeedbackEvaluator >> eval: case [
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByAllocatedMemory [
 
-	guide := PBTMemoryGuide new
+	guide := PBTMemoryGuide new evaluator: self
 ]
 
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByCoverage [
 
-	guide := PBTCoverageGuide new
+	guide := PBTCoverageGuide new evaluator: self
 ]
 
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByExecutionTime [
 
-	guide := PBTExecutionTimeGuide new
+	guide := PBTExecutionTimeGuide new evaluator: self
 ]
 
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByMethodsCalls [
 
-	guide := PBTMethodsCallsGuide new
+	guide := PBTMethodsCallsGuide new evaluator: self
 ]
 
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByScore [
 
-	guide := PBTScoreGuide new
+	guide := PBTScoreGuide new evaluator: self
 ]
 
 { #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> improves: caseTable key: key [
 
-	^ ((methodsCalled includesKey: key) not) or: [ (caseTable at: key) > (methodsCalled at: key) ]
+	^ ((guide tableOfValue includesKey: key) not) or: [ (caseTable at: key) > (guide tableOfValue at: key) ]
 ]
 
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> initialize [ 
 
 	super initialize.
+	
 	methodsCalled := Dictionary new.
+	memoryTable := Dictionary new.
+	coverageTable := Dictionary new.
+	performanceTable := Dictionary new.
+	customMetricsTable := Dictionary new.
+	
 	topCases := OrderedCollection new.
-	self feedbackByMethodsCalls.
+
+	self feedbackByMethodsCalls
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> memoryTable [
+
+	^ memoryTable
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> memoryTable: aMemoryTable [
+
+	memoryTable := aMemoryTable
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> methodsCalled [
+
+	^ methodsCalled
 ]
 
 { #category : 'accessing' }
@@ -124,21 +174,31 @@ PBTFeedbackEvaluator >> methodsCalled: dict [
 ]
 
 { #category : 'accessing' }
-PBTFeedbackEvaluator >> methodsCalledFrom: case [
+PBTFeedbackEvaluator >> performanceTable [
 
-	^ case result profilingResult ifNil: [ Dictionary new ] ifNotNil: [
-		case result profilingResult methodsCalled collect: [ :value | self category: value ]
-	]
+	^ performanceTable
 ]
 
 { #category : 'accessing' }
-PBTFeedbackEvaluator >> tableOfValues: case [
+PBTFeedbackEvaluator >> performanceTable: aTable [
 
-	^ self methodsCalledFrom: case 
+	performanceTable := aTable
 ]
 
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> topCases [
 
 	^ topCases 
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> updateKey: key value: value [
+
+	guide tableOfValue at: key put: value
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> values: case [
+
+	^ guide values: case
 ]

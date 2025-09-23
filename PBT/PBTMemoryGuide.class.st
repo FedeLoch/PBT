@@ -5,3 +5,15 @@ Class {
 	#package : 'PBT',
 	#tag : 'Feedback'
 }
+
+{ #category : 'as yet unclassified' }
+PBTMemoryGuide >> tableOfValue [
+
+	^ evaluator memoryTable
+]
+
+{ #category : 'accessing' }
+PBTMemoryGuide >> values: case [
+
+	1 halt.
+]
