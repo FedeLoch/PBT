@@ -31,7 +31,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByAllocatedMemory; run.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByAllocatedMemory; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -97,7 +97,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByScore; run.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -120,6 +120,17 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 	| pbtResult |
 	
 	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentHillClimbingTest >> testGuidedByMethodsCalled [
+
+	| pbtResult |
+
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

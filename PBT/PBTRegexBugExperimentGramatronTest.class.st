@@ -38,3 +38,14 @@ PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGenerat
 	self assert: (pbtResult tests size) equals: 10000.
 
 ]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentGramatronTest >> testGuidedByMethodsCalled [
+
+	| pbtResult |
+
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]

@@ -25,3 +25,14 @@ PBTRegexBugExperimentRandomTest >> testGivingARandomGeneratorThenWeForceThePerfo
 	self assert: (pbtResult tests size) equals: 10000.
 
 ]
+
+{ #category : 'tests' }
+PBTRegexBugExperimentRandomTest >> testGuidingByMethodsCalls [
+
+	| pbtResult |
+	
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByMethodsCalls; run.
+	
+	self assert: (pbtResult tests size) equals: 10000.
+
+]
