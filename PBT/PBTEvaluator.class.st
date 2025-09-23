@@ -19,7 +19,7 @@ PBTEvaluator >> allocatedMemory [
 { #category : 'as yet unclassified' }
 PBTEvaluator >> classesFor: target [
 
-	targetClasses ifNil: [ targetClasses := target package classes ].
+	targetClasses ifNil: [ targetClasses := target package definedClasses ].
 	
 	^ targetClasses
 ]
