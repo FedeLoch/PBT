@@ -32,7 +32,7 @@ PBTFeedbackEvaluator >> category: value [
 	
 	value == 0 ifTrue: [ ^ 0 ].
 
-	^ value log rounded
+	^ value ln rounded
 ]
 
 { #category : 'accessing' }
