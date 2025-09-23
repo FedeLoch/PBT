@@ -2,7 +2,8 @@ Class {
 	#name : 'PBTEvaluator',
 	#superclass : 'Object',
 	#instVars : [
-		'analyzer'
+		'analyzer',
+		'targetClasses'
 	],
 	#category : 'PBT-Evaluation',
 	#package : 'PBT',
@@ -16,6 +17,14 @@ PBTEvaluator >> allocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
+PBTEvaluator >> classesFor: target [
+
+	targetClasses ifNil: [ targetClasses := target package classes ].
+	
+	^ targetClasses
+]
+
+{ #category : 'as yet unclassified' }
 PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverage: incrCoverage collectingWith: collector [
 
 	| localCoverageResult result assertResult case profilingResult |
@@ -26,7 +35,8 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		
 		"Executing PB Analyzer"
 		case := PBAProgram from:
-			[ result := receiver perform: target selector withArguments: args ] forClasses: target package classes.
+			[ result := receiver perform: target selector withArguments: args ] forClasses: (self classesFor: target).
+
 		profilingResult := analyzer analyze: case.
 
 		localCoverageResult := collector collectResult.
@@ -34,6 +44,7 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		assertResult := schema assert value: receiver value: args value: result
 	] on: Error do: [ :error | ^ PBTEvalError new
 			stack: (error signalerContext stackOfSize: 10);
+			profilingResult: profilingResult;
 			coverageResult: localCoverageResult;
 			message: error messageText
 	].
