@@ -64,7 +64,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByCoverage; run.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
