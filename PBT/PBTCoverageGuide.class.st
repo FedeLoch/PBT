@@ -15,5 +15,7 @@ PBTCoverageGuide >> tableOfValue [
 { #category : 'accessing' }
 PBTCoverageGuide >> values: case [
 
-	1 halt.
+	^ case result profilingResult ifNil: [ Dictionary new ] ifNotNil: [
+		case result profilingResult coverage collect: [ :value | evaluator category: value ]
+	]
 ]

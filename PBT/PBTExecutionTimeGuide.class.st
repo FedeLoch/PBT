@@ -15,5 +15,7 @@ PBTExecutionTimeGuide >> tableOfValue [
 { #category : 'accessing' }
 PBTExecutionTimeGuide >> values: case [
 
-	1 halt.
+	^ case result profilingResult ifNil: [ Dictionary new ] ifNotNil: [ {
+		'executionTime' -> (evaluator category: case result profilingResult executionTime)
+	} asDictionary ]
 ]

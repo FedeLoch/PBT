@@ -15,5 +15,5 @@ PBTScoreGuide >> tableOfValue [
 { #category : 'accessing' }
 PBTScoreGuide >> values: case [
 
-	1 halt.
+	^ { 'score' -> (evaluator category: case score) } asDictionary
 ]
