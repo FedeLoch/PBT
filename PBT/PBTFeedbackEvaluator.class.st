@@ -2,9 +2,6 @@ Class {
 	#name : 'PBTFeedbackEvaluator',
 	#superclass : 'Object',
 	#instVars : [
-		'criteria',
-		'better',
-		'betterValue',
 		'methodsCalled',
 		'topCases',
 		'guide',
@@ -35,7 +32,7 @@ PBTFeedbackEvaluator >> category: value [
 	
 	value == 0 ifTrue: [ ^ 0 ].
 
-	^ value log floor
+	^ value log rounded
 ]
 
 { #category : 'accessing' }
@@ -58,18 +55,6 @@ PBTFeedbackEvaluator >> coverageTable [
 PBTFeedbackEvaluator >> coverageTable: aCoverageTable [
 
 	coverageTable := aCoverageTable 
-]
-
-{ #category : 'accessing' }
-PBTFeedbackEvaluator >> criteria [
-
-	^ criteria 
-]
-
-{ #category : 'accessing' }
-PBTFeedbackEvaluator >> criteria: aBlock [
-
-	criteria := aBlock 
 ]
 
 { #category : 'accessing' }

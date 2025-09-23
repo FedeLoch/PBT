@@ -8,7 +8,8 @@ Class {
 		'performanceResult',
 		'segmentedTests',
 		'ranking',
-		'topCases'
+		'topCases',
+		'feedbackEvaluator'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -28,6 +29,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
 		topCases: topCases;
+		feedbackEvaluator: runner feedbackEvaluator;
 		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
 		performanceResult: perfResult
 ]
@@ -57,6 +59,13 @@ PBTResult >> exportExecutionValues [
 			writer nextPut: {
 					total.
 					test time asMilliSeconds } ] ]
+]
+
+{ #category : 'setter' }
+PBTResult >> feedbackEvaluator: aFeedbackEvaluator [
+
+	feedbackEvaluator := aFeedbackEvaluator
+
 ]
 
 { #category : 'plot' }
