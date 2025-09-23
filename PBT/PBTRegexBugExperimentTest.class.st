@@ -76,9 +76,9 @@ PBTRegexBugExperimentTest >> setUp [
 		coreScore := res profilingResult executionTime.
 		anotherRegex := inputs first asRegex.
 		
-		base := Smalltalk highResClock.
+		base := Time microsecondClockValue.
 		anotherRegex matches: inputs first.
-		gnoccoScore := Smalltalk highResClock - base.
+		gnoccoScore := Time microsecondClockValue - base.
 		(coreScore / (gnoccoScore max: 1)) asFloat "This allows us to avoid division by zero"
 	].
 
