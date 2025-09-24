@@ -12,7 +12,6 @@ Class {
 { #category : 'running' }
 PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> regexConstraint [
 
-
 	| randomGenerator mutationGeneration |
 	randomGenerator := PBTObjectConstraint new
 		  objectClass: String;
@@ -31,7 +30,10 @@ PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> regexConstraint [
 	regexGenerator := PBTGenerator base: [ | re |
 		re := randomGenerator gen.
 		[ re size = 40 ] whileFalse: [ re := randomGenerator gen ].
-		re ] mutating: [ :regexString :constraint :feedback | (mutationGeneration gen: constraint by: feedback) mutate: regexString ].
+		re ] mutating: [ :regexString :constraint :feedback |
+			mutationGeneration feed: feedback.
+			(mutationGeneration gen: constraint) mutate: regexString
+		].
 
 	^ PBTObjectConstraint new generator: regexGenerator
 ]
@@ -52,7 +54,7 @@ PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> testGuidingByMethodsCalls
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByMethodsCalls; run.
+	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 5 minutes) guidedByMethodsCalls; run.
 	
 	self assert: (pbtResult tests size) equals: 1000.
 
