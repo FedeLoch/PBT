@@ -97,7 +97,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGuidingByMethodsCalls [
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 1 minute) guidedByMethodsCalls ; run.
+	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls ; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

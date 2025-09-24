@@ -72,14 +72,16 @@ PBTRegexBugExperimentTest >> setUp [
 
 	assert := [ :regex :input :result | result ].
 	
-	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex base | "Replicating the score experiment"
-		coreScore := res profilingResult executionTime.
-		anotherRegex := inputs first asRegex.
+	score := [ :re :inputs :res | | coreScore gnoccoScore anotherRegex base |
+		res profilingResult ifNil: [ -1 ] ifNotNil: [
+			coreScore := res profilingResult executionTime.
+			anotherRegex := inputs first asRegex.
 		
-		base := Time microsecondClockValue.
-		anotherRegex matches: inputs first.
-		gnoccoScore := Time microsecondClockValue - base.
-		(coreScore / (gnoccoScore max: 1)) asFloat "This allows us to avoid division by zero"
+			base := Time microsecondClockValue.
+			anotherRegex matches: inputs first.
+			gnoccoScore := Time microsecondClockValue - base.
+			(coreScore / (gnoccoScore max: 1)) asFloat "This allows us to avoid division by zero"
+		] 
 	].
 
 	schema := PBTSchema new

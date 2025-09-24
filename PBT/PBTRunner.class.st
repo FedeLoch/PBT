@@ -164,7 +164,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	
 	"Feeds the generator with the test result"
 	feedback := feedbackEvaluator eval: test.
-	generator feedback: feedback.
+	generator feed: feedback.
 	
 	^ test feedback: feedback; assert: schema assert; yourself
 ]
@@ -209,7 +209,7 @@ PBTRunner >> guidedByScore [
 PBTRunner >> initialize [ 
 	super initialize.
 	evaluator := PBTEvaluator new.
-	generator := PBTInputGenerator new.
+	generator := PBTCaseGenerator new.
 	feedbackEvaluator := PBTFeedbackEvaluator new.
 	stopCriteria := PBTCountCriteria new times: 100.
 	
@@ -234,9 +234,8 @@ PBTRunner >> run [
 	collector := C2CoverageCollector new methods: self reachableMethods.
 	incrCoverage := IncrementalCoverageResult for: { target } from: collector.
 	
-	collector runOn: [
-		[
-			self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
+	collector runOn: [ [
+		self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
 			tests add: (self genTest: incrCoverage with: collector).
 		]
 	].

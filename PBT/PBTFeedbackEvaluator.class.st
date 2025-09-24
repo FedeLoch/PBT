@@ -78,7 +78,7 @@ PBTFeedbackEvaluator >> eval: case [
 	
 	isPositive ifTrue: [ topCases add: case ].
 
-	^ PBTFeedback from: case value: isPositive
+	^ isPositive
 	
 ]
 
