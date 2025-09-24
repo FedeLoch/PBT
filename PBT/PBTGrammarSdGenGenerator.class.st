@@ -78,9 +78,13 @@ PBTGrammarSdGenGenerator >> expandFragments: fragments depth: aDepth accumulator
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> gen: constraint by: previousFeedback [
+PBTGrammarSdGenGenerator >> feed: feedback [
 
-	self backpropagate: previousFeedback.	
+	self backpropagate: feedback
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarSdGenGenerator >> gen: constraint [
 
 	^ self expand: grammar start depth: 0
 ]

@@ -89,7 +89,13 @@ PBTGrammarGramatronGenerator >> depth: aDepth [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> gen: constraint by: previousFeedback [
+PBTGrammarGramatronGenerator >> feed: feedback [
+
+	"do nothing"
+]
+
+{ #category : 'as yet unclassified' }
+PBTGrammarGramatronGenerator >> gen: constraint [
 
 	| input state nextOptions next |
 	input := ''.
@@ -101,9 +107,10 @@ PBTGrammarGramatronGenerator >> gen: constraint by: previousFeedback [
 		next := nextOptions atRandom.
 		input := input, next value aMCTSValue.
 		nextState := (self transitionsFrom: next key on: next value) atRandom.
-		nextState == #end ifTrue: [ ^input ].
+		nextState == #end ifTrue: [ ^ input ].
 		state := nextState name.
 		].
+	
 	^ input
 ]
 

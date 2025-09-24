@@ -12,15 +12,15 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTObjectConstraint >> gen [
+PBTObjectConstraint >> feed: pbtFeedback [
 
-	^ generator gen: self
+	generator feed: pbtFeedback
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectConstraint >> genBy: aFeedback [
+PBTObjectConstraint >> gen [
 
-	^ generator gen: self by: aFeedback
+	^ generator gen: self
 ]
 
 { #category : 'accessing' }

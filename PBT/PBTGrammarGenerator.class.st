@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PBTGrammarGenerator >> feed: feedback [
+
+	"do nothing"
+]
+
+{ #category : 'accessing' }
 PBTGrammarGenerator >> gen: myConstraint [
 
 	"Gen a random string that matchs with the instance variable grammar"

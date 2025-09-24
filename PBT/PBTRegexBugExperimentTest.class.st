@@ -19,11 +19,11 @@ PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
 
 	| regex |
 	regex := nil.
-
+1 halt.
 	[ regex ] whileNil: [
 		[
 		| maybe |
-		maybe := (props at: 'grammar') genBy: feedback.
+		maybe := (props at: 'grammar') gen.
 		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error

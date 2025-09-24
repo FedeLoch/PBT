@@ -10,6 +10,12 @@ Class {
 }
 
 { #category : 'accessing' }
+PBTConstantGenerator >> feed: feedback [
+
+	"do nothing"
+]
+
+{ #category : 'accessing' }
 PBTConstantGenerator >> gen: myConstraint [
 
 	^ value

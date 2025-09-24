@@ -9,6 +9,12 @@ Class {
 	#tag : 'Generators'
 }
 
+{ #category : 'as yet unclassified' }
+PBTOptionsGenerator >> feed: feedback [
+
+	"do nothing"
+]
+
 { #category : 'instance creation' }
 PBTOptionsGenerator >> from: aRange [
 

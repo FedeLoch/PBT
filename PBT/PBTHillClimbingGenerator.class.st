@@ -5,7 +5,8 @@ Class {
 		'base',
 		'lastMutated',
 		'genBase',
-		'mutate'
+		'mutate',
+		'lastFeedback'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -13,16 +14,21 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> gen: constraint by: aFeedback [
+PBTHillClimbingGenerator >> feed: aFeedback [
 
+	lastFeedback := aFeedback.
+	
+	base := (lastFeedback notNil and: [ lastFeedback feedback ]) ifTrue: [ lastMutated ] ifFalse: [ base ]
+]
+
+{ #category : 'as yet unclassified' }
+PBTHillClimbingGenerator >> gen: aConstraint [
+	
 	base ifNil: [ self generateBase ].
 	
-	base := (aFeedback notNil and: [ aFeedback feedback ]) ifTrue: [ lastMutated ] ifFalse: [ base ].
-	
-	lastMutated := mutate value: base value: constraint value: aFeedback.
+	lastMutated := mutate value: base value: aConstraint value: lastFeedback.
 	
 	^ lastMutated
-	
 ]
 
 { #category : 'as yet unclassified' }

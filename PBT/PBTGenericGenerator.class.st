@@ -2,7 +2,8 @@ Class {
 	#name : 'PBTGenericGenerator',
 	#superclass : 'PBTGenerator',
 	#instVars : [
-		'do'
+		'do',
+		'prevFeedback'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -28,7 +29,13 @@ PBTGenericGenerator >> do: aBlock [
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> gen: constraint by: aFeedback [
+PBTGenericGenerator >> feed: feedback [
 
-	^ do value: (constraint ifNotNil: [ constraint props ] ifNil: nil) value: aFeedback
+	prevFeedback := feedback 
+]
+
+{ #category : 'accessing' }
+PBTGenericGenerator >> gen: constraint [
+
+	^ do value: (constraint ifNotNil: [ constraint props ] ifNil: nil) value: prevFeedback
 ]

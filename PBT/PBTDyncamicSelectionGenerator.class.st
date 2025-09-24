@@ -11,19 +11,17 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> gen: myConstraint [
+PBTDyncamicSelectionGenerator >> feed: feedback [
 
-	^ self gen: myConstraint by: true 
+	"P(x) = \frac{\text{weight}(x)}{\text{sum of all weights}}"
+	self updateWeight: feedback.
 ]
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> gen: myConstraint by: previousFeedback [
+PBTDyncamicSelectionGenerator >> gen: myConstraint [
 
-	"P(x) = \frac{\text{weight}(x)}{\text{sum of all weights}}"
-	self updateWeight: previousFeedback.
 	lastChosen := self selectOne.
 	^ lastChosen gen: myConstraint
-	
 ]
 
 { #category : 'accessing' }
@@ -58,9 +56,9 @@ PBTDyncamicSelectionGenerator >> selectOne [
 ]
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> updateWeight: previousFeedback [
+PBTDyncamicSelectionGenerator >> updateWeight: feedback [
 
-	(lastChosen isNil or: [previousFeedback isNil]) ifTrue: [ ^nil ].
+	(lastChosen isNil or: [ feedback isNil ]) ifTrue: [ ^ nil ].
 
-	previousFeedback feedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
+	feedback feedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
 ]

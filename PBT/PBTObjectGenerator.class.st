@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PBTObjectGenerator >> feed: feedback [
+
+	"do nothing"
+]
+
+{ #category : 'as yet unclassified' }
 PBTObjectGenerator >> gen: myConstraint [
 	
 	^ then value: objectClass new value: myConstraint props

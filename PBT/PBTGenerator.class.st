@@ -43,12 +43,13 @@ PBTGenerator class >> oneOf: options [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGenerator >> gen: instance [
+PBTGenerator >> feed: feedback [
 	
 	self subclassResponsibility 
 ]
 
 { #category : 'as yet unclassified' }
-PBTGenerator >> gen: constraint by: aFeedback [
-	^ self gen: constraint 
+PBTGenerator >> gen: instance [
+	
+	self subclassResponsibility 
 ]

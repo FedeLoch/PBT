@@ -20,9 +20,15 @@ PBTObjectGrammarGenerator class >> from: anObjectGrammar [
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectGrammarGenerator >> gen: constraint by: previousFeedback [
+PBTObjectGrammarGenerator >> feed: feedback [
 
-	^ self generateObject: (grammarGenerator genDerivation: constraint by: previousFeedback) children first
+	grammarGenerator feed: feedback 
+]
+
+{ #category : 'as yet unclassified' }
+PBTObjectGrammarGenerator >> gen: constraint [
+
+	^ self generateObject: (grammarGenerator genDerivation: constraint) children first
 ]
 
 { #category : 'as yet unclassified' }
