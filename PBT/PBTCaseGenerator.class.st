@@ -45,6 +45,13 @@ PBTCaseGenerator >> genReceiverFor: target from: schema [
 ]
 
 { #category : 'as yet unclassified' }
+PBTCaseGenerator >> initialize [ 
+
+	super initialize.
+	lastFeedback := true
+]
+
+{ #category : 'as yet unclassified' }
 PBTCaseGenerator >> lastArgument: index [
 
 	^ lastArguments ifNil: [ nil ] ifNotNil: [ lastArguments at: index ] 
