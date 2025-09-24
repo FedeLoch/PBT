@@ -27,7 +27,7 @@ PBTDyncamicSelectionGeneratorTest >> testGenerateAnInstanceOfBooleanSelectingThe
 	
 	generator := PBTDyncamicSelectionGenerator new generators: subGenerators.
 
-	self assert: (generator gen: nil by: false) class superclass equals: Boolean
+	self assert: (generator gen: nil) class superclass equals: Boolean
 	
 ]
 
@@ -39,5 +39,5 @@ PBTDyncamicSelectionGeneratorTest >> testGenerateAnInstanceOfBooleanWithTheSameP
 	subGenerators := { constTrueGen . constFalseGen }.
 	generator := PBTDyncamicSelectionGenerator new generators: subGenerators.
 
-	self assert: (generator gen: nil by: false) class superclass equals: Boolean 
+	self assert: (generator gen: nil) class superclass equals: Boolean 
 ]

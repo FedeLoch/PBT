@@ -9,5 +9,5 @@ Class {
 { #category : 'accessing' }
 PBTGeneratorTest >> feedback: value [
 
-	^ PBTFeedback having: nil current: nil with: nil isBetter: value
+	^ PBTFeedback from: nil value: value
 ]

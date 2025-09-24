@@ -13,7 +13,7 @@ PBTGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar 
 	
 	generator := PBTGrammarSdGenGenerator from: PzDateMDYYYYGrammar new ofDepth: 10.
 	
-	self assert: (Date readFrom: (generator gen: nil by: (self feedback: nil)) pattern: 'm-d-y') class equals: Date
+	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
 ]
 
 { #category : 'tests' }
@@ -23,5 +23,5 @@ PBTGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar
 	
 	generator := PBTGrammarSdGenGenerator from: GncRegexGrammar new ofDepth: 10.
 	
-	self assert: (generator gen: nil by: (self feedback: false)) asRegex class equals: RxMatcher
+	self assert: (generator gen: nil) asRegex class equals: RxMatcher
 ]

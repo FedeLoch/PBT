@@ -22,7 +22,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
 
 	generator grammar: PzDateMDYYYYGrammar new.
 
-	self assert: (generator gen: nil by: nil) class equals: Date
+	self assert: (generator gen: nil) class equals: Date
 ]
 
 { #category : 'tests' }
@@ -30,7 +30,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAlwaysTheSameValue [
 
 	generator grammar: ConstantGrammar new.
 
-	self assert: (generator gen: nil by: nil) equals: 42
+	self assert: (generator gen: nil) equals: 42
 ]
 
 { #category : 'tests' }
@@ -38,7 +38,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfBoolean [
 
 	generator grammar: BooleanGrammar new.
 
-	self assert: (generator gen: nil by: nil) class superclass equals: Boolean
+	self assert: (generator gen: nil) class superclass equals: Boolean
 ]
 
 { #category : 'tests' }
@@ -46,7 +46,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfPerson [
 
 	generator grammar: PersonGrammar new.
 
-	self assert: (generator gen: nil by: nil) class equals: Person
+	self assert: (generator gen: nil) class equals: Person
 ]
 
 { #category : 'tests' }
@@ -54,7 +54,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfRectangle [
 
 	generator grammar: RectangleGrammar new.
 
-	self assert: (generator gen: nil by: nil) class equals: Rectangle
+	self assert: (generator gen: nil) class equals: Rectangle
 ]
 
 { #category : 'tests' }
@@ -62,5 +62,5 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfSmallIntegerByRange [
 
 	generator grammar: DecimalGrammar new.
 
-	self assert: ((0 to: 100) includes: (generator gen: nil by: nil)) equals: true
+	self assert: ((0 to: 100) includes: (generator gen: nil)) equals: true
 ]

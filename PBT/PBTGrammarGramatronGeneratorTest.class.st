@@ -13,7 +13,7 @@ PBTGrammarGramatronGeneratorTest >> testGenerateARandomStringFromAGivenARegexGra
 	
 	generator := PBTGrammarGramatronGenerator from: GnfRegexGrammar new ofDepth: 10.
 	
-	regex := generator gen: nil by: (self feedback: false).
+	regex := generator gen: nil.
 	
 	self assert: regex asRegex class equals: RxMatcher.
 	self assert: (regex ~= '') equals: true.

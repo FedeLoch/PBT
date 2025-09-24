@@ -7,6 +7,12 @@ GncLeaf >> allChildren [
 ]
 
 { #category : '*PBT' }
+GncLeaf >> asPharoObject [
+
+	^ self asPrimitiveObject 
+]
+
+{ #category : '*PBT' }
 GncLeaf >> backPropagateToChildren: reward [
 
 	"Do nothing, it's a leaf"

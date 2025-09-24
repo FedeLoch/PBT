@@ -11,7 +11,7 @@ ConstantGrammar >> defineGrammar [
 
 	super defineGrammar.
 	
-	ntRoot  --> '42'.
+	ntRoot --> '42'.
 
 	^ ntRoot
 ]

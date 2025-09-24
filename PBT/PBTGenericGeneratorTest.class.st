@@ -13,5 +13,5 @@ PBTGenericGeneratorTest >> testGenerateAConstantString [
 
 	generator := PBTGenerator do:[ :props :feedback | 'hello' ].
 
-	self assert: (generator gen: nil by: true) equals: 'hello'
+	self assert: (generator gen: nil) equals: 'hello'
 ]

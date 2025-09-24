@@ -9,9 +9,9 @@ Class {
 { #category : 'tests' }
 PBTGrammarMCTSGeneratorTest >> testGenerateARandomDemaProgramFromADemaGrammar [
 
-	| generator generated result |
+	| generator generated |
 	generator := PBTGrammarMCTSGenerator from: DemaGrammar new.
-	generated := generator gen: nil by: (self feedback: nil).
+	generated := generator gen: nil.
 ]
 
 { #category : 'tests' }
@@ -21,7 +21,7 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
 	
 	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
 
-	self assert: (Date readFrom: (generator gen: nil by: (self feedback: nil)) pattern: 'm-d-y') class equals: Date
+	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
 ]
 
 { #category : 'tests' }
@@ -31,9 +31,10 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammarGu
 	
 	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
 	
-	generator gen: nil by: (self feedback: true).
+	generator gen: nil.
+	generator feed: (self feedback: false).
 
-	self assert: (Date readFrom: (generator gen: nil by: (self feedback: false)) pattern: 'm-d-y') class equals: Date
+	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
 ]
 
 { #category : 'tests' }
@@ -43,7 +44,7 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar 
 	
 	generator := PBTGrammarMCTSGenerator from: GncRegexGrammar new.
 
-	self assert: (generator gen: nil by: (self feedback: nil)) asRegex class equals: RxMatcher 
+	self assert: (generator gen: nil) asRegex class equals: RxMatcher 
 ]
 
 { #category : 'tests' }
@@ -53,9 +54,10 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammarG
 	
 	generator := PBTGrammarMCTSGenerator from: GncRegexGrammar new.
 	
-	generator gen: nil by: (self feedback: true).
+	generator gen: nil.
+	generator feed: (self feedback: false).
 
-	self assert: (generator gen: nil by: (self feedback: false)) asRegex class equals: RxMatcher
+	self assert: (generator gen: nil) asRegex class equals: RxMatcher
 ]
 
 { #category : 'tests' }
@@ -63,11 +65,9 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAStonGrammar [
 
 	| generator generated result |
 	generator := PBTGrammarMCTSGenerator from: GncStonGrammar new.
-	generated := generator gen: nil by: (self feedback: nil).
+	generated := generator gen: nil.
 
-	result := STON reader
-		          on: generated readStream;
-		          next.
+	result := STON reader on: generated readStream; next.
 
 	self assert: (result class name beginsWith: 'GncFuzzyClass')
 ]
