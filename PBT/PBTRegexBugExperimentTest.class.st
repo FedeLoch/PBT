@@ -19,11 +19,13 @@ PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
 
 	| regex |
 	regex := nil.
-1 halt.
+
 	[ regex ] whileNil: [
 		[
-		| maybe |
-		maybe := (props at: 'grammar') gen.
+		| maybe grammarConstraint |
+		grammarConstraint := (props at: 'grammar').
+		grammarConstraint feed: feedback.
+		maybe := grammarConstraint gen.
 		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
@@ -54,7 +56,7 @@ PBTRegexBugExperimentTest >> setUp [
 
 	generator := PBTGenerator do: [ :props :feedback |
 		             | regex |
-		             regex := self regexByProp: props and: feedback. "(props at: 'grammar') genBy: feedback."
+		             regex := self regexByProp: props and: feedback.
 		             props at: 'input' put: regex minimalStringMatching.
 						 PBTRegex fromString: regex ].
 
