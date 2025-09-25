@@ -29,7 +29,7 @@ GenericGrammar >> defineGrammar [
 	
 	ntDecimal --> ntDigit, ntDigit.
 	
-	ntInteger --> ntDecimal.
+	ntInteger --> ntDigit | ntDigit, ntInteger.
 	
 	ntBoolean --> 'false' | 'true'.
 	

@@ -39,11 +39,17 @@ PBTCorpusWithMutationsGenerator >> generator: aGenerator [
 ]
 
 { #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> heuristic: aHeuristic [
+
+	heuristic := aHeuristic 
+]
+
+{ #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> initialize [ 
 	
 	super initialize.
 	heuristic := PBTRandomSelectorHeuristic new.
-	corpus := {}
+	corpus := OrderedCollection new.
 ]
 
 { #category : 'as yet unclassified' }

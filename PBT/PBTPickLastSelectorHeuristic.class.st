@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRandomSelectorHeuristic',
+	#name : 'PBTPickLastSelectorHeuristic',
 	#superclass : 'PBTSelectorHeuristic',
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tree building' }
-PBTRandomSelectorHeuristic >> pickOne: candidates [
+PBTPickLastSelectorHeuristic >> pickOne: candidates [
 
-	^ candidates atRandom 
+	^ candidates last
 ]
