@@ -39,3 +39,9 @@ PBTFeedback >> feedback: someFeedback [
 	
 	feedback := someFeedback 
 ]
+
+{ #category : 'accessing' }
+PBTFeedback >> isPositive [
+
+	^ feedback
+]
