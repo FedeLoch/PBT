@@ -16,10 +16,10 @@ Class {
 PBTCorpusWithMutationsGeneratorTest >> setUp [
 
 	super setUp.
-	subGenerator := PBTGrammarMCTSGenerator from: StringGrammarWithoutRanges new.
+	subGenerator := PBTGrammarMCTSGenerator from: JSONGrammar new.
 	heuristic := PBTPickLastSelectorHeuristic new.
 	mutators := {
-		PBTMutator mutate: [ :string  | (string, ($a to: $z) atRandom asString) reverse ]
+		PBTMutator mutate: [ :jsonString  | '[', jsonString, ',', (subGenerator gen: nil), ']' ]
 	}.
 	
 	generator := PBTCorpusWithMutationsGenerator new
@@ -54,6 +54,17 @@ PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFe
 PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackFiveTimes [
 
 	5 timesRepeat: [ | case |
+		case := generator gen: nil.
+		generator feed: (PBTFeedback from: case value: true).
+	].
+	
+	self assert: (generator gen: nil) equals: 'godhpkhsp'
+]
+
+{ #category : 'tests' }
+PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackTwentyTimes [
+
+	20 timesRepeat: [ | case |
 		case := generator gen: nil.
 		generator feed: (PBTFeedback from: case value: true).
 	].
