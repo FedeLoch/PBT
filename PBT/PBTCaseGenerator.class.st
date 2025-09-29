@@ -12,24 +12,24 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feed: feedback [
+PBTCaseGenerator >> feed: improvementFeedback [
 	
-	self feedReceiverGenerator: feedback.
-	self feedArgumentsGenerators: feedback
+	self feedReceiverGenerator: improvementFeedback.
+	self feedArgumentsGenerators: improvementFeedback
 ]
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feedArgumentsGenerators: feedback [
+PBTCaseGenerator >> feedArgumentsGenerators: improvementFeedback [
 
 	schema argumentConstraints collectWithIndex: [ :inputConstraint :index |
-		inputConstraint feed: (PBTFeedback from: (self lastArgument: index) value: feedback)
+		inputConstraint feed: (PBTFeedback from: (self lastArgument: index) improvement: improvementFeedback)
 	]
 ]
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feedReceiverGenerator: feedback [
+PBTCaseGenerator >> feedReceiverGenerator: improvementFeedback [
 
-	schema receiverConstraint feed: (PBTFeedback from: lastReceiver value: feedback)
+	schema receiverConstraint feed: (PBTFeedback from: lastReceiver improvement: improvementFeedback)
 ]
 
 { #category : 'as yet unclassified' }

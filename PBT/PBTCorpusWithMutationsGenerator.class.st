@@ -5,7 +5,8 @@ Class {
 		'generator',
 		'mutators',
 		'corpus',
-		'heuristic'
+		'heuristic',
+		'feedbacks'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -13,9 +14,10 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> addToCorpus: case [
+PBTCorpusWithMutationsGenerator >> addToCorpus: feedback [
 
-	corpus add: case
+	corpus add: feedback case.
+	feedbacks add: feedback
 ]
 
 { #category : 'as yet unclassified' }
@@ -23,7 +25,7 @@ PBTCorpusWithMutationsGenerator >> feed: feedback [
 
 	feedback ifNotNil: [
 		generator feed: feedback.
-		feedback isPositive ifTrue: [ self addToCorpus: feedback case ]
+		feedback isPositive ifTrue: [ self addToCorpus: feedback ]
 	]
 ]
 
@@ -51,6 +53,7 @@ PBTCorpusWithMutationsGenerator >> initialize [
 	super initialize.
 	heuristic := PBTRandomSelectorHeuristic new.
 	corpus := OrderedCollection new.
+	feedbacks := OrderedCollection new.
 ]
 
 { #category : 'as yet unclassified' }
@@ -64,5 +67,5 @@ PBTCorpusWithMutationsGenerator >> pickOne: aConstraint [
 
 	corpus ifEmpty: [ ^ generator gen: aConstraint ].
 	
-	^ heuristic pickOne: corpus
+	^ heuristic pickOne: corpus feedbacks: feedbacks
 ]

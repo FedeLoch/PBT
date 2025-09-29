@@ -12,12 +12,12 @@ PBTRegexBugExperimentPerfuzzTest >> regexConstraint [
 	| mutator terminalString |
 	terminalString := 'abc+|?*.'.
 
-	mutator := PBTMutator mutate: [ :regexString | RxMatcher mutateCharacter: regexString using: terminalString ].
+	mutator := PBTMutator mutate: [ :regex | RxMatcher mutateCharacter: regex using: terminalString ].
 
 	^ PBTObjectConstraint new generator: (PBTCorpusWithMutationsGenerator new
 			   generator: (PBTGrammarMCTSGenerator from: GncRegexGrammar new);
 			   mutators: { mutator };
-			   heuristic: PBTPickLastSelectorHeuristic new
+			   heuristic: PBTPickBestFeedbackSelectorHeuristic new
 	)
 ]
 

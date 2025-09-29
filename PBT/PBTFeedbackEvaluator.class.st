@@ -38,10 +38,12 @@ PBTFeedbackEvaluator >> category: value [
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> compareAndUpdateValues: caseValues [
 
-	^ caseValues keys inject: false into: [ :isPositive :key | | improves |
-		improves := self improves: caseValues key: key.
-		improves ifTrue: [ self updateKey: key value: (caseValues at: key) ].
-		isPositive or: [ improves ]
+	^ caseValues keys inject: 0 into: [ :improvement :key | | difference |
+		difference := (caseValues at: key) - (self valueAt: key).
+		difference positive ifTrue: [
+			self updateKey: key value: (caseValues at: key)
+		].
+		improvement + (difference max: 0)
 	]
 ]
 
@@ -72,13 +74,12 @@ PBTFeedbackEvaluator >> customMetricsTable: dict [
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> eval: case [
 	
-	| isPositive |
+	| improvement |
 	
-	isPositive := self compareAndUpdateValues: (self values: case).
-	
-	isPositive ifTrue: [ topCases add: case ].
+	improvement := self compareAndUpdateValues: (self values: case).
+	improvement positive ifTrue: [ topCases add: case ].
 
-	^ isPositive
+	^ improvement
 	
 ]
 
@@ -110,12 +111,6 @@ PBTFeedbackEvaluator >> feedbackByMethodsCalls [
 PBTFeedbackEvaluator >> feedbackByScore [
 
 	guide := PBTScoreGuide new evaluator: self
-]
-
-{ #category : 'as yet unclassified' }
-PBTFeedbackEvaluator >> improves: caseTable key: key [
-
-	^ ((guide tableOfValue includesKey: key) not) or: [ (caseTable at: key) > (guide tableOfValue at: key) ]
 ]
 
 { #category : 'accessing' }
@@ -180,6 +175,12 @@ PBTFeedbackEvaluator >> topCases [
 PBTFeedbackEvaluator >> updateKey: key value: value [
 
 	guide tableOfValue at: key put: value
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> valueAt: key [
+
+	^ guide tableOfValue at: key ifPresent: [ guide tableOfValue at: key ] ifAbsentPut: [ 0 ]
 ]
 
 { #category : 'accessing' }
