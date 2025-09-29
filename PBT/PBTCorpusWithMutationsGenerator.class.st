@@ -21,9 +21,10 @@ PBTCorpusWithMutationsGenerator >> addToCorpus: case [
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> feed: feedback [
 
-	generator feed: feedback.
-	
-	feedback isPositive ifTrue: [ self addToCorpus: feedback case ]
+	feedback ifNotNil: [
+		generator feed: feedback.
+		feedback isPositive ifTrue: [ self addToCorpus: feedback case ]
+	]
 ]
 
 { #category : 'as yet unclassified' }

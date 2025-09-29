@@ -83,20 +83,27 @@ RxMatcher class >> mutate: stringRegex [
 { #category : '*PBT' }
 RxMatcher class >> mutateCharacter: stringRegex using: otherString [
 
-	| result |
+	| result target |
+	target := stringRegex class = PBTRegex
+		          ifTrue: [ stringRegex regexString ]
+		          ifFalse: [ stringRegex ].
+
 	result := nil.
 
-	[result] whileNil: [
+	[ result ] whileNil: [
 		[
 		| copied at valueToInsert |
-		copied := stringRegex deepCopy.
-		at := (1 to: copied size) atRandom.
+		copied := target copy.
 		valueToInsert := otherString atRandom.
-		copied at: at put: valueToInsert asCharacter.
+		at := (1 to: copied size) atRandom.
+		copied size < 40
+			ifTrue: [ copied := (copied copyFrom: 1  to: at), valueToInsert asString, (copied copyFrom: at to: copied size) ]
+			ifFalse: [
+				copied at: at put: valueToInsert asCharacter ].
 		copied asRegex.
 		result := copied ]
 			on: Error
-			do: [  ] ].
+			do: [ :e | e class = RegexSyntaxError ifFalse: [ 1 halt ] ] ].
 
 	^ result
 ]
