@@ -2,8 +2,6 @@ Class {
 	#name : 'PBTCaseGenerator',
 	#superclass : 'Object',
 	#instVars : [
-		'lastReceiver',
-		'lastArguments',
 		'schema'
 	],
 	#category : 'PBT-Generators',
@@ -12,24 +10,24 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feed: improvementFeedback [
+PBTCaseGenerator >> feed: caseFeedback [
 	
-	self feedReceiverGenerator: improvementFeedback.
-	self feedArgumentsGenerators: improvementFeedback
+	self feedReceiverGenerator: caseFeedback.
+	self feedArgumentsGenerators: caseFeedback
 ]
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feedArgumentsGenerators: improvementFeedback [
+PBTCaseGenerator >> feedArgumentsGenerators: caseFeedback [
 
 	schema argumentConstraints collectWithIndex: [ :inputConstraint :index |
-		inputConstraint feed: (PBTFeedback from: (self lastArgument: index) improvement: improvementFeedback)
+		inputConstraint feed: (caseFeedback argumentFeedbackCase: index)
 	]
 ]
 
 { #category : 'as yet unclassified' }
-PBTCaseGenerator >> feedReceiverGenerator: improvementFeedback [
+PBTCaseGenerator >> feedReceiverGenerator: caseFeedback [
 
-	schema receiverConstraint feed: (PBTFeedback from: lastReceiver improvement: improvementFeedback)
+	schema receiverConstraint feed: (caseFeedback receiverFeedback)
 ]
 
 { #category : 'as yet unclassified' }
@@ -37,11 +35,9 @@ PBTCaseGenerator >> genArgumentsFor: target from: aSchema [
 	
 	self schema: aSchema.
 	
-	lastArguments := schema argumentConstraints collect: [ :inputConstraint |
+	^ schema argumentConstraints collect: [ :inputConstraint |
 		self genInstanceFor: inputConstraint
-	].
-
-	^ lastArguments
+	]
 
 ]
 
@@ -56,15 +52,7 @@ PBTCaseGenerator >> genReceiverFor: target from: aSchema [
 
 	self schema: aSchema.
 	
-	lastReceiver := self genInstanceFor: schema receiverConstraint.
-	
-	^ lastReceiver
-]
-
-{ #category : 'as yet unclassified' }
-PBTCaseGenerator >> lastArgument: index [
-
-	^ lastArguments ifNil: [ nil ] ifNotNil: [ lastArguments at: index ] 
+	^ self genInstanceFor: schema receiverConstraint
 ]
 
 { #category : 'as yet unclassified' }

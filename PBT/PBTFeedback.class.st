@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'case',
 		'feedback',
-		'improvement'
+		'improvement',
+		'values'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -12,9 +13,9 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTFeedback class >> from: case improvement: improvement [
+PBTFeedback class >> from: case improvement: improvement values: values [
 
-	^ self new case: case; feedback: improvement > 0; improvement: improvement
+	^ self new case: case; feedback: improvement > 0; improvement: improvement; values: values
 ]
 
 { #category : 'accessing' }
@@ -57,4 +58,16 @@ PBTFeedback >> improvement: anImprovement [
 PBTFeedback >> isPositive [
 
 	^ feedback
+]
+
+{ #category : 'accessing' }
+PBTFeedback >> values [
+
+	^ values
+]
+
+{ #category : 'accessing' }
+PBTFeedback >> values: someValues [
+
+	values := someValues
 ]

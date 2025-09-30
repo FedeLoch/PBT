@@ -22,8 +22,8 @@ PBTCorpusWithMutationsGenerator >> addToCorpus: feedback [
 
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> feed: feedback [
-	1 halt.
-	[ feedback notNil and: [ feedback isPositive ] ] ifTrue: [
+
+	((feedback notNil) and: [ feedback isPositive ]) ifTrue: [
 		self addToCorpus: feedback
 	]
 ]

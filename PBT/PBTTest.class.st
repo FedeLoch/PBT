@@ -31,6 +31,12 @@ PBTTest >> announce: anAnnouncementClass withResult: result [
 ]
 
 { #category : 'accessing' }
+PBTTest >> arguments [
+
+	^ arguments
+]
+
+{ #category : 'accessing' }
 PBTTest >> arguments: inputs [
 
 	arguments := inputs

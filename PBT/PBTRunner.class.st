@@ -140,7 +140,7 @@ PBTRunner >> genReport: tests since: time withCoverage: totalCoverageResult [
 { #category : 'tests' }
 PBTRunner >> genTest: incrCoverage with: collector [
 
-	| arguments receiver result score improvementFeedback test |
+	| arguments receiver result score caseFeedback test |
 	
 	"Setup based on the enriched schema"
 	receiver := generator genReceiverFor: target from: schema.
@@ -163,10 +163,10 @@ PBTRunner >> genTest: incrCoverage with: collector [
 		result: result.
 	
 	"Feeds the generator with the test result"
-	improvementFeedback := feedbackEvaluator eval: test.
-	generator feed: improvementFeedback.
+	caseFeedback := feedbackEvaluator eval: test.
+	generator feed: caseFeedback.
 	
-	^ test feedback: improvementFeedback > 0; assert: schema assert; yourself
+	^ test feedback: caseFeedback; assert: schema assert; yourself
 ]
 
 { #category : 'as yet unclassified' }

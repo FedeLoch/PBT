@@ -74,12 +74,13 @@ PBTFeedbackEvaluator >> customMetricsTable: dict [
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> eval: case [
 	
-	| improvement |
+	| improvement caseValues |
 	
-	improvement := self compareAndUpdateValues: (self values: case).
+	caseValues := self values: case.
+	improvement := self compareAndUpdateValues: caseValues.
 	improvement > 0 ifTrue: [ topCases add: case ].
 
-	^ improvement
+	^ PBTCaseFeedback from: case improvement: improvement values: caseValues 
 	
 ]
 
