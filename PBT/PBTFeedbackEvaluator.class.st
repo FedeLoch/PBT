@@ -187,5 +187,5 @@ PBTFeedbackEvaluator >> valueAt: key [
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> values: case [
 
-	^ guide values: case
+	^ (guide values: case) select: [ :value | value > 0 ]
 ]
