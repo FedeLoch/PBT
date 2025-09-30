@@ -18,7 +18,7 @@ PBTRegexBugExperimentPerfuzzTest >> regexConstraint [
 	^ PBTObjectConstraint new generator: (PBTCorpusWithMutationsGenerator new
 			   seedGenerator: randomGenerator;
 			   mutators: { mutator };
-			   heuristic: PBTPickBestFeedbackSelectorHeuristic new
+			   heuristic: PBTPickBestElementDifferenceHeuristic new
 	)
 ]
 
