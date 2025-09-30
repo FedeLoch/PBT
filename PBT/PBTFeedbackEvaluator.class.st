@@ -77,7 +77,7 @@ PBTFeedbackEvaluator >> eval: case [
 	| improvement |
 	
 	improvement := self compareAndUpdateValues: (self values: case).
-	improvement positive ifTrue: [ topCases add: case ].
+	improvement > 0 ifTrue: [ topCases add: case ].
 
 	^ improvement
 	

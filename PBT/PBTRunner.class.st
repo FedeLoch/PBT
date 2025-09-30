@@ -166,7 +166,7 @@ PBTRunner >> genTest: incrCoverage with: collector [
 	improvementFeedback := feedbackEvaluator eval: test.
 	generator feed: improvementFeedback.
 	
-	^ test feedback: improvementFeedback positive; assert: schema assert; yourself
+	^ test feedback: improvementFeedback > 0; assert: schema assert; yourself
 ]
 
 { #category : 'as yet unclassified' }

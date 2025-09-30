@@ -15,7 +15,7 @@ PBTRegexBugExperimentPerfuzzTest >> regexConstraint [
 	mutator := PBTMutator mutate: [ :regex | RxMatcher mutateCharacter: regex using: terminalString ].
 
 	^ PBTObjectConstraint new generator: (PBTCorpusWithMutationsGenerator new
-			   generator: (PBTGrammarMCTSGenerator from: GncRegexGrammar new);
+			   seedGenerator: (PBTGrammarGramatronGenerator from: GncRegexGrammar new ofDepth: 10);
 			   mutators: { mutator };
 			   heuristic: PBTPickBestFeedbackSelectorHeuristic new
 	)
@@ -26,7 +26,7 @@ PBTRegexBugExperimentPerfuzzTest >> testGuidingByMethodsCalls [
 
 	| runner result |
 	
-	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls.
+	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minute) guidedByMethodsCalls.
 	result := runner run.
 	
 	self assert: (result tests size) equals: 10000.

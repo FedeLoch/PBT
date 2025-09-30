@@ -2,11 +2,11 @@ Class {
 	#name : 'PBTCorpusWithMutationsGenerator',
 	#superclass : 'PBTGenerator',
 	#instVars : [
-		'generator',
 		'mutators',
 		'corpus',
 		'heuristic',
-		'feedbacks'
+		'feedbacks',
+		'seedGenerator'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -22,23 +22,16 @@ PBTCorpusWithMutationsGenerator >> addToCorpus: feedback [
 
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> feed: feedback [
-
-	feedback ifNotNil: [
-		generator feed: feedback.
-		feedback isPositive ifTrue: [ self addToCorpus: feedback ]
+	1 halt.
+	[ feedback notNil and: [ feedback isPositive ] ] ifTrue: [
+		self addToCorpus: feedback
 	]
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> gen: aConstraint [
+PBTCorpusWithMutationsGenerator >> gen: constraint [
 
-	^ mutators inject: (self pickOne: aConstraint) into: [ :seed :mutator | mutator mutate: seed ]
-]
-
-{ #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> generator: aGenerator [
-
-	generator := aGenerator 
+	^ mutators inject: (self pickOne: constraint) into: [ :seed :mutator | mutator mutate: seed ]
 ]
 
 { #category : 'as yet unclassified' }
@@ -63,9 +56,21 @@ PBTCorpusWithMutationsGenerator >> mutators: someMutators [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> pickOne: aConstraint [
+PBTCorpusWithMutationsGenerator >> pickOne: constraint [
 
-	corpus ifEmpty: [ ^ generator gen: aConstraint ].
+	corpus ifEmpty: [ ^ self seed: constraint ].
 	
 	^ heuristic pickOne: corpus feedbacks: feedbacks
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> seed: constraint [
+
+	^ seedGenerator gen: constraint
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> seedGenerator: aGenerator [
+
+	seedGenerator := aGenerator 
 ]
