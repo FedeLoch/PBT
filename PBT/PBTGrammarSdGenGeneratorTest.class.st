@@ -17,6 +17,16 @@ PBTGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar 
 ]
 
 { #category : 'tests' }
+PBTGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenAJSONGrammar [
+
+	| generator generated |
+	
+	generator := PBTGrammarSdGenGenerator from: JSONGrammar new ofDepth: 10.
+	generated := generator gen: nil.
+	self assert: ({ Array . SmallInteger . True . False . Dictionary . UndefinedObject } includes: (NeoJSONReader fromString: generated) class) equals: true 
+]
+
+{ #category : 'tests' }
 PBTGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
 
 	| generator |

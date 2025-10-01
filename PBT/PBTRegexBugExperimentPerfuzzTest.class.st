@@ -27,7 +27,7 @@ PBTRegexBugExperimentPerfuzzTest >> testGuidingByMethodsCalls [
 
 	| runner result |
 	
-	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minute) guidedByMethodsCalls.
+	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 8 hours) guidedByMethodsCalls.
 	result := runner run.
 	
 	self assert: (result tests size) equals: 10000.

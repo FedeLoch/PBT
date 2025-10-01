@@ -15,3 +15,15 @@ String >> minimalStringMatching [
 
     ^ (RxParser parse: self) minimalString
 ]
+
+{ #category : '*PBT' }
+String >> mutateArray: anArray [
+
+	^ anArray, { self }
+]
+
+{ #category : '*PBT' }
+String >> mutateJson: json [
+
+	^ json
+]
