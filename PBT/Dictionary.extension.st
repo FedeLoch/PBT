@@ -8,6 +8,8 @@ Dictionary >> mutateArray: anArray [
 
 { #category : '*PBT' }
 Dictionary >> mutateJson: anotherJson [
+
+	self ifEmpty: [ ^ anotherJson ].
 	
 	self at: (self keys atRandom) update: [ :value |
 		value ifNil: [ anotherJson ] ifNotNil: [ value mutateJson: anotherJson ]

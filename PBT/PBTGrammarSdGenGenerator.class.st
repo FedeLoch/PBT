@@ -94,7 +94,7 @@ PBTGrammarSdGenGenerator >> getUntilTerminal: node [
 
 	node isTerminal ifTrue: [ ^ node aMCTSValue ].
 	
-	^ (node rules sorted: [ :r1 :r2 | r1 minSize < r2 minSize ]) first fragments inject: '' into: [ :r :n | r, (self getUntilTerminal: n) ] 
+	^ (node rules sorted: [ :r1 :r2 | r1 minSize < r2 minSize ]) first fragments inject: '' into: [ :r :n | r, (self getUntilTerminal: n) asString ] 
 ]
 
 { #category : 'accessing' }
