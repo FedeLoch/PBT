@@ -7,9 +7,27 @@ Array >> mutateArray: anArray [
 ]
 
 { #category : '*PBT' }
+Array >> mutateDictionary: dict [
+
+	^ dict mutateIntroducing: self
+]
+
+{ #category : '*PBT' }
+Array >> mutateInteger: integer [
+
+	^ self, { integer }
+]
+
+{ #category : '*PBT' }
 Array >> mutateJson: anotherInput [
 
 	anotherInput ifNil: [ ^ self ].
 
 	^ anotherInput mutateArray: self
+]
+
+{ #category : '*PBT' }
+Array >> mutateString: string [
+
+	^ self, { string }
 ]

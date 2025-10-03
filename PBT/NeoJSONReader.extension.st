@@ -7,7 +7,7 @@ NeoJSONReader class >> mutate: input with: anotherInput [
 
 	json := self fromString: input.
 	json ifNil: [ ^ anotherInput ].
-	
+
 	^ NeoJSONWriter toString: (json mutateJson: (self fromString: anotherInput)).
 
 ]

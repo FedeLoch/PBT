@@ -7,7 +7,25 @@ SmallInteger >> mutateArray: anArray [
 ]
 
 { #category : '*PBT' }
+SmallInteger >> mutateDictionary: dict [
+
+	^ dict mutateIntroducing: self
+]
+
+{ #category : '*PBT' }
+SmallInteger >> mutateInteger: integer [
+
+	^ self + integer 
+]
+
+{ #category : '*PBT' }
 SmallInteger >> mutateJson: anotherJson [
 
-	^ anotherJson
+	^ anotherJson mutateInteger: self
+]
+
+{ #category : '*PBT' }
+SmallInteger >> mutateString: string [
+
+	^ self 
 ]

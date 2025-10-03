@@ -23,7 +23,27 @@ String >> mutateArray: anArray [
 ]
 
 { #category : '*PBT' }
-String >> mutateJson: json [
+String >> mutateDictionary: dict [
 
-	^ json
+	^ dict mutateIntroducing: self
+]
+
+{ #category : '*PBT' }
+String >> mutateInteger: integer [
+
+	^ self
+]
+
+{ #category : '*PBT' }
+String >> mutateJson: json [
+	
+	json ifNil: [ ^ self ].
+	
+	^ json mutateString: self
+]
+
+{ #category : '*PBT' }
+String >> mutateString: string [
+
+	^ self, string
 ]

@@ -11,11 +11,11 @@ PBTJSONExperimentPerfuzzTest >> jsonGenerator [
 
 	| mutator randomGenerator |
 	
-	randomGenerator := PBTGrammarSdGenGenerator from: JSONGrammar new ofDepth: 10.
+	randomGenerator := (PBTGrammarMCTSGenerator from: JSONGrammar new) maxSize: Float infinity.
+	"PBTGrammarSdGenGenerator from: JSONGrammar new ofDepth: 10".
 	
-	mutator := PBTMutator mutate: [ :input | | input2 |
-		input2 := randomGenerator gen: nil.
-		NeoJSONReader mutate: input with: input2
+	mutator := PBTMutator mutate: [ :input |
+		NeoJSONReader mutate: input with: (randomGenerator gen: nil)
 	].
 
 	^ PBTCorpusWithMutationsGenerator new
@@ -28,7 +28,7 @@ PBTJSONExperimentPerfuzzTest >> testGuidingByMethodsCalls [
 
 	| runner result |
 	
-	runner := (PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 5 minute) guidedByMethodsCalls.
+	runner := (PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 15 minutes) guidedByMethodsCalls.
 	result := runner run.
 	
 	self assert: (result tests size) equals: 10000.

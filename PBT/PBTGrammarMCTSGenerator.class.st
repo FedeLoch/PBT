@@ -121,7 +121,12 @@ PBTGrammarMCTSGenerator >> initialize [
 { #category : 'setter' }
 PBTGrammarMCTSGenerator >> maxSize: aSize [
 
-	maxSize := aSize 
+	maxSize := aSize.
+	generator := GrammarMCTSGenerator new
+		             maxHeight: 20;
+		             maxSize: maxSize + 60;
+		             totalGenerations: totalGenerations;
+		             explorationConstant: explorationConstant
 ]
 
 { #category : 'as yet unclassified' }
