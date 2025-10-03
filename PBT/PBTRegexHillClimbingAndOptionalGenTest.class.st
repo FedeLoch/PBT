@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentHillClimbingAndOptionalGenTest',
+	#name : 'PBTRegexHillClimbingAndOptionalGenTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'regexGenerator'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> regexConstraint [
+PBTRegexHillClimbingAndOptionalGenTest >> regexConstraint [
 
 	| randomGenerator mutationGeneration |
 	randomGenerator := PBTObjectConstraint new
@@ -39,7 +39,7 @@ PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
+PBTRegexHillClimbingAndOptionalGenTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
 
 	| pbtResult |
 
@@ -50,7 +50,7 @@ PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> testGivingARegexFuzzerAnd
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingAndOptionalGenTest >> testGuidingByMethodsCalls [
+PBTRegexHillClimbingAndOptionalGenTest >> testGuidingByMethodsCalls [
 
 	| pbtResult |
 

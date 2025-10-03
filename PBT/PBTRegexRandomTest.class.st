@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentRandomTest',
+	#name : 'PBTRegexRandomTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'regexGenerator'
@@ -10,13 +10,13 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentRandomTest >> regexConstraint [
+PBTRegexRandomTest >> regexConstraint [
 		
 	^ PBTObjectConstraint new generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentRandomTest >> testGivingARandomGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
+PBTRegexRandomTest >> testGivingARandomGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
 
 	| pbtResult |
 	
@@ -27,7 +27,7 @@ PBTRegexBugExperimentRandomTest >> testGivingARandomGeneratorThenWeForceThePerfo
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentRandomTest >> testGuidingByMethodsCalls [
+PBTRegexRandomTest >> testGuidingByMethodsCalls [
 
 	| pbtResult |
 	

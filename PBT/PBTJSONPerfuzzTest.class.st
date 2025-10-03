@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTJSONExperimentPerfuzzTest',
+	#name : 'PBTJSONPerfuzzTest',
 	#superclass : 'PBTJSONExperimentTest',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTJSONExperimentPerfuzzTest >> jsonGenerator [
+PBTJSONPerfuzzTest >> jsonGenerator [
 
 	| mutator randomGenerator |
 	
@@ -24,7 +24,7 @@ PBTJSONExperimentPerfuzzTest >> jsonGenerator [
 ]
 
 { #category : 'tests' }
-PBTJSONExperimentPerfuzzTest >> testGuidingByMethodsCalls [ 
+PBTJSONPerfuzzTest >> testGuidingByMethodsCalls [ 
 
 	| runner result |
 	

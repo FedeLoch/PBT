@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentHillClimbingTest',
+	#name : 'PBTRegexHillClimbingTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'regexGenerator'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> regexConstraint [
+PBTRegexHillClimbingTest >> regexConstraint [
 
 
 	| randomGenerator |
@@ -27,7 +27,7 @@ PBTRegexBugExperimentHillClimbingTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
 
 	| pbtResult |
 	
@@ -38,7 +38,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
 
 	| pbtResult |
 	
@@ -49,7 +49,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
 
 	| pbtResult |
 	
@@ -60,7 +60,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 	
@@ -71,7 +71,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
 
 	| pbtResult |
 	
@@ -82,7 +82,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
 
 	| pbtResult |
 	
@@ -93,7 +93,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScore [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScore [
 
 	| pbtResult |
 
@@ -104,7 +104,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTime [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTime [
 
 	| pbtResult |
 	
@@ -115,7 +115,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
+PBTRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
 
 	| pbtResult |
 	
@@ -126,7 +126,7 @@ PBTRegexBugExperimentHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingG
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentHillClimbingTest >> testGuidedByMethodsCalled [
+PBTRegexHillClimbingTest >> testGuidedByMethodsCalled [
 
 	| pbtResult |
 

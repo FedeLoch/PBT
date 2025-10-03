@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentGramatronTest',
+	#name : 'PBTRegexGramatronTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'grammarRegex'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentGramatronTest >> regexConstraint [
+PBTRegexGramatronTest >> regexConstraint [
 
 	grammarRegex := GnfRegexGrammar new.
 	
@@ -18,7 +18,7 @@ PBTRegexBugExperimentGramatronTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 
@@ -29,7 +29,7 @@ PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGenerat
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
+PBTRegexGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
 
@@ -40,7 +40,7 @@ PBTRegexBugExperimentGramatronTest >> testGivingARegexFuzzerAndAGramatronGenerat
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentGramatronTest >> testGuidedByMethodsCalled [
+PBTRegexGramatronTest >> testGuidedByMethodsCalled [
 
 	| pbtResult |
 

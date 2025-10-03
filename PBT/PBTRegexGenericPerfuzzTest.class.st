@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentPerfuzzTest',
+	#name : 'PBTRegexGenericPerfuzzTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentPerfuzzTest >> regexConstraint [
+PBTRegexGenericPerfuzzTest >> regexConstraint [
 
 	| mutator terminalString randomGenerator |
 	terminalString := 'abc+|?*.'.
@@ -23,11 +23,11 @@ PBTRegexBugExperimentPerfuzzTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentPerfuzzTest >> testGuidingByMethodsCalls [ 
+PBTRegexGenericPerfuzzTest >> testGuidingByMethodsCalls [ 
 
 	| runner result |
 	
-	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 8 hours) guidedByMethodsCalls.
+	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls.
 	result := runner run.
 	
 	self assert: (result tests size) equals: 10000.

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentMCTSTest',
+	#name : 'PBTRegexMCTSTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'grammarRegex'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentMCTSTest >> regexConstraint [
+PBTRegexMCTSTest >> regexConstraint [
 
 	grammarRegex := GncRegexGrammar new.
 	
@@ -18,7 +18,7 @@ PBTRegexBugExperimentMCTSTest >> regexConstraint [
 ]
 
 { #category : 'as yet unclassified' }
-PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 
@@ -29,7 +29,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 ]
 
 { #category : 'as yet unclassified' }
-PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
+PBTRegexMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
 
@@ -40,7 +40,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 ]
 
 { #category : 'as yet unclassified' }
-PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
+PBTRegexMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
 	
@@ -51,7 +51,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByguidedByAllocatedMemoryByTimeWithShallow [
+PBTRegexMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeForceThePerformanceBugGuidedByguidedByAllocatedMemoryByTimeWithShallow [
 
 	| pbtResult |
 
@@ -62,7 +62,7 @@ PBTRegexBugExperimentMCTSTest >> testGivingARegexFuzzerAndAMCTSGeneratorThenWeFo
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentMCTSTest >> testGuidedByMethodsCalled [
+PBTRegexMCTSTest >> testGuidedByMethodsCalled [
 
 	| pbtResult |
 

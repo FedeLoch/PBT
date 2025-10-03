@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentSDGenTest',
+	#name : 'PBTRegexSDGenTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'grammarRegex'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentSDGenTest >> regexConstraint [
+PBTRegexSDGenTest >> regexConstraint [
 
 	grammarRegex := GncRegexGrammar new.
 	
@@ -18,7 +18,7 @@ PBTRegexBugExperimentSDGenTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 	
@@ -29,7 +29,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWe
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
+PBTRegexSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTimeWithShallow [
 
 	| pbtResult |
 
@@ -40,7 +40,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndASDGenGeneratorThenWe
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndSDGenSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
+PBTRegexSDGenTest >> testGivingARegexFuzzerAndSDGenSGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
 	| pbtResult |
 
@@ -51,7 +51,7 @@ PBTRegexBugExperimentSDGenTest >> testGivingARegexFuzzerAndSDGenSGeneratorThenWe
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentSDGenTest >> testGuidingByMethodsCalls [
+PBTRegexSDGenTest >> testGuidingByMethodsCalls [
 
 	| pbtResult |
 

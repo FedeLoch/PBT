@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentOptionalGenTest',
+	#name : 'PBTRegexOptionalGenTest',
 	#superclass : 'PBTRegexBugExperimentTest',
 	#instVars : [
 		'regexGenerator'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> regexConstraint [
+PBTRegexOptionalGenTest >> regexConstraint [
 
 	regexGenerator := PBTDyncamicSelectionGenerator new generators: {
 		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 1; maxSize: 100.
@@ -27,7 +27,7 @@ PBTRegexBugExperimentOptionalGenTest >> regexConstraint [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
 
 	| pbtResult |
 	
@@ -38,7 +38,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
 
 	| pbtResult |
 	
@@ -49,7 +49,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
 
 	| pbtResult |
 	
@@ -60,7 +60,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
 	| pbtResult |
 	
@@ -71,7 +71,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
 
 	| pbtResult |
 	
@@ -82,7 +82,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
+PBTRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
 
 	| pbtResult |
 	
@@ -93,7 +93,7 @@ PBTRegexBugExperimentOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGener
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentOptionalGenTest >> testGuidingByMethodsCalls [ 
+PBTRegexOptionalGenTest >> testGuidingByMethodsCalls [ 
 
 	| pbtResult |
 	
