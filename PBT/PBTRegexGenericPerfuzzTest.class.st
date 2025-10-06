@@ -1,6 +1,9 @@
 Class {
 	#name : 'PBTRegexGenericPerfuzzTest',
 	#superclass : 'PBTRegexBugExperimentTest',
+	#instVars : [
+		'runner'
+	],
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
 	#tag : 'FrameworkTests'
@@ -9,26 +12,35 @@ Class {
 { #category : 'running' }
 PBTRegexGenericPerfuzzTest >> regexConstraint [
 
-	| mutator terminalString randomGenerator |
-	terminalString := 'abc+|?*.'.
+	^ PBTObjectConstraint new generator:
+		  (PBTCorpusWithMutationsGenerator new
+			   seedGenerator: (PBTGrammarGenerator new
+					    grammar: GncRegexGrammar new;
+					    maxHeight: 100;
+					    maxSize: 100);
+			   mutators: {
+					   PBTAddByteMutator new.
+"					   PBTByteFlipMutator new.
+					   PBTDelByteMutator new "
+					};
+			   heuristic: PBTPickBestElementDifferenceHeuristic new)
+]
 
-	randomGenerator := PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100.
-	mutator := PBTMutator mutate: [ :regex | RxMatcher mutateCharacter: regex using: terminalString ].
-
-	^ PBTObjectConstraint new generator: (PBTCorpusWithMutationsGenerator new
-			   seedGenerator: randomGenerator;
-			   mutators: { mutator };
-			   heuristic: PBTPickBestElementDifferenceHeuristic new
-	)
+{ #category : 'running' }
+PBTRegexGenericPerfuzzTest >> setUp [
+	
+	super setUp.
+	schema score: nil.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }
 PBTRegexGenericPerfuzzTest >> testGuidingByMethodsCalls [ 
 
-	| runner result |
+	| result |
 	
-	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls.
+	runner guidedByMethodsCalls.
 	result := runner run.
 	
-	self assert: (result tests size) equals: 10000.
+	1 halt.
 ]

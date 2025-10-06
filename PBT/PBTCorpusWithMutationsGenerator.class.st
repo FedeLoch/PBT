@@ -31,7 +31,7 @@ PBTCorpusWithMutationsGenerator >> feed: feedback [
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> gen: constraint [
 
-	^ mutators inject: (self pickOne: constraint) into: [ :seed :mutator | mutator mutate: seed ]
+	^ self mutate: (self pickOne: constraint)
 ]
 
 { #category : 'as yet unclassified' }
@@ -47,6 +47,24 @@ PBTCorpusWithMutationsGenerator >> initialize [
 	heuristic := PBTRandomSelectorHeuristic new.
 	corpus := OrderedCollection new.
 	feedbacks := OrderedCollection new.
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> mutate: seed [
+
+	| m mutated |
+	"TODO: The paper recommends powers between 2 and 128"
+	m := (2 to: 12) atRandom.
+	mutated := seed.
+	(2 ** m) timesRepeat: [ mutated := self mutateOnce: mutated ].
+	
+	^ mutated
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> mutateOnce: input [
+
+	^ mutators atRandom mutate: input
 ]
 
 { #category : 'as yet unclassified' }

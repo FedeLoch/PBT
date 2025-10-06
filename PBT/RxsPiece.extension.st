@@ -8,5 +8,5 @@ RxsPiece >> minimalString [
 
 	(self isOptional or: [ self isStar ]) ifTrue: [ ^ '' ].
 	
-	1 halt.
+	^ atom minimalString repeat: min
 ]

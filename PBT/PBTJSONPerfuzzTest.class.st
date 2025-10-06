@@ -12,7 +12,6 @@ PBTJSONPerfuzzTest >> jsonGenerator [
 	| mutator randomGenerator |
 	
 	randomGenerator := (PBTGrammarMCTSGenerator from: JSONGrammar new) maxSize: Float infinity.
-	"PBTGrammarSdGenGenerator from: JSONGrammar new ofDepth: 10".
 	
 	mutator := PBTMutator mutate: [ :input |
 		NeoJSONReader mutate: input with: (randomGenerator gen: nil)
