@@ -19,10 +19,10 @@ PBTRegexGenericPerfuzzTest >> regexConstraint [
 					    maxHeight: 100;
 					    maxSize: 100);
 			   mutators: {
-					   PBTAddByteMutator new.
-"					   PBTByteFlipMutator new.
-					   PBTDelByteMutator new "
-					};
+					   PBTAddByteMutator new maxInputSize: 40.
+					   PBTByteFlipMutator new.
+					   PBTDelByteMutator new
+				};
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]
 
@@ -31,7 +31,7 @@ PBTRegexGenericPerfuzzTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 ]
 
 { #category : 'tests' }
