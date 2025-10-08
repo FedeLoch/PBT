@@ -14,14 +14,7 @@ PBTByteFlipMutator >> applyMutation: target [
 	at2 := target size atRandom.
 
 	temp := target at: at1.
-	^ String streamContents: [ :stream |
-		  1 to: target size do: [ :k |
-			  | c |
-			  c := k = at1
-				       ifTrue: [ target at: at2 ]
-				       ifFalse: [
-					       k = at2
-						       ifTrue: [ temp ]
-						       ifFalse: [ target at: k ] ].
-			  stream nextPut: c ] ]
+	target at: at1 put: (target at: at2).
+	target at: at2 put: temp.
+	^ target
 ]
