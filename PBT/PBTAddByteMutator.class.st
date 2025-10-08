@@ -12,13 +12,14 @@ Class {
 { #category : 'accessing' }
 PBTAddByteMutator >> applyMutation: string [
 
-	| at from toInsert |
+	| at from toInsert size |
 	
-	at := string size atRandom.
-	toInsert := (1 to: 126) atRandom asCharacter asString.
-	from := (self isReplace: string) ifTrue: [ at + 1 ] ifFalse: [ at ].
-	
-	^ (string copyFrom: 1  to: at), toInsert, (string copyFrom: from to: string size)
+	size := string size.
+	at := ( 2 to: size ) atRandom.
+	toInsert := Character allByteCharacters atRandom asString.
+	from := (self isReplace: string) ifTrue: [ at + 1] ifFalse: [ at ].
+
+	^ (string copyFrom: 1  to: at - 1), toInsert, (string copyFrom: from to: size)
 
 ]
 
