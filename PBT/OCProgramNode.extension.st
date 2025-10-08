@@ -1,7 +1,7 @@
-Extension { #name : 'RBProgramNode' }
+Extension { #name : 'OCProgramNode' }
 
 { #category : '*PBT' }
-RBProgramNode >> childAtPath: path [
+OCProgramNode >> childAtPath: path [
 
 	path ifEmpty: [  ^ self ].
 	
@@ -11,19 +11,19 @@ RBProgramNode >> childAtPath: path [
 ]
 
 { #category : '*PBT' }
-RBProgramNode >> indexInParent [
+OCProgramNode >> indexInParent [
 
 	^ self parent children indexOf: self
 ]
 
 { #category : '*PBT' }
-RBProgramNode >> isRoot [
+OCProgramNode >> isRoot [
 
 	^ parent isNil
 ]
 
 { #category : '*PBT' }
-RBProgramNode >> path [
+OCProgramNode >> path [
 
 	self isRoot ifTrue: [ ^ #(  ) ].
 
