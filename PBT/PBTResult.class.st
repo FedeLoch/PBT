@@ -40,6 +40,7 @@ PBTResult >> bloxplotByTime [
 	| plot |
 	plot := RSBoxPlot new y: self times; yLog; yourself.
 	plot horizontalTick numberOfTicks: tests size.
+	1 halt.
 	
 	^ plot
 ]
@@ -70,22 +71,7 @@ PBTResult >> feedbackEvaluator: aFeedbackEvaluator [
 
 { #category : 'plot' }
 PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
-
-"	| popup container |
-	
-	container := RSCompositeChart new.
-	popup := RSPopupDecoration new.
-
-	container add:(RSScatterPlot new
-		  rawData: tests x: xBlock y: ybloc;
-		  xlabel: xLabel;
-		  ylabel: yLabel;
-		  title: title;
-		  yourself).
-		
-	container addDecoration: popup.
-	^ container"
-	
+	1 halt.
 	^ RSLinePlot new
 		  rawData: tests x: xBlock y: ybloc; yLog;
 		  xlabel: xLabel;
@@ -216,7 +202,6 @@ PBTResult >> plotByAllocatedMemory [
 
 { #category : 'plot' }
 PBTResult >> plotByCoverage [
-
 	^ self
 		  lineplotBy: [ :test | tests indexOf: test ]
 		  and: [ :test |

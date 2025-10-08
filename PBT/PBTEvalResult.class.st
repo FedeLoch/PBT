@@ -48,3 +48,12 @@ PBTEvalResult >> profilingResult: result [
 
 	profilingResult := result 
 ]
+
+{ #category : 'accessing' }
+PBTEvalResult >> time [
+
+	profilingResult ifNil: [ ^ Duration microSeconds: -1 ].
+	
+	^ Duration microSeconds: profilingResult executionTime
+	
+]
