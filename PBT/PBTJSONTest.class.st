@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTJSONExperimentTest',
+	#name : 'PBTJSONTest',
 	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'receiverConstraint',
@@ -12,24 +12,20 @@ Class {
 }
 
 { #category : 'running' }
-PBTJSONExperimentTest >> jsonGenerator [
+PBTJSONTest >> jsonGenerator [
 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-PBTJSONExperimentTest >> setUp [
+PBTJSONTest >> setUp [
 
 	super setUp.
 	self timeLimit: 5 hours.
 
-	receiverConstraint := PBTObjectConstraint new
-		                      objectClass: RxMatcher;
-		                      generator: (PBTConstantGenerator new value: NeoJSONReader).
+	receiverConstraint := PBTObjectConstraint new generator: (PBTConstantGenerator new value: NeoJSONReader).
 
-	argumentConstraints := {
-		(PBTObjectConstraint new objectClass: String; generator: self jsonGenerator)
-	}.
+	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: self jsonGenerator }.
 
 	schema := PBTSchema new
 		          receiverConstraint: receiverConstraint;

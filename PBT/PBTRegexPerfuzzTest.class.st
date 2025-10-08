@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTRegexPerfuzzTest',
-	#superclass : 'PBTRegexBugExperimentTest',
+	#superclass : 'PBTRegexTest',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
 	#tag : 'FrameworkTests'

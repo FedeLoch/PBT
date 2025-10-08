@@ -14,7 +14,9 @@ PBTByteFlipMutator >> applyMutation: target [
 	at2 := target size atRandom.
 
 	temp := target at: at1.
+	target beWritableObject.
 	target at: at1 put: (target at: at2).
 	target at: at2 put: temp.
+	
 	^ target
 ]

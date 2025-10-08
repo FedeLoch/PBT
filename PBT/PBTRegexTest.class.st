@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexBugExperimentTest',
+	#name : 'PBTRegexTest',
 	#superclass : 'PBTFrameworkTest',
 	#instVars : [
 		'schema',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
+PBTRegexTest >> regexByProp: props and: feedback [
 
 	| regex |
 	regex := nil.
@@ -34,7 +34,7 @@ PBTRegexBugExperimentTest >> regexByProp: props and: feedback [
 ]
 
 { #category : 'running' }
-PBTRegexBugExperimentTest >> regexConstraint [
+PBTRegexTest >> regexConstraint [
 
 	^ PBTObjectConstraint new
 		  objectClass: String;
@@ -42,7 +42,7 @@ PBTRegexBugExperimentTest >> regexConstraint [
 ]
 
 { #category : 'running' }
-PBTRegexBugExperimentTest >> setUp [
+PBTRegexTest >> setUp [
 
 	| generator sharedProperties |
 	
@@ -93,7 +93,7 @@ PBTRegexBugExperimentTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBug [
+PBTRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBug [
 
 	| pbtResult |
 	
@@ -104,7 +104,7 @@ PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerfor
 ]
 
 { #category : 'tests' }
-PBTRegexBugExperimentTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBugByTime [
+PBTRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBugByTime [
 
 	| pbtResult |
 	

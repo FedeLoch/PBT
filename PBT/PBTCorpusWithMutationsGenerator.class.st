@@ -6,7 +6,8 @@ Class {
 		'corpus',
 		'heuristic',
 		'feedbacks',
-		'seedGenerator'
+		'seedGenerator',
+		'mutationsPerIteration'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -52,11 +53,11 @@ PBTCorpusWithMutationsGenerator >> initialize [
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> mutate: seed [
 
-	| m mutated |
-	"TODO: The paper recommends powers between 2 and 128"
-	m := (2 to: 12) atRandom.
+	| m mutated times |
+	m := (2 to: 12) atRandom. "TODO: The paper recommends powers between 2 and 128"
 	mutated := seed.
-	(2 ** m) timesRepeat: [ mutated := self mutateOnce: mutated ].
+	times := mutationsPerIteration ifNil: [ (2 ** m) ] ifNotNil: [ mutationsPerIteration ]. 
+	times timesRepeat: [ mutated := self mutateOnce: mutated ].
 	
 	^ mutated
 ]
@@ -65,6 +66,18 @@ PBTCorpusWithMutationsGenerator >> mutate: seed [
 PBTCorpusWithMutationsGenerator >> mutateOnce: input [
 
 	^ mutators atRandom mutate: input
+]
+
+{ #category : 'accessing' }
+PBTCorpusWithMutationsGenerator >> mutationsPerIteration [
+
+	^ mutationsPerIteration
+]
+
+{ #category : 'accessing' }
+PBTCorpusWithMutationsGenerator >> mutationsPerIteration: count [
+
+	mutationsPerIteration := count
 ]
 
 { #category : 'as yet unclassified' }

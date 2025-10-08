@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTJSONPerfuzzTest',
-	#superclass : 'PBTJSONExperimentTest',
+	#superclass : 'PBTJSONTest',
 	#category : 'PBT-FrameworkTests',
 	#package : 'PBT',
 	#tag : 'FrameworkTests'

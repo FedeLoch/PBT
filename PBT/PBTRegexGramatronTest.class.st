@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTRegexGramatronTest',
-	#superclass : 'PBTRegexBugExperimentTest',
+	#superclass : 'PBTRegexTest',
 	#instVars : [
 		'grammarRegex'
 	],

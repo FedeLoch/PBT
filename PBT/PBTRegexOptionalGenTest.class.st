@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTRegexOptionalGenTest',
-	#superclass : 'PBTRegexBugExperimentTest',
+	#superclass : 'PBTRegexTest',
 	#instVars : [
 		'regexGenerator'
 	],
