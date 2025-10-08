@@ -16,7 +16,7 @@ PBTAddByteMutator >> applyMutation: string [
 	
 	size := string size.
 	at := ( 2 to: size ) atRandom.
-	toInsert := Character allByteCharacters atRandom asString.
+	toInsert := self randomStringCharacter.
 	from := (self isReplace: string) ifTrue: [ at + 1] ifFalse: [ at ].
 
 	^ (string copyFrom: 1  to: at - 1), toInsert, (string copyFrom: from to: size)
@@ -40,4 +40,10 @@ PBTAddByteMutator >> isReplace: string [
 PBTAddByteMutator >> maxInputSize: size [
 
 	maxInputSize := size
+]
+
+{ #category : 'accessing' }
+PBTAddByteMutator >> randomStringCharacter [
+
+	^ ((33 to: 126) collect: [:v | (Character value: v) asString ]) atRandom
 ]
