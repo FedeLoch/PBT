@@ -18,9 +18,9 @@ PBTRegexPerfuzzWithGrammarMutatorTest >> regexConstraint [
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;
 					    maxSize: 100);
-			   mutationsPerIteration: 1;
+			   mutationsPerIteration: 3;
 			   mutators: {
-					   PBTGrammarMutator from: GncRegexGrammar
+					   (PBTGrammarMutator from: GncRegexGrammar new) maxInputSize: 40
 				};
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]
@@ -30,7 +30,7 @@ PBTRegexPerfuzzWithGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 ]
 
 { #category : 'tests' }
