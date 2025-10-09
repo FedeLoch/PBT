@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegexGenericPerfuzzTest',
+	#name : 'PBTRegexPerfuzzWithGrammarMutatorTest',
 	#superclass : 'PBTRegexTest',
 	#instVars : [
 		'runner'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTRegexGenericPerfuzzTest >> regexConstraint [
+PBTRegexPerfuzzWithGrammarMutatorTest >> regexConstraint [
 
 	^ PBTObjectConstraint new generator:
 		  (PBTCorpusWithMutationsGenerator new
@@ -18,8 +18,9 @@ PBTRegexGenericPerfuzzTest >> regexConstraint [
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;
 					    maxSize: 100);
+			   mutationsPerIteration: 1;
 			   mutators: {
-					   PBTAddByteMutator new maxInputSize: 40.
+					   (PBTAddByteMutator new maxInputSize: 40).
 					   PBTByteFlipMutator new.
 					   PBTDelByteMutator new
 				};
@@ -27,15 +28,15 @@ PBTRegexGenericPerfuzzTest >> regexConstraint [
 ]
 
 { #category : 'running' }
-PBTRegexGenericPerfuzzTest >> setUp [
+PBTRegexPerfuzzWithGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes.
 ]
 
 { #category : 'tests' }
-PBTRegexGenericPerfuzzTest >> testGuidingByMethodsCalls [ 
+PBTRegexPerfuzzWithGrammarMutatorTest >> testGuidingByMethodsCalls [ 
 
 	| result |
 	

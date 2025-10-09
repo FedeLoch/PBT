@@ -12,6 +12,15 @@ Class {
 }
 
 { #category : 'accessing' }
+PBTEvalResult >> allocatedMemory [
+
+	profilingResult ifNil: [ ^ -1 ].
+	
+	^ profilingResult memory
+	
+]
+
+{ #category : 'accessing' }
 PBTEvalResult >> callResult [
 
 	^ callResult 

@@ -35,7 +35,7 @@ PBTMicrodownPerfuzzTest >> markdownGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: 2;
+		  "mutationsPerIteration: 200;"
 		  mutators: {
 				  PBTAddByteMutator new.
 				  PBTByteFlipMutator new.
@@ -55,7 +55,7 @@ PBTMicrodownPerfuzzTest >> setUp [
 PBTMicrodownPerfuzzTest >> testGuidingByMethodsCalls [ 
 
 	| result |
-	runner guidedByMethodsCalls.
+	runner guidedByCoverage.
 	result := runner run.
 	1 halt.
 ]

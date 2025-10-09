@@ -40,9 +40,8 @@ PBTResult >> bloxplotByTime [
 	| plot |
 	plot := RSBoxPlot new y: self times; yLog; yourself.
 	plot horizontalTick numberOfTicks: tests size.
-	1 halt.
 	
-	^ plot
+	^ plot open
 ]
 
 { #category : 'as yet unclassified' }
@@ -71,13 +70,13 @@ PBTResult >> feedbackEvaluator: aFeedbackEvaluator [
 
 { #category : 'plot' }
 PBTResult >> lineplotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
-	1 halt.
+
 	^ RSLinePlot new
 		  rawData: tests x: xBlock y: ybloc; yLog;
 		  xlabel: xLabel;
 		  ylabel: yLabel;
 		  title: title;
-		  yourself
+		  open
 ]
 
 { #category : 'as yet unclassified' }
@@ -98,7 +97,7 @@ PBTResult >> outliersBy: valueBlock [
 	| sortedTests q1 q3 iqr upperBound min |
 	
 	sortedTests := tests sorted: [ :a :b | (valueBlock value: a) < (valueBlock value: b) ].
-	
+
 	min := valueBlock value: (sortedTests first).
 	"We are ignoring cases with min values, the idea is to avoid biased the sample"
 	sortedTests := sortedTests select: [ :test | (valueBlock value: test) > min ].
@@ -151,21 +150,6 @@ PBTResult >> performanceResult: aPerfResult [
 { #category : 'plot' }
 PBTResult >> plotBy: xBlock and: ybloc xlabel: xLabel ylabel: yLabel title: title [
 
-"	| popup container |
-	
-	container := RSCompositeChart new.
-	popup := RSPopupDecoration new.
-
-	container add:(RSScatterPlot new
-		  rawData: tests x: xBlock y: ybloc;
-		  xlabel: xLabel;
-		  ylabel: yLabel;
-		  title: title;
-		  yourself).
-		
-	container addDecoration: popup.
-	^ container"
-	
 	^ RSScatterPlot new
 		  rawData: tests x: xBlock y: ybloc;
 		  xlabel: xLabel;
@@ -198,6 +182,17 @@ PBTResult >> plotByAllocatedMemory [
 		  xlabel: 'Number of cases'
 		  ylabel: 'Allocated memory'
 		  title: 'Allocated memory per case'
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByCategories [
+	
+	^ self
+		  lineplotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test feedback sumOfCategories ]
+		  xlabel: 'Number of cases'
+		  ylabel: 'Sum of categories'
+		  title: 'Categories reached per case'
 ]
 
 { #category : 'plot' }
