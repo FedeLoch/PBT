@@ -20,7 +20,7 @@ PBTGrammarMutator class >> from: aGrammar [
 { #category : 'accessing' }
 PBTGrammarMutator >> applyMutation: string [
 
-	mutator options: (characterTerminals collect: #literal).
+	mutator options: (characterTerminals flatCollect: #values).
 	^ mutator mutate: string
 ]
 
@@ -49,6 +49,6 @@ PBTGrammarMutator >> isReplace: string [
 { #category : 'accessing' }
 PBTGrammarMutator >> maxInputSize: anInteger [
 
-	maxInputSize := anInteger
+	maxInputSize := anInteger.
 	mutator maxInputSize: anInteger
 ]

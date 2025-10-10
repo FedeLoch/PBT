@@ -60,13 +60,6 @@ PBTFeedback >> isPositive [
 	^ feedback
 ]
 
-{ #category : 'as yet unclassified' }
-PBTFeedback >> sumOfCategories [
-
-	^ values values sum
-
-]
-
 { #category : 'accessing' }
 PBTFeedback >> values [
 

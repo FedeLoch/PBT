@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTMicrodownPerfuzzTest',
+	#name : 'PBTMicrodownPerfuzzWithGrammarMutatorTest',
 	#superclass : 'PBTMicrodownTest',
 	#instVars : [
 		'runner'
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTMicrodownPerfuzzTest >> markdownGenerator [
+PBTMicrodownPerfuzzWithGrammarMutatorTest >> markdownGenerator [
 
 	| seed |
 	
@@ -35,24 +35,22 @@ PBTMicrodownPerfuzzTest >> markdownGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  "mutationsPerIteration: 200;"
+		  mutationsPerIteration: 100;
 		  mutators: {
-				  PBTAddByteMutator new.
-				  PBTByteFlipMutator new.
-				  PBTDelByteMutator new
+				(PBTGrammarMutator from: ExtendedMarkdownGrammar new)
 			};
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'running' }
-PBTMicrodownPerfuzzTest >> setUp [
+PBTMicrodownPerfuzzWithGrammarMutatorTest >> setUp [
 
 	super setUp.
 	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }
-PBTMicrodownPerfuzzTest >> testGuidingByMethodsCalls [ 
+PBTMicrodownPerfuzzWithGrammarMutatorTest >> testGuidingByMethodsCalls [ 
 
 	| result |
 	runner guidedByMethodsCalls.

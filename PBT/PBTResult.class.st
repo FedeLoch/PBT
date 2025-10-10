@@ -184,17 +184,6 @@ PBTResult >> plotByAllocatedMemory [
 		  title: 'Allocated memory per case'
 ]
 
-{ #category : 'as yet unclassified' }
-PBTResult >> plotByCategories [
-	
-	^ self
-		  lineplotBy: [ :test | tests indexOf: test ]
-		  and: [ :test | test feedback sumOfCategories ]
-		  xlabel: 'Number of cases'
-		  ylabel: 'Sum of categories'
-		  title: 'Categories reached per case'
-]
-
 { #category : 'plot' }
 PBTResult >> plotByCoverage [
 	^ self
@@ -220,6 +209,17 @@ PBTResult >> plotByExecutionTime [
 		  xlabel: 'Number of cases'
 		  ylabel: 'Time consumed'
 		  title: 'Execution time consumed per case'
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> plotByImprovements [
+	
+	^ self
+		  lineplotBy: [ :test | tests indexOf: test ]
+		  and: [ :test | test feedback improvement ]
+		  xlabel: 'Number of cases'
+		  ylabel: 'Sum of categories'
+		  title: 'Categories reached per case'
 ]
 
 { #category : 'plot' }

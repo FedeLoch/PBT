@@ -20,7 +20,7 @@ PBTRegexPerfuzzWithGrammarMutatorTest >> regexConstraint [
 					    maxSize: 100);
 			   mutationsPerIteration: 3;
 			   mutators: {
-					   (PBTGrammarMutator from: GncRegexGrammar new) maxInputSize: 40
+					(PBTGrammarMutator from: GncRegexGrammar new) maxInputSize: 40
 				};
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]

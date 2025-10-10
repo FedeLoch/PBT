@@ -1,6 +1,6 @@
 Class {
 	#name : 'JSONGrammar',
-	#superclass : 'GenericGrammar',
+	#superclass : 'GncGrammar',
 	#instVars : [
 		'ntJSON',
 		'ntValue',
@@ -15,7 +15,11 @@ Class {
 		'ntOpenBlock',
 		'ntElements',
 		'ntCloseBlock',
-		'ntKey'
+		'ntKey',
+		'ntString',
+		'ntInteger',
+		'ntDigit',
+		'ntDecimal'
 	],
 	#category : 'PBT-Grammars',
 	#package : 'PBT',
@@ -24,10 +28,6 @@ Class {
 
 { #category : 'initialization' }
 JSONGrammar >> defineGrammar [
-
-	super defineGrammar.
-	
-	ntRoot --> ntJSON.
 
 	ntJSON --> ntValue.
 	
@@ -57,5 +57,13 @@ JSONGrammar >> defineGrammar [
 	
 	ntPrivimite --> 'true' | 'false' | 'null'.
 	
-	^ ntRoot 
+	ntString --> ($a - $z), ntString | ($a - $z).
+	
+	ntDigit --> ($0 - $9).
+	
+	ntDecimal --> ntDigit, ntDigit.
+	
+	ntInteger --> ntDigit | ntDigit, ntInteger.
+	
+	^ ntJSON 
 ]
