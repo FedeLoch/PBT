@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTJSONPerfuzzWithGrammarMutationTest',
-	#superclass : 'PBTJSONTest',
+	#name : 'PBTDataFramePerfuzzWithGrammarMutationTest',
+	#superclass : 'PBTDataFrameTest',
 	#instVars : [
 		'runner'
 	],
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : 'running' }
-PBTJSONPerfuzzWithGrammarMutationTest >> jsonGenerator [
+PBTDataFramePerfuzzWithGrammarMutationTest >> csvGenerator [
 
 	| seed |
 	seed := '{"n":true,"n":true,"x":6}'.
@@ -22,16 +22,17 @@ PBTJSONPerfuzzWithGrammarMutationTest >> jsonGenerator [
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
-{ #category : 'tests' }
-PBTJSONPerfuzzWithGrammarMutationTest >> setUp [ 
+{ #category : 'running' }
+PBTDataFramePerfuzzWithGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 5 minutes.
+	1 halt.
+	runner := PBTRunner test: DataFrame class >> #readFromCsv: from: schema for: 5 minutes.
 
 ]
 
 { #category : 'tests' }
-PBTJSONPerfuzzWithGrammarMutationTest >> testGuidingByMethodsCalls [ 
+PBTDataFramePerfuzzWithGrammarMutationTest >> testGuidingByMethodsCalls [ 
 
 	| result |
 	

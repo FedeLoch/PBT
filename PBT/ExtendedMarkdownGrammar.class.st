@@ -60,7 +60,7 @@ ExtendedMarkdownGrammar >> defineGrammar [
 	
 	ntStrikethrough --> '~~', ntString, '~~'.
 	
-	ntTaskList --> ntTaskItem |  ntTaskItem, '\n', ntTaskList.
+	ntTaskList --> ntTaskItem |  ntTaskItem, Character cr asString, ntTaskList.
 	
 	ntTaskItem --> '- ', ntItemCheckbox, ntSpace, ntString.
 	
