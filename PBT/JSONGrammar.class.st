@@ -57,7 +57,7 @@ JSONGrammar >> defineGrammar [
 	
 	ntPrivimite --> 'true' | 'false' | 'null'.
 	
-	ntString --> ($a - $z), ntString | ($a - $z).
+	ntString --> ($a - $z), ntString | ($a - $z) | ''.
 	
 	ntDigit --> ($0 - $9).
 	

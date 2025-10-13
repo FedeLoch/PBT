@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTJSONPerfuzzWithGrammarMutationTest',
+	#name : 'PBTJSONPerfuzzWithTreeGrammarMutationTest',
 	#superclass : 'PBTJSONTest',
 	#instVars : [
 		'runner'
@@ -10,20 +10,20 @@ Class {
 }
 
 { #category : 'running' }
-PBTJSONPerfuzzWithGrammarMutationTest >> jsonGenerator [
+PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 
 	| seed |
 	seed := '{"n":true,"n":true,"x":6}'.
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: 1000;
-		  mutators: { (PBTGrammarMutator from: JSONGrammar new) };
+		  mutationsPerIteration: 3;
+		  mutators: { (PBTTreeGrammarMutator from: JSONGrammar new) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'tests' }
-PBTJSONPerfuzzWithGrammarMutationTest >> setUp [ 
+PBTJSONPerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
 	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 1 hour.
@@ -31,7 +31,7 @@ PBTJSONPerfuzzWithGrammarMutationTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTJSONPerfuzzWithGrammarMutationTest >> testGuidingByMethodsCalls [ 
+PBTJSONPerfuzzWithTreeGrammarMutationTest >> testGuidingByMethodsCalls [ 
 
 	| result |
 	
