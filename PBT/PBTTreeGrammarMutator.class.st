@@ -54,11 +54,7 @@ PBTTreeGrammarMutator >> mutateTree: ast [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> tree: string [
+PBTTreeGrammarMutator >> tree: word [
 	
-	| generator |
-	generator := PBTGrammarTreeGenerator from: string.
-	grammar generateAst: generator.
-	
-	^ generator ast
+	^ PBTGrammarTreeGenerator parse: word from: grammar
 ]

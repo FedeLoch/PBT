@@ -1,11 +1,8 @@
 Class {
 	#name : 'PBTGrammarTreeGenerator',
-	#superclass : 'GncVisitor',
+	#superclass : 'Object',
 	#instVars : [
-		'wordToConsume',
-		'maxHeight',
-		'maxSize',
-		'ast'
+		'wordToConsume'
 	],
 	#category : 'PBT-Grammars',
 	#package : 'PBT',
@@ -13,61 +10,45 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGrammarTreeGenerator class >> from: string [
+PBTGrammarTreeGenerator class >> parse: string from: grammar [
 
-	^ self new wordToConsume: string
+	^ self parseNonTerminal: string from: grammar start
+
+	
 ]
 
-{ #category : 'accessing' }
-PBTGrammarTreeGenerator >> ast [
+{ #category : 'instance creation' }
+PBTGrammarTreeGenerator class >> parseNonTerminal: string from: nonTerminal [
 
-	^ ast
+	| options |
+	options := nonTerminal rules collect: [ :rule | | children node |
+		children := self parseRule: string from: rule.
+		GncInnerNode new tag: nonTerminal name; grammarRule: rule; children: children
+	].
+	
+	"TODO: repear me later, i am returning just the first one that matches as much as possible"
+	options sort: [ :node1 :node2 | node1 generate size >= node2 generate size ].
+	
+	^ options first
 ]
 
-{ #category : 'accessing' }
-PBTGrammarTreeGenerator >> initialize [ 
+{ #category : 'parsing' }
+PBTGrammarTreeGenerator class >> parseRule: string from: rule [ 
+	
+	"TODO: improve me, it tries to consume as much as possible always,
+		it is not always true, check the case of A -> aC | abC, both match with 'a'
+	"
 
-	super initialize.
-	maxHeight := 0.
-	maxSize := 0.
-	ast := nil
+	^ (rule fragments inject: { OrderedCollection new . string } into: [ :curr :fragment | | node |
+		node := fragment parse: curr second with: self.
+		curr first add: node.
+		{ curr first . curr second allButFirst: (node generate size) }
+	]) first.
+	
 ]
 
-{ #category : 'accessing - attributes' }
-PBTGrammarTreeGenerator >> maxHeight: height [
+{ #category : 'parsing' }
+PBTGrammarTreeGenerator class >> parseTerminal: string from: terminal [ 
 
-	maxHeight := height
-]
-
-{ #category : 'accessing - attributes' }
-PBTGrammarTreeGenerator >> maxSize: size [
-
-	maxSize := size
-]
-
-{ #category : 'accessing - attributes' }
-PBTGrammarTreeGenerator >> offsetHeightCost: offset andSizeCost: size [
-
-	^ self clone
-		  maxHeight: maxHeight + offset;
-		  maxSize: maxSize + size;
-		  yourself
-]
-
-{ #category : 'visiting' }
-PBTGrammarTreeGenerator >> selectRule: rules [
-
-	^ rules detect: [ :rule | rule accept: wordToConsume ] ifNone: [ 1 halt. ]
-]
-
-{ #category : 'accessing' }
-PBTGrammarTreeGenerator >> wordToConsume [
-
-	^ wordToConsume
-]
-
-{ #category : 'accessing' }
-PBTGrammarTreeGenerator >> wordToConsume: string [
-
-	wordToConsume := string
+	^ GncLeaf withToken: (terminal consume: string)
 ]
