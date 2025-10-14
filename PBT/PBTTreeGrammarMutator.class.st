@@ -19,7 +19,7 @@ PBTTreeGrammarMutator class >> from: aGrammar [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> applyMutation: string [
 
-	^ (self mutateTree: (self tree: string)) asStringInput
+	^ (self mutate: (self tree: string)) asStringInput
 ]
 
 { #category : 'as yet unclassified' }
@@ -48,9 +48,9 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> mutateTree: ast [
+PBTTreeGrammarMutator >> mutate: derivation [
 
-	1 halt.
+	 1 halt.
 ]
 
 { #category : 'accessing' }

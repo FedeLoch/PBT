@@ -21,15 +21,20 @@ PBTGrammarTreeGenerator class >> parse: string from: grammar [
 PBTGrammarTreeGenerator class >> parseNonTerminal: string from: nonTerminal [
 
 	| options |
-	options := nonTerminal rules collect: [ :rule | | children node |
+
+	options := nonTerminal rules inject: OrderedCollection new into: [ :acc :rule | | children |
 		children := self parseRule: string from: rule.
-		GncInnerNode new tag: nonTerminal name; grammarRule: rule; children: children
+		children ifNotNil: [
+			acc add: (GncInnerNode new tag: nonTerminal name; grammarRule: rule; children: children)
+		].
+		acc
 	].
 	
 	"TODO: repear me later, i am returning just the first one that matches as much as possible"
+	
 	options sort: [ :node1 :node2 | node1 generate size >= node2 generate size ].
 	
-	^ options first
+	^ options ifEmpty: [ nil ] ifNotEmpty: [ options first ] 
 ]
 
 { #category : 'parsing' }
@@ -41,6 +46,7 @@ PBTGrammarTreeGenerator class >> parseRule: string from: rule [
 
 	^ (rule fragments inject: { OrderedCollection new . string } into: [ :curr :fragment | | node |
 		node := fragment parse: curr second with: self.
+		node ifNil: [ ^ nil ].
 		curr first add: node.
 		{ curr first . curr second allButFirst: (node generate size) }
 	]) first.
@@ -48,7 +54,10 @@ PBTGrammarTreeGenerator class >> parseRule: string from: rule [
 ]
 
 { #category : 'parsing' }
-PBTGrammarTreeGenerator class >> parseTerminal: string from: terminal [ 
+PBTGrammarTreeGenerator class >> parseTerminal: string from: terminal [
 
-	^ GncLeaf withToken: (terminal consume: string)
+	| token |
+	token := terminal consume: string.
+
+	^ token ifNil: [ nil ] ifNotNil: [ GncLeaf withToken: token ]
 ]

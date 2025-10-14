@@ -35,7 +35,7 @@ JSONGrammar >> defineGrammar [
 	
 	ntObject --> ntOpenBracket, ntKeyValues, ntCloseBracket.
 	
-	ntKeyValues --> ntKeyValue | ntKeyValue, ',', ntKeyValues.
+	ntKeyValues --> '' | ntKeyValue | ntKeyValue, ',', ntKeyValues.
 	
 	ntKeyValue --> ntKey, ntValue.
 	
@@ -43,7 +43,7 @@ JSONGrammar >> defineGrammar [
 	
 	ntArray --> ntOpenBlock, ntElements, ntCloseBlock.
 	
-	ntElements --> ntValue | ntValue, ',', ntElements.
+	ntElements --> ''| ntValue | ntValue, ',', ntElements.
 	
 	ntOpenBlock --> '['.
 		
