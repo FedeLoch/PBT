@@ -41,7 +41,7 @@ PBTGrammarMCTSGenerator >> backpropagate: prevFeedback [
 	 Applies it recursively to the root"
 	
 	reward := self reward: prevFeedback.
-	
+
 	lastDerivationTree backPropagateToChildren: reward level: 0
 ]
 
