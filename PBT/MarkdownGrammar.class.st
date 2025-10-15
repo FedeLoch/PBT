@@ -19,7 +19,10 @@ Class {
 		'ntStatements',
 		'ntString',
 		'ntDecimal',
-		'ntDigit'
+		'ntDigit',
+		'ntHeaderSymbol',
+		'ntLetter',
+		'ntSpaces'
 	],
 	#category : 'PBT-Grammars',
 	#package : 'PBT',
@@ -29,13 +32,17 @@ Class {
 { #category : 'initialization' }
 MarkdownGrammar >> defineGrammar [
 
-	ntStatements --> ntElement | ntElement, ntStatements.
+	ntStatements --> ntElement, Character cr asString, ntSpaces, ntStatements | ntElement.
 
 	ntElement --> ntHeader | ntBold | ntItalic | ntBlockQuote
 		| ntOrderedList | ntUnorderedList | ntCode | ntHorizontalRule
 		| ntLink | ntImage.
 		
-	ntHeader --> ('#' | '##' | '###'), ntSpace, ntString.
+	ntHeader --> ntHeaderSymbol, ntSpace, ntString.
+	
+	ntHeaderSymbol --> '#' | '##' | '###'.
+	
+	ntSpaces --> ntSpace, ntSpaces | ntSpace | ''.
 	
 	ntSpace --> ' '.
 	
@@ -61,7 +68,9 @@ MarkdownGrammar >> defineGrammar [
 	
 	ntImageRef --> ntString.
 	
-	ntString --> ($a - $z), ntString | ($a - $z).
+	ntString --> ntLetter, ntString | ntLetter.
+	
+	ntLetter --> ($a - $z) | ($A - $Z) | ntSpace.
 	
 	ntDigit --> ($0 - $9).
 	

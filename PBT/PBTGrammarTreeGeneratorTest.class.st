@@ -66,3 +66,37 @@ PBTGrammarTreeGeneratorTest >> testParseJsonObject06 [
 	
 	self assert: node generate equals: json
 ]
+
+{ #category : 'tests' }
+PBTGrammarTreeGeneratorTest >> testParseMarkdown01 [
+
+	| node input |
+
+	input := '# Header'.
+	node := PBTGrammarTreeGenerator parse: input from: MarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
+PBTGrammarTreeGeneratorTest >> testParseMarkdown02 [
+
+	| node input |
+
+	input := '# Header', Character cr asString, '# This is a line comment'.
+	node := PBTGrammarTreeGenerator parse: input from: MarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
+PBTGrammarTreeGeneratorTest >> testParseMarkdown03 [
+
+	| node input |
+
+	input := '# Header
+** This is a line comment **'.
+	node := PBTGrammarTreeGenerator parse: input from: MarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]

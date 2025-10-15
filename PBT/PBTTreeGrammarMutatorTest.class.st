@@ -21,3 +21,9 @@ PBTTreeGrammarMutatorTest >> testMutatingAnEmptyString [
 
 	self assert: (mutator mutate: '{}') equals:  '{}'
 ]
+
+{ #category : 'tests' }
+PBTTreeGrammarMutatorTest >> testMutatingAnEmptyString02 [
+
+	self assert: (mutator mutate: '{"n":true,"n":true,"x":6}') equals:  '{}'
+]
