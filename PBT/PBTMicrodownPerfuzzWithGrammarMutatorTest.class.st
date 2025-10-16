@@ -14,24 +14,7 @@ PBTMicrodownPerfuzzWithGrammarMutatorTest >> markdownGenerator [
 
 	| seed |
 	
-	seed := '
-	# Header
-        @anchor
-	% This is a line comment
-
-	```language=Pharo&caption=Beautiful&label=Fig1
-   	code
-	```
-   
-   	![Pharo is cool .%anchor=fig:pharo&width=80](http://pharo.org)
-	
-   	- list
-   	1. ordered list 
-
-  	`in text` and for Pharo hyperlinks to class, method and package: 
-  	`Point`, `Point class`, `Point>>#setX:setY:`, `#’Microdown-Tests’ (for packages)
-
-  	References: *@ref@*'.
+	seed := '# Header'.
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);

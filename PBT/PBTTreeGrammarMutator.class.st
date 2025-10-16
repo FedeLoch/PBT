@@ -77,7 +77,6 @@ PBTTreeGrammarMutator >> mutateTree: derivation [
 	
 	[ self shouldApplyMutation: currDerivationNode ] whileFalse: [ | next nonTerminals |
 		nonTerminals := currDerivationNode children reject: #isLeaf.
-		nonTerminals isEmpty ifTrue: [ 1 halt ].
 		next := nonTerminals atRandom.
 		currGrammarNode := currDerivationNode grammarRule fragments detect: [ :fragment |
 			(fragment isTerminal not) and: [ fragment name = next tag ]
@@ -88,7 +87,8 @@ PBTTreeGrammarMutator >> mutateTree: derivation [
 
 	parentSize := derivation generate size - (currDerivationNode generate size).
 
-	currDerivationNode children: (self newSubtreeFrom: currGrammarNode parentSize: parentSize level: level) children.
+	currDerivationNode children:
+		(self newSubtreeFrom: currGrammarNode parentSize: parentSize level: level) children.
 	
 	^ root	
 ]
@@ -104,7 +104,7 @@ PBTTreeGrammarMutator >> newSubtreeFrom: node parentSize: parentSize level: leve
 
 	| maxSize |
 	maxSize := maxInputSize - parentSize.
-	generator maxSize: maxSize; totalGenerations: generator totalGenerations + 1.
+	generator maxSize: maxSize + 1; totalGenerations: generator totalGenerations + 1.
 
 	^ node generateMCTSAst: generator level: level.
 ]
