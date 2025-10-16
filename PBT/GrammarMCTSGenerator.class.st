@@ -93,7 +93,7 @@ GrammarMCTSGenerator >> visitRule: rule level: level [
 		          node grammarRule: rule.
 
 		          self maxSize: prevSize.
-		          availableSize := availableSize - node treeSize.
+		          availableSize := availableSize - node inputSize.
 		          node
 	].
 
