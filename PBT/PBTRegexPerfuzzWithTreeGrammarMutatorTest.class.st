@@ -18,7 +18,7 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;
 					    maxSize: 100);
-			   mutationsPerIteration: 1;
+			   mutationsPerIteration: 3;
 			   mutators: {
 					(PBTTreeGrammarMutator from: GncRegexGrammar new mutationProbability: 10) maxInputSize: 41
 				};
@@ -30,7 +30,7 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }

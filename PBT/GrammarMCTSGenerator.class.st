@@ -53,6 +53,12 @@ GrammarMCTSGenerator >> selectRule: rules level: level [
 	^ (maxSize - taken minSize) < -1 ifTrue: [ nil ] ifFalse: [ taken ] 
 ]
 
+{ #category : 'initialization' }
+GrammarMCTSGenerator >> totalGenerations [
+
+	^ totalGenerations 
+]
+
 { #category : 'accessing' }
 GrammarMCTSGenerator >> totalGenerations: aNumber [
 	totalGenerations := aNumber

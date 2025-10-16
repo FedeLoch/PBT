@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'maxInputSize',
 		'grammar',
-		'mutationProbability'
+		'mutationProbability',
+		'generator'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -27,12 +28,10 @@ PBTTreeGrammarMutator class >> from: aGrammar mutationProbability: prob [
 PBTTreeGrammarMutator >> applyMutation: string [
 
 	| ast |
-	1 halt.
 	ast := self tree: string.
-1 halt.
 	"We feed the grammar by doing backPropagation with the grammar"	
 	ast backPropagateToChildren: 1 level: 0.
-	1 halt.
+
 	^ (self mutateTree: ast) asStringInput
 ]
 
@@ -43,11 +42,15 @@ PBTTreeGrammarMutator >> gammar: aGrammar [
 ]
 
 { #category : 'initialization' }
-PBTTreeGrammarMutator >> initialize [ 
-	
+PBTTreeGrammarMutator >> initialize [
+
 	super initialize.
 	maxInputSize := SmallInteger maxVal.
 	mutationProbability := 10.
+	generator := GrammarMCTSGenerator new
+		             maxHeight: 20;
+		             totalGenerations: 1;
+		             explorationConstant: 1.41
 ]
 
 { #category : 'testing' }
@@ -99,23 +102,17 @@ PBTTreeGrammarMutator >> mutationProbability: aProb [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> newSubtreeFrom: node parentSize: parentSize level: level [
 
-	| generator maxSize |
+	| maxSize |
 	maxSize := maxInputSize - parentSize.
-	generator := generator := GrammarMCTSGenerator new
-		             maxHeight: 20;
-		             maxSize: maxSize + 60;
-		             totalGenerations: 1;
-		             explorationConstant: 1.41.
+	generator maxSize: maxSize; totalGenerations: generator totalGenerations + 1.
 
 	^ node generateMCTSAst: generator level: level.
-	
-	"^ node generateAst: (GncGrammarGenerator newUnbounded maxSize: maxSize)"
 ]
 
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> shouldApplyMutation [
 
-	^ (1 to: 100) atRandom <= mutationProbability "TODO: 10% of apply the mutation"
+	^ (1 to: 100) atRandom <= mutationProbability
 ]
 
 { #category : 'accessing' }

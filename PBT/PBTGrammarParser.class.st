@@ -23,7 +23,7 @@ PBTGrammarParser >> best: best candidate: candidate [
 	
 	best ifNil: [ ^ candidate ].
 	
-	^ ((best first generate size) < candidate first generate size) ifTrue: [ candidate ] ifFalse: [ best ]
+	^ ((best first inputSize) < candidate first inputSize) ifTrue: [ candidate ] ifFalse: [ best ]
 ]
 
 { #category : 'initialization' }
