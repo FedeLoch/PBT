@@ -110,11 +110,7 @@ PBTGrammarMCTSGenerator >> initialize [
 	totalGenerations := 0.
 	explorationConstant := 1.41.
 	maxSize := 40.
-	generator := GrammarMCTSGenerator new
-		             maxHeight: 20;
-		             maxSize: maxSize + 60;
-		             totalGenerations: totalGenerations;
-		             explorationConstant: explorationConstant.
+	generator := self newGenerator: maxSize.
 	generatedTextInputs := Dictionary new
 ]
 
@@ -122,11 +118,15 @@ PBTGrammarMCTSGenerator >> initialize [
 PBTGrammarMCTSGenerator >> maxSize: aSize [
 
 	maxSize := aSize.
-	generator := GrammarMCTSGenerator new
-		             maxHeight: 20;
-		             maxSize: maxSize + 60;
-		             totalGenerations: totalGenerations;
-		             explorationConstant: explorationConstant
+	generator := self newGenerator: aSize
+]
+
+{ #category : 'setter' }
+PBTGrammarMCTSGenerator >> newGenerator: _maxSize [
+
+	^ GrammarMCTSGenerator new maxHeight: 20; maxSize: _maxSize;
+		totalGenerations: totalGenerations;
+		explorationConstant: explorationConstant
 ]
 
 { #category : 'as yet unclassified' }

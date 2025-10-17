@@ -32,45 +32,43 @@ ExtendedMarkdownGrammar >> defineGrammar [
 
 	super defineGrammar.
 
-	ntExtendedStatements --> ntExtendedStatement | ntExtendedStatement, ntExtendedStatements.
+	ntExtendedStatements --> ntExtendedStatement , ntSpaces , ntExtendedStatements | ntExtendedStatement.
 
 	ntExtendedStatement --> ntElement | ntExtendedElement.
 
-	ntExtendedElement --> ntTable | ntCodeBlock | ntFootnote
-		| ntHeadingID | ntStrikethrough | ntTaskList | ntEmoji
-		| ntSubscript.
-		
-	ntTable --> ntTableTitles, '\n', ntTableSeparators, '\n', ntTableRows.
-	
+	ntExtendedElement --> ntTable | ntCodeBlock | ntFootnote | ntHeadingID | ntStrikethrough | ntTaskList | ntEmoji | ntSubscript.
+
+	ntTable --> ntTableTitles , Character cr asString , ntTableSeparators , Character cr asString , ntTableRows.
+
 	ntTableTitles --> ntTableRows.
-	
-	ntTableSeparators --> '| ----------- |' | '| -----------', ntTableSeparators.
-	
-	ntTableRows --> ntTableCell | '|', ntString, ntTableTitles.
-	
-	ntTableCell --> '|', ntString, '|'.
-	
-	ntCodeBlock --> '```', ntProgrammingCode, '\n', '```'.
+
+	ntTableSeparators --> '| ----------- |' | '| -----------' , ntTableSeparators.
+
+	ntTableRows --> ntTableCell | '|' , ntString , ntTableTitles.
+
+	ntTableCell --> '|' , ntString , '|'.
+
+	ntCodeBlock --> '```', ntSpaces , ntProgrammingCode , ntSpaces , '```'.
 
 	ntProgrammingCode --> ntString.
-	
-	ntFootnote --> '[^', ntDecimal, ']: ', ntString.
-	
-	ntHeadingID --> ntString, '{#', ntString, '}', ntString.
-	
-	ntStrikethrough --> '~~', ntString, '~~'.
-	
-	ntTaskList --> ntTaskItem |  ntTaskItem, Character cr asString, ntTaskList.
-	
-	ntTaskItem --> '- ', ntItemCheckbox, ntSpace, ntString.
-	
+
+	ntFootnote --> '[^' , ntDecimal , ']: ' , ntString.
+
+	ntHeadingID --> ntString , '{#' , ntString , '}' , ntString.
+
+	ntStrikethrough --> '~~' , ntString , '~~'.
+
+	ntTaskList --> ntTaskItem , Character cr asString , ntTaskList | ntTaskItem.
+
+	ntTaskItem --> '- ' , ntItemCheckbox , ntSpace , ntString.
+
 	ntItemCheckbox --> '[ ]' | '[x]'.
-	
-	ntEmoji --> ':', ntEmotionLabel, ':'.
-	
+
+	ntEmoji --> ':' , ntEmotionLabel , ':'.
+
 	ntEmotionLabel --> ntString.
-	
-	ntSubscript --> '~', ntString, '~'.
+
+	ntSubscript --> '~' , ntString , '~'.
 
 	^ ntExtendedStatements
 ]

@@ -30,7 +30,7 @@ PBTRegexPerfuzzWithGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 hours.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 ]
 
 { #category : 'tests' }

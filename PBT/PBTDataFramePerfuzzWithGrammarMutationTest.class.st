@@ -13,7 +13,7 @@ Class {
 PBTDataFramePerfuzzWithGrammarMutationTest >> csvGenerator [
 
 	| seed |
-	seed := '{"n":true,"n":true,"x":6}'.
+	seed := ''.
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);

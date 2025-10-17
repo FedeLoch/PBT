@@ -102,6 +102,44 @@ PBTGrammarParserTest >> testParseMarkdown03 [
 ]
 
 { #category : 'tests' }
+PBTGrammarParserTest >> testParseMarkdown04 [
+
+	| node input |
+
+	input := '# Header
+** This is a line comment **'.
+	node := PBTGrammarParser parse: input from: ExtendedMarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
+PBTGrammarParserTest >> testParseMarkdown05 [
+
+	| node input |
+
+	input := '# Header
+	** This is a line comment **
+	
+	```
+	code
+	```
+   
+   	![Pharo is cool](http://pharo.org)
+	
+   	- list
+   	1. ordered list 
+
+  	`in text` and for Pharo hyperlinks to class, method and package: 
+  	`Point`, `Point class`, `Point>>#setX:setY:`, `#’Microdown-Tests’`
+
+  	References: @ref@'.
+	node := PBTGrammarParser parse: input from: ExtendedMarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
 PBTGrammarParserTest >> testParseRegex01 [
 
 	| node input |
