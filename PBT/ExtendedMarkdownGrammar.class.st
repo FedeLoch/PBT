@@ -50,7 +50,7 @@ ExtendedMarkdownGrammar >> defineGrammar [
 
 	ntCodeBlock --> '```', ntSpaces , ntProgrammingCode , ntSpaces , '```'.
 
-	ntProgrammingCode --> ntString.
+	ntProgrammingCode --> ntString | ''.
 
 	ntFootnote --> '[^' , ntDecimal , ']: ' , ntString.
 

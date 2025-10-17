@@ -12,12 +12,8 @@ Class {
 { #category : 'running' }
 PBTMicrodownPerfuzzWithGrammarMutatorTest >> markdownGenerator [
 
-	| seed |
-	
-	seed := '# Header'.
-
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
+		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: 100;
 		  mutators: {
 				(PBTGrammarMutator from: ExtendedMarkdownGrammar new)

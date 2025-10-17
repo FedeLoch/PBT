@@ -15,6 +15,27 @@ PBTMicrodownTest >> markdownGenerator [
 	self subclassResponsibility 
 ]
 
+{ #category : 'accessing' }
+PBTMicrodownTest >> seed [
+
+	^ '# Header
+	** This is a line comment **
+	
+	```
+	code
+	```
+   
+   	![Pharo is cool](http://pharo.org)
+	
+   	- list
+   	1. ordered list 
+
+  	`in text` and for Pharo hyperlinks to class, method and package: 
+  	`Point`, `Point class`, `Point>>#setX:setY:`, `#’Microdown-Tests’`
+
+  	References: @ref@'
+]
+
 { #category : 'running' }
 PBTMicrodownTest >> setUp [
 

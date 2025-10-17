@@ -12,13 +12,10 @@ Class {
 { #category : 'running' }
 PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 
-	| seed |
-	seed := '# Header'.
-
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: 100;
-		  mutators: { (PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new mutationProbability: 10) };
+		  seedGenerator: (PBTConstantGenerator new value: self seed);
+		  mutationsPerIteration: 10;
+		  mutators: { (PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new mutationProbability: 5) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
@@ -26,7 +23,7 @@ PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> setUp [
 
 	super setUp.
-	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 1 minutes.
+	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }

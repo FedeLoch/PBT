@@ -140,6 +140,17 @@ PBTGrammarParserTest >> testParseMarkdown05 [
 ]
 
 { #category : 'tests' }
+PBTGrammarParserTest >> testParseMarkdown06 [
+
+	| node input |
+
+	input := '```  ```'.
+	node := PBTGrammarParser parse: input from: ExtendedMarkdownGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
 PBTGrammarParserTest >> testParseRegex01 [
 
 	| node input |
