@@ -66,31 +66,20 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> mutateAST: derivation [
+PBTTreeGrammarMutator >> mutateAST: ast [
 	
-	|  root currGrammarNode currDerivationNode parentSize level |
-	
-	root := derivation copy.
-	currGrammarNode := grammar start.
-	currDerivationNode := root.
-	level := 0.
-	
-	[ self shouldApplyMutation: currDerivationNode ] whileFalse: [ | next nonTerminals |
-		nonTerminals := currDerivationNode children reject: #isLeaf.
-		next := nonTerminals atRandom.
-		currGrammarNode := currDerivationNode grammarRule fragments detect: [ :fragment |
-			(fragment isTerminal not) and: [ fragment name = next tag ]
-		].
-		currDerivationNode := next.
-		level := level + 1.
-	].
+	| aNode node parentSize newChildren |
 
-	parentSize := derivation generate size - (currDerivationNode generate size).
+	aNode := self pickNode: ast.
+	node := aNode isLeaf ifTrue: [ aNode parent ] ifFalse: [ aNode ].
 
-	currDerivationNode children:
-		(self newSubtreeFrom: currGrammarNode parentSize: parentSize level: level) children.
+	parentSize := ast generate size - (node generate size).
+
+	newChildren := (self subNodesFrom: node grammarRule parentSize: parentSize level: (ast treeHeight - node treeHeight)).
 	
-	^ root	
+	node children: newChildren.
+	
+	^ ast	
 ]
 
 { #category : 'initialization' }
@@ -100,13 +89,9 @@ PBTTreeGrammarMutator >> mutationProbability: aProb [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> newSubtreeFrom: node parentSize: parentSize level: level [
+PBTTreeGrammarMutator >> pickNode: ast [
 
-	| maxSize |
-	maxSize := maxInputSize - parentSize.
-	generator maxSize: maxSize + 1; totalGenerations: generator totalGenerations + 1.
-
-	^ node generateMCTSAst: generator level: level.
+	^ ast at: ((2 to: ast treeSize) atRandom)
 ]
 
 { #category : 'accessing' }
@@ -119,6 +104,30 @@ PBTTreeGrammarMutator >> shouldApplyMutation [
 PBTTreeGrammarMutator >> shouldApplyMutation: derivation [
 	
 	^ (self shouldApplyMutation) or: [ (derivation children reject: #isLeaf) isEmpty ]
+]
+
+{ #category : 'accessing' }
+PBTTreeGrammarMutator >> subNodeFrom: grammarNode parentSize: parentSize level: level [
+
+	| maxSize |
+
+	maxSize := maxInputSize - parentSize.
+	generator maxSize: maxSize + 1; totalGenerations: generator totalGenerations + 1.
+
+	^ grammarNode generateMCTSAst: generator level: level.
+]
+
+{ #category : 'accessing' }
+PBTTreeGrammarMutator >> subNodesFrom: grammarRule parentSize: parentSize level: level [
+
+	| currentSize |
+	
+	currentSize := parentSize.
+	^ grammarRule fragments collect: [ :node | | generated |
+		generated := self subNodeFrom: node parentSize: currentSize level: level.
+		currentSize := currentSize - generated inputSize.
+		generated 
+	]
 ]
 
 { #category : 'accessing' }

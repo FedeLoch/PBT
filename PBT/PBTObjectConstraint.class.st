@@ -15,8 +15,11 @@ Class {
 
 { #category : 'as yet unclassified' }
 PBTObjectConstraint >> feed: pbtFeedback [
-
-	generator feed: (pbtFeedback unWrapCase: unwrapBlock)
+	
+	| unwrappedFeedback |
+	
+	unwrappedFeedback := pbtFeedback ifNil: [ pbtFeedback ] ifNotNil: [ pbtFeedback unWrapCase: unwrapBlock ].
+	generator feed: unwrappedFeedback
 ]
 
 { #category : 'as yet unclassified' }

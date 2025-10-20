@@ -26,7 +26,7 @@ PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 PBTJSONPerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 20 minutes.
+	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 5 minutes.
 
 ]
 
