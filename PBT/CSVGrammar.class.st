@@ -7,11 +7,10 @@ Class {
 		'ntString',
 		'ntInteger',
 		'ntDigit',
-		'ntDecimal',
 		'ntCsv',
-		'ntQuote',
 		'ntEmptyString',
-		'ntRow'
+		'ntRow',
+		'ntLetter'
 	],
 	#category : 'PBT-Grammars',
 	#package : 'PBT',
@@ -21,25 +20,23 @@ Class {
 { #category : 'initialization' }
 CSVGrammar >> defineGrammar [
 
-	ntCsv --> ntRow | ntRow, Character cr asString, ntCsv.
+	ntCsv --> ntRow, Character cr asString, ntCsv | ntRow.
 	
-	ntRow --> ntCellValue | ntCellValue, ',', ntRow.
+	ntRow --> ntCellValue, ',', ntRow | ntCellValue.
 
-	ntCellValue --> ntEmptyString | ntPrivimite | ntString | ntInteger.
+	ntCellValue --> ntEmptyString | ntInteger | ntPrivimite | ntString.
 	
 	ntEmptyString --> ''.
 
 	ntPrivimite --> 'true' | 'false' | 'null'.
 	
-	ntString --> ntQuote, ($a - $z), ntString, ntQuote | ntQuote, ($a - $z), ntQuote.
+	ntString --> ntLetter , ntString | ntLetter.
+
+	ntLetter --> ($a - $z) | ($A - $Z) | ':' | '/' | '.'  | '\' | '>' | $' asString | '#' | '’' |  '_' | '-' | '@' | ' '.
 	
-	ntQuote --> '"'.
+	ntInteger --> ntDigit, ntInteger | ntDigit.
 	
 	ntDigit --> ($0 - $9).
-	
-	ntDecimal --> ntDigit, ntDigit.
-	
-	ntInteger --> ntDigit | ntDigit, ntInteger.
 	
 	^ ntCsv
 ]

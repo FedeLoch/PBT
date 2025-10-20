@@ -7,6 +7,22 @@ Class {
 }
 
 { #category : 'tests' }
+PBTGrammarParserTest >> testParseCsv01 [
+
+	| node input |
+
+	input := 'id,first_name,last_name,email,gender,n
+1,Jeannine,Sutehall,jsutehall@lulu.com,Female,250
+2,Lynnette,Pashbee,lpashbee@blogger.com,Female,380
+3,Garrick,Fontell,gfontell@sitemeter.com,Male,412
+4,Osbert,O''Henecan,oohenecan@senate.gov,Male,242
+5,Doug,Vieyra,dvieyra@chronoengine.com,Genderfluid,525'.
+	node := PBTGrammarParser parse: input from: CSVGrammar new.
+	
+	self assert: node generate equals: input
+]
+
+{ #category : 'tests' }
 PBTGrammarParserTest >> testParseJsonObject01 [
 
 	| node |

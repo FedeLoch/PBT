@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTDataFramePerfuzzWithGrammarMutationTest',
+	#name : 'PBTDataFramePerfuzzWithTreeGrammarMutationTest',
 	#superclass : 'PBTDataFrameTest',
 	#instVars : [
 		'runner'
@@ -10,17 +10,17 @@ Class {
 }
 
 { #category : 'running' }
-PBTDataFramePerfuzzWithGrammarMutationTest >> csvGenerator [
+PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: 10;
-		  mutators: { (PBTGrammarMutator from: CSVGrammar new) };
+		  mutators: { (PBTTreeGrammarMutator from: CSVGrammar new mutationProbability: 10) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'running' }
-PBTDataFramePerfuzzWithGrammarMutationTest >> setUp [ 
+PBTDataFramePerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
 	1 halt.
@@ -29,7 +29,7 @@ PBTDataFramePerfuzzWithGrammarMutationTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTDataFramePerfuzzWithGrammarMutationTest >> testGuidingByMethodsCalls [ 
+PBTDataFramePerfuzzWithTreeGrammarMutationTest >> testGuidingByMethodsCalls [ 
 
 	| result |
 	
