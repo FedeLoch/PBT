@@ -32,7 +32,7 @@ PBTTreeGrammarMutator >> applyMutation: string [
 	"We feed the grammar by doing backPropagation with the grammar"	
 	ast backPropagateToChildren: 1 level: 0.
 
-	^ (self mutateTree: ast) asStringInput
+	^ (self mutateAST: ast) asStringInput
 ]
 
 { #category : 'as yet unclassified' }
@@ -66,7 +66,7 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> mutateTree: derivation [
+PBTTreeGrammarMutator >> mutateAST: derivation [
 	
 	|  root currGrammarNode currDerivationNode parentSize level |
 	
