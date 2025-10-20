@@ -6,9 +6,9 @@ Class {
 		'receiverConstraint',
 		'assert'
 	],
-	#category : 'PBT-FrameworkTests',
+	#category : 'PBT-Framework Tests',
 	#package : 'PBT',
-	#tag : 'FrameworkTests'
+	#tag : 'Framework Tests'
 }
 
 { #category : 'running' }
