@@ -14,7 +14,7 @@ PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
-		  mutationsPerIteration: 10;
+		  mutationsPerIteration: 3;
 		  mutators: { (PBTTreeGrammarMutator from: CSVGrammar new mutationProbability: 10) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
@@ -23,7 +23,7 @@ PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 PBTDataFramePerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	1 halt.
+
 	runner := PBTRunner test: DataFrame class >> #readFromCsv: from: schema for: 5 minutes.
 
 ]

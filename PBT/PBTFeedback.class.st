@@ -60,6 +60,15 @@ PBTFeedback >> isPositive [
 	^ feedback
 ]
 
+{ #category : 'as yet unclassified' }
+PBTFeedback >> unWrapCase: unwrapBlock [ 
+	
+	unwrapBlock ifNotNil: [ self case: (unwrapBlock value: case) ].
+	
+	^ self.
+	
+]
+
 { #category : 'accessing' }
 PBTFeedback >> values [
 

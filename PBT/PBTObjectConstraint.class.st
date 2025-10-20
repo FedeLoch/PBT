@@ -4,7 +4,9 @@ Class {
 	#instVars : [
 		'objectClass',
 		'generator',
-		'props'
+		'props',
+		'wrapBlock',
+		'unwrapBlock'
 	],
 	#category : 'PBT-Property Schema',
 	#package : 'PBT',
@@ -14,13 +16,13 @@ Class {
 { #category : 'as yet unclassified' }
 PBTObjectConstraint >> feed: pbtFeedback [
 
-	generator feed: pbtFeedback
+	generator feed: (pbtFeedback unWrapCase: unwrapBlock)
 ]
 
 { #category : 'as yet unclassified' }
 PBTObjectConstraint >> gen [
 
-	^ generator gen: self
+	^ self wrapInput: (generator gen: self)
 ]
 
 { #category : 'accessing' }
@@ -59,4 +61,24 @@ PBTObjectConstraint >> props: aPropObj [
 	props := aPropObj class = InternalConstraintProperties
 		         ifTrue: [ aPropObj ]
 		         ifFalse: [ InternalConstraintProperties from: aPropObj asDictionary ]
+]
+
+{ #category : 'as yet unclassified' }
+PBTObjectConstraint >> unwrap: block [
+
+	unwrapBlock := block
+]
+
+{ #category : 'as yet unclassified' }
+PBTObjectConstraint >> wrap: block [
+
+	wrapBlock := block
+]
+
+{ #category : 'as yet unclassified' }
+PBTObjectConstraint >> wrapInput: input [
+
+	wrapBlock ifNil: [ ^ input ].
+	
+	^ wrapBlock value: input
 ]

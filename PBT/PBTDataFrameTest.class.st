@@ -34,7 +34,15 @@ PBTDataFrameTest >> setUp [
 
 	schema := PBTSchema new
 		          receiverConstraint: (PBTObjectConstraint new generator: (PBTConstantGenerator new value: DataFrame));
-		          argumentConstraints: { PBTObjectConstraint new objectClass: String; generator: self csvGenerator };
+		          argumentConstraints: { (PBTObjectConstraint new
+				           generator: self csvGenerator;
+				           wrap: [ :input | | file |
+						       file := FileLocator temp / input hash asString, '.csv'.
+						       file ensureDelete.
+						       file writeStreamDo: [ :stream | stream nextPutAll: input ].
+						       file asFileReference
+							  ];
+				           unwrap: #contents) };
 		          score: [ :re :inputs :res | 1 ];
-		          assert: [ :regex :input :result | true ].
+		          assert: [ :regex :input :result | true ]
 ]
