@@ -18,12 +18,6 @@ PBTTreeGrammarMutator class >> from: aGrammar [
 	^ self new gammar: aGrammar
 ]
 
-{ #category : 'instance creation' }
-PBTTreeGrammarMutator class >> from: aGrammar mutationProbability: prob [
-
-	^ self new gammar: aGrammar; mutationProbability: prob
-]
-
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> applyMutation: string [
 
