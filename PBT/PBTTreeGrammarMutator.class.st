@@ -4,12 +4,11 @@ Class {
 	#instVars : [
 		'maxInputSize',
 		'grammar',
-		'mutationProbability',
 		'generator'
 	],
-	#category : 'PBT-Mutators',
+	#category : 'PBT-Generators',
 	#package : 'PBT',
-	#tag : 'Mutators'
+	#tag : 'Generators'
 }
 
 { #category : 'instance creation' }
@@ -41,7 +40,6 @@ PBTTreeGrammarMutator >> initialize [
 
 	super initialize.
 	maxInputSize := SmallInteger maxVal.
-	mutationProbability := 10.
 	generator := GrammarMCTSGenerator new
 		             maxHeight: 20;
 		             totalGenerations: 1;
@@ -77,28 +75,11 @@ PBTTreeGrammarMutator >> mutateAST: ast [
 	^ ast	
 ]
 
-{ #category : 'initialization' }
-PBTTreeGrammarMutator >> mutationProbability: aProb [
-
-	mutationProbability := aProb
-]
-
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> pickNode: ast [
 
+	1 halt.
 	^ ast at: ((2 to: ast treeSize) atRandom)
-]
-
-{ #category : 'accessing' }
-PBTTreeGrammarMutator >> shouldApplyMutation [
-
-	^ (1 to: 100) atRandom <= mutationProbability
-]
-
-{ #category : 'accessing' }
-PBTTreeGrammarMutator >> shouldApplyMutation: derivation [
-	
-	^ (self shouldApplyMutation) or: [ (derivation children reject: #isLeaf) isEmpty ]
 ]
 
 { #category : 'accessing' }
