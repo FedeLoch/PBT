@@ -6,9 +6,9 @@ Class {
 		'grammar',
 		'generator'
 	],
-	#category : 'PBT-Generators',
+	#category : 'PBT-Mutators',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Mutators'
 }
 
 { #category : 'instance creation' }
@@ -78,8 +78,15 @@ PBTTreeGrammarMutator >> mutateAST: ast [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> pickNode: ast [
 
-	1 halt.
-	^ ast at: ((2 to: ast treeSize) atRandom)
+"	| selected |
+
+	selected := ast at: ((2 to: ast treeSize) atRandom)."
+	
+	"10 % of selecting a random node"
+	((1 to: 100) atRandom) <= 15 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ].
+
+	"Select a random leaf"
+	^ ast aLeaf
 ]
 
 { #category : 'accessing' }
