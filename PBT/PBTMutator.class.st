@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'mutator'
 	],
-	#category : 'PBT-Generators',
+	#category : 'PBT-Mutators',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Mutators'
 }
 
 { #category : 'mutating' }

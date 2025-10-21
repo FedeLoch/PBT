@@ -1,9 +1,9 @@
 Class {
 	#name : 'PBTRandomSelectorHeuristic',
 	#superclass : 'PBTSelectorHeuristic',
-	#category : 'PBT-Generators',
+	#category : 'PBT-Selector Heuristics',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Selector Heuristics'
 }
 
 { #category : 'tree building' }

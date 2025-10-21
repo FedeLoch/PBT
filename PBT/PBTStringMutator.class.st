@@ -1,9 +1,9 @@
 Class {
 	#name : 'PBTStringMutator',
 	#superclass : 'PBTMutator',
-	#category : 'PBT-Generators',
+	#category : 'PBT-Mutators',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Mutators'
 }
 
 { #category : 'accessing' }

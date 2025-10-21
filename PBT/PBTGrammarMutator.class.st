@@ -6,9 +6,9 @@ Class {
 		'characterTerminals',
 		'maxInputSize'
 	],
-	#category : 'PBT-Generators',
+	#category : 'PBT-Mutators',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Mutators'
 }
 
 { #category : 'instance creation' }

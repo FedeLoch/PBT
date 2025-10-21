@@ -7,9 +7,9 @@ Class {
 		'mutationProbability',
 		'generator'
 	],
-	#category : 'PBT-Generators',
+	#category : 'PBT-Mutators',
 	#package : 'PBT',
-	#tag : 'Generators'
+	#tag : 'Mutators'
 }
 
 { #category : 'instance creation' }
@@ -23,6 +23,7 @@ PBTTreeGrammarMutator >> applyMutation: string [
 
 	| ast |
 	ast := self tree: string.
+
 	"We feed the grammar by doing backPropagation with the grammar"	
 	ast backPropagateToChildren: 1 level: 0.
 
