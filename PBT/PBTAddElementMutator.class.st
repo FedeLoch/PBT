@@ -16,8 +16,10 @@ PBTAddElementMutator >> applyMutation: string [
 	| at from toInsert size |
 	
 	size := string size.
-	at := ( 2 to: size ) atRandom.
 	toInsert := self randomStringCharacter.
+	(string size < 2) ifTrue: [ ^ string, toInsert ].
+	
+	at := ( 2 to: size ) atRandom.
 	from := (self isReplace: string) ifTrue: [ at + 1] ifFalse: [ at ].
 
 	^ (string copyFrom: 1  to: at - 1), toInsert, (string copyFrom: from to: size)

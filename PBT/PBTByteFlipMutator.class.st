@@ -10,6 +10,9 @@ Class {
 PBTByteFlipMutator >> applyMutation: target [
 
 	| at1 at2 temp |
+	
+	target ifEmpty: [ ^ target ].
+	
 	at1 := target size atRandom.
 	at2 := target size atRandom.
 

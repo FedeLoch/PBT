@@ -39,7 +39,7 @@ RegexExperiment >> regexByProp: props and: feedback [
 		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
-			do: [ :e | "1 halt." ] ].
+			do: [ :e | 1 halt."1 halt." ] ].
 
 	^ regex
 ]
