@@ -343,3 +343,17 @@ PBTResult >> unnecessaryExplorationTime [
 
 	^ totalTime - self minimumTimeNeeded 
 ]
+
+{ #category : 'writing' }
+PBTResult >> writeToFile: fileName [
+
+	| file |
+	
+	file := fileName asFileReference.
+	file ensureDelete.
+
+	file writeStreamDo: [ :stream | STON put: self onStreamPretty: stream ].
+	
+	^ file
+	
+]
