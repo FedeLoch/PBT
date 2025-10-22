@@ -1,6 +1,9 @@
 Class {
 	#name : 'GrammarBasePathologicalBugExperiment',
 	#superclass : 'Object',
+	#instVars : [
+		'experimentTime'
+	],
 	#category : 'PBT-Paper Experimentation',
 	#package : 'PBT',
 	#tag : 'Paper Experimentation'
@@ -15,7 +18,26 @@ GrammarBasePathologicalBugExperiment class >> run [
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment >> experimentTime [
 
-	^ 10 seconds
+	^ experimentTime
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugExperiment >> experimentTime: aDuration [
+
+	experimentTime := aDuration 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugExperiment >> initialize [ 
+
+	super initialize.
+	experimentTime := 10 seconds
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugExperiment >> maxInputSize [
+
+	^ SmallInteger maxVal 
 ]
 
 { #category : 'running' }
@@ -30,7 +52,7 @@ GrammarBasePathologicalBugExperiment >> mutatorVariants [
 	^ {
 		[ { PBTAddByteMutator new. PBTByteFlipMutator new. PBTDelByteMutator new } ].
 		[ { PBTGrammarMutator from: self newGrammar } ].
-		[ { PBTTreeGrammarMutator from: self newGrammar } ]
+		[ { (PBTTreeGrammarMutator from: self newGrammar ) maxInputSize: self maxInputSize } ]
 	}
 ]
 
