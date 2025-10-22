@@ -88,7 +88,7 @@ GrammarBasePathologicalBugExperiment >> run [
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPerIteration: n [
 
-	| schema runner result fileName |
+	| schema runner result fileName mutatorsLabel |
 	
 	schema := self schema: seed mutators: mutators mutationsPerIteration: n.
 	
@@ -99,7 +99,9 @@ GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPe
 	
 	result := runner run.
 	
-	fileName := self name, '-seed:', seed, '-mutators:' join: (mutators collect: #className), '-mutationPerIteration: ', n asString, '.ston'.
+	mutatorsLabel := '-mutators:', (mutators collect: #className) asString.
+	
+	fileName := self name, '-seed:', seed, mutatorsLabel, '-mutationPerIteration: ', n asString, '.ston'.
 	
 	result writeToFile: fileName.
 ]
