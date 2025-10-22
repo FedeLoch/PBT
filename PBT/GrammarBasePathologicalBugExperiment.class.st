@@ -49,10 +49,14 @@ GrammarBasePathologicalBugExperiment >> mutationsPerIterations [
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment >> mutatorVariants [
 
+	| maxSize |
+	
+	maxSize := self maxInputSize.
+
 	^ {
-		[ { PBTAddByteMutator new. PBTByteFlipMutator new. PBTDelByteMutator new } ].
-		[ { PBTGrammarMutator from: self newGrammar } ].
-		[ { (PBTTreeGrammarMutator from: self newGrammar ) maxInputSize: self maxInputSize } ]
+		[ { PBTAddByteMutator new maxInputSize: maxSize. PBTByteFlipMutator new. PBTDelByteMutator new } ].
+		[ { (PBTGrammarMutator from: self newGrammar) maxInputSize: maxSize } ].
+		[ { (PBTTreeGrammarMutator from: self newGrammar) maxInputSize: maxSize } ]
 	}
 ]
 
