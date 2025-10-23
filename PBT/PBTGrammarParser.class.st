@@ -65,7 +65,7 @@ PBTGrammarParser >> parseRule: rule on: input from: index [
 	currentIndex := index.
 
 	rule fragments do: [ :fragment | | result |
-		result := fragment parse: input from: currentIndex with: self.
+		result := fragment parse: input from: currentIndex with: self rule: rule.
 		result ifNil: [ ^ nil ].
 		children add: result first.
 		currentIndex := result second
@@ -75,7 +75,7 @@ PBTGrammarParser >> parseRule: rule on: input from: index [
 ]
 
 { #category : 'parsing' }
-PBTGrammarParser >> parseTerminal: terminal on: string from: index [
+PBTGrammarParser >> parseTerminal: terminal on: string from: index rule: rule [
 
     | token |
 
@@ -83,5 +83,5 @@ PBTGrammarParser >> parseTerminal: terminal on: string from: index [
 
     token ifNil: [ ^ nil ].
 
-    ^ { GncLeaf withToken: token . index + token size }
+    ^ { (GncLeaf withToken: token) grammarRule: rule . index + token size }
 ]

@@ -64,6 +64,14 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 ]
 
 { #category : 'accessing' }
+PBTTreeGrammarMutator >> minimumNodeRewarded: root [
+
+	^ (root allNodes sort: [ :node1 :node2 |
+		(node1 reward: grammar root: root) > (node2 reward: grammar root: root)
+	]) last
+]
+
+{ #category : 'accessing' }
 PBTTreeGrammarMutator >> mutateAST: ast [
 	
 	| aNode node parentSize newChildren |
@@ -87,11 +95,12 @@ PBTTreeGrammarMutator >> pickNode: ast [
 
 	selected := ast at: ((2 to: ast treeSize) atRandom)."
 	
-	"10 % of selecting a random node"
-	((1 to: 100) atRandom) <= 15 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ].
+	"10 % of selecting a random node""
+	((1 to: 100) atRandom) <= 15 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ]."
 
 	"Select a random leaf"
-	^ ast aLeaf
+	^ self minimumNodeRewarded: ast
+	"ast aLeaf"
 ]
 
 { #category : 'accessing' }
@@ -120,6 +129,6 @@ PBTTreeGrammarMutator >> subNodesFrom: grammarRule parentSize: parentSize level:
 
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> tree: word [
-	
+
 	^ PBTGrammarParser parse: word from: grammar
 ]
