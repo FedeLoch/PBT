@@ -50,8 +50,8 @@ GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mu
 
 	| mutatorsLabel |
 	mutatorsLabel := '-mutators=', (mutators collect: #className) asString.
-	
-	^ self name, '-seed=', seed, mutatorsLabel, '-mutationPerIteration=', times asString, '.ston'.
+
+	^ self name, '-seed=', seed hash asString, mutatorsLabel, '-mutationPerIteration=', times asString, '.ston'.
 ]
 
 { #category : 'running' }

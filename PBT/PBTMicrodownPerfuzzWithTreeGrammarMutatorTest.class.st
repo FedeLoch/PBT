@@ -13,7 +13,7 @@ Class {
 PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: 'a');
+		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: 100;
 		  mutators: { (PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
