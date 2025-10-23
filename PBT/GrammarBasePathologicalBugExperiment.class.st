@@ -21,8 +21,9 @@ GrammarBasePathologicalBugExperiment >> allPathNames [
 	| fileNames |
 	
 	fileNames := OrderedCollection new.
+
 	self seeds do: [ :seed |
-		self mutationsPerIterations do: [ :times | 
+		self mutationsPerIterations do: [ :times |
 			self mutatorVariants do: [ :mutators |
 				fileNames add: (self fileNameSeed: seed mutators: mutators mutationsPerIteration: times)
 			 ]
@@ -48,9 +49,9 @@ GrammarBasePathologicalBugExperiment >> experimentTime: aDuration [
 GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mutationsPerIteration: times [
 
 	| mutatorsLabel |
-	mutatorsLabel := '-mutators:', (mutators collect: #className) asString.
+	mutatorsLabel := '-mutators=', (mutators collect: #className) asString.
 	
-	^ self name, '-seed:', seed, mutatorsLabel, '-mutationPerIteration: ', times asString, '.ston'.
+	^ self name, '-seed=', seed, mutatorsLabel, '-mutationPerIteration=', times asString, '.ston'.
 ]
 
 { #category : 'running' }
@@ -105,7 +106,9 @@ GrammarBasePathologicalBugExperiment >> run [
 		self mutationsPerIterations do: [ :times |
 			self mutatorVariants do: [ :mutators |
 				Smalltalk garbageCollect. "We perform a garbageCollect before each execution"
-				self run: seed mutators: mutators mutationsPerIteration: times
+				"We are copying the seed because some mutators mutate the string itself"
+				(seed = '}{') ifTrue: [ 1 halt. ].
+				self run: seed deepCopy mutators: mutators mutationsPerIteration: times
 			 ]
 		]
 	]
@@ -116,6 +119,8 @@ GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPe
 
 	| schema runner result fileName |
 	
+	fileName := self fileNameSeed: seed mutators: mutators mutationsPerIteration: n.
+	
 	schema := self schema: seed mutators: mutators mutationsPerIteration: n.
 	
 	runner := PBTRunner test: self targetMethod from: schema for: self experimentTime.
@@ -124,8 +129,6 @@ GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPe
 	runner guidedByMethodsCalls.
 	
 	result := runner run.
-	
-	fileName := self fileNameSeed: seed mutators: mutators mutationsPerIteration: n.
 	
 	result writeToFile: fileName.
 ]
