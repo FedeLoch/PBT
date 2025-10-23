@@ -10,6 +10,12 @@ Class {
 	#tag : 'Evaluation'
 }
 
+{ #category : 'ston-core' }
+PBTEvalError class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( stack )
+]
+
 { #category : 'accessing' }
 PBTEvalError >> message [
 

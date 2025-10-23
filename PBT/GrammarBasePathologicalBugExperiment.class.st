@@ -15,6 +15,24 @@ GrammarBasePathologicalBugExperiment class >> run [
 	^ self new run
 ]
 
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugExperiment >> allPathNames [
+
+	| fileNames |
+	
+	fileNames := OrderedCollection new.
+	self seeds do: [ :seed |
+		self mutatorVariants do: [ :mutatorsBlock | | mutators |
+			mutators := mutatorsBlock value.
+			self mutationsPerIterations do: [ :times |
+				fileNames add: (self fileNameSeed: seed mutators: mutators mutationsPerIteration: times)
+			 ]
+		]
+	].
+
+	^ fileNames
+]
+
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment >> experimentTime [
 
@@ -25,6 +43,15 @@ GrammarBasePathologicalBugExperiment >> experimentTime [
 GrammarBasePathologicalBugExperiment >> experimentTime: aDuration [
 
 	experimentTime := aDuration 
+]
+
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mutationsPerIteration: times [
+
+	| mutatorsLabel |
+	mutatorsLabel := '-mutators:', (mutators collect: #className) asString.
+	
+	^ self name, '-seed:', seed, mutatorsLabel, '-mutationPerIteration: ', times asString, '.ston'.
 ]
 
 { #category : 'running' }
@@ -100,9 +127,7 @@ GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPe
 	
 	result := runner run.
 	
-	mutatorsLabel := '-mutators:', (mutators collect: #className) asString.
-	
-	fileName := self name, '-seed:', seed, mutatorsLabel, '-mutationPerIteration: ', n asString, '.ston'.
+	fileName := self fileNameSeed: seed mutators: mutators mutationsPerIteration: n.
 	
 	result writeToFile: fileName.
 ]

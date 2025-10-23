@@ -83,7 +83,7 @@ RegexExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
 { #category : 'running' }
 RegexExperiment >> seeds [
 
-	^ { '' . 'a(a+b*)?(aa(aaa?c?ab?b?()a(bc?aaa|b)?))?a' }
+	^ { 'a' . 'a(a+b*)?(aa(aaa?c?ab?b?()a(bc?aaa|b)?))?a' }
 ]
 
 { #category : 'running' }
