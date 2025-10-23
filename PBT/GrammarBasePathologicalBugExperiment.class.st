@@ -9,6 +9,12 @@ Class {
 	#tag : 'Paper Experimentation'
 }
 
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugExperiment class >> getResults [
+
+	^ self new allPathNames collect: [ :file | STON fromStream: file asFileReference readStream ]
+]
+
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment class >> run [
 
