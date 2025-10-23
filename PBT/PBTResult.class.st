@@ -351,7 +351,6 @@ PBTResult >> writeToFile: fileName [
 	
 	file := fileName asFileReference.
 	file ensureDelete.
-	1 halt.
 	file writeStreamDo: [ :stream | STON put: self onStreamPretty: stream ].
 	
 	^ file

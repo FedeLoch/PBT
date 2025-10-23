@@ -15,6 +15,12 @@ IncrementalCoverageResult class >> for: methods from: collector [
 	^ self new methods: methods asSet; nodes: IdentitySet new ; collector: collector
 ]
 
+{ #category : 'ston-core' }
+IncrementalCoverageResult class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( methods )
+]
+
 { #category : 'as yet unclassified' }
 IncrementalCoverageResult >> asPercent [
 	^ self percentage

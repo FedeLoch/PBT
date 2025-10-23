@@ -31,7 +31,7 @@ GrammarBasePathologicalBugExperiment >> experimentTime: aDuration [
 GrammarBasePathologicalBugExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 10 seconds
+	experimentTime := 1 seconds
 ]
 
 { #category : 'running' }
@@ -79,6 +79,7 @@ GrammarBasePathologicalBugExperiment >> run [
 		self mutatorVariants do: [ :mutatorsBlock | | mutators |
 			mutators := mutatorsBlock value.
 			self mutationsPerIterations do: [ :times |
+				Smalltalk garbageCollect. "We perform a garbageCollect before each execution"
 				self run: seed mutators: mutators mutationsPerIteration: times
 			 ]
 		]
