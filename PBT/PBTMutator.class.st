@@ -16,6 +16,12 @@ PBTMutator class >> mutate: aBlock [
 ]
 
 { #category : 'accessing' }
+PBTMutator >> feed: feedback [
+
+	"DO NOTHING"
+]
+
+{ #category : 'accessing' }
 PBTMutator >> mutate: anInput [
 
 	^ mutator value: anInput 

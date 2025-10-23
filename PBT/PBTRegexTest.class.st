@@ -16,14 +16,13 @@ Class {
 { #category : 'running' }
 PBTRegexTest >> regexByProp: props and: feedback [
 
-	| regex |
+	| regex grammarConstraint |
 	regex := nil.
+	
+	grammarConstraint := (props at: 'grammar').
+	grammarConstraint feed: feedback.
 
-	[ regex ] whileNil: [
-		[
-		| maybe grammarConstraint |
-		grammarConstraint := (props at: 'grammar').
-		grammarConstraint feed: feedback.
+	[ regex ] whileNil: [ [ | maybe |
 		maybe := grammarConstraint gen.
 		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
