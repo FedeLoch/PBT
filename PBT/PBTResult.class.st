@@ -61,6 +61,12 @@ PBTResult >> exportExecutionValues [
 					test time asMilliSeconds } ] ]
 ]
 
+{ #category : 'accessing' }
+PBTResult >> feedbackEvaluator [
+	
+	^ feedbackEvaluator
+]
+
 { #category : 'setter' }
 PBTResult >> feedbackEvaluator: aFeedbackEvaluator [
 
