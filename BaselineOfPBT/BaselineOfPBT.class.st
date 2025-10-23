@@ -16,9 +16,10 @@ BaselineOfPBT >> baseline: spec [
 		spec baseline: 'PBA' with: [ spec repository: 'github://FedeLoch/PBA:main' ].
 		spec baseline: 'Gnocco' with: [ spec repository: 'github://FedeLoch/gnocco:release/src' ].
 		spec baseline: 'MuTalk' with: [ spec repository: 'github://pharo-contributions/mutalk:v2.6.0/src' ].
+		spec baseline: 'Microdown' with: [ spec repository: 'github://pillar-markup/Microdown:dev' ].
 		spec baseline: 'OSSubprocess' with: [ spec repository: 'github://pharo-contributions/OSSubprocess:master/repository' ].
 		
-		spec package: 'PBT' with: [ spec requires: #( 'Coverage2' 'Phuzzer' "'BlocBenchs'" "'Roassal'" 'OSSubprocess' 'PBA' 'Gnocco' ) ].
+		spec package: 'PBT' with: [ spec requires: #( 'Coverage2' 'Phuzzer' "'BlocBenchs'" "'Roassal'" 'OSSubprocess' 'PBA' 'Gnocco' 'Microdown' ) ].
 		spec package: 'Coverage2'
 	]
 ]
