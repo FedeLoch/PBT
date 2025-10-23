@@ -27,19 +27,18 @@ RegexExperiment >> newGrammar [
 { #category : 'running' }
 RegexExperiment >> regexByProp: props and: feedback [
 
-	| regex |
+	| regex grammarConstraint |
 	regex := nil.
+	
+	grammarConstraint := (props at: 'grammar').
+	grammarConstraint feed: feedback.
 
-	[ regex ] whileNil: [
-		[
-		| maybe grammarConstraint |
-		grammarConstraint := (props at: 'grammar').
-		grammarConstraint feed: feedback.
+	[ regex ] whileNil: [ [ | maybe |
 		maybe := grammarConstraint gen.
 		(PBTRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
-			do: [ :e | "1 halt." ] ].
+			do: [ :e | 1 halt "1 halt." ] ].
 
 	^ regex
 ]
@@ -83,7 +82,7 @@ RegexExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
 { #category : 'running' }
 RegexExperiment >> seeds [
 
-	^ { 'a' . 'a(a+b*)?(aa(aaa?c?ab?b?()a(bc?aaa|b)?))?a' }
+	^ { 'a' . 'ac?ab?ab?b?aa.?aaab?c?a(c)?ac?aaab?a?a' }
 ]
 
 { #category : 'running' }

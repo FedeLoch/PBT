@@ -22,9 +22,8 @@ GrammarBasePathologicalBugExperiment >> allPathNames [
 	
 	fileNames := OrderedCollection new.
 	self seeds do: [ :seed |
-		self mutatorVariants do: [ :mutatorsBlock | | mutators |
-			mutators := mutatorsBlock value.
-			self mutationsPerIterations do: [ :times |
+		self mutationsPerIterations do: [ :times | 
+			self mutatorVariants do: [ :mutators |
 				fileNames add: (self fileNameSeed: seed mutators: mutators mutationsPerIteration: times)
 			 ]
 		]
@@ -58,7 +57,7 @@ GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mu
 GrammarBasePathologicalBugExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 1 seconds
+	experimentTime := 5 seconds
 ]
 
 { #category : 'running' }
@@ -81,9 +80,9 @@ GrammarBasePathologicalBugExperiment >> mutatorVariants [
 	maxSize := self maxInputSize.
 
 	^ {
-		[ { PBTAddByteMutator new maxInputSize: maxSize. PBTByteFlipMutator new. PBTDelByteMutator new } ].
-		[ { (PBTGrammarMutator from: self newGrammar) maxInputSize: maxSize } ].
-		[ { (PBTTreeGrammarMutator from: self newGrammar) maxInputSize: maxSize } ]
+		{ PBTAddByteMutator new maxInputSize: maxSize. PBTByteFlipMutator new. PBTDelByteMutator new }.
+		{ (PBTGrammarMutator from: self newGrammar) maxInputSize: maxSize }.
+		{ (PBTTreeGrammarMutator from: self newGrammar) maxInputSize: maxSize }
 	}
 ]
 
@@ -103,9 +102,8 @@ GrammarBasePathologicalBugExperiment >> newGrammar [
 GrammarBasePathologicalBugExperiment >> run [
 
 	self seeds do: [ :seed |
-		self mutatorVariants do: [ :mutatorsBlock | | mutators |
-			mutators := mutatorsBlock value.
-			self mutationsPerIterations do: [ :times |
+		self mutationsPerIterations do: [ :times |
+			self mutatorVariants do: [ :mutators |
 				Smalltalk garbageCollect. "We perform a garbageCollect before each execution"
 				self run: seed mutators: mutators mutationsPerIteration: times
 			 ]
@@ -116,7 +114,7 @@ GrammarBasePathologicalBugExperiment >> run [
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPerIteration: n [
 
-	| schema runner result fileName mutatorsLabel |
+	| schema runner result fileName |
 	
 	schema := self schema: seed mutators: mutators mutationsPerIteration: n.
 	
