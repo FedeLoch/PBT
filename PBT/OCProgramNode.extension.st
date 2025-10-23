@@ -29,3 +29,9 @@ OCProgramNode >> path [
 
 	^ self parent path , { self indexInParent }
 ]
+
+{ #category : '*PBT' }
+OCProgramNode class >> stonAllInstVarNames [
+
+	^ super stonAllInstVarNames copyWithoutAll: #( properties )
+]
