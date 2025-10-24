@@ -29,8 +29,8 @@ PBTTreeGrammarMutator >> feed: feedback [
 	feedback ifNotNil: [ | ast amount |
 		[ ast := self tree: (feedback case) ] on: Error do: [ ^ nil ].
 		"We feed the grammar by doing backPropagation with the grammar"
-		amount := (feedback isPositive) ifTrue: [ feedback improvement ] ifFalse: [ -1 ].
-		ast backPropagateToChildren: feedback improvement level: 0.
+		amount := (feedback isPositive) ifTrue: [ (feedback improvement) * 10 ] ifFalse: [ -1 ].
+		ast backPropagateToChildren: amount level: 0.
 	]
 ]
 
