@@ -48,7 +48,9 @@ RegexExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
 
 	| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
 	
-	regexConstraint := PBTObjectConstraint new generator: (PBTCorpusWithMutationsGenerator new
+	regexConstraint := PBTObjectConstraint new
+		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		generator: (PBTCorpusWithMutationsGenerator new
 		seedGenerator: (PBTConstantGenerator new value: seed);
 		mutationsPerIteration: n; mutators: mutators;
 		heuristic: PBTPickBestElementDifferenceHeuristic new).
