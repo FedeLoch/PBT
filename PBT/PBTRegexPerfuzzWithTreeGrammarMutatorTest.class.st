@@ -12,16 +12,12 @@ Class {
 { #category : 'running' }
 PBTRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 
-	^ PBTObjectConstraint new generator:
-		  (PBTCorpusWithMutationsGenerator new
-			   seedGenerator: (PBTGrammarGenerator new
-					    grammar: GncRegexGrammar new;
-					    maxHeight: 100;
-					    maxSize: 100);
+	^ PBTObjectConstraint new
+		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		generator: (PBTCorpusWithMutationsGenerator new
+			   seedGenerator: (PBTConstantGenerator new value: self seed);
 			   mutationsPerIteration: 3;
-			   mutators: {
-					(PBTTreeGrammarMutator from: GncRegexGrammar new) maxInputSize: 41
-				};
+			   mutators: { (PBTTreeGrammarMutator from: GncRegexGrammar new) maxInputSize: 41 };
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]
 

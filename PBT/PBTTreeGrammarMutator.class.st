@@ -66,9 +66,22 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> minimumNodeRewarded: root [
 
-	^ (root allNodes sort: [ :node1 :node2 |
+	| worst worstReward | 
+	worstReward := SmallInteger maxVal.
+	worst := OrderedCollection new.
+	
+	root allNodes do: [ :node | | reward |
+		reward := node reward: grammar root: root.
+		(reward < worstReward) ifTrue: [ worstReward := reward . worst := OrderedCollection new ].
+		(reward = worstReward) ifTrue: [ worst add: node ]
+	].
+
+	"We return a random node from the collection of worst ones"
+	^ worst atRandom. 
+	
+"	^ (root allNodes sort: [ :node1 :node2 |
 		(node1 reward: grammar root: root) > (node2 reward: grammar root: root)
-	]) last
+	]) last"
 ]
 
 { #category : 'accessing' }
@@ -95,8 +108,8 @@ PBTTreeGrammarMutator >> pickNode: ast [
 
 	selected := ast at: ((2 to: ast treeSize) atRandom)."
 	
-	"10 % of selecting a random node""
-	((1 to: 100) atRandom) <= 15 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ]."
+	"10 % of selecting a random node"
+	((1 to: 100) atRandom) <= 10 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ].
 
 	"Select a random leaf"
 	^ self minimumNodeRewarded: ast

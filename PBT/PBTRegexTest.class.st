@@ -40,6 +40,12 @@ PBTRegexTest >> regexConstraint [
 		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
 
+{ #category : 'accessing' }
+PBTRegexTest >> seed [
+
+	^ 'ac?ab?ab?b?aa.?aaab?c?a(c)?ac?aaab?a?a'
+]
+
 { #category : 'running' }
 PBTRegexTest >> setUp [
 
