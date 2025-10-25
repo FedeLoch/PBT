@@ -46,7 +46,7 @@ PBTTreeGrammarMutator >> initialize [
 	super initialize.
 	maxInputSize := SmallInteger maxVal.
 	generator := GrammarMCTSGenerator new
-		             maxHeight: 20;
+		             maxHeight: SmallInteger maxVal;
 		             totalGenerations: 1;
 		             explorationConstant: 1.41
 ]
