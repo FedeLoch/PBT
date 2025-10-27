@@ -187,3 +187,14 @@ PBTGrammarParserTest >> testParseRegex02 [
 	
 	self assert: node generate equals: input
 ]
+
+{ #category : 'tests' }
+PBTGrammarParserTest >> testParseRegex03 [
+
+	| node input |
+
+	input := '(b*b|c|)'.
+	node := PBTGrammarParser parse: input from: GncRegexGrammar new.
+	
+	self assert: node generate equals: input
+]
