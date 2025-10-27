@@ -11,3 +11,25 @@ NeoJSONReader class >> mutate: input with: anotherInput [
 	^ NeoJSONWriter toString: (json mutateJson: (self fromString: anotherInput)).
 
 ]
+
+{ #category : '*PBT' }
+NeoJSONReader >> parseList [
+
+	self perturbation: 100.
+	
+	^ self listClass 
+		streamContents: [ :stream |
+			self parseListElementsDo: [ :each |
+				stream nextPut: each ] ]
+
+		
+]
+
+{ #category : '*PBT' }
+NeoJSONReader >> perturbation: n [
+
+	(n = 0) ifTrue: [ ^ self ].
+	(Delay forMilliseconds: 1) wait.
+	
+	self perturbation: n - 1	
+]
