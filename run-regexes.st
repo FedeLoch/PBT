@@ -4,4 +4,4 @@ Metacello new
 	 onConflictUseIncoming;
     load.
 
-RegexExperiment run
+(Smalltalk at: #RegexExperiment) run
