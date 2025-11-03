@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTTreeGrammarMutatorTest',
+	#name : 'PBTTreeGrammarMutatorJSONTest',
 	#superclass : 'PBTStringMutatorTest',
 	#instVars : [
 		'mutator'
@@ -10,20 +10,20 @@ Class {
 }
 
 { #category : 'running' }
-PBTTreeGrammarMutatorTest >> setUp [
+PBTTreeGrammarMutatorJSONTest >> setUp [
 
 	super setUp.
 	mutator := PBTTreeGrammarMutator from: JSONGrammar new.
 ]
 
 { #category : 'tests' }
-PBTTreeGrammarMutatorTest >> testMutatingAnEmptyString [
+PBTTreeGrammarMutatorJSONTest >> testMutatingAnEmptyString [
 
 	self assert: (mutator mutate: '{}') equals:  '{}'
 ]
 
 { #category : 'tests' }
-PBTTreeGrammarMutatorTest >> testMutatingAnEmptyString02 [
+PBTTreeGrammarMutatorJSONTest >> testMutatingAnEmptyString02 [
 
 	self assert: (mutator mutate: '{"n":true,"n":true,"x":6}') equals:  '{}'
 ]

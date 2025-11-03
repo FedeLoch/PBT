@@ -64,7 +64,7 @@ GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mu
 GrammarBasePathologicalBugExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 8 hours
+	experimentTime := 2 minutes.
 ]
 
 { #category : 'running' }

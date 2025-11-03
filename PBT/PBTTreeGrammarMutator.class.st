@@ -40,6 +40,12 @@ PBTTreeGrammarMutator >> gammar: aGrammar [
 	grammar := aGrammar
 ]
 
+{ #category : 'as yet unclassified' }
+PBTTreeGrammarMutator >> grammar [
+
+	^ grammar 
+]
+
 { #category : 'initialization' }
 PBTTreeGrammarMutator >> initialize [
 
