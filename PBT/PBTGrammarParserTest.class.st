@@ -198,3 +198,14 @@ PBTGrammarParserTest >> testParseRegex03 [
 	
 	self assert: node generate equals: input
 ]
+
+{ #category : 'tests' }
+PBTGrammarParserTest >> testParseRegex04 [
+
+	| node input |
+
+	input := '((ca)+|(()a|(a|b?()c*)*(|a))+a)()+a'.
+	node := PBTGrammarParser parse: input from: GncRegexGrammar new.
+	
+	self assert: node generate equals: input
+]

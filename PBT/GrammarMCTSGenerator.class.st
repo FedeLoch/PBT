@@ -40,17 +40,30 @@ GrammarMCTSGenerator >> ruleWithMoreUTC: rules level: level [
 { #category : 'private' }
 GrammarMCTSGenerator >> selectRule: rules level: level [
 
-	| notVisited taken |
+	| notVisited validRules minRule |
 	
-	rules detect: [ :rule | rule minSize <= maxSize ] ifNone: [ ^ nil ].
+	minRule := (rules sorted: [ :r1 :r2 | r1 minSize < r2 minSize ]) first.
 	
+	validRules := rules select: [ :rule | rule minSize <= maxSize ].
+	
+	validRules ifEmpty: [ ^ minRule ].
+	
+	notVisited := validRules reject: [ :rule | rule visitedIn: level ].
+	
+	^ notVisited
+		  ifEmpty: [ self ruleWithMoreUTC: validRules level: level ]
+		  ifNotEmpty: [ notVisited atRandom ]
+	
+	"
+	rules detect: [ :rule | rule minSize <= maxSize ] ifNone: [ 1 halt. ^ nil ].
+
 	notVisited := rules reject: [ :rule | rule visitedIn: level ].
 	
 	taken := (notVisited
 		  ifEmpty: [ self ruleWithMoreUTC: rules level: level ]
 		  ifNotEmpty: [ notVisited atRandom ]).
-
-	^ (maxSize - taken minSize) < -1 ifTrue: [ nil ] ifFalse: [ taken ] 
+	
+	^ (maxSize - taken minSize) < 0 ifTrue: [ 1 halt. nil ] ifFalse: [ taken ] "
 ]
 
 { #category : 'initialization' }
@@ -70,8 +83,10 @@ GrammarMCTSGenerator >> visitNonTerminal: nonTerminal level: level [
 	| rule |
 	
 	rule := self selectRule: nonTerminal rules level: level.
+	
+	^ (rule visit: self level: level) tag: nonTerminal name
 
-	^ (rule ifNil: [ GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]) tag: nonTerminal name
+"	^ (rule ifNil: [ 1 halt. GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]) tag: nonTerminal name"
 	
 ]
 
