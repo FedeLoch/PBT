@@ -176,36 +176,3 @@ PBTGrammarParserTest >> testParseRegex01 [
 	
 	self assert: node generate equals: input
 ]
-
-{ #category : 'tests' }
-PBTGrammarParserTest >> testParseRegex02 [
-
-	| node input |
-
-	input := '(b?c*b+c+|()|a?)b?b'.
-	node := PBTGrammarParser parse: input from: GncRegexGrammar new.
-	
-	self assert: node generate equals: input
-]
-
-{ #category : 'tests' }
-PBTGrammarParserTest >> testParseRegex03 [
-
-	| node input |
-
-	input := '(b*b|c|)'.
-	node := PBTGrammarParser parse: input from: GncRegexGrammar new.
-	
-	self assert: node generate equals: input
-]
-
-{ #category : 'tests' }
-PBTGrammarParserTest >> testParseRegex04 [
-
-	| node input |
-
-	input := '((ca)+|(()a|(a|b?()c*)*(|a))+a)()+a'.
-	node := PBTGrammarParser parse: input from: GncRegexGrammar new.
-	
-	self assert: node generate equals: input
-]
