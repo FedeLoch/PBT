@@ -64,7 +64,7 @@ GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mu
 GrammarBasePathologicalBugExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 2 minutes.
+	experimentTime := 4 hours.
 ]
 
 { #category : 'running' }
@@ -113,7 +113,6 @@ GrammarBasePathologicalBugExperiment >> run [
 			self mutatorVariants do: [ :mutators |
 				Smalltalk garbageCollect. "We perform a garbageCollect before each execution"
 				"We are copying the seed because some mutators mutate the string itself"
-				(seed = '}{') ifTrue: [ 1 halt. ].
 				self run: seed deepCopy mutators: mutators mutationsPerIteration: times
 			 ]
 		]
