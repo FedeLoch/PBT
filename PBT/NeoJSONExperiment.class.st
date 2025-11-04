@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'running' }
+NeoJSONExperiment >> maxInputSize [
+
+	^ 100
+]
+
+{ #category : 'running' }
 NeoJSONExperiment >> name [
 
 	^ 'NeoJSON'
@@ -41,7 +47,7 @@ NeoJSONExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
 { #category : 'running' }
 NeoJSONExperiment >> seeds [
 
-	^ { '{}' . '{"n":true,"n":true,"x":6}' }
+	^ { '{}' . '{"n":true,"n":[],"x":6}' }
 ]
 
 { #category : 'running' }

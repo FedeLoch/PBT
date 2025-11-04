@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'running' }
+DataFrameExperiment >> maxInputSize [
+
+	^ 200
+]
+
+{ #category : 'running' }
 DataFrameExperiment >> name [
 
 	^ 'DataFrame'

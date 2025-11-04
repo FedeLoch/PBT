@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'running' }
+MicrodownExperiment >> maxInputSize [
+
+	^ 200
+]
+
+{ #category : 'running' }
 MicrodownExperiment >> name [
 
 	^ 'Microdown'
