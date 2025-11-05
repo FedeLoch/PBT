@@ -15,7 +15,7 @@ PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: 100;
-		  mutators: { (PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new) };
+		  mutators: { (PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new) maxInputSize: 200 };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
