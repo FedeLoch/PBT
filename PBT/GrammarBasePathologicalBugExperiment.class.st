@@ -15,6 +15,12 @@ GrammarBasePathologicalBugExperiment class >> getResults [
 	^ self new allPathNames collect: [ :file | STON fromStream: file asFileReference readStream ]
 ]
 
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugExperiment class >> getResults: sourcePath [
+
+	^ self new allPathNames collect: [ :file | STON fromStream: (sourcePath, file) asFileReference readStream ]
+]
+
 { #category : 'running' }
 GrammarBasePathologicalBugExperiment class >> run [
 
