@@ -42,14 +42,6 @@ PBTTest >> arguments: inputs [
 	arguments := inputs
 ]
 
-{ #category : 'converting' }
-PBTTest >> asPharoTest [
-	
-	"Returns the pharo code that reprensents the test which the same semantics"
-
-	"TODO: Implement me"
-]
-
 { #category : 'accessing' }
 PBTTest >> assert [
 
@@ -94,6 +86,34 @@ PBTTest >> feedback [
 PBTTest >> feedback: aFeedback [
 
 	feedback := aFeedback
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> installIn: aPBTUnitTest [
+	
+	| selector sourceCode receiverString argumentsString |
+	selector := (aPBTUnitTest testName: self) asSymbol.
+	
+	receiverString := $' asString, (STON toString: receiver), $' asString.
+	argumentsString := STON toString: arguments.
+		
+	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
+     	nextPutAll: '
+		| receiver arguments result targetSelector |
+		
+		receiver := STON fromString: ',  receiverString, '.
+		arguments := STON fromString: ', argumentsString, ' asString.
+		
+		targetSelector := (', target name, ') selector.
+		
+		result := receiver perform: targetSelector withArguments: arguments.
+		self assert: receiver arguments: arguments result: result
+	'].
+    aPBTUnitTest class
+        compile: sourceCode
+        classified: 'PBT dynamic tests'.
+
+    ^ selector
 ]
 
 { #category : 'accessing' }
