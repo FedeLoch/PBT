@@ -43,9 +43,15 @@ PBTUnitTest >> generateTests [
 
 	<script: 'self new generateTests'>
 	
-	self generateUnitTests: self runPBT.
+	self generateUnitTests: (self runPBT: self generationTime)
+]
+
+{ #category : 'running' }
+PBTUnitTest >> generateTests: duration [
+
+	<script: 'self new generateTests'>
 	
-	"only rewrite this ?"
+	self generateUnitTests: (self runPBT: duration)
 ]
 
 { #category : 'running' }
@@ -106,9 +112,9 @@ PBTUnitTest >> guidedByScore [
 ]
 
 { #category : 'running' }
-PBTUnitTest >> instanceRunner [
+PBTUnitTest >> instanceRunner: duration [
 
-	runner := PBTRunner test: self targetMethod from: self schema for: self generationTime.
+	runner := PBTRunner test: self targetMethod from: self schema for: duration
 ]
 
 { #category : 'running' }
@@ -118,9 +124,9 @@ PBTUnitTest >> receiverGenerator [
 ]
 
 { #category : 'running' }
-PBTUnitTest >> runPBT [
+PBTUnitTest >> runPBT: duration [
 
-	self instanceRunner.
+	self instanceRunner: duration.
 	self guidedBy.
 
 	^ runner run
