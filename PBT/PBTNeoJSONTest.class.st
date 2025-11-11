@@ -10,7 +10,7 @@ Class {
 PBTNeoJSONTest >> argumentGenerators [
 
 	^ {
-		self corpusGenFrom: '{"n":true,"n":[],"x":6}' mpi: 3 mutators: {
+		self corpusGenFrom: '[]' mpi: 3 mutators: {
 			(PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100
 		}
 	}
@@ -42,122 +42,155 @@ PBTNeoJSONTest >> targetMethod [
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_17685504 [
+PBTNeoJSONTest >> test_146323200 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"n":true,"n":[],"x":6}'].
+			'arguments' -> ['4'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_219223552 [
+PBTNeoJSONTest >> test_197470976 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"lb":[[0,{},"c",""]],"":"r"}'].
+			'arguments' -> ['[[{"":"ob"},""]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_305008640 [
+PBTNeoJSONTest >> test_355585536 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"":false,"a":78,"gn":[false]}'].
+			'arguments' -> ['[[[[[646562],"",0,062755],"vx",[["y"]],[503750],"",null],{},{},[1,null],["",[{"c":"f"}],[]]]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_309022464 [
+PBTNeoJSONTest >> test_369663744 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"c":[[82,["",{"s":"hb"},{"ux":true,"":{"":{"ew":{}},"":{"":null}},"":false}],"f",{"t":"es"},3]]}'].
+			'arguments' -> ['[["z",{},{},[[0081],"",[{"k":4}]],null]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_315405568 [
+PBTNeoJSONTest >> test_433265152 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"lb":[[1,{},"u","","",{"mh":"h"},{}]],"j":{"":140}}'].
+			'arguments' -> ['[["pnf",{},{},[[936915],"",[[true,null]]],"mm"]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_395102720 [
+PBTNeoJSONTest >> test_458894336 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"c":[[82,["",{"aea":"wq"},{"t":"e"}],"f","","",[[]],{}]]}'].
+			'arguments' -> ['[8]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_447708672 [
+PBTNeoJSONTest >> test_546047232 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"jcrj":[[["v"],{},"w","","",[[]],[],false]],"i":[]}'].
+			'arguments' -> ['[["pnf",{},{},[],"mm"]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_592790528 [
+PBTNeoJSONTest >> test_605775360 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"c":[[82,["",{"s":"hb"},{"ux":true,"":{"":{"ew":{}},"":{"":null}},"":false}],"ev",{"t":"es"},3]]}'].
+			'arguments' -> ['[["",{},{}]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_748935936 [
+PBTNeoJSONTest >> test_635631872 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"lb":[[4,{},"c",""]],"j":{"":"iw"}}'].
+			'arguments' -> ['[["z",{},{},[[null],"",[["hxd",null]],[]],false]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_757573888 [
+PBTNeoJSONTest >> test_68785152 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"c":[[82,["",{"s":"hb"},{"ux":true,"":{"":{"ew":{}},"":{"":null}},"":false}],{"":false},{},null]]}'].
+			'arguments' -> ['[["z",{},{},[[755126],"",[{"":"qiq","":"qeh"}],436796],null]]'].
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_759742720 [
+PBTNeoJSONTest >> test_692307968 [
 	
 		self doTest: {
 			'method' -> (NeoJSONReader class>>#fromString:) selector.
 			'receiver' -> 'Class[#NeoJSONReader]'.
-			'arguments' -> ['{"lb":[[[]]],"":"r"}'].
+			'arguments' -> ['[[[[[646562],"",0,062755],"vx",[[null,null,false]],[503750],"",null],{},{},[1,null],["",[{"c":"f"}],[]]]]'].
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+PBTNeoJSONTest >> test_755765504 [
+	
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['[[]]'].
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+PBTNeoJSONTest >> test_952308480 [
+	
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['[[[[[646562],"",0,062755],"vx",[["y"]],[503750],"",[]],{},{},[1,null],["",[{"c":"f"}],[]]]]'].
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+PBTNeoJSONTest >> test_959864832 [
+	
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['[["wxv",{},{},[49,""]]]'].
 		} asDictionary
 	
 ]
