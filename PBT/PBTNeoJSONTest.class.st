@@ -36,211 +36,133 @@ PBTNeoJSONTest >> targetMethod [
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_336650240 [
+PBTNeoJSONTest >> test_1065701376 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"":[{"":{},"":"","j":null,"":3144}],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"uj":true,"":{"xmay":[[["m"]],"",59,null,null],"rx":[""],"vk":{},"h":{"v":null}},"":9,"k":{},"":false}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_508865536 [
+PBTNeoJSONTest >> test_1069832960 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"qp":null,"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"n":true,"n":[],"x":6}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_517215232 [
+PBTNeoJSONTest >> test_410537472 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"uc":true,"":[{"":{"f":[]},"v":null,"znft":{"g":{"":[[[],"y",true]],"":false}},"":[]}],"w":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"n":true,"n":[],"":[null]}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_637220608 [
+PBTNeoJSONTest >> test_439378944 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"n":[],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"de":true,"dwy":{"f":4,"yg":1,"":"t","a":true},"":1}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_651972096 [
+PBTNeoJSONTest >> test_443656448 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"uc":true,"":[{"":{"":[48,6]},"v":null,"znft":{"g":{"":"","":null,"":"","":""}},"":[]}],"w":2}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"t":{"":[{"":[[]]},{"l":null},""]},"qe":[],"":[[{"":true},"","z",[[]]]],"z":[],"c":[[""],{},""]}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_685078784 [
+PBTNeoJSONTest >> test_693326080 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"uc":true,"":[{"":{"f":[]},"v":null,"znft":{"g":{"":[[[],"y",true]],"cbk":false}},"":[]}],"w":2}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"o":true,"j":{"j":7,"en":[""]},"":4}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_71209216 [
+PBTNeoJSONTest >> test_695895808 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"n":[{"":{},"z":false,"j":null,"z":false}],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"v":true,"li":[],"":5,"":[["",false,"xm","","p"],""]}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_735987712 [
+PBTNeoJSONTest >> test_743581184 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"uc":true,"":[{"":{"f":[]},"v":null,"lwai":{"g":{"":[[[],{},true,[]]],"cbk":false}},"":[]}],"w":2}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"t":{"":[["",61352,true],{"j":null},""]},"z":[],"":[[[[[]]],""]]}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_906356224 [
+PBTNeoJSONTest >> test_791460352 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"n":[{"":{},"z":false,"j":null,"gj":[]}],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"v":true,"li":[],"":5,"":[["",false,"xm",21,40,false,"","j"],""]}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_921152256 [
+PBTNeoJSONTest >> test_799751168 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"":[{"":{},"z":false,"j":null,"gj":["",null,false]}],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"cbv":189,"":{"":8,"czt":["",165260640,63],"af":{"":274},"":{"u":null}},"":true,"":32,"":null}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_923475712 [
+PBTNeoJSONTest >> test_802290944 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"":[{"":{"f":[]},"v":null,"znft":{"g":{"":[[7,true]],"":false}},"":[]}],"w":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"uj":true,"":{"xmay":[[["m"]],"",621,709],"rx":[""],"vk":{},"h":{"v":null}},"":9,"k":{},"":false}'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_933075456 [
+PBTNeoJSONTest >> test_888255232 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"":[{"":{"f":[]},"v":null,"znft":{"g":{"":[[7,true]],"":false}},"":null}],"w":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_933597952 [
-	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"uc":true,"":[{"":{"":[false,["o"],[8,true]]},"v":null,"znft":{"g":{"":"","":null,"":"","":""}},"":[]}],"w":2}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTNeoJSONTest >> test_966690048 [
-	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#NeoJSONReader]'.
-		arguments := STON fromString: ['{"n":true,"":[{"":{},"":false,"j":null,"gj":[["m",false]]}],"":3}'] asString.
-		
-		targetSelector := (NeoJSONReader class>>#fromString:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (NeoJSONReader class>>#fromString:) selector.
+			'receiver' -> 'Class[#NeoJSONReader]'.
+			'arguments' -> ['{"uj":true,"":{"xmay":[[["m"]],"",59,null,null],"rx":[""],"vk":{},"h":{"v":null}},"":9,"jo":{},"":825,"":false}'].
+		} asDictionary
 	
 ]

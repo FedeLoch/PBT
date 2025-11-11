@@ -39,6 +39,19 @@ PBTUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 ]
 
 { #category : 'running' }
+PBTUnitTest >> doTest: case [
+
+	| receiver arguments targetSelector result |
+	receiver := STON fromString: (case at: 'receiver').
+	arguments := STON fromString: (case at: 'arguments') asString.
+
+	targetSelector := case at: 'method'.
+
+	result := receiver perform: targetSelector withArguments: arguments.
+	self assert: (self assert: receiver arguments: arguments result: result)
+]
+
+{ #category : 'running' }
 PBTUnitTest >> generateTests [
 
 	<script: 'self new generateTests'>

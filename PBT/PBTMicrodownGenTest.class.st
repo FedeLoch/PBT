@@ -36,616 +36,441 @@ PBTMicrodownGenTest >> targetMethod [
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_1011356672 [
+PBTMicrodownGenTest >> test_1051104256 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\t\\\r- [ ]\r>'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r.#-.\r- [x]\r..\r- [x] L#\r- [x] #’\r- [x]\t:\r- [x]\t.bk-\r- [ ]\t’zz:\r- [x]\t’\r- [ ]\rx-\r- [ ]\tp\r- [ ]\t#::\r- [x]\r::'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_101284096 [
+PBTMicrodownGenTest >> test_1065587456 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['`,``/`![>,,>](->\\,)[>-](  :f)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['**’pZ-****W.. >**[#](:)@ @`#,upT>`![-.dR:](xQWV)**###,**[q:H](Y)*q:*[O](::>)/** ’##:**'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_1062694144 [
+PBTMicrodownGenTest >> test_136354304 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\rJ>\r- [x]\t>\r- [x]\r>\r- [x]\t>\\// \r- [x] ,,>>\r- [ ]\r\\\\ /:\r- [ ]\t/’\r- [ ] .\r- [x]\r,:\r- [x]\r>:\r- [x]\t’\r- [ ]\rS’\r- [x]\t’'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['`,#.`@ @**.**`’`'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_107891712 [
+PBTMicrodownGenTest >> test_193782528 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**>**[\\.](/)![//](/)[, \\>](>, ,::)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r-\r- [x]\r,.S.\r- [ ]\r #’\r- [ ] -\r- [x]\t--\r- [x]\t \r- [x] >.’\r- [ ]\tl #B##:\r- [ ]\tZ’\r- [ ]\ri\r- [ ]\tV\r- [ ]\t:::\r- [ ]\r: \r- [ ]\r-\r- [ ] >\r- [x] ’\r- [x]\r,.\r- [ ]\r>\r- [ ]\t,\r- [ ]\r,\r- [x]\t/#'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_108195584 [
+PBTMicrodownGenTest >> test_228035328 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['8.\r’\\’'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [ ] D-\r- [ ]\rxbq\r- [ ]\t>:\r- [x]\rK:  #\r- [x]\r/: -'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_162477824 [
+PBTMicrodownGenTest >> test_230656 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['###\r# ’'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r\\\r- [ ]\r\\\r- [x]\r#,\r- [x]\r,\r- [x]\r.\r- [ ]\t-\r- [ ]\r--\r- [ ]\r \r- [x]\r \r- [x]\r-H\r- [ ]\t \r- [ ]\r ,\r- [ ]\t’#n,'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_194171392 [
+PBTMicrodownGenTest >> test_236902656 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x] \\\r- [x]\r>\r- [x]\r>\r- [x]\r/\\>o\r- [ ]\t\\  \r- [ ]\r>// \\\r- [x]\r >\r- [ ]  \r- [x] . \r- [x] :\r- [x]\rm\r- [x]\t\\/\r- [ ]\r/\r- [ ]\t/-q\r- [ ]\t’g\r- [ ]\r \r- [ ] d\r- [ ]\r:\r- [ ] ,\r- [ ] .\r- [x]\r  \r- [x]\rZ\r- [ ]\r ,,\r- [ ]\r>,\r- [ ]\r,\r- [ ] ,\r- [ ] Z\r- [ ]\rT \r- [x]  \r- [x]\r >>\r- [ ]\t,\r- [ ] \\,\r- [ ]\r\\.\r- [ ] p\r- [ ] i\r- [ ]\ro,#'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r#\r- [x]\r,.\r- [x]\r,\r- [ ]\t.\r- [ ]\t-\r- [ ]\r- \r- [x]\t#\r- [ ]\rm'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_209009920 [
+PBTMicrodownGenTest >> test_2604032 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\\r- [x]\r>\r- [x]\r>\r- [x]\r/\\\\\r- [ ]\t\\\\/y  \r- [ ]\t>>/\r- [x]\r\\ \r- [ ]\r . \r- [x]   \r- [x]  \r- [x] mt\\\r- [x]\r\\\\\r- [ ]\r/\r- [ ]\r//r\r- [ ]\t--\r- [ ] \\\r- [ ]\ri\r- [ ]\r:\r- [ ]\r:’\r- [ ] ,\r- [x] .’#\r- [x]\r’\r- [ ]\t>,\r- [ ]\rO,\r- [ ]\r,\r- [ ] ,\r- [ ] B\r- [ ] - \r- [ ]\r \r- [x]\r’>,\r- [x]\r>\r- [ ]\t>w#'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r..#\r- [ ]\t#’.\r- [x]\r.-\r- [x] ’\r- [x]\t.\r- [x] >’mDY\r- [ ]\rmjc:\r- [ ]\taM#'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_231255040 [
+PBTMicrodownGenTest >> test_278477312 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['|/|b:-m|\r| -----------| ----------- |\r|>|>|>-\\.>|-|'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['|:-W| |\r| ----------- |\r|##-.W|L#.| |,CQ|#:\\: ’#|#|-|'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_265454848 [
+PBTMicrodownGenTest >> test_292121600 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['[\\](\\)`\\:>`*/   #**,>/ .*'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r’\r- [ ]\r:,\r- [x]\r,\r- [ ] .\r- [ ]\r-\r- [ ]\r--'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_26979072 [
+PBTMicrodownGenTest >> test_345921024 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**>**`/`>qs-/#.*h*'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\tA>\r- [ ]\tV   \r- [x]\t:\r- [x]\r/’-\r- [x]  \r- [ ]\r#\r- [ ] #\r- [x]\r,,\r- [x]\r.\r- [ ]\t>\r- [ ]\r#\r- [x]\t, '].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_272127232 [
+PBTMicrodownGenTest >> test_372356864 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x] \\\r- [x]\r>\r- [x]\r>\r- [x]\r/\\>o\r- [ ]\t\\\\E.\r- [ ]\r>// \\\r- [x]\r >\r- [ ]  \r- [x] . \r- [x] :\r- [x]\rm\r- [x]\t\\/\r- [ ]\r/\r- [ ]\t/-q\r- [ ]\t’g\r- [ ]\r \r- [ ] d\r- [ ]\r:\r- [ ] ,\r- [ ] .\r- [x]\r’rH\r- [x]\rZ\r- [ ]\r ,,\r- [ ]\r,,\r- [ ] #\r- [ ] F\r- [ ]\r/\r- [x]\t-\r- [x]\t,'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [ ]\r.#\r- [x]\r/#-\r- [x]\r-.\r- [ ]\t-\r- [ ]\r#\r- [x]\t’uvH:\r- [x]\t.beh\\: \r- [ ]\tnd#\r- [ ]\tZ’\r- [ ]\tN\r- [x] : \r- [x]\tI-\r- [x]  #'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_274305792 [
+PBTMicrodownGenTest >> test_375983872 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\t\\\r- [x]\r>\r- [x]\r/\r- [x]\t \\\\\r- [ ]\r,> .>\r- [ ]\t/>,\r- [x] -/'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r’\r- [ ]\r:,\r- [ ]\rP\r- [x]\rd\r- [ ]\t:\r- [ ]\r--\r- [x]\r-\r- [ ]\tv\r- [ ]\t, '].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_294754816 [
+PBTMicrodownGenTest >> test_407132160 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['`\\``/`![>>, -](  )[’   ](>-l#)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [ ]\r#-’\r- [x]\r#/\r- [x]\t-\r- [x]\t’-o.uR\r- [x]\t’ArU.\r- [x]\t,n:N\r- [ ]\r’g:\r- [ ]\r#y\r- [ ]\tS:: \\\r- [ ]\t>:>\r- [x]\t ’\r- [x]\r:’#\r- [x]\r-#\r- [ ]\r\\,W\r- [ ]\r#,.\r- [x]\r.\r- [x]\r,\r- [ ]\t#\r- [ ]\r--\r- [ ]\r \r- [ ]\tf'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_322414848 [
+PBTMicrodownGenTest >> test_416220928 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['@#@![ ](:: />)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['```\r\r:--I ```'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_326275328 [
+PBTMicrodownGenTest >> test_419323648 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['|#|, >>|’#|#|:’|’|\r| -----------| -----------| -----------| -----------| -----------| -----------| -----------| ----------- |\r|>|/|\\ ,m|'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r..#\r- [ ]\t#’.\r- [x]\r.-\r- [x] ’\r- [x]\t.\r- [ ]\t/’MP:\r- [ ] ,zzZ\r- [ ]\rpW:\r- [x] yP\r- [x]\t>'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_368278272 [
+PBTMicrodownGenTest >> test_423536640 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\\r- [ ]\r>\r- [x]\r#\r- [x]\t/> >>\r- [ ]\r\\-\\.\r- [ ]\r> \r- [ ]\r/#\r- [ ]\t/\r- [x]  :\r- [x]\rf\r- [x]\t\\\r- [x]\t//\r- [ ]\t’\r- [x]\t’:  \r- [x] E,\r- [ ] >,\r- [ ]\r’\r- [ ] ,\r- [ ] . \r- [ ]\rU\r- [x]\rf ,\r- [x]\rC\r- [ ]\t.,-\r- [ ] ##-\r- [ ] >\r- [ ] /\r- [x]  \r- [x]\t’>'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['```\r\r\r \r```'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_399527424 [
+PBTMicrodownGenTest >> test_471543040 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['[\\](-)`\\:>`*/   #**:y*'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r.\\..\r- [x]\r D\r- [x] ##\r- [x] -\r- [x]\t.\r- [ ]\t.mY#>\r- [ ]\t’’\r- [ ]\rpZJ\r- [ ]\tc:\r- [ ]\tP#  -\r- [ ]\r::>\r- [ ]\r:-\r- [ ] -\r- [x] #\r- [x] ,\r- [ ] >T\r- [x]\r>,>#'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_415838720 [
+PBTMicrodownGenTest >> test_510673920 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['-\r’’'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['[. ](.X)'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_420927232 [
+PBTMicrodownGenTest >> test_530867968 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\\\\r- [x]\r’\r- [x]\r>\r- [x]\r  \\/.\r- [ ]\t->>-,\r- [ ]\r#\r- [x]\t->\r- [x]\r,\r- [x]\r’\r- [x]\t’\r- [x]\t/\r- [x]\t’,\r- [x]\r’\r- [ ]\t’\r- [x]\r#C \r- [ ] :c\r- [ ]  \r- [ ] ,\r- [x] ’.\r- [ ] ,\r- [x]\r,hU\r- [ ]\r’’\r- [ ]\tN\r- [ ]\t/#\r- [ ] #\r- [ ] P\r- [ ]\r-\r- [x]  \\'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['`:F’K`**#-#**[Y]( )@i@'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_4265984 [
+PBTMicrodownGenTest >> test_550824448 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x] \\\r- [x]\r>\r- [x]\r>\r- [x]\r/\\>o\r- [ ]\t\\\\E.\r- [ ]\r>// \\\r- [x]\r >\r- [ ]  \r- [x] . \r- [x] :\r- [x]\rm\r- [x]\t\\/\r- [ ]\r/\r- [ ]\t/-q\r- [ ]\t’g\r- [ ]\r \r- [ ] d\r- [ ]\r:\r- [ ] ,\r- [ ] .\r- [x]\r’rH\r- [x]\rZ\r- [ ]\r ,,\r- [ ]\r,,\r- [ ] #\r- [ ] F\r- [ ] -\r- [ ]  ’\r- [x]\r,\r- [x]\t>>,\r- [ ]\t,\r- [x]\r\\>\r- [ ] m-\r- [ ]\r.\r- [ ] /'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r.\\..\r- [x]\r D\r- [x] ##\r- [x] -\r- [x]\t.\r- [ ]\t.mY#>\r- [x]\t’/pi\r- [ ]\rpZJ\r- [ ]\tc:\r- [ ]\tP#  -\r- [ ]\r::>\r- [ ]\r:-\r- [x] ’#\r- [x]  '].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_476668672 [
+PBTMicrodownGenTest >> test_550834688 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['```\r\\’\r\r\r\t\r\r\r```'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [ ] ’\r- [ ]\rmt#\r- [ ]\t::'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_532267776 [
+PBTMicrodownGenTest >> test_556664320 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**/**`>`'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['**,DI-****A#.**[.#]( )@.@`--.#HN`![--.\\G](#)-,![#BK](..)'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_5392384 [
+PBTMicrodownGenTest >> test_58994176 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r>>\r- [x]\r>\r- [x]\r/\r- [x]\t \\\\\r- [ ]\r,> .>\r- [ ]\r/> \r- [ ]\r/\r- [ ] ,\r- [x]\r>’\r- [x]\t:\r- [x]\t/'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['4. :'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_553019904 [
+PBTMicrodownGenTest >> test_723428864 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['`>>``/:`![ ,>-.](   )[>-](  :f)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.:#.#\r- [x]  ’’’>\r- [ ]\r.-\r- [x] B \r- [x]\t.\r- [ ]\rB'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_602110976 [
+PBTMicrodownGenTest >> test_746031360 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\t \r- [x]\r>\r- [x]\r>\r- [x]\r/ /\\ \r- [x]\r,>n,,:\r- [ ]\r,>>\r- [x]\r//\r- [ ] >>>\r- [x]\r.>\r- [x]\r’\r- [x]\t’\r- [ ]\t/#\r- [ ]\t’\r- [x]\r’>:>\r- [ ] .’’'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['**..’’***-#/->,qPK*[X-](:)@.@`:-fn’q`![>’G](..iK)**jcEZ**[qi](X>)[kF](V)[Y](/ .##::#:/)@G >>#:@X'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_683613952 [
+PBTMicrodownGenTest >> test_769009920 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['`l``\\``’ >>`**,,---**'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.’’\r- [x]   #\r- [ ]\r/-F\r- [ ]\r. :.\\l/>\r- [x] ’\r- [x]\t  :,c:'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_709576960 [
+PBTMicrodownGenTest >> test_779910656 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**>**[/](>\\,>)![//](,/)[, \\>](>, ,::)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [x]\r-#\r- [ ]\rxbq\r- [ ]\t>:\r- [x]\rK:  #\r- [x]\r/: -'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_733969920 [
+PBTMicrodownGenTest >> test_782356480 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['\\*:*'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['~.~'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_781902848 [
+PBTMicrodownGenTest >> test_79090944 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['```\r\r\r\t’’ ```'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['~~:~~'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_804663552 [
+PBTMicrodownGenTest >> test_797326080 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**>**[\\.](/)![>](:)![,>,/](,> ,)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x] #,\r- [x]\r..\r- [x]\r##\r- [x]\t’\r- [x]\tE.-n\r- [x]\t>’L/:\r- [ ]\t#’tP\r- [x]\rvX:\r- [ ]\twP\r- [ ]\tdG :\r- [x]\t::’#\r- [ ]\r> \r- [x]\r-\r- [x] -\r- [ ]\r#'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_821428736 [
+PBTMicrodownGenTest >> test_799421184 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\>\r- [x]\r>\r- [x]\r>\r- [ ]\t/,,>/ :\r- [x]\t \\/\r- [ ]\t,\\,\r- [ ]\r> \r- [ ]\r>\r- [x] >>\r- [x]\r’\r- [x]\t\\\r- [x]\t#’\r- [ ]\r’\r- [x] -: \\'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.:#.#\r- [x]  ’’’>\r- [ ]\r.-\r- [x] B \r- [x]\t.\r- [x]\t-’vxK:'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_843232768 [
+PBTMicrodownGenTest >> test_804054016 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\>\r- [x]\r>\r- [x]\r>\r- [ ]\t/,,>/ :\r- [x]\t \\/\r- [ ]\t,\\,\r- [ ]\r> \r- [ ]\r>\r- [x] >>\r- [x]\r:\r- [ ]\t>\r- [x]\t-’\r- [x] ’\r- [ ]\t#K-’.\r- [x] BR>,\r- [ ] \\ \r- [ ]\r.\r- [ ] :\r- [ ] e\r- [x]\t/\r- [ ]\r,-,\r- [x]\r \r- [ ]\t.#/\r- [x] -\r- [ ] >-'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['>#s#.c{#.}:'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_844176896 [
+PBTMicrodownGenTest >> test_847851776 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x] \\\r- [x]\r>\r- [x]\r-\r- [x]\r  >-,\r- [x]\r#\\\r- [x]\r  l \r- [ ] >.\r- [x]\r>\r- [ ] >#\r- [x] .\r- [x]\t:P\\\r- [x]\r’/\r- [x]\r’\r- [x]\r/# ,\r- [x]\r’Y \r- [ ] o’\r- [ ] >'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['`. .F`'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_876326912 [
+PBTMicrodownGenTest >> test_85950464 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\\r- [ ]\r>\r- [x]\r#\r- [x]\t/> >>\r- [ ]\r\\-\\.\r- [ ]\r> \r- [ ]\r/#\r- [ ]\t/\r- [x]  :\r- [x]\rf\r- [x]\t\\\r- [x]\t//\r- [ ]\t’\r- [x]\t’:  \r- [ ]\r,v\r- [ ] >,\r- [ ]\r’\r- [ ] ,\r- [ ] . \r- [ ]\rU\r- [x]\rf ,\r- [x]\rC\r- [ ]\t.,-\r- [ ] ##-\r- [ ] >\r- [ ] /\r- [x]  \r- [x]\t’>'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r-\r- [x]\r,.S.\r- [ ]\r #’\r- [ ] -\r- [x]\t--\r- [x]\t \r- [x] >.’\r- [ ]\tl #B##:\r- [ ]\tZ’\r- [ ]\ri\r- [ ]\tV\r- [ ]\t:::\r- [ ]\r: \r- [ ]\r-\r- [ ] >\r- [x] ’\r- [x]\r,.\r- [x] ->V,\r- [ ]\rL’M'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_888955136 [
+PBTMicrodownGenTest >> test_869694720 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\t \r- [x]\r>\r- [x]\r>\r- [x]\r/ /\\ \r- [x]\r,>n,,:\r- [ ]\r,>>\r- [x]\r//\r- [ ] >>>\r- [x]\r.>\r- [x]\r’\r- [x]\t’\r- [x]\t/#\r- [x]\r’\r- [x]\r’Q :\r- [x] #,.\r- [ ]   \r- [ ]\r,\r- [ ] .\r- [ ]\t \r- [ ]\rB'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['|:-W|>\\|\r| ----------- |\r|##-.W|L#.| |,CQ|#:\\: ’#|#|-|'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_933862656 [
+PBTMicrodownGenTest >> test_913300736 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['~~->~~'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['![aG’I](#.#)** ..**[#](:)@:@'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_953382912 [
+PBTMicrodownGenTest >> test_915980800 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['**\\**`>`'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r\\\r- [ ]\r\\\r- [x]\r#,\r- [x]\r,\r- [x]\r.\r- [ ]\t-\r- [ ]\r- \r- [x]\t’\r- [ ]\r-\r- [ ]\rO '].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_955901440 [
+PBTMicrodownGenTest >> test_950874112 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['![/](/)`##:>\\`'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['**  ’#****W.. >**[#](:)@ @`#,upT>`**-,’Y#***u#\\W*'].
+		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_967509760 [
+PBTMicrodownGenTest >> test_960004352 [
 	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['- [x]\r\\>\r- [x]\r>\r- [x]\r>\r- [ ]\t/,,>/ :\r- [x]\t \\/\r- [ ]\t,\\,\r- [ ]\r> \r- [ ]\r>\r- [x] >>\r- [x]\r:\r- [ ]\t>\r- [x]\t-’\r- [x] ’\r- [ ]\t#K>#\r- [x]\t -.\r- [ ]\r,,\r- [x] j'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_981786624 [
-	
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: 'Class[#Microdown]'.
-		arguments := STON fromString: ['`\\``/`![>>-,r.](  -.)[,> ](/:-)'] asString.
-		
-		targetSelector := (Microdown class>>#parse:) selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			'method' -> (Microdown class>>#parse:) selector.
+			'receiver' -> 'Class[#Microdown]'.
+			'arguments' -> ['- [x]\r.\r- [x]\r.#-.\r- [x]\r..\r- [x] L#\r- [x] #’\r- [x]\t:\r- [x]\t.bk-\r- [ ]\t’zz:\r- [ ]\rMHJ\r- [ ]\tf#:: \r- [ ]\t:\r- [x]\r: -#\r- [x] :-'].
+		} asDictionary
 	
 ]

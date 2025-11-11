@@ -99,16 +99,13 @@ PBTTest >> installIn: aPBTUnitTest [
 		
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
      	nextPutAll: '
-		| receiver arguments result targetSelector |
-		
-		receiver := STON fromString: ',  receiverString, '.
-		arguments := STON fromString: ', argumentsString, ' asString.
-		
-		targetSelector := (', target name, ') selector.
-		
-		result := receiver perform: targetSelector withArguments: arguments.
-		self assert: receiver arguments: arguments result: result
+		self doTest: {
+			', $' asString, 'method', $' asString, ' -> (', target name, ') selector.
+			', $' asString, 'receiver', $' asString, ' -> ', receiverString, '.
+			', $' asString, 'arguments', $' asString, ' -> ', argumentsString, '.
+		} asDictionary
 	'].
+
     aPBTUnitTest class
         compile: sourceCode
         classified: 'PBT dynamic tests'.
