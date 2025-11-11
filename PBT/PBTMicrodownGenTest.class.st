@@ -20,7 +20,7 @@ PBTMicrodownGenTest >> argumentGenerators [
 PBTMicrodownGenTest >> generateTests [
 
 	<script: 'self new generateTests'>
-	super generateTests: 5 minutes
+	super generateTests: 10 minutes
 ]
 
 { #category : 'running' }
