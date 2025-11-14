@@ -340,3 +340,11 @@ PBTRunner test: DateParser >> #parse from: schema
 
 	PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes
 ```
+
+## 📘 Documentation
+
+- [Getting Started](https://github.com/FedeLoch/PBT/wiki/Getting-Started)
+- [How PBT Works](https://github.com/FedeLoch/PBT/wiki/How-PBT-Works)
+- [Generators](https://github.com/FedeLoch/PBT/wiki/Generators)
+- [API Reference](https://github.com/FedeLoch/PBT/wiki/API-Reference)
+- [Examples](https://github.com/FedeLoch/PBT/wiki/Examples)
