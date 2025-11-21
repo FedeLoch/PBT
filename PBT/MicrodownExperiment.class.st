@@ -1,6 +1,6 @@
 Class {
 	#name : 'MicrodownExperiment',
-	#superclass : 'GrammarBasePathologicalBugExperiment',
+	#superclass : 'GrammarBasePathologicalBugMutatorExperiment',
 	#category : 'PBT-Paper Experimentation',
 	#package : 'PBT',
 	#tag : 'Paper Experimentation'

@@ -1,5 +1,5 @@
 Class {
-	#name : 'GrammarBasePathologicalBugExperiment',
+	#name : 'GrammarBasePathologicalBugMutatorExperiment',
 	#superclass : 'Object',
 	#instVars : [
 		'experimentTime'
@@ -10,31 +10,31 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-GrammarBasePathologicalBugExperiment class >> getResults [
+GrammarBasePathologicalBugMutatorExperiment class >> getResults [
 
 	^ self new allPathNames collect: [ :file | STON fromStream: file asFileReference readStream ]
 ]
 
 { #category : 'as yet unclassified' }
-GrammarBasePathologicalBugExperiment class >> getResults: sourcePath [
+GrammarBasePathologicalBugMutatorExperiment class >> getResults: sourcePath [
 
 	^ self new allPathNames collect: [ :file | STON fromStream: (sourcePath, file) asFileReference readStream ]
 ]
 
 { #category : 'as yet unclassified' }
-GrammarBasePathologicalBugExperiment class >> getResults: sourcePath at: position [
+GrammarBasePathologicalBugMutatorExperiment class >> getResults: sourcePath at: position [
 
 	^ STON fromStream: (sourcePath, (self new allPathNames at: position)) asFileReference readStream
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment class >> run [
+GrammarBasePathologicalBugMutatorExperiment class >> run [
 
 	^ self new run
 ]
 
 { #category : 'as yet unclassified' }
-GrammarBasePathologicalBugExperiment >> allPathNames [
+GrammarBasePathologicalBugMutatorExperiment >> allPathNames [
 
 	| fileNames |
 	
@@ -52,19 +52,19 @@ GrammarBasePathologicalBugExperiment >> allPathNames [
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> experimentTime [
+GrammarBasePathologicalBugMutatorExperiment >> experimentTime [
 
 	^ experimentTime
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> experimentTime: aDuration [
+GrammarBasePathologicalBugMutatorExperiment >> experimentTime: aDuration [
 
 	experimentTime := aDuration 
 ]
 
 { #category : 'as yet unclassified' }
-GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mutationsPerIteration: times [
+GrammarBasePathologicalBugMutatorExperiment >> fileNameSeed: seed mutators: mutators mutationsPerIteration: times [
 
 	| mutatorsLabel |
 	mutatorsLabel := '-mutators=', (mutators collect: #className) asString.
@@ -73,26 +73,26 @@ GrammarBasePathologicalBugExperiment >> fileNameSeed: seed mutators: mutators mu
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> initialize [ 
+GrammarBasePathologicalBugMutatorExperiment >> initialize [ 
 
 	super initialize.
 	experimentTime := 4 hours.
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> maxInputSize [
+GrammarBasePathologicalBugMutatorExperiment >> maxInputSize [
 
 	^ SmallInteger maxVal 
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> mutationsPerIterations [
+GrammarBasePathologicalBugMutatorExperiment >> mutationsPerIterations [
 
 	^ { 3 . 100 }
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> mutatorVariants [
+GrammarBasePathologicalBugMutatorExperiment >> mutatorVariants [
 
 	| maxSize |
 	
@@ -106,19 +106,19 @@ GrammarBasePathologicalBugExperiment >> mutatorVariants [
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> name [
+GrammarBasePathologicalBugMutatorExperiment >> name [
 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> newGrammar [
+GrammarBasePathologicalBugMutatorExperiment >> newGrammar [
 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> run [
+GrammarBasePathologicalBugMutatorExperiment >> run [
 
 	self seeds do: [ :seed |
 		self mutationsPerIterations do: [ :times |
@@ -132,7 +132,7 @@ GrammarBasePathologicalBugExperiment >> run [
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPerIteration: n [
+GrammarBasePathologicalBugMutatorExperiment >> run: seed mutators: mutators mutationsPerIteration: n [
 
 	| schema runner result fileName |
 	
@@ -151,19 +151,19 @@ GrammarBasePathologicalBugExperiment >> run: seed mutators: mutators mutationsPe
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
+GrammarBasePathologicalBugMutatorExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> seeds [
+GrammarBasePathologicalBugMutatorExperiment >> seeds [
 
 	self subclassResponsibility 
 ]
 
 { #category : 'running' }
-GrammarBasePathologicalBugExperiment >> targetMethod [
+GrammarBasePathologicalBugMutatorExperiment >> targetMethod [
 
 	self subclassResponsibility 
 ]
