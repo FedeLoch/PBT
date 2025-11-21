@@ -9,7 +9,8 @@ Class {
 		'schema',
 		'lastFeedback',
 		'methodsToInstrument',
-		'feedbackEvaluator'
+		'feedbackEvaluator',
+		'shrinker'
 	],
 	#category : 'PBT-Runner',
 	#package : 'PBT',
@@ -162,11 +163,16 @@ PBTRunner >> genTest: incrCoverage with: collector [
 		score: score;
 		result: result.
 	
-	"Feeds the generator with the test result"
 	caseFeedback := feedbackEvaluator eval: test.
-	generator feed: caseFeedback.
+	test feedback: caseFeedback; assert: schema assert.
 	
-	^ test feedback: caseFeedback; assert: schema assert; yourself
+	"Shrinking only cases that that improve the execution"
+"	caseFeedback isPositive ifTrue: [ shrinker shrink: test ]."
+
+	"Feeds the generator with the test result"
+	generator feed: test feedback.
+	
+	^ test
 ]
 
 { #category : 'as yet unclassified' }
@@ -211,6 +217,7 @@ PBTRunner >> initialize [
 	evaluator := PBTEvaluator new.
 	generator := PBTCaseGenerator new.
 	feedbackEvaluator := PBTFeedbackEvaluator new.
+	shrinker := PBTShrinker new.
 	stopCriteria := PBTCountCriteria new times: 100.
 	
 	
