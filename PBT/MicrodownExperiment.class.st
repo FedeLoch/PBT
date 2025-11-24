@@ -37,9 +37,7 @@ MicrodownExperiment >> schema: seed mutators: mutators mutationsPerIteration: n 
 
 	^ PBTSchema new
 		  receiverConstraint: (PBTObjectConstraint new generator: (PBTConstantGenerator new value: Microdown));
-		  argumentConstraints: { (PBTObjectConstraint new
-				   objectClass: String;
-				   generator: markdownGenerator) };
+		  argumentConstraints: { (PBTObjectConstraint new objectClass: String; generator: markdownGenerator) };
 		  assert: [ :regex :input :result | true ]
 ]
 
