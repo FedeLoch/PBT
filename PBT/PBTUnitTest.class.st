@@ -97,7 +97,7 @@ PBTUnitTest >> guidedByAllocatedMemory [
 { #category : 'running' }
 PBTUnitTest >> guidedByBytecodes [
 
-	1 halt.
+	runner guidedByBytecodes
 ]
 
 { #category : 'running' }

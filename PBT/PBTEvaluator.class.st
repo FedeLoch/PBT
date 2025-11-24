@@ -70,6 +70,12 @@ PBTEvaluator >> profilingByAllocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
+PBTEvaluator >> profilingByBytecodes [
+
+	analyzer profilers: { PBACallBacksProfiler new . PBABytecodeProfiler new }
+]
+
+{ #category : 'as yet unclassified' }
 PBTEvaluator >> profilingByCoverage [
 
 	analyzer profilers: { PBACallBacksProfiler new . PBACoverageCollectorProfiler new }

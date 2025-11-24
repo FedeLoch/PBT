@@ -177,6 +177,13 @@ PBTRunner >> guidedByAllocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
+PBTRunner >> guidedByBytecodes [
+
+	evaluator profilingByBytecodes.
+	feedbackEvaluator feedbackByBytecodes
+]
+
+{ #category : 'as yet unclassified' }
 PBTRunner >> guidedByCoverage [
 
 	evaluator profilingByCoverage.

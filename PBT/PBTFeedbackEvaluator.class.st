@@ -8,7 +8,8 @@ Class {
 		'memoryTable',
 		'coverageTable',
 		'performanceTable',
-		'customMetricsTable'
+		'customMetricsTable',
+		'bytecodesTable'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -25,6 +26,18 @@ PBTFeedbackEvaluator class >> from: aBlock [
 PBTFeedbackEvaluator class >> stonAllInstVarNames [
 
 	^ super stonAllInstVarNames copyWithoutAll: #( criteria )
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> bytecodesTable [
+
+	^ bytecodesTable
+]
+
+{ #category : 'accessing' }
+PBTFeedbackEvaluator >> bytecodesTable: aBytecodesTable [
+
+	bytecodesTable := aBytecodesTable
 ]
 
 { #category : 'accessing' }
@@ -91,6 +104,12 @@ PBTFeedbackEvaluator >> feedbackByAllocatedMemory [
 ]
 
 { #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> feedbackByBytecodes [
+
+	guide := PBTBytecodesGuide new evaluator: self
+]
+
+{ #category : 'as yet unclassified' }
 PBTFeedbackEvaluator >> feedbackByCoverage [
 
 	guide := PBTCoverageGuide new evaluator: self
@@ -124,6 +143,7 @@ PBTFeedbackEvaluator >> initialize [
 	coverageTable := Dictionary new.
 	performanceTable := Dictionary new.
 	customMetricsTable := Dictionary new.
+	bytecodesTable := Dictionary new.
 	
 	topCases := OrderedCollection new.
 
