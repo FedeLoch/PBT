@@ -37,7 +37,7 @@ PerformanceMetricsPaperExperiment >> experimentTime [
 PerformanceMetricsPaperExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 20 seconds"8 hours".
+	experimentTime := 10 seconds"8 hours".
 ]
 
 { #category : 'running' }
