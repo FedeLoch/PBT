@@ -12,7 +12,13 @@ Class {
 { #category : 'as yet unclassified' }
 PerformanceMetricsPaperExperiment class >> getResults: sourcePath [
 	
-	1 halt.
+	| instance |
+	
+	instance := self new.
+	^ { 'allocatedMemory' . 'codeCoverage' . 'bytecodes' . 'methodsCalls' } collect: [ :guidedBy | | file |
+		file := instance libraryName, guidedBy, '.ston'.
+		STON fromStream: (sourcePath, file) asFileReference readStream
+	] 
 ]
 
 { #category : 'running' }
