@@ -20,7 +20,12 @@ PBTTreeGrammarMutator class >> from: aGrammar [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> applyMutation: string [
 
-	^ (self mutateAST: (self tree: string)) asStringInput
+	| tree derivation |
+	
+	tree := self tree: string.
+	derivation := tree ifNil: [ self freshAST ] ifNotNil: [ self mutateAST: tree ].
+
+	^ derivation asStringInput
 ]
 
 { #category : 'accessing' }
@@ -28,10 +33,18 @@ PBTTreeGrammarMutator >> feed: feedback [
 
 	feedback ifNotNil: [ | ast amount |
 		[ ast := self tree: (feedback case) ] on: Error do: [ ^ nil ].
+		ast ifNil: [ ^ nil ].
+		
 		"We feed the grammar by doing backPropagation with the grammar"
 		amount := (feedback isPositive) ifTrue: [ (feedback improvement) * 10 ] ifFalse: [ -1 ].
 		ast backPropagateToChildren: amount level: 0.
 	]
+]
+
+{ #category : 'accessing' }
+PBTTreeGrammarMutator >> freshAST [
+
+	^ self subNodeFrom: grammar start parentSize: 0 level: 0
 ]
 
 { #category : 'as yet unclassified' }

@@ -13,9 +13,10 @@ Class {
 { #category : 'instance creation' }
 PBTGrammarParser class >> parse: string from: grammar [
 
-	^ (self new parseNonTerminal: grammar start on: string from: 0) first
-
+	| parsingResult |
+	parsingResult := self new parseNonTerminal: grammar start on: string from: 0.
 	
+	^ parsingResult ifNil: [ nil ] ifNotNil: [ parsingResult first ] 
 ]
 
 { #category : 'initialization' }
