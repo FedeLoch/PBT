@@ -76,6 +76,12 @@ PBTTest >> autoTunedIterations [
 	^ autoTunedIterations
 ]
 
+{ #category : 'as yet unclassified' }
+PBTTest >> escapeQuotes: input [ 
+	
+	^ input copyReplaceAll: '''' with: ''''''
+]
+
 { #category : 'accessing' }
 PBTTest >> feedback [
 
@@ -94,9 +100,9 @@ PBTTest >> installIn: aPBTUnitTest [
 	| selector sourceCode receiverString argumentsString |
 	selector := (aPBTUnitTest testName: self) asSymbol.
 	
-	receiverString := $' asString, (STON toString: receiver), $' asString.
-	argumentsString := STON toString: arguments.
-		
+	receiverString := $' asString, (self escapeQuotes: (STON toString: receiver)), $' asString.
+	argumentsString := $' asString, (self escapeQuotes: (STON toString: arguments)), $' asString.
+	
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
      	nextPutAll: '
 		self doTest: {

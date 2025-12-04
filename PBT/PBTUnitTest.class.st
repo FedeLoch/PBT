@@ -43,7 +43,7 @@ PBTUnitTest >> doTest: case [
 
 	| receiver arguments targetSelector result |
 	receiver := STON fromString: (case at: 'receiver').
-	arguments := STON fromString: (case at: 'arguments') asString.
+	arguments := STON fromString: (case at: 'arguments').
 
 	targetSelector := case at: 'method'.
 
