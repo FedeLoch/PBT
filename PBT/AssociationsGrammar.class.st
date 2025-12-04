@@ -17,7 +17,7 @@ Class {
 { #category : 'initialization' }
 AssociationsGrammar >> defineGrammar [
 
-	ntAssociations --> ntAssociation | ntAssociation, Character cr asString, ntAssociations.
+	ntAssociations -->  ntAssociation, Character cr asString, ntAssociations | ntAssociation.
 	
 	ntAssociation  --> ntKey, '->', ntValue.
 	

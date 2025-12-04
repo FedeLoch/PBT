@@ -28,7 +28,7 @@ FLSerializerPerformancePBTTest >> generateTests [
 
 	"super generateRegressionTests: 10 minutes"
 	<script: 'self new generateTests'>
-	super generateTests: 20 minutes
+	super generateTests: 5 minutes
 ]
 
 { #category : 'running' }
@@ -65,89 +65,122 @@ FLSerializerPerformancePBTTest >> targetMethod [
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_1007382784 [
+FLSerializerPerformancePBTTest >> test_175727872 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[nil:6,nil:5,nil:36,nil:602,nil:4,nil:20,nil:''a'',''t'':2],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/3222.fuel'']'.
+			'arguments' -> '[[''t'':878,nil:5251,''a'':''sfwe'',nil:2],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/631.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_149707520 [
+FLSerializerPerformancePBTTest >> test_39343872 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[''x'':490496,''bd'':38,''wa'':94,''oew'':nil,nil:nil,nil:nil,nil:3,nil:93313,nil:nil,''c'':''lqm'',nil:nil,nil:nil,nil:nil,nil:nil],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/5.fuel'']'.
+			'arguments' -> '[[nil:''elqy'',''u'':nil,nil:nil,''ij'':780,''va'':nil,''cxl'':''b'',''v'':nil,''mobw'':7,nil:nil,nil:4,nil:nil],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/1581.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_275986176 [
+FLSerializerPerformancePBTTest >> test_409615104 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[nil:nil,nil:''d'',nil:''t'',''m'':nil,nil:nil,''phx'':nil,''q'':nil,nil:nil,nil:''o'',nil:nil,''bb'':''hp'',nil:''qi'',''l'':nil,nil:''x'',''ekfs'':8,''j'':36374],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/5999.fuel'']'.
+			'arguments' -> '[[nil:22,nil:''nij'',nil:nil,''sw'':6,nil:275,''n'':3,''m'':82],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/119.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_303698176 [
+FLSerializerPerformancePBTTest >> test_496954112 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[''o'':nil],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/1.fuel'']'.
+			'arguments' -> '[[nil:nil,nil:''j'',''i'':nil,''fji'':nil,nil:nil,nil:nil,nil:nil,nil:90,''eh'':''h'',''poeij'':nil],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/212.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_329486080 [
+FLSerializerPerformancePBTTest >> test_540409600 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[''r'':''xuzgjlt'',nil:15,nil:nil,''pmuhc'':nil,nil:nil,nil:''a'',''i'':nil,''bg'':''q'',''qoxpja'':94,''u'':''xc'',''sj'':1],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/3252.fuel'']'.
+			'arguments' -> '[[''i'':''nim'',''l'':''tr''],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/4.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_53232896 [
+FLSerializerPerformancePBTTest >> test_636126976 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[''v'':47,nil:2,nil:''u''],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/3.fuel'']'.
+			'arguments' -> '[[nil:''o'',nil:nil,''i'':0],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/3.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_778423040 [
+FLSerializerPerformancePBTTest >> test_747278592 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[nil:''eu'',nil:766,nil:4,''p'':668,''n'':95],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/519.fuel'']'.
+			'arguments' -> '[[''gmg'':''u'',''v'':''tau'',''i'':''yad'',''t'':''nif'',nil:''jd'',''ucji'':7,nil:''w'',''dhq'':''d''],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/937.fuel'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-FLSerializerPerformancePBTTest >> test_779191552 [
+FLSerializerPerformancePBTTest >> test_913094912 [
 	
 		self doTest: {
 			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
 			'receiver' -> 'Class[#FLSerializer]'.
-			'arguments' -> '[[nil:''h'',nil:nil,''afh'':''k'',nil:1,nil:9,''a'':''ymk'',''j'':8,nil:nil,nil:nil,''fcl'':2,''n'':975452,''k'':30],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/1641.fuel'']'.
+			'arguments' -> '[[nil:4],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/1.fuel'']'.
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+FLSerializerPerformancePBTTest >> test_971895040 [
+	
+		self doTest: {
+			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
+			'receiver' -> 'Class[#FLSerializer]'.
+			'arguments' -> '[[''rha'':8,''m'':498986,nil:nil,nil:''mnht'',nil:4,''t'':nil],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/9.fuel'']'.
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+FLSerializerPerformancePBTTest >> test_991260416 [
+	
+		self doTest: {
+			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
+			'receiver' -> 'Class[#FLSerializer]'.
+			'arguments' -> '[[''azv'':''y'',''sgea'':nil,nil:1,''h'':0,nil:2,''xr'':4,''gw'':97],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/998.fuel'']'.
+		} asDictionary
+	
+]
+
+{ #category : 'PBT dynamic tests' }
+FLSerializerPerformancePBTTest >> test_994010368 [
+	
+		self doTest: {
+			'method' -> (FLSerializer class>>#serialize:toFileNamed:) selector.
+			'receiver' -> 'Class[#FLSerializer]'.
+			'arguments' -> '[[nil:nil,nil:nil,nil:3,nil:8570,nil:nil,''r'':9,nil:''jvgkor'',nil:''b''],''/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/60.fuel'']'.
 		} asDictionary
 	
 ]

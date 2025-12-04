@@ -53,17 +53,6 @@ GrammarMCTSGenerator >> selectRule: rules level: level [
 	^ notVisited
 		  ifEmpty: [ self ruleWithMoreUTC: validRules level: level ]
 		  ifNotEmpty: [ notVisited atRandom ]
-	
-	"
-	rules detect: [ :rule | rule minSize <= maxSize ] ifNone: [ 1 halt. ^ nil ].
-
-	notVisited := rules reject: [ :rule | rule visitedIn: level ].
-	
-	taken := (notVisited
-		  ifEmpty: [ self ruleWithMoreUTC: rules level: level ]
-		  ifNotEmpty: [ notVisited atRandom ]).
-	
-	^ (maxSize - taken minSize) < 0 ifTrue: [ 1 halt. nil ] ifFalse: [ taken ] "
 ]
 
 { #category : 'initialization' }
@@ -74,6 +63,7 @@ GrammarMCTSGenerator >> totalGenerations [
 
 { #category : 'accessing' }
 GrammarMCTSGenerator >> totalGenerations: aNumber [
+
 	totalGenerations := aNumber
 ]
 
@@ -86,7 +76,6 @@ GrammarMCTSGenerator >> visitNonTerminal: nonTerminal level: level [
 	
 	^ (rule visit: self level: level) tag: nonTerminal name
 
-"	^ (rule ifNil: [ 1 halt. GncInnerNode with: {} ] ifNotNil: [ rule visit: self level: level ]) tag: nonTerminal name"
 	
 ]
 
