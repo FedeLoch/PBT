@@ -39,6 +39,27 @@ PBTUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 ]
 
 { #category : 'running' }
+PBTUnitTest >> doRegressionTest: case [
+
+	| receiver arguments targetSelector expectedFeedback analyzerResult feedbackEvaluator analyzerInstance |
+
+	receiver := STON fromString: (case at: 'receiver').
+	arguments := STON fromString: (case at: 'arguments').
+	targetSelector := case at: 'method'.
+	expectedFeedback := STON fromString: (case at: 'expected').
+	feedbackEvaluator := STON fromString: (case at: 'feedbackSystem').
+	
+	analyzerInstance := STON fromString: (case at: 'analyzerInstance').
+
+	1 halt.
+	analyzerResult := analyzerInstance analyse: [
+		receiver perform: targetSelector withArguments: arguments.
+	].
+	
+	self assert: (feedbackEvaluator from: analyzerResult) equals: expectedFeedback
+]
+
+{ #category : 'running' }
 PBTUnitTest >> doTest: case [
 
 	| receiver arguments targetSelector result |
@@ -52,6 +73,18 @@ PBTUnitTest >> doTest: case [
 ]
 
 { #category : 'running' }
+PBTUnitTest >> generateRegressionTests: duration [
+
+	self generateRegressionUnitTests: (self runPBT: duration)
+]
+
+{ #category : 'running' }
+PBTUnitTest >> generateRegressionUnitTests: pbtResult [
+
+	pbtResult topCases do: [ :t | t installRegressionUnitTestIn: self ]
+]
+
+{ #category : 'running' }
 PBTUnitTest >> generateTests [
 
 	<script: 'self new generateTests'>
@@ -62,15 +95,13 @@ PBTUnitTest >> generateTests [
 { #category : 'running' }
 PBTUnitTest >> generateTests: duration [
 
-	<script: 'self new generateTests'>
-	
 	self generateUnitTests: (self runPBT: duration)
 ]
 
 { #category : 'running' }
 PBTUnitTest >> generateUnitTests: pbtResult [
 
-	pbtResult topCases do: [ :t | t installIn: self ]
+	pbtResult topCases do: [ :t | t installUnitTestIn: self ]
 ]
 
 { #category : 'running' }
@@ -137,12 +168,25 @@ PBTUnitTest >> receiverGenerator [
 ]
 
 { #category : 'running' }
+PBTUnitTest >> regressionTestName: pbtTest [
+
+	"TODO: REWRITE ME IF YOU WANT TO CUSTOM ME"
+	^ 'regression_test_', pbtTest name asString
+]
+
+{ #category : 'running' }
 PBTUnitTest >> runPBT: duration [
 
 	self instanceRunner: duration.
 	self guidedBy.
 
 	^ runner run
+]
+
+{ #category : 'running' }
+PBTUnitTest >> runner [
+
+	^ runner
 ]
 
 { #category : 'running' }

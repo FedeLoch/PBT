@@ -42,6 +42,12 @@ PBTTest >> arguments: inputs [
 	arguments := inputs
 ]
 
+{ #category : 'as yet unclassified' }
+PBTTest >> argumentsString [
+
+	^ $' asString, (self escapeQuotes: (STON toString: arguments)), $' asString
+]
+
 { #category : 'accessing' }
 PBTTest >> assert [
 
@@ -95,20 +101,49 @@ PBTTest >> feedback: aFeedback [
 ]
 
 { #category : 'as yet unclassified' }
-PBTTest >> installIn: aPBTUnitTest [
+PBTTest >> feedbackValuesString [
+
+	^ $' asString, (self escapeQuotes: (STON toString: feedback values)), $' asString
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> installRegressionUnitTestIn: aPBTUnitTest [
 	
-	| selector sourceCode receiverString argumentsString |
+	| selector sourceCode |
+	
+	selector := (aPBTUnitTest regressionTestName: self) asSymbol.
+	
+	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
+     	nextPutAll: '
+		self doRegressionTest: {
+			', $' asString, 'method', $' asString, ' -> (', target name, ') selector.
+			', $' asString, 'receiver', $' asString, ' -> ', self receiverString, '.
+			', $' asString, 'arguments', $' asString, ' -> ', self argumentsString, '.
+			', $' asString, 'expected', $' asString, ' -> ', self feedbackValuesString, '.
+			
+		} asDictionary
+	'].
+	 1 halt.
+	
+    aPBTUnitTest class
+        compile: sourceCode
+        classified: 'PBT dynamic regression tests'.
+
+    ^ selector
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> installUnitTestIn: aPBTUnitTest [
+	
+	| selector sourceCode |
 	selector := (aPBTUnitTest testName: self) asSymbol.
-	
-	receiverString := $' asString, (self escapeQuotes: (STON toString: receiver)), $' asString.
-	argumentsString := $' asString, (self escapeQuotes: (STON toString: arguments)), $' asString.
-	
+
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
      	nextPutAll: '
 		self doTest: {
 			', $' asString, 'method', $' asString, ' -> (', target name, ') selector.
-			', $' asString, 'receiver', $' asString, ' -> ', receiverString, '.
-			', $' asString, 'arguments', $' asString, ' -> ', argumentsString, '.
+			', $' asString, 'receiver', $' asString, ' -> ', self receiverString, '.
+			', $' asString, 'arguments', $' asString, ' -> ', self argumentsString, '.
 		} asDictionary
 	'].
 
@@ -154,6 +189,12 @@ PBTTest >> receiver [
 PBTTest >> receiver: anObject [
 
 	receiver := anObject
+]
+
+{ #category : 'as yet unclassified' }
+PBTTest >> receiverString [
+
+	^ $' asString, (self escapeQuotes: (STON toString: receiver)), $' asString
 ]
 
 { #category : 'as yet unclassified' }
