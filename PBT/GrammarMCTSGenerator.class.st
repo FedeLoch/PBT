@@ -52,7 +52,7 @@ GrammarMCTSGenerator >> selectRule: rules level: level [
 	
 	^ notVisited
 		  ifEmpty: [ self ruleWithMoreUTC: validRules level: level ]
-		  ifNotEmpty: [ notVisited atRandom ]
+		  ifNotEmpty: [ (notVisited sorted: [ :e1 :e2 | e1 minSize > e2 minSize ]) first ]"<- Experiment [ notVisited atRandom ]"
 ]
 
 { #category : 'initialization' }

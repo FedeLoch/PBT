@@ -36,441 +36,287 @@ PBTMicrodownGenTest >> targetMethod [
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_1051104256 [
+PBTMicrodownGenTest >> test_102246656 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r.#-.\r- [x]\r..\r- [x] L#\r- [x] #’\r- [x]\t:\r- [x]\t.bk-\r- [ ]\t’zz:\r- [x]\t’\r- [ ]\rx-\r- [ ]\tp\r- [ ]\t#::\r- [x]\r::'].
+			'arguments' -> '[''- [x]\t.\r- [x]\t/\r- [x]\t,#\r- [x]\t>,\\\r- [x]\t\\.\r- [x]\t/##\r- [x]\t>>##\r- [x]\t,\r- [x]\t>>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>’#\r- [x]\t#>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>##’’\r- [x]\t>>\r- [x]\t,\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>##\r- [x]\t>\r- [x]\t>>\r- [x]\t,>\r- [x]\t,\r- [x]\t##\r- [ ]\r\\>/'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_1065587456 [
+PBTMicrodownGenTest >> test_1055700736 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['**’pZ-****W.. >**[#](:)@ @`#,upT>`![-.dR:](xQWV)**###,**[q:H](Y)*q:*[O](::>)/** ’##:**'].
+			'arguments' -> '[''` ``,`'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_136354304 [
+PBTMicrodownGenTest >> test_123604736 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['`,#.`@ @**.**`’`'].
+			'arguments' -> '[''![ ](,E\\/)[/,](#)'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_193782528 [
+PBTMicrodownGenTest >> test_265502976 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r-\r- [x]\r,.S.\r- [ ]\r #’\r- [ ] -\r- [x]\t--\r- [x]\t \r- [x] >.’\r- [ ]\tl #B##:\r- [ ]\tZ’\r- [ ]\ri\r- [ ]\tV\r- [ ]\t:::\r- [ ]\r: \r- [ ]\r-\r- [ ] >\r- [x] ’\r- [x]\r,.\r- [ ]\r>\r- [ ]\t,\r- [ ]\r,\r- [x]\t/#'].
+			'arguments' -> '[''###\r>>'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_228035328 [
+PBTMicrodownGenTest >> test_285262592 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [ ] D-\r- [ ]\rxbq\r- [ ]\t>:\r- [x]\rK:  #\r- [x]\r/: -'].
+			'arguments' -> '[''![ ]( >\\-/>)[. ’-\\-](>)[,-](Y)![\\#->## #z#-#](/)'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_230656 [
+PBTMicrodownGenTest >> test_310533888 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r\\\r- [ ]\r\\\r- [x]\r#,\r- [x]\r,\r- [x]\r.\r- [ ]\t-\r- [ ]\r--\r- [ ]\r \r- [x]\r \r- [x]\r-H\r- [ ]\t \r- [ ]\r ,\r- [ ]\t’#n,'].
+			'arguments' -> '[''- [x]\t..\r- [ ]\t.\r- [x]\t/-\r- [x]\t>\r- [x]\t’.\r- [x]\r\\\r- [x]\r,# -\r- [x]\r>\r- [x]\t#>\r- [x]\t>\r- [x]\t>># \r- [x]\t#\r- [x]\t--\r- [x]\t#.>-\r- [x]\r#’\r- [ ]\t \r- [x]\t# \r- [ ]\r#--\r- [x]\t# \r- [x]\t> -\r- [x] ’ ’>\r- [x]\t.\r- [x]\t#’\r- [x]\r#\r- [x]\t ##’\r- [x]\t-\r- [x]\t-#>-\r- [x]\t- \r- [x]\tA>\r- [x]\r,\r- [x]\t-#\r- [x]\tR  '']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_236902656 [
+PBTMicrodownGenTest >> test_350809344 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r#\r- [x]\r,.\r- [x]\r,\r- [ ]\t.\r- [ ]\t-\r- [ ]\r- \r- [x]\t#\r- [ ]\rm'].
+			'arguments' -> '[''- [x]\t.\r- [x]\t/\r- [x]\t,#\r- [x]\t>,\\\r- [x]\t\\.\r- [x]\t/##\r- [x]\t>>##\r- [x]\t,\r- [x]\t>>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>’#\r- [x]\t#>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>##’’\r- [x]\t>>\r- [x]\t,\r- [x]\t##\r- [ ]\r,\r- [ ]\r>,'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_2604032 [
+PBTMicrodownGenTest >> test_39187200 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r..#\r- [ ]\t#’.\r- [x]\r.-\r- [x] ’\r- [x]\t.\r- [x] >’mDY\r- [ ]\rmjc:\r- [ ]\taM#'].
+			'arguments' -> '[''```\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r\r \r  \r\r\r\r\r\r\r\r\r\r \t\r\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t’ ```'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_278477312 [
+PBTMicrodownGenTest >> test_428228352 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['|:-W| |\r| ----------- |\r|##-.W|L#.| |,CQ|#:\\: ’#|#|-|'].
+			'arguments' -> '[''- [x]\t.\r- [x]\t/\r- [x]\t,#\r- [x]\t>,\\\r- [x]\t\\.\r- [x]\t/##\r- [x]\t>>##\r- [x]\t,\r- [x]\t>>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>’#\r- [x]\t#>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>##’’\r- [x]\t>>\r- [x]\t,\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>’’\r- [x]\t##\r- [x]\t>##\r- [x]\t>\r- [x]\t>>\r- [x]\t,>\r- [x]\t,\r- [x]\t##\r- [x]\t>’’'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_292121600 [
+PBTMicrodownGenTest >> test_532077312 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r’\r- [ ]\r:,\r- [x]\r,\r- [ ] .\r- [ ]\r-\r- [ ]\r--'].
+			'arguments' -> '[''- [x]\t..\r- [ ]\t.\r- [x]\t/-\r- [x]\t>\r- [x]\t’.\r- [x]\r\\\r- [x]\r,# -\r- [x]\r>\r- [x]\t#>\r- [x]\t>\r- [x]\t\\>##\r- [x]\t#\r- [x]\t’ \r- [x]\r>\r- [x]\t’#\r- [x]\t>\r- [x]\t>,\r- [x]\t#’#\r- [x]\r\\’\r- [x]\r-#’\r- [x]\t>>>’\r- [x]\t#\r- [x]\r’#/#\r- [x]\t \r- [x]\r/’#\r- [x]\t \r- [x]\r>\\\r- [x]\r #\r- [x]\r>>\r- [x]\r>\r- [x]\r>-M \r- [x]\t#\r- [x]\t ,\r- [ ]\t’\r- [x]\r’'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_345921024 [
+PBTMicrodownGenTest >> test_539532544 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\tA>\r- [ ]\tV   \r- [x]\t:\r- [x]\r/’-\r- [x]  \r- [ ]\r#\r- [ ] #\r- [x]\r,,\r- [x]\r.\r- [ ]\t>\r- [ ]\r#\r- [x]\t, '].
+			'arguments' -> '[''~~  ~~'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_372356864 [
+PBTMicrodownGenTest >> test_558823680 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [ ]\r.#\r- [x]\r/#-\r- [x]\r-.\r- [ ]\t-\r- [ ]\r#\r- [x]\t’uvH:\r- [x]\t.beh\\: \r- [ ]\tnd#\r- [ ]\tZ’\r- [ ]\tN\r- [x] : \r- [x]\tI-\r- [x]  #'].
+			'arguments' -> '[''![ ]( /)[-]( ’  -)'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_375983872 [
+PBTMicrodownGenTest >> test_612167936 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r’\r- [ ]\r’\r- [ ]\r:,\r- [ ]\rP\r- [x]\rd\r- [ ]\t:\r- [ ]\r--\r- [x]\r-\r- [ ]\tv\r- [ ]\t, '].
+			'arguments' -> '[''![ ](,E\\/)` `'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_407132160 [
+PBTMicrodownGenTest >> test_647628544 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [ ]\r#-’\r- [x]\r#/\r- [x]\t-\r- [x]\t’-o.uR\r- [x]\t’ArU.\r- [x]\t,n:N\r- [ ]\r’g:\r- [ ]\r#y\r- [ ]\tS:: \\\r- [ ]\t>:>\r- [x]\t ’\r- [x]\r:’#\r- [x]\r-#\r- [ ]\r\\,W\r- [ ]\r#,.\r- [x]\r.\r- [x]\r,\r- [ ]\t#\r- [ ]\r--\r- [ ]\r \r- [ ]\tf'].
+			'arguments' -> '[''>\r .'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_416220928 [
+PBTMicrodownGenTest >> test_656077568 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['```\r\r:--I ```'].
+			'arguments' -> '[''- [x]\t.\r- [x]\t/\r- [x]\t,#\r- [x]\t>,\\\r- [x]\t\\.\r- [x]\t/##\r- [x]\t>>##\r- [x]\t,\r- [x]\t>>’’\r- [x]\t,\r- [x]\t##\r- [x]\t>’#\r- [x]\t#>’’\r- [x]\t,\r- [x]\t##\r- [ ]\r\\\r- [x]\t>>\r- [x]\t,\r- [x]\t##\r- [ ]\r,\r- [ ]\r>,'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_419323648 [
+PBTMicrodownGenTest >> test_764877056 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r..#\r- [ ]\t#’.\r- [x]\r.-\r- [x] ’\r- [x]\t.\r- [ ]\t/’MP:\r- [ ] ,zzZ\r- [ ]\rpW:\r- [x] yP\r- [x]\t>'].
+			'arguments' -> '[''- [x]\t’\r- [x]\t.\r- [x]\r >\r- [x]\r-\r- [x]\t\\/\r- [x]\t\\\r- [ ]\r:-\r- [x]\t,>>\r- [ ]\t# :’\r- [x] #\r- [ ]\t,>\r- [x]\t#-’##\r- [x]\t>’\r- [x]\t>\r- [x]\r,’\r- [x]\t-\r- [x]\t>-'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_423536640 [
+PBTMicrodownGenTest >> test_766194944 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['```\r\r\r \r```'].
+			'arguments' -> '[''8.\t -'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_471543040 [
+PBTMicrodownGenTest >> test_776948480 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r.\\..\r- [x]\r D\r- [x] ##\r- [x] -\r- [x]\t.\r- [ ]\t.mY#>\r- [ ]\t’’\r- [ ]\rpZJ\r- [ ]\tc:\r- [ ]\tP#  -\r- [ ]\r::>\r- [ ]\r:-\r- [ ] -\r- [x] #\r- [x] ,\r- [ ] >T\r- [x]\r>,>#'].
+			'arguments' -> '[''- [x]\t -\r- [x]\t#\r- [ ]\t , .\\-\r- [x]\t/\r- [x]\t’,\r- [x]\t\\\r- [x]\t ,\r- [x]\t#V\r- [x]\t>>##\r- [x]\r-\r- [x]\t ’>\r- [ ]\t>\r- [x]\r#\r- [x]\r##-’#’\\\r- [x]\t- \r- [x]\r#\r- [x]\t#\r- [x]\t,\r- [x]\t>,\r- [x]\r’\r- [x]\t> #’\r- [x]\t#\r- [ ]\t>#\r- [x]\t-’\r- [x]\r#-\r- [x]\r#\r- [x]\r>>\r- [x]\r-.,\r- [x]\t>\r- [ ]\r>\r- [x]\r>U- \r- [x]\t#'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_510673920 [
+PBTMicrodownGenTest >> test_784017152 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['[. ](.X)'].
+			'arguments' -> '[''- [x]\t./\r- [x]\t \r- [x]\t/’\r- [x]\t-\r- [x]\r#\\\r- [x]\r.\r- [x]\r#>>>\r- [x]\t#\r- [x]\t--\r- [x]\t \r- [x]\t>\r- [x]\t##,\r- [x]\t #\r- [x]\t’>- #\r- [x]\t #\r- [x]\rz\r- [x]\r’>\r- [x]\t-\r- [x]\t>#\r- [x]\t:\r- [x]\t#’ -'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_530867968 [
+PBTMicrodownGenTest >> test_806208768 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['`:F’K`**#-#**[Y]( )@i@'].
+			'arguments' -> '[''- [x]\t..\r- [ ]\t.\r- [x]\t/-\r- [x]\t>\r- [x]\t’.\r- [x]\r\\\r- [x]\r,# -\r- [x]\r>\r- [x]\t#>\r- [x]\t>\r- [x]\t\\>##\r- [x]\t#\r- [x]\t’ \r- [x]\t,\\-#>\r- [x]\t’#\r- [x]\t>\r- [x]\t>,\r- [x]\t#’#\r- [x]\r\\’\r- [x]\r-#’\r- [x]\t>>>’\r- [x]\t#\r- [x]\r’#/#\r- [x]\t \r- [x]\r/’#\r- [x]\t \r- [x]\r>\\\r- [x]\r #\r- [x]\r>>\r- [x]\r>\r- [x]\r>-M \r- [x]\t#\r- [x]\t ,\r- [ ]\t’\r- [x]\r’'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_550824448 [
+PBTMicrodownGenTest >> test_85236992 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r.\\..\r- [x]\r D\r- [x] ##\r- [x] -\r- [x]\t.\r- [ ]\t.mY#>\r- [x]\t’/pi\r- [ ]\rpZJ\r- [ ]\tc:\r- [ ]\tP#  -\r- [ ]\r::>\r- [ ]\r:-\r- [x] ’#\r- [x]  '].
+			'arguments' -> '[''![ ]( >\\-/>)[f#]( # >#)[,,/#>](\\\\-#>)@,,  @'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_550834688 [
+PBTMicrodownGenTest >> test_875335936 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [ ] ’\r- [ ]\rmt#\r- [ ]\t::'].
+			'arguments' -> '[''- [x]\t..\r- [ ]\t.\r- [x]\t/-\r- [x]\t>\r- [x]\t’.\r- [x]\r\\\r- [x]\r,# -\r- [x]\r>\r- [x]\t#>\r- [x]\t>\r- [x]\t\\>##\r- [x]\t#\r- [x]\t’ \r- [x]\t,\\-#>\r- [x]\t’#\r- [x]\t>\r- [x]\t>,\r- [x]\t#’#\r- [x]\r\\’\r- [x]\r-#’\r- [x]\t>>>’\r- [x]\t#\r- [x]\r’#/#\r- [x]\t \r- [x]\r/’#\r- [x]\t \r- [x]\r>\\\r- [x]\r #\r- [x]\r>>\r- [x]\r>\r- [x]\t C-’\r- [x]\t#\r- [x] # \r- [x]\t-z\r- [x]\r--'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_556664320 [
+PBTMicrodownGenTest >> test_883755776 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['**,DI-****A#.**[.#]( )@.@`--.#HN`![--.\\G](#)-,![#BK](..)'].
+			'arguments' -> '[''|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|’|-|-|-|-|-|-|-|-|’|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|\r| -----------| ----------- |\r| |'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_58994176 [
+PBTMicrodownGenTest >> test_947127552 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['4. :'].
+			'arguments' -> '[''- [x]\t..\r- [ ]\t.\r- [x]\t/-\r- [x]\t>\r- [x]\t’.\r- [x]\r\\\r- [x]\r,# -\r- [x]\r>\r- [x]\t#>\r- [x]\t>\r- [x]\t\\>##\r- [x]\t#\r- [x]\t’ \r- [x]\r>\r- [x]\t’#\r- [ ]\r-\r- [x]\t>,\r- [x]\t#’#\r- [x]\r\\’\r- [x]\r-#’\r- [x]\t#’ >\r- [x]\t>\r- [x]\t##/##\r- [x]\t’\r- [x]\r- \r- [x]\t-\r- [x]\r> #, #\r- [x]\r>\r- [x]\r->\r- [x]\r>\r- [ ]\r- \r- [x]\r##’\r- [x]\t-.\r- [x] H’-'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_723428864 [
+PBTMicrodownGenTest >> test_975084288 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.:#.#\r- [x]  ’’’>\r- [ ]\r.-\r- [x] B \r- [x]\t.\r- [ ]\rB'].
+			'arguments' -> '[''|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|’|-|-|-|-|-|-|-|-|’|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|’|-|\r| -----------| ----------- |\r|’#|'']'.
 		} asDictionary
 	
 ]
 
 { #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_746031360 [
+PBTMicrodownGenTest >> test_975574272 [
 	
 		self doTest: {
 			'method' -> (Microdown class>>#parse:) selector.
 			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['**..’’***-#/->,qPK*[X-](:)@.@`:-fn’q`![>’G](..iK)**jcEZ**[qi](X>)[kF](V)[Y](/ .##::#:/)@G >>#:@X'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_769009920 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.’’\r- [x]   #\r- [ ]\r/-F\r- [ ]\r. :.\\l/>\r- [x] ’\r- [x]\t  :,c:'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_779910656 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r:#H \r- [ ]\r.’-\r- [x]\r.-\r- [x]\t’\r- [x]\t.\r- [x]\t>V’IT\r- [x]\r-#\r- [ ]\rxbq\r- [ ]\t>:\r- [x]\rK:  #\r- [x]\r/: -'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_782356480 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['~.~'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_79090944 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['~~:~~'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_797326080 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x] #,\r- [x]\r..\r- [x]\r##\r- [x]\t’\r- [x]\tE.-n\r- [x]\t>’L/:\r- [ ]\t#’tP\r- [x]\rvX:\r- [ ]\twP\r- [ ]\tdG :\r- [x]\t::’#\r- [ ]\r> \r- [x]\r-\r- [x] -\r- [ ]\r#'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_799421184 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.:#.#\r- [x]  ’’’>\r- [ ]\r.-\r- [x] B \r- [x]\t.\r- [x]\t-’vxK:'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_804054016 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['>#s#.c{#.}:'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_847851776 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['`. .F`'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_85950464 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r-\r- [x]\r,.S.\r- [ ]\r #’\r- [ ] -\r- [x]\t--\r- [x]\t \r- [x] >.’\r- [ ]\tl #B##:\r- [ ]\tZ’\r- [ ]\ri\r- [ ]\tV\r- [ ]\t:::\r- [ ]\r: \r- [ ]\r-\r- [ ] >\r- [x] ’\r- [x]\r,.\r- [x] ->V,\r- [ ]\rL’M'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_869694720 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['|:-W|>\\|\r| ----------- |\r|##-.W|L#.| |,CQ|#:\\: ’#|#|-|'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_913300736 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['![aG’I](#.#)** ..**[#](:)@:@'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_915980800 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [ ]\r#,.#-\r- [x]\r:>-\r- [x]\r#R\\\r- [ ]\r..’\r- [x]\t \r- [x]\t-\r- [x]\t’>,:C#:-\r- [ ]\t>oV\\\r- [ ]\rsa:\r- [ ]\r,’>\r- [ ]\t:\r- [ ]\t\\ -\\\r- [x]\r: \r- [x] ’\r- [ ]\r\\\r- [ ]\r\\\r- [x]\r#,\r- [x]\r,\r- [x]\r.\r- [ ]\t-\r- [ ]\r- \r- [x]\t’\r- [ ]\r-\r- [ ]\rO '].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_950874112 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['**  ’#****W.. >**[#](:)@ @`#,upT>`**-,’Y#***u#\\W*'].
-		} asDictionary
-	
-]
-
-{ #category : 'PBT dynamic tests' }
-PBTMicrodownGenTest >> test_960004352 [
-	
-		self doTest: {
-			'method' -> (Microdown class>>#parse:) selector.
-			'receiver' -> 'Class[#Microdown]'.
-			'arguments' -> ['- [x]\r.\r- [x]\r.#-.\r- [x]\r..\r- [x] L#\r- [x] #’\r- [x]\t:\r- [x]\t.bk-\r- [ ]\t’zz:\r- [ ]\rMHJ\r- [ ]\tf#:: \r- [ ]\t:\r- [x]\r: -#\r- [x] :-'].
+			'arguments' -> '[''![                                                                 --](-)'']'.
 		} asDictionary
 	
 ]
