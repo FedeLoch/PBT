@@ -41,22 +41,22 @@ PBTUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 { #category : 'running' }
 PBTUnitTest >> doRegressionTest: case [
 
-	| receiver arguments targetSelector expectedFeedback analyzerResult feedbackEvaluator analyzerInstance |
+	| receiver arguments targetSelector expectedFeedback analyzerResult feedbackEvaluator evaluator pbtCase |
 
 	receiver := STON fromString: (case at: 'receiver').
 	arguments := STON fromString: (case at: 'arguments').
 	targetSelector := case at: 'method'.
 	expectedFeedback := STON fromString: (case at: 'expected').
 	feedbackEvaluator := STON fromString: (case at: 'feedbackSystem').
-	
-	analyzerInstance := STON fromString: (case at: 'analyzerInstance').
-
+	evaluator := STON fromString: (case at: 'evaluator').
 	1 halt.
-	analyzerResult := analyzerInstance analyse: [
-		receiver perform: targetSelector withArguments: arguments.
-	].
+	pbtCase := PBAProgram from:
+			[ receiver perform: targetSelector withArguments: arguments ]
+		forClasses: (evaluator classesFor: targetSelector).
 	
-	self assert: (feedbackEvaluator from: analyzerResult) equals: expectedFeedback
+	analyzerResult := evaluator analyze: case.
+	
+	self assert: (feedbackEvaluator fromAnlyzingResult: analyzerResult) equals: expectedFeedback
 ]
 
 { #category : 'running' }
@@ -171,7 +171,7 @@ PBTUnitTest >> receiverGenerator [
 PBTUnitTest >> regressionTestName: pbtTest [
 
 	"TODO: REWRITE ME IF YOU WANT TO CUSTOM ME"
-	^ 'regression_test_', pbtTest name asString
+	^ 'test_regression_', pbtTest name asString
 ]
 
 { #category : 'running' }

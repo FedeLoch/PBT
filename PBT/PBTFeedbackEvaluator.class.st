@@ -48,6 +48,12 @@ PBTFeedbackEvaluator >> category: value [
 	^ value ln rounded
 ]
 
+{ #category : 'as yet unclassified' }
+PBTFeedbackEvaluator >> clear [
+
+	topCases := OrderedCollection new
+]
+
 { #category : 'accessing' }
 PBTFeedbackEvaluator >> compareAndUpdateValues: caseValues [
 

@@ -60,6 +60,12 @@ PBTFeedback >> isPositive [
 	^ feedback
 ]
 
+{ #category : 'accessing' }
+PBTFeedback >> relevantValues [
+
+	^ values select: [ :k | k value ~= 0 ]
+]
+
 { #category : 'as yet unclassified' }
 PBTFeedback >> unWrapCase: unwrapBlock [ 
 	

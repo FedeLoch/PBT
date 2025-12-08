@@ -45,7 +45,7 @@ PBTTest >> arguments: inputs [
 { #category : 'as yet unclassified' }
 PBTTest >> argumentsString [
 
-	^ $' asString, (self escapeQuotes: (STON toString: arguments)), $' asString
+	^ (STON toString: arguments) printString
 ]
 
 { #category : 'accessing' }
@@ -82,12 +82,6 @@ PBTTest >> autoTunedIterations [
 	^ autoTunedIterations
 ]
 
-{ #category : 'as yet unclassified' }
-PBTTest >> escapeQuotes: input [ 
-	
-	^ input copyReplaceAll: '''' with: ''''''
-]
-
 { #category : 'accessing' }
 PBTTest >> feedback [
 
@@ -101,34 +95,32 @@ PBTTest >> feedback: aFeedback [
 ]
 
 { #category : 'as yet unclassified' }
-PBTTest >> feedbackValuesString [
-
-	^ $' asString, (self escapeQuotes: (STON toString: feedback values)), $' asString
-]
-
-{ #category : 'as yet unclassified' }
 PBTTest >> installRegressionUnitTestIn: aPBTUnitTest [
 	
-	| selector sourceCode |
+	| selector sourceCode feedbackSystem testParams evaluator expected |
 	
 	selector := (aPBTUnitTest regressionTestName: self) asSymbol.
-	
+
+	feedbackSystem := STON toString: aPBTUnitTest runner feedbackEvaluator clear.
+	evaluator := STON toString: aPBTUnitTest runner evaluator.
+	expected := STON toString: feedback relevantValues.
+
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
      	nextPutAll: '
 		self doRegressionTest: {
 			', $' asString, 'method', $' asString, ' -> (', target name, ') selector.
 			', $' asString, 'receiver', $' asString, ' -> ', self receiverString, '.
 			', $' asString, 'arguments', $' asString, ' -> ', self argumentsString, '.
-			', $' asString, 'expected', $' asString, ' -> ', self feedbackValuesString, '.
-			
+			', $' asString, 'expected', $' asString, ' -> ', expected printString, '.
+			', $' asString, 'evaluator', $' asString, ' -> ', evaluator printString, '.
+			', $' asString, 'feedbackSystem', $' asString, ' -> ', feedbackSystem printString, '.
 		} asDictionary
 	'].
-	 1 halt.
-	
+
     aPBTUnitTest class
         compile: sourceCode
         classified: 'PBT dynamic regression tests'.
-
+	
     ^ selector
 ]
 
@@ -194,7 +186,7 @@ PBTTest >> receiver: anObject [
 { #category : 'as yet unclassified' }
 PBTTest >> receiverString [
 
-	^ $' asString, (self escapeQuotes: (STON toString: receiver)), $' asString
+	^ (STON toString: receiver) printString
 ]
 
 { #category : 'as yet unclassified' }
