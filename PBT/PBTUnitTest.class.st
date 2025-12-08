@@ -41,7 +41,7 @@ PBTUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 { #category : 'running' }
 PBTUnitTest >> doRegressionTest: case [
 
-	| receiver arguments targetSelector expectedFeedback analyzerResult feedbackEvaluator evaluator pbtCase |
+	| receiver arguments targetSelector expectedFeedback profilingResult feedbackEvaluator evaluator program pbtCase |
 
 	receiver := STON fromString: (case at: 'receiver').
 	arguments := STON fromString: (case at: 'arguments').
@@ -49,14 +49,16 @@ PBTUnitTest >> doRegressionTest: case [
 	expectedFeedback := STON fromString: (case at: 'expected').
 	feedbackEvaluator := STON fromString: (case at: 'feedbackSystem').
 	evaluator := STON fromString: (case at: 'evaluator').
-	1 halt.
-	pbtCase := PBAProgram from:
+
+	program := PBAProgram from:
 			[ receiver perform: targetSelector withArguments: arguments ]
 		forClasses: (evaluator classesFor: targetSelector).
+
+	profilingResult := evaluator analyzer analyze: program.
 	
-	analyzerResult := evaluator analyze: case.
-	
-	self assert: (feedbackEvaluator fromAnlyzingResult: analyzerResult) equals: expectedFeedback
+	pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult).
+
+	self assert: (feedbackEvaluator eval: pbtCase) relevantValues equals: expectedFeedback
 ]
 
 { #category : 'running' }

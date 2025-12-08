@@ -16,6 +16,12 @@ PBTEvaluator >> allocatedMemory [
 	^ Smalltalk vm getParameters at: 34
 ]
 
+{ #category : 'testing' }
+PBTEvaluator >> analyzer [
+
+	^ analyzer
+]
+
 { #category : 'as yet unclassified' }
 PBTEvaluator >> classesFor: target [
 

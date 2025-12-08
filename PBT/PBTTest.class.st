@@ -97,7 +97,7 @@ PBTTest >> feedback: aFeedback [
 { #category : 'as yet unclassified' }
 PBTTest >> installRegressionUnitTestIn: aPBTUnitTest [
 	
-	| selector sourceCode feedbackSystem testParams evaluator expected |
+	| selector sourceCode feedbackSystem evaluator expected |
 	
 	selector := (aPBTUnitTest regressionTestName: self) asSymbol.
 
