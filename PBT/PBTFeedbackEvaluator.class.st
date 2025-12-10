@@ -62,7 +62,8 @@ PBTFeedbackEvaluator >> compareAndUpdateValues: caseValues [
 		difference positive ifTrue: [
 			self updateKey: key value: (caseValues at: key)
 		].
-		improvement + (difference max: 0)
+	
+		improvement + (difference > 0 ifTrue: [ caseValues at: key ] ifFalse: [ difference ])
 	]
 ]
 
