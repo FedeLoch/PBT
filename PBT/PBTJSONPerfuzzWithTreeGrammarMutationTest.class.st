@@ -16,7 +16,7 @@ PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 	seed := '{"n":true,"n":[],"x":6}'.
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
+		  seedGenerator: (PBTConstantGenerator new value: '[]');
 		  mutationsPerIteration: 3;
 		  mutators: { (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100 };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
@@ -26,7 +26,7 @@ PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 PBTJSONPerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 10 minutes.
+	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 15 minutes.
 
 ]
 

@@ -15,7 +15,7 @@ PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 	^ PBTCorpusWithMutationsGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: 3;
-		  mutators: { (PBTTreeGrammarMutator from: CSVGrammar new) maxInputSize:200 };
+		  mutators: { (PBTTreeGrammarMutator from: CSVGrammar new) maxInputSize: 200 };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 
