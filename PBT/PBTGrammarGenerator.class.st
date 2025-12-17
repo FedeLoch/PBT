@@ -3,7 +3,8 @@ Class {
 	#superclass : 'PBTGenerator',
 	#instVars : [
 		'grammar',
-		'generator'
+		'generator',
+		'lastInput'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -11,16 +12,31 @@ Class {
 }
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> feed: feedback [
+PBTGrammarGenerator >> derivationTree: input [
 
-	"do nothing"
+	^ PBTGrammarParser parse: input from: grammar
+]
+
+{ #category : 'accessing' }
+PBTGrammarGenerator >> feed: feedback [
+	
+	feedback ifNotNil: [ | ast |
+		[ ast := self derivationTree: (feedback case) ] on: Error do: [ ^ nil ].
+		
+		ast ifNil: [ ^ nil ].
+		
+		"Increase/Decrease the weight of each production based on the feedback"
+		ast updateWeightToChildren: ((feedback isPositive) ifTrue: [ 1 ] ifFalse: [ -1 ]).
+	]
 ]
 
 { #category : 'accessing' }
 PBTGrammarGenerator >> gen: myConstraint [
 
 	"Gen a random string that matchs with the instance variable grammar"
-	^ grammar generate: generator
+	lastInput := grammar generate: generator.
+	^ lastInput
+	
 ]
 
 { #category : 'accessing' }
@@ -33,7 +49,7 @@ PBTGrammarGenerator >> grammar: aGrammar [
 PBTGrammarGenerator >> initialize [ 
 
 	super initialize.
-	generator := GncGrammarGenerator newUnbounded maxHeight: 20; maxSize: 20
+	generator := GncGrammarGenerator newUnbounded maxHeight: SmallInteger maxVal; maxSize: 20
 ]
 
 { #category : 'accessing' }

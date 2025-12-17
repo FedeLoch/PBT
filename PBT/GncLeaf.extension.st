@@ -31,6 +31,12 @@ GncLeaf >> isTypeVariable [
 ]
 
 { #category : '*PBT' }
+GncLeaf >> updateWeightToChildren: reward [ 
+
+	"Do nothing, it's a leaf"
+]
+
+{ #category : '*PBT' }
 GncLeaf >> varName [
 
 	^ token allButLast

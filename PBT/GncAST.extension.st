@@ -78,6 +78,20 @@ GncAST >> isTypeVariable [
 ]
 
 { #category : '*PBT' }
+GncAST >> updateWeightRecursive: reward [
+
+	grammarRule ifNotNil: [ grammarRule updateWeightWith: reward ].
+	
+	self updateWeightToChildren: reward.
+]
+
+{ #category : '*PBT' }
+GncAST >> updateWeightToChildren: reward [
+
+	self subclassResponsibility 
+]
+
+{ #category : '*PBT' }
 GncAST >> visited [
 	
 	^ false 

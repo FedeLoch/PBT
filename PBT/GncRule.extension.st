@@ -29,6 +29,12 @@ GncRule >> rewardBy: level [
 ]
 
 { #category : '*PBT' }
+GncRule >> updateWeightWith: reward [
+
+	weight set: ((weight get + reward) max: 1)
+]
+
+{ #category : '*PBT' }
 GncRule >> utc: totalVisits by: c [
 
 	"DELETE ME"

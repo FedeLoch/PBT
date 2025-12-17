@@ -31,13 +31,13 @@ PBTTreeGrammarMutator >> applyMutation: string [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> feed: feedback [
 
-	feedback ifNotNil: [ | ast amount |
+	feedback ifNotNil: [ | ast improvement |
 		[ ast := self tree: (feedback case) ] on: Error do: [ ^ nil ].
 		ast ifNil: [ ^ nil ].
 		
 		"We feed the grammar by doing backPropagation with the grammar"
-		amount := (feedback isPositive) ifTrue: [ (feedback improvement) * 10 ] ifFalse: [ -1 ].
-		ast backPropagateToChildren: amount level: 0.
+		improvement := (feedback isPositive) ifTrue: [ (feedback improvement) * 100 ] ifFalse: [ -1 ].
+		ast backPropagateRecursive: improvement level: 0.
 	]
 ]
 
