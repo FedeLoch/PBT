@@ -96,3 +96,26 @@ GncAST >> visited [
 	
 	^ false 
 ]
+
+{ #category : '*PBT' }
+GncAST >> canReplace: aNode [
+
+	"Return true if I can replace aNode in the AST. 
+	 Basic rule: same grammar type/tag."
+	
+	^ self grammarRule = aNode grammarRule
+]
+
+{ #category : '*PBT' }
+GncAST >> parent [
+	"This assumes the AST has parent pointers set up. 
+	 If not, we might need to rely on the Shrinker traversing and keeping track of parents."
+	
+	^ parent
+]
+
+{ #category : '*PBT' }
+GncAST >> parent: aNode [
+	
+	parent := aNode
+]
