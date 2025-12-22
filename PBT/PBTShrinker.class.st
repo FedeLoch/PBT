@@ -83,33 +83,55 @@ PBTShrinker >> parse: input [
 { #category : 'shrinking' }
 PBTShrinker >> shrink: input [
 	
-	| ast bestInput bestFeedback |
+	| ast bestInput bestFeedback candidates |
 	
 	ast := self parse: input.
 	ast ifNil: [ ^ input ].
 	
 	bestInput := input.
 	bestFeedback := self evalInput: input.
-
+	
+	"Collect all valid shrink candidates: { parent. index. child }"
+	candidates := OrderedCollection new.
 	ast allNodes do: [ :node | 
 		node children do: [ :child |
 			(child canReplace: node) ifTrue: [
-
-				| originalParent originalIndex newInput newFeedback |
-				
-				originalParent := node parent.
-				originalIndex := originalParent indexOf: node.
-				
-				"Apply Mutation"
-				originalParent replaceChildAt: originalIndex with: child.
-				newInput := ast asStringInput.
-				
-				newFeedback := self evalInput: input.
-				
-				(self isStillValuable: newFeedback original: bestFeedback) 
-					ifTrue: [  bestInput := newInput. bestFeedback := newFeedback ]
-					ifFalse: [ originalParent replaceChildAt: originalIndex with: node ]
+				candidates add: { node parent. node parent indexOf: node. child }
 			]
+		]
+	].
+
+	"Sort by Child Weight DESCENDING (Prioritize keeping Heavy nodes)"
+	candidates sort: [ :a :b | a third weight > b third weight ].
+
+	"Apply Shrinks"
+	candidates do: [ :cand |
+		| parent index child newInput newFeedback |
+		parent := cand first.
+		index := cand second.
+		child := cand third.
+
+		"Check if parent still has the child at that index (structure preservation check)"
+		((parent children size >= index) and: [ (parent children at: index) grammarRule = child grammarRule ]) ifTrue: [ 
+
+			| originalNode |
+			originalNode := parent children at: index.
+			
+			"Apply Mutation"
+			parent replaceChildAt: index with: child.
+			newInput := ast asStringInput.
+			
+			newFeedback := self evalInput: newInput.
+			
+			(self isStillValuable: newFeedback original: bestFeedback) 
+				ifTrue: [  
+					bestInput := newInput. 
+					bestFeedback := newFeedback.
+				]
+				ifFalse: [ 
+					"Revert"
+					parent replaceChildAt: index with: originalNode 
+				]
 		]
 	].
 
