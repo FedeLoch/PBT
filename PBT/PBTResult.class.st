@@ -37,6 +37,16 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> bloxplotByTime [
+	
+	| plot |
+	plot := RSBoxPlot new y: self times; yLog; yourself.
+	plot horizontalTick numberOfTicks: tests size.
+	
+	^ plot open
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> continue: numberOfCases [
 
 	^ runner continue: numberOfCases from: self
@@ -46,16 +56,6 @@ PBTResult >> continue: numberOfCases [
 PBTResult >> continueFor: time [
 
 	^ runner continueFor: time from: self
-]
-
-{ #category : 'as yet unclassified' }
-PBTResult >> bloxplotByTime [
-	
-	| plot |
-	plot := RSBoxPlot new y: self times; yLog; yourself.
-	plot horizontalTick numberOfTicks: tests size.
-	
-	^ plot open
 ]
 
 { #category : 'as yet unclassified' }
@@ -91,6 +91,16 @@ PBTResult >> exportExecutionValues [
 			writer nextPut: {
 					total.
 					test time asMilliSeconds } ] ]
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> feed: someTests time: aTime [ 
+
+	tests := tests, someTests.
+	totalTime := totalTime  + (Duration milliSeconds: (Time millisecondsSince: aTime)).
+	performanceResult := PerformanceResult from: tests withTime: totalTime.
+	topCases := runner feedbackEvaluator topCases.
+	ranking := (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse.
 ]
 
 { #category : 'accessing' }

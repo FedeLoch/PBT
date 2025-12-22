@@ -120,13 +120,17 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: tim
 ]
 
 { #category : 'as yet unclassified' }
-PBTRunner >> continue: numberOfCases from: result [
-	1 halt.
+PBTRunner >> continue: times from: result [
+
+	self withCriteria: (PBTCountCriteria new times: times).
+	^ self reRun: result.
 ]
 
 { #category : 'as yet unclassified' }
 PBTRunner >> continueFor: time from: result [
-	1 halt.
+	
+	self withCriteria: (PBTTimeCriteria new timeout: time).
+	^ self reRun: result.
 ]
 
 { #category : 'tests' }
@@ -231,6 +235,25 @@ PBTRunner >> initialize [
 	stopCriteria := PBTCountCriteria new times: 100.
 	
 	
+]
+
+{ #category : 'tests' }
+PBTRunner >> reRun: result [
+
+	| tests time collector incrCoverage |
+	
+	time := Time millisecondClockValue.
+	tests := OrderedCollection new.
+	collector := result totalCoverage collector.
+	incrCoverage := result totalCoverage.
+
+	collector runOn: [ [
+		self shouldGenNext: tests since: time withCoverage: incrCoverage] whileTrue: [
+			tests add: (self genTest: incrCoverage with: collector).
+		]
+	].
+
+	^ result feed: tests time: time
 ]
 
 { #category : 'tests' }
