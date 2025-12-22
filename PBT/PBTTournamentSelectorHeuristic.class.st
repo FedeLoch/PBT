@@ -44,6 +44,8 @@ PBTTournamentSelectorHeuristic >> pickOne: candidates feedbacks: feedbacks [
 { #category : 'accessing' }
 PBTTournamentSelectorHeuristic >> tournamentSize [
 
+	tournamentSize ifNil: [ ^ self defaultTournamentSize ].
+
 	^ tournamentSize
 ]
 
