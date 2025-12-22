@@ -3,26 +3,47 @@ Class {
 	#superclass : 'Object',
 	#instVars : [
 		'grammar',
-		'evaluator'
+		'evaluator',
+		'feedbackEvaluator'
 	],
 	#category : 'PBT-Shrinking',
 	#package : 'PBT',
 	#tag : 'Shrinking'
 }
 
-{ #category : 'instance creation' }
-PBTShrinker class >> from: aGrammar runner: aRunner [
+{ #category : 'shrinking' }
+PBTShrinker >> evalInput: input [
 
-	^ self new
-		grammar: aGrammar;
-		runner: aRunner;
-		yourself
+	| profilingResult pbtCase |
+	profilingResult := evaluator analyzer analyze: input.
+	
+	pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult).
+
+	^ feedbackEvaluator eval: pbtCase
 ]
 
 { #category : 'accessing' }
 PBTShrinker >> evaluator [
 	
-	^ evaluator ifNil: [ evaluator := runner evaluator ]
+	^ evaluator
+]
+
+{ #category : 'accessing' }
+PBTShrinker >> evaluator: anEvaluator [
+
+	evaluator := anEvaluator
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> feedbackEvaluator [
+
+	^ feedbackEvaluator 
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> feedbackEvaluator: aFeedbackEvaluator [
+
+	feedbackEvaluator := aFeedbackEvaluator 
 ]
 
 { #category : 'accessing' }
@@ -32,25 +53,31 @@ PBTShrinker >> grammar: aGrammar [
 ]
 
 { #category : 'testing' }
-PBTShrinker >> isStillBad: newResult original: originalResult [
+PBTShrinker >> isStillValuable: feedback original: originalFeedback [
 
-	"Check if the new result is comparable to the original result (e.g., within 90% of execution time)"
-	"For now, we just check if it has a score or if execution time is significant"
+	| threshold |
 	
-	^ newResult score > (originalResult score * 0.9)
+	threshold := 0.9.
+
+	^ feedback score >= (originalFeedback score * threshold)
 ]
 
 { #category : 'testing' }
-PBTShrinker >> isValidStructure: anAST [
+PBTShrinker >> isValidTree: ast [
 
-	"Check if the AST respects basic grammar constraints (if necessary)"
-	^ true
+	| input derivation |
+	input := ast asStringInput.
+
+	[ derivation := self parse: input ] on: Error do: [ ^ false ].
+	derivation ifNil: [ ^ false ].
+
+	^ derivation asStringInput = input
 ]
 
-{ #category : 'accessing' }
-PBTShrinker >> runner: aRunner [
+{ #category : 'testing' }
+PBTShrinker >> parse: input [
 
-	runner := aRunner
+	^ PBTGrammarParser parse: input from: grammar
 ]
 
 { #category : 'shrinking' }
@@ -58,17 +85,16 @@ PBTShrinker >> shrink: input [
 	
 	| ast bestInput bestFeedback |
 	
-	"Parse initial input"
-	ast := PBTGrammarParser parse: input from: grammar.
+	ast := self parse: input.
 	ast ifNil: [ ^ input ].
+	
 	bestInput := input.
-	bestFeedback := evaluator eval: input.
+	bestFeedback := self evalInput: input.
 
-	"Iterate over nodes (bottom-up might be better, or just allNodes)"
 	ast allNodes do: [ :node | 
 		node children do: [ :child |
-			"Check if child can replace node (same type/grammar rule)"
 			(child canReplace: node) ifTrue: [
+
 				| originalParent originalIndex newInput newFeedback |
 				
 				originalParent := node parent.
@@ -78,23 +104,14 @@ PBTShrinker >> shrink: input [
 				originalParent replaceChildAt: originalIndex with: child.
 				newInput := ast asStringInput.
 				
-				"Evaluate"
-				newFeedback := evaluator eval: newInput.
+				newFeedback := self evalInput: input.
 				
-				(self isStillBad: newFeedback original: bestFeedback) 
-					ifTrue: [ 
-						bestInput := newInput.
-						bestFeedback := newFeedback. 
-					] "Keep change"
-					ifFalse: [ 
-						"Revert change"
-						originalParent replaceChildAt: originalIndex with: node.
-					]
+				(self isStillValuable: newFeedback original: bestFeedback) 
+					ifTrue: [  bestInput := newInput. bestFeedback := newFeedback ]
+					ifFalse: [ originalParent replaceChildAt: originalIndex with: node ]
 			]
 		]
 	].
 
 	^ bestInput
 ]
-
-

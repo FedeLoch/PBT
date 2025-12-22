@@ -5,7 +5,8 @@ Class {
 		'case',
 		'feedback',
 		'improvement',
-		'values'
+		'values',
+		'score'
 	],
 	#category : 'PBT-Feedback',
 	#package : 'PBT',
@@ -16,6 +17,12 @@ Class {
 PBTFeedback class >> from: case improvement: improvement values: values [
 
 	^ self new case: case; feedback: improvement > 0; improvement: improvement; values: values
+]
+
+{ #category : 'accessing' }
+PBTFeedback >> absoluteScore [
+
+	^ self relevantValues inject: [ 0 ] into: [ :acc :key | key value + acc ]
 ]
 
 { #category : 'accessing' }
@@ -64,6 +71,14 @@ PBTFeedback >> isPositive [
 PBTFeedback >> relevantValues [
 
 	^ values select: [ :k | k value ~= 0 ]
+]
+
+{ #category : 'accessing' }
+PBTFeedback >> score [
+
+	score ifNil: [ self absoluteScore ].
+	
+	^ score
 ]
 
 { #category : 'as yet unclassified' }

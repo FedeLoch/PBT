@@ -35,6 +35,12 @@ GncInnerNode >> backPropagateToChildren: reward level: level [
 ]
 
 { #category : '*PBT' }
+GncInnerNode >> indexOf: aNode [
+
+	^ children indexOf: aNode
+]
+
+{ #category : '*PBT' }
 GncInnerNode >> isClassObject [
 
 	^ children first isTypeVariable
@@ -47,20 +53,14 @@ GncInnerNode >> objectClass [
 ]
 
 { #category : '*PBT' }
-GncInnerNode >> updateWeightToChildren: reward [ 
-
-	self children do: [ :child | child updateWeightRecursive: reward ]
-]
-
-{ #category : '*PBT' }
-GncInnerNode >> indexOf: aNode [
-
-	^ children indexOf: aNode
-]
-
-{ #category : '*PBT' }
 GncInnerNode >> replaceChildAt: index with: newNode [
 
 	children at: index put: newNode.
 	newNode parent: self.
+]
+
+{ #category : '*PBT' }
+GncInnerNode >> updateWeightToChildren: reward [ 
+
+	self children do: [ :child | child updateWeightRecursive: reward ]
 ]
