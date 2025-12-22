@@ -49,16 +49,18 @@ PBTResult >> bloxplotByTime [
 { #category : 'as yet unclassified' }
 PBTResult >> exportAsCSV [
 
-	| writer |
-	'results.csv' asFileReference writeStreamDo: [ :stream |
+	| writer fileName |
+	
+	fileName := self hash asString, '-results.csv'.
+	fileName asFileReference writeStreamDo: [ :stream |
 		writer := (NeoCSVWriter on: stream)
-			writeHeader: #( time improvement );
+			writeHeader: #( 'time-microseconds' 'improvement' );
 			fieldWriter: #raw;
 			yourself.
 			
 		tests do: [ :test |
 			writer nextPut: {
-					test time asMilliSeconds.
+					test time asMicroseconds.
 					test feedback improvement } ] ]
 ]
 
