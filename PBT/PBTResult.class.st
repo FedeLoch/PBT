@@ -9,7 +9,8 @@ Class {
 		'segmentedTests',
 		'ranking',
 		'topCases',
-		'feedbackEvaluator'
+		'feedbackEvaluator',
+		'runner'
 	],
 	#category : 'PBT-Result',
 	#package : 'PBT',
@@ -29,6 +30,7 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 		totalTime: totalTime;
 		totalCoverage: totalCoverageResult;
 		topCases: topCases;
+		runner: runner;
 		feedbackEvaluator: runner feedbackEvaluator;
 		ranking: (tests collect: [ :test | test score ifNil: [ 0 ] ifNotNil: [ test score ] ]) asSortedCollection reverse;
 		performanceResult: perfResult
@@ -42,6 +44,12 @@ PBTResult >> bloxplotByTime [
 	plot horizontalTick numberOfTicks: tests size.
 	
 	^ plot open
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> exportAsSCV [
+	
+	1 halt.
 ]
 
 { #category : 'as yet unclassified' }
@@ -285,6 +293,12 @@ PBTResult >> ranking: aRanking [
 
 	ranking := aRanking
 
+]
+
+{ #category : 'outliers' }
+PBTResult >> runner: aRunner [
+
+	runner := aRunner 
 ]
 
 { #category : 'getter' }
