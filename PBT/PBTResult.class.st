@@ -37,6 +37,18 @@ PBTResult class >> resultFrom: tests since: time withCoverage: totalCoverageResu
 ]
 
 { #category : 'as yet unclassified' }
+PBTResult >> continue: numberOfCases [
+
+	^ runner continue: numberOfCases from: self
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> continueFor: time [
+
+	^ runner continueFor: time from: self
+]
+
+{ #category : 'as yet unclassified' }
 PBTResult >> bloxplotByTime [
 	
 	| plot |

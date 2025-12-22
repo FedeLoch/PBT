@@ -119,6 +119,16 @@ PBTRunner class >> testWithPackageCoverage: targetMethod from: schema times: tim
 		targetAndPackageCoverage: targetMethod
 ]
 
+{ #category : 'as yet unclassified' }
+PBTRunner >> continue: numberOfCases from: result [
+	1 halt.
+]
+
+{ #category : 'as yet unclassified' }
+PBTRunner >> continueFor: time from: result [
+	1 halt.
+]
+
 { #category : 'tests' }
 PBTRunner >> evaluator [
 
