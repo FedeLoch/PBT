@@ -47,9 +47,19 @@ PBTResult >> bloxplotByTime [
 ]
 
 { #category : 'as yet unclassified' }
-PBTResult >> exportAsSCV [
-	
-	1 halt.
+PBTResult >> exportAsCSV [
+
+	| writer |
+	'results.csv' asFileReference writeStreamDo: [ :stream |
+		writer := (NeoCSVWriter on: stream)
+			writeHeader: #( time improvement );
+			fieldWriter: #raw;
+			yourself.
+			
+		tests do: [ :test |
+			writer nextPut: {
+					test time asMilliSeconds.
+					test feedback improvement } ] ]
 ]
 
 { #category : 'as yet unclassified' }
