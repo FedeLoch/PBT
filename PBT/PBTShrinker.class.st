@@ -121,7 +121,6 @@ PBTShrinker >> minimize: node [
 	
 	| copy |
 	copy := self parse: node asInput. "TODO: avoid to copy the node"
-	
 	(self candidates: copy) do: [ :child |
 		child parent ifNotNil: [ | index |
 			index := child parent children indexOf: child. 
