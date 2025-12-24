@@ -7,6 +7,12 @@ GncTerminalRange >> aMCTSValue [
 ]
 
 { #category : '*PBT' }
+GncTerminalRange >> minimumTree [
+	
+	^ GncLeaf withToken: (from charCode asCharacter)
+]
+
+{ #category : '*PBT' }
 GncTerminalRange >> values [
 	
 	^ (from to: to) collect: #asString

@@ -15,6 +15,16 @@ GncRule >> backPropagate: reward level: level [
 ]
 
 { #category : '*PBT' }
+GncRule >> minimumTree [
+
+	^ fragments collect: [ :fragment | | node |
+		node := fragment minimumTree grammarRule: self.
+		node 
+	]
+
+]
+
+{ #category : '*PBT' }
 GncRule >> reward [
 
 	"DELETE ME"

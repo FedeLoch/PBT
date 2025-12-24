@@ -6,6 +6,13 @@ Class {
 	#tag : 'Feedback'
 }
 
+{ #category : 'accessing' }
+PBTMethodsCallsGuide >> setBase: base [
+
+	evaluator methodsCalled: base
+
+]
+
 { #category : 'as yet unclassified' }
 PBTMethodsCallsGuide >> tableOfValue [
 

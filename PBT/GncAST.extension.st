@@ -7,6 +7,12 @@ GncAST >> allChildren [
 ]
 
 { #category : '*PBT' }
+GncAST >> asInput [
+
+	^ self asStringInput
+]
+
+{ #category : '*PBT' }
 GncAST >> asPharoObject [
 
 	self subclassResponsibility 
@@ -84,6 +90,18 @@ GncAST >> grammarRule: gncRule [
 GncAST >> isTypeVariable [
 
 	^ false
+]
+
+{ #category : '*PBT' }
+GncAST >> minimumTree [
+
+	^ GncInnerNode new tag: self tag; grammarRule: grammarRule; children: grammarRule minimumTree.
+]
+
+{ #category : '*PBT' }
+GncAST >> tag [
+
+	^ nil
 ]
 
 { #category : '*PBT' }

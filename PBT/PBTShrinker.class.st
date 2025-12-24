@@ -4,7 +4,10 @@ Class {
 	#instVars : [
 		'grammar',
 		'evaluator',
-		'feedbackEvaluator'
+		'feedbackEvaluator',
+		'threshold',
+		'programBlock',
+		'classesToProfile'
 	],
 	#category : 'PBT-Shrinking',
 	#package : 'PBT',
@@ -12,10 +15,42 @@ Class {
 }
 
 { #category : 'shrinking' }
+PBTShrinker >> candidates: root [
+	
+	| worstReward worst |
+	worstReward := SmallInteger maxVal.
+	worst := OrderedCollection new.
+	
+	root allNodes do: [ :node | | reward |
+		reward := node reward: grammar root: root.
+		(reward < worstReward) ifTrue: [ worstReward := reward . worst := OrderedCollection new ].
+		(reward = worstReward) ifTrue: [ worst add: node ]
+	].
+
+	^ worst.
+
+]
+
+{ #category : 'testing' }
+PBTShrinker >> classesToProfile [
+
+	^ classesToProfile 
+]
+
+{ #category : 'testing' }
+PBTShrinker >> classesToProfile: someClassesToProfile [
+
+	classesToProfile := someClassesToProfile 
+]
+
+{ #category : 'shrinking' }
 PBTShrinker >> evalInput: input [
 
-	| profilingResult pbtCase |
-	profilingResult := evaluator analyzer analyze: input.
+	| profilingResult pbtCase program |
+	
+	program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
+
+	profilingResult := evaluator analyzer analyze: program.
 	
 	pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult).
 
@@ -53,25 +88,48 @@ PBTShrinker >> grammar: aGrammar [
 ]
 
 { #category : 'testing' }
-PBTShrinker >> isStillValuable: feedback original: originalFeedback [
-
-	| threshold |
+PBTShrinker >> initialize [ 
 	
+	super initialize.
 	threshold := 0.9.
+	programBlock := nil.
+	classesToProfile := nil.
+	feedbackEvaluator := nil.
+	grammar := nil.
+]
+
+{ #category : 'testing' }
+PBTShrinker >> isStillValuable: feedback original: originalFeedback [
 
 	^ feedback score >= (originalFeedback score * threshold)
 ]
 
 { #category : 'testing' }
-PBTShrinker >> isValidTree: ast [
+PBTShrinker >> isValidTree: node [
 
 	| input derivation |
-	input := ast asStringInput.
+	input := node asInput.
 
 	[ derivation := self parse: input ] on: Error do: [ ^ false ].
 	derivation ifNil: [ ^ false ].
 
-	^ derivation asStringInput = input
+	^ derivation asInput = input
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> minimize: node [
+	
+	| copy |
+	copy := self parse: node asInput. "TODO: avoid to copy the node"
+	
+	(self candidates: copy) do: [ :child |
+		child parent ifNotNil: [ | index |
+			index := child parent children indexOf: child. 
+			child parent replaceChildAt: index with: child minimumTree
+		].
+	].
+
+	^ copy
 ]
 
 { #category : 'testing' }
@@ -80,60 +138,47 @@ PBTShrinker >> parse: input [
 	^ PBTGrammarParser parse: input from: grammar
 ]
 
+{ #category : 'testing' }
+PBTShrinker >> programBlock [
+
+	^ programBlock 
+]
+
+{ #category : 'testing' }
+PBTShrinker >> programBlock: aProgramBlock [
+
+	programBlock := aProgramBlock 
+]
+
 { #category : 'shrinking' }
 PBTShrinker >> shrink: input [
 	
-	| ast bestInput bestFeedback candidates |
+	| node originalFeedback canImprove |
 	
-	ast := self parse: input.
-	ast ifNil: [ ^ input ].
+	node := self parse: input.
+	node ifNil: [ ^ input ].
+	originalFeedback := self evalInput: input.
 	
-	bestInput := input.
-	bestFeedback := self evalInput: input.
+	canImprove := true.
+	[ canImprove ] whileTrue: [ | minimized |
+		minimized := self minimize: node.
+		(minimized asInput = node asInput) ifTrue: [ ^ node asInput ].
+		canImprove := (self isValidTree: minimized) and: [ self isStillValuable: (self evalInput: input) original: originalFeedback ].
 	
-	"Collect all valid shrink candidates: { parent. index. child }"
-	candidates := OrderedCollection new.
-	ast allNodes do: [ :node | 
-		node children do: [ :child |
-			(child canReplace: node) ifTrue: [
-				candidates add: { node parent. node parent indexOf: node. child }
-			]
-		]
+		canImprove ifTrue: [ node := minimized ]
 	].
 
-	"Sort by Child Weight DESCENDING (Prioritize keeping Heavy nodes)"
-	candidates sort: [ :a :b | a third weight > b third weight ].
+	^ node asInput
+]
 
-	"Apply Shrinks"
-	candidates do: [ :cand |
-		| parent index child newInput newFeedback |
-		parent := cand first.
-		index := cand second.
-		child := cand third.
+{ #category : 'testing' }
+PBTShrinker >> threshold [
 
-		"Check if parent still has the child at that index (structure preservation check)"
-		((parent children size >= index) and: [ (parent children at: index) grammarRule = child grammarRule ]) ifTrue: [ 
+	^ threshold 
+]
 
-			| originalNode |
-			originalNode := parent children at: index.
-			
-			"Apply Mutation"
-			parent replaceChildAt: index with: child.
-			newInput := ast asStringInput.
-			
-			newFeedback := self evalInput: newInput.
-			
-			(self isStillValuable: newFeedback original: bestFeedback) 
-				ifTrue: [  
-					bestInput := newInput. 
-					bestFeedback := newFeedback.
-				]
-				ifFalse: [ 
-					"Revert"
-					parent replaceChildAt: index with: originalNode 
-				]
-		]
-	].
+{ #category : 'testing' }
+PBTShrinker >> threshold: aThreshold [
 
-	^ bestInput
+	threshold := aThreshold.
 ]

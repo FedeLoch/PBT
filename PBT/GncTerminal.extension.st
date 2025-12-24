@@ -19,6 +19,12 @@ GncTerminal >> isTerminal [
 ]
 
 { #category : '*PBT' }
+GncTerminal >> minimumTree [
+
+	self subclassResponsibility 
+]
+
+{ #category : '*PBT' }
 GncTerminal >> values [
 	
 	self subclassResponsibility

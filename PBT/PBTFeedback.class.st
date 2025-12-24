@@ -22,7 +22,7 @@ PBTFeedback class >> from: case improvement: improvement values: values [
 { #category : 'accessing' }
 PBTFeedback >> absoluteScore [
 
-	^ self relevantValues inject: [ 0 ] into: [ :acc :key | key value + acc ]
+	^ self relevantValues inject: 0 into: [ :acc :key | key value + acc ]
 ]
 
 { #category : 'accessing' }
@@ -76,7 +76,7 @@ PBTFeedback >> relevantValues [
 { #category : 'accessing' }
 PBTFeedback >> score [
 
-	score ifNil: [ self absoluteScore ].
+	score ifNil: [ score := self absoluteScore ].
 	
 	^ score
 ]

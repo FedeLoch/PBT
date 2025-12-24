@@ -7,6 +7,23 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+RegexExperiment5days class >> allPathsForMutator: mIndex from: path [
+
+	| instance |
+	
+	instance := self new.
+	^ (1 to: 5) collect: [ :index | path, (instance mutatorLabel: (instance mutatorVariants at: mIndex)), (instance pathName: index) ]
+]
+
+{ #category : 'as yet unclassified' }
+RegexExperiment5days class >> generateCSVsForMutator: mIndex from: sourcePath [
+
+	(self allPathsForMutator: mIndex from: sourcePath) do: [ :path |
+		(STON fromStream: (path asFileReference readStream)) exportAsCSV
+	]
+]
+
+{ #category : 'as yet unclassified' }
 RegexExperiment5days class >> getResults: sourcePath at: index mutatorIndex: mIndex [
 
 	| pathName instance |

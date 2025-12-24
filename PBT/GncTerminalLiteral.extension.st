@@ -7,6 +7,12 @@ GncTerminalLiteral >> aMCTSValue [
 ]
 
 { #category : '*PBT' }
+GncTerminalLiteral >> minimumTree [
+	
+	^ GncLeaf withToken: literal
+]
+
+{ #category : '*PBT' }
 GncTerminalLiteral >> name [
 	^ literal
 ]

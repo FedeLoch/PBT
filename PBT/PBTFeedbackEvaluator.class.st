@@ -141,6 +141,12 @@ PBTFeedbackEvaluator >> feedbackByScore [
 ]
 
 { #category : 'accessing' }
+PBTFeedbackEvaluator >> guide [
+
+	^ guide
+]
+
+{ #category : 'accessing' }
 PBTFeedbackEvaluator >> initialize [ 
 
 	super initialize.

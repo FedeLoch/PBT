@@ -15,6 +15,12 @@ PBTFeedbackGuide >> evaluator: anEvaluator [
 	evaluator := anEvaluator
 ]
 
+{ #category : 'initialization' }
+PBTFeedbackGuide >> setBase: base [
+
+	self subclassResponsibility 
+]
+
 { #category : 'as yet unclassified' }
 PBTFeedbackGuide >> tableOfValue [
 
