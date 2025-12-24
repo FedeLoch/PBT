@@ -153,7 +153,6 @@ PBTShrinker >> programBlock: aProgramBlock [
 PBTShrinker >> shrink: input [
 	
 	| node originalFeedback canImprove |
-	
 	node := self parse: input.
 	node ifNil: [ ^ input ].
 	originalFeedback := self evalInput: input.
