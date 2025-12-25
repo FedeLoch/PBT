@@ -29,14 +29,12 @@ PBTJSONShrinkerTest >> setUp [
 { #category : 'tests' }
 PBTJSONShrinkerTest >> testShrinkNestedArraysToNormalForm [
 
-	| input guidingFeedback |
+	| guidingFeedback |
 
 	guidingFeedback := shrinker evalInput: '[[[[]],[3,4]],[[5,6],[7,8]]]'.
 	self updateFeedbackEvaluatorWith: guidingFeedback values.
 	
-	input := '[[[]],{"a":null}]'.
-	
-	self assert: (shrinker shrink: input) equals: '[]'.
+	self assert: (shrinker shrink: '[[[[]]],{"a":null}]') equals: '[]'.
 
 ]
 
