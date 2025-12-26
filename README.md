@@ -1,16 +1,16 @@
-# PBT: Property-Based Testing & Guided Performance Fuzzing for Pharo
+# PBT - Property-Based Testing & Guided Performance Fuzzing for Pharo
 
 PBT is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
 
 ---
 
-## 🎯 Core Objective
+## Core Objective
 
 The goal of PBT is to automate the discovery of **worst-case scenarios**. Whether you are looking for inputs that break your invariants (Property Testing) or inputs that maximize execution time/memory, PBT guides the search using feedback from the system under test.
 
 ---
 
-## 🏗 Architecture Overview
+## Architecture Overview
 
 PBT is built with a highly modular and decoupled architecture, allowing for flexible instrumentation and search strategies.
 
@@ -37,7 +37,7 @@ graph TD
 
 ---
 
-## 🚀 Quick Start: Basic Property Testing
+## Quick Start: Property Testing
 
 To test a method, you define a **Schema** and run it through the **Runner**.
 
@@ -60,7 +60,7 @@ PBTRunner test: Integer >> #factorial from: schema.
 
 ---
 
-## 🔥 Performance Fuzzing (Perfuzz)
+## Performance Fuzzing
 
 PBT excels at finding performance bottlenecks. Unlike traditional tools, **the Runner guides the search** toward high-cost inputs.
 
@@ -80,7 +80,7 @@ result := runner run.
 
 ---
 
-## 📊 Analyzing Results: The `PBTResult` API
+## Analyzing Results
 
 The `PBTResult` object contains the history of the search and tools to identify outliers.
 
@@ -99,7 +99,7 @@ The `PBTResult` object contains the history of the search and tools to identify 
 
 ---
 
-## 🧬 Advanced Generation: Tree-Grammar Mutations
+## Advanced Generation: Tree-Grammar Mutations
 
 For complex inputs like JSON or Regex, PBT uses structural mutations. **`PBTTreeGrammarMutator`** parses inputs into ASTs and uses **Monte Carlo Tree Search (MCTS)** to intelligently explore the grammar space.
 
@@ -112,7 +112,7 @@ generator := PBTCorpusWithMutationsGenerator new
 
 ---
 
-## 🧪 Regression Testing: Automatic Test Generation
+## Automatic Test Generation
 
 One of the most powerful workflows in PBT is the ability to turn discovered bugs into permanent unit tests automatically.
 
@@ -138,7 +138,7 @@ test_12345678 [
 
 ---
 
-## 🧬 Mutator Configurations
+## Mutator Configurations
 
 PBT supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `PBTCorpusWithMutationsGenerator`.
 
@@ -185,12 +185,13 @@ generator := PBTCorpusWithMutationsGenerator new
 
 ---
 
-## 📘 Documentation & Wiki
+## Documentation
 
 - [Getting Started](https://github.com/FedeLoch/PBT/wiki/Getting-Started)
 - [How PBT Works](https://github.com/FedeLoch/PBT/wiki/How-PBT-Works)
 - [Generators](https://github.com/FedeLoch/PBT/wiki/Generators)
-- [Examples](https://github.com/FedeLoch/PBT/wiki/Examples)
+- [API Reference](https://github.com/FedeLoch/PBT/wiki/API-Reference)
+- [Examples](Examples.md)
 
 - [Defining Custom Grammars](https://github.com/FedeLoch/PBT/wiki/Grammars)
 - [Performance Analysis with Charts](https://github.com/FedeLoch/PBT/wiki/Charts)
