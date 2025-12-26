@@ -190,9 +190,7 @@ generator := PBTCorpusWithMutationsGenerator new
 - [Getting Started](https://github.com/FedeLoch/PBT/wiki/Getting-Started)
 - [How PBT Works](https://github.com/FedeLoch/PBT/wiki/How-PBT-Works)
 - [Generators](https://github.com/FedeLoch/PBT/wiki/Generators)
-- [API Reference](https://github.com/FedeLoch/PBT/wiki/API-Reference)
-- [Examples](Examples.md)
-
+- [Examples](https://github.com/FedeLoch/PBT/wiki/Examples)
 - [Defining Custom Grammars](https://github.com/FedeLoch/PBT/wiki/Grammars)
 - [Performance Analysis with Charts](https://github.com/FedeLoch/PBT/wiki/Charts)
 - [Low-Cost instrumentation API](https://github.com/FedeLoch/PBT/wiki/Low-Cost-API)
