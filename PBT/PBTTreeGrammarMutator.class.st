@@ -36,8 +36,9 @@ PBTTreeGrammarMutator >> feed: feedback [
 		ast ifNil: [ ^ nil ].
 		
 		"We feed the grammar by doing backPropagation with the grammar"
-		improvement := (feedback isPositive) ifTrue: [ (feedback improvement) * 100 ] ifFalse: [ -1 ].
-		ast backPropagateRecursive: improvement level: 0.
+		improvement := (feedback isPositive) ifTrue: [ (feedback improvement) * 100 ] ifFalse: [ 0 ].
+		"ast backPropagateRecursive: improvement level: 0."
+		ast updateWeightToChildren: improvement.
 	]
 ]
 
@@ -64,10 +65,12 @@ PBTTreeGrammarMutator >> initialize [
 
 	super initialize.
 	maxInputSize := SmallInteger maxVal.
-	generator := GrammarMCTSGenerator new
+	generator := PBTGncGrammarGenerator newUnbounded maxHeight: SmallInteger maxVal; grammar: JSONGrammar new
+	
+"	GrammarMCTSGenerator new
 		             maxHeight: SmallInteger maxVal;
 		             totalGenerations: 1;
-		             explorationConstant: 1.41
+		             explorationConstant: 1.41"
 ]
 
 { #category : 'testing' }
@@ -134,7 +137,7 @@ PBTTreeGrammarMutator >> subNodeFrom: grammarNode parentSize: parentSize level: 
 	| maxSize |
 
 	maxSize := maxInputSize - parentSize.
-	generator maxSize: maxSize + 1; totalGenerations: generator totalGenerations + 1.
+	generator maxSize: maxSize + 1"; totalGenerations: generator totalGenerations + 1".
 
 	^ grammarNode generateMCTSAst: generator level: level.
 ]
