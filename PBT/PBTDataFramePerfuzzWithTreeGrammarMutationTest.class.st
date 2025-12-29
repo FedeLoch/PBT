@@ -23,7 +23,7 @@ PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 PBTDataFramePerfuzzWithTreeGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: DataFrame class >> #readFromCsv: from: schema for: 5 minutes.
+	runner := PBTRunner test: DataFrame class >> #readFromCsv: from: schema for: 2 minutes.
 
 ]
 
