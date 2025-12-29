@@ -85,7 +85,7 @@ PBTTreeGrammarMutator >> maxInputSize: anInteger [
 { #category : 'accessing' }
 PBTTreeGrammarMutator >> minimumNodeRewarded: root [
 
-	| worst worstReward | 
+	| worst worstReward worstNonTerminal | 
 	worstReward := SmallInteger maxVal.
 	worst := OrderedCollection new.
 	
@@ -95,8 +95,10 @@ PBTTreeGrammarMutator >> minimumNodeRewarded: root [
 		(reward = worstReward) ifTrue: [ worst add: node ]
 	].
 
-	"We return a random node from the collection of worst ones"
-	^ worst atRandom.
+	"We return a random non terminal node from the collection of worst ones"
+	worstNonTerminal := worst select: [ :elem | elem isLeaf not ].
+	
+	^ (worstNonTerminal ifEmpty: [ worst ] ifNotEmpty: [ worstNonTerminal ]) atRandom
 ]
 
 { #category : 'accessing' }
