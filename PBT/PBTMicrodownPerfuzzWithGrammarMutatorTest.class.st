@@ -13,7 +13,7 @@ Class {
 PBTMicrodownPerfuzzWithGrammarMutatorTest >> markdownGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: self seed);
+		  seeds: { self seed };
 		  mutationsPerIteration: 100;
 		  mutators: {
 				(PBTGrammarMutator from: ExtendedMarkdownGrammar new)

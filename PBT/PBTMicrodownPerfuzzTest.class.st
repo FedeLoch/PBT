@@ -13,7 +13,7 @@ Class {
 PBTMicrodownPerfuzzTest >> markdownGenerator [
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: self seed);
+		  seeds: { self seed };
 		  "mutationsPerIteration: 200;"
 		  mutators: {
 				  PBTAddByteMutator new.

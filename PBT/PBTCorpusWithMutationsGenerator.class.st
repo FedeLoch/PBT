@@ -7,7 +7,8 @@ Class {
 		'heuristic',
 		'feedbacks',
 		'seedGenerator',
-		'mutationsPerIteration'
+		'mutationsPerIteration',
+		'seeds'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -34,7 +35,20 @@ PBTCorpusWithMutationsGenerator >> feed: feedback [
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> gen: constraint [
 
+	"First, we consume all the seeds"
+	seeds ifNotEmpty: [ ^ self popSeed ].
+	
+	"Case where there is no seeds and the corpus is empty and a seed generator was provided"
+	corpus isEmpty ifTrue: [ ^ self genSeed: constraint ].
+
+	"Once the seeds have been consumed, we proceed to pick and mutate one element of the corpus"
 	^ self mutate: (self pickOne: constraint)
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> genSeed: constraint [
+
+	^ seedGenerator gen: constraint
 ]
 
 { #category : 'as yet unclassified' }
@@ -50,6 +64,7 @@ PBTCorpusWithMutationsGenerator >> initialize [
 	heuristic := PBTRandomSelectorHeuristic new.
 	corpus := OrderedCollection new.
 	feedbacks := OrderedCollection new.
+	seeds := OrderedCollection new.
 ]
 
 { #category : 'as yet unclassified' }
@@ -90,20 +105,28 @@ PBTCorpusWithMutationsGenerator >> mutators: someMutators [
 
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> pickOne: constraint [
-
-	corpus ifEmpty: [ ^ self seed: constraint ].
 	
 	^ heuristic pickOne: corpus feedbacks: feedbacks
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> seed: constraint [
-
-	^ seedGenerator gen: constraint
+PBTCorpusWithMutationsGenerator >> popSeed [
+	| top |
+	
+	top := seeds first.
+	seeds := seeds allButFirst.
+	
+	^ top
 ]
 
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> seedGenerator: aGenerator [
 
 	seedGenerator := aGenerator 
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> seeds: someSeeds [
+	
+	seeds := someSeeds 
 ]

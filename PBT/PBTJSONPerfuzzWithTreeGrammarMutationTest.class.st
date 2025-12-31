@@ -12,11 +12,11 @@ Class {
 { #category : 'running' }
 PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 
-	| seed |
-	seed := '{"n":true,"n":[],"x":6}'.
+	| seeds |
+	seeds := { '[]' . '{"n":true,"n":[],"x":6}' }.
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: '[]');
+		  seeds: seeds;
 		  mutationsPerIteration: 3;
 		  mutators: { (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100 };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new

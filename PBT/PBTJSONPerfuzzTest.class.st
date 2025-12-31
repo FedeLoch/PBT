@@ -19,7 +19,7 @@ PBTJSONPerfuzzTest >> jsonGenerator [
 			           with: (randomGenerator gen: nil) ].
 
 	^ PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: '{}');
+		  seeds: { '{}' };
 		  mutationsPerIteration: 10;
 		  mutators: { mutator };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new

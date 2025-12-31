@@ -15,7 +15,7 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 	^ PBTObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (PBTCorpusWithMutationsGenerator new
-			   seedGenerator: (PBTConstantGenerator new value: self seed);
+			   seeds: { self seed };
 			   mutationsPerIteration: 3;
 			   mutators: { (PBTTreeGrammarMutator from: GncRegexGrammar new) maxInputSize: 41 };
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
