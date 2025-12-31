@@ -7,25 +7,14 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTUnweightedMinimizer >> minimize: feedbacks [
+PBTUnweightedMinimizer >> minset: fbsWithSatisfiedKeys from: notZeroKeys [
 
-	| globalRecords universe satisfiedKeys minset remainingKeys fbsWithSatisfiedKeys |
-	
-	feedbacks ifEmpty: [ ^ #() ].
-	
-	globalRecords := self calculateGlobalRecords: feedbacks.
-	universe := globalRecords keys select: [ :k | (globalRecords at: k) > 0 ].
-	universe ifEmpty: [ ^ feedbacks ]. "Nothing to minimize if no records"
-
-	"Map each feedback to the set of keys it 'conquered' (matches global max)"
-	fbsWithSatisfiedKeys := feedbacks collect: [ :fb | 
-		fb -> (universe select: [ :k | (fb values at: k ifAbsent: [ 0 ]) = (globalRecords at: k) ]) ].
+	| minset remainingKeys |
 
 	minset := OrderedCollection new.
-	remainingKeys := universe asSet.
+	remainingKeys := notZeroKeys asSet.
 
-	[ remainingKeys isNotEmpty ] whileTrue: [ 
-		| bestMatch |
+	[ remainingKeys isNotEmpty ] whileTrue: [ | bestMatch |
 		"Find the feedback that covers the most remaining keys"
 		bestMatch := fbsWithSatisfiedKeys 
 			detectMax: [ :assoc | (assoc value intersection: remainingKeys) size ].

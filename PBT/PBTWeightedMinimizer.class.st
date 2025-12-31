@@ -24,29 +24,18 @@ PBTWeightedMinimizer >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-PBTWeightedMinimizer >> minimize: feedbacks [
+PBTWeightedMinimizer >> minset: fbsWithSatisfiedKeys from: notZeroKeys [
 
-	| globalRecords universe remainingKeys minset fbsWithSatisfiedKeys |
-	
-	feedbacks ifEmpty: [ ^ #() ].
-	
-	globalRecords := self calculateGlobalRecords: feedbacks.
-	universe := globalRecords keys select: [ :k | (globalRecords at: k) > 0 ].
-	universe ifEmpty: [ ^ feedbacks ].
-
-	fbsWithSatisfiedKeys := feedbacks collect: [ :fb | 
-		fb -> (universe select: [ :k | (fb values at: k ifAbsent: [ 0 ]) = (globalRecords at: k) ]) ].
+	| remainingKeys minset |
 
 	minset := OrderedCollection new.
-	remainingKeys := universe asSet.
+	remainingKeys := notZeroKeys asSet.
 
-	[ remainingKeys isNotEmpty ] whileTrue: [ 
-		| bestMatch bestRatio |
+	[ remainingKeys isNotEmpty ] whileTrue: [ | bestMatch bestRatio |
 		bestRatio := -1.
 		bestMatch := nil.
 		
-		fbsWithSatisfiedKeys do: [ :assoc | 
-			| uncoveredCount cost ratio |
+		fbsWithSatisfiedKeys do: [ :assoc | | uncoveredCount cost ratio |
 			uncoveredCount := (assoc value intersection: remainingKeys) size.
 			uncoveredCount > 0 ifTrue: [ 
 				cost := costBlock value: assoc key.

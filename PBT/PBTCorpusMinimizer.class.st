@@ -7,20 +7,43 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTCorpusMinimizer >> calculateGlobalRecords: feedbacks [
+PBTCorpusMinimizer >> globalMax: feedbacks [
 
-	| globalMax |
-	globalMax := Dictionary new.
-	feedbacks do: [ :fb | 
-		fb values keysAndValuesDo: [ :key :value | 
-			| currentMax |
+	"This should be the same as the current max in the feedback evaluator"
+	^ feedbacks inject: Dictionary new into: [ :globalMax : feedback |
+		feedback values keysAndValuesDo: [ :key :category | | currentMax |
 			currentMax := globalMax at: key ifAbsent: [ 0 ].
-			value > currentMax ifTrue: [ globalMax at: key put: value ] ] ].
-	^ globalMax
+			category > currentMax ifTrue: [ globalMax at: key put: category ] ].
+		globalMax
+	]
+
 ]
 
 { #category : 'as yet unclassified' }
 PBTCorpusMinimizer >> minimize: feedbacks [
 
+	| globalMax universe fbsWithSatisfiedKeys |
+
+	feedbacks ifEmpty: [ ^ #() ].
+	
+	globalMax := self globalMax: feedbacks.
+	universe := globalMax keys select: [ :k | (globalMax at: k) > 0 ].
+	universe ifEmpty: [ ^ feedbacks ].
+
+	fbsWithSatisfiedKeys := self satisfiedKeys: feedbacks globalMax: globalMax.
+	
+	^ self minset: fbsWithSatisfiedKeys from: universe
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusMinimizer >> minset: fbsWithSatisfiedKeys from: notZeroKeys [
+
 	self subclassResponsibility 
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusMinimizer >> satisfiedKeys: feedbacks globalMax: globalMax [
+	
+	^ feedbacks collect: [ :feedback | 
+		feedback -> (globalMax select: [ :k | (feedback values at: k ifAbsent: [ 0 ]) = (globalMax at: k) ])         ].
 ]
