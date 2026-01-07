@@ -45,5 +45,5 @@ PBTCorpusMinimizer >> minset: fbsWithSatisfiedKeys from: notZeroKeys [
 PBTCorpusMinimizer >> satisfiedKeys: feedbacks globalMax: globalMax [
 	
 	^ feedbacks collect: [ :feedback | 
-		feedback -> (globalMax select: [ :k | (feedback values at: k ifAbsent: [ 0 ]) = (globalMax at: k) ])         ].
+		feedback -> (globalMax keys select: [ :k | (feedback values at: k ifAbsent: [ 0 ]) = (globalMax at: k) ]) ]
 ]
