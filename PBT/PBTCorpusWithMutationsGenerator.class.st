@@ -22,6 +22,12 @@ PBTCorpusWithMutationsGenerator >> addToCorpus: feedback [
 	feedbacks add: feedback
 ]
 
+{ #category : 'accessing' }
+PBTCorpusWithMutationsGenerator >> corpus: cases [ 
+
+	corpus := cases
+]
+
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> feed: feedback [
 
@@ -30,6 +36,12 @@ PBTCorpusWithMutationsGenerator >> feed: feedback [
 	((feedback notNil) and: [ feedback isPositive ]) ifTrue: [
 		self addToCorpus: feedback
 	].
+]
+
+{ #category : 'accessing' }
+PBTCorpusWithMutationsGenerator >> feedbacks: someFeedbacks [ 
+
+	feedbacks := someFeedbacks
 ]
 
 { #category : 'as yet unclassified' }
