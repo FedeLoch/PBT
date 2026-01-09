@@ -8,7 +8,8 @@ Class {
 		'feedbacks',
 		'seedGenerator',
 		'mutationsPerIteration',
-		'seeds'
+		'seeds',
+		'iteration'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -47,6 +48,8 @@ PBTCorpusWithMutationsGenerator >> feedbacks: someFeedbacks [
 { #category : 'as yet unclassified' }
 PBTCorpusWithMutationsGenerator >> gen: constraint [
 
+	iteration := iteration + 1.
+	
 	"First, we consume all the seeds"
 	seeds ifNotEmpty: [ ^ self popSeed ].
 	
@@ -77,6 +80,15 @@ PBTCorpusWithMutationsGenerator >> initialize [
 	corpus := OrderedCollection new.
 	feedbacks := OrderedCollection new.
 	seeds := OrderedCollection new.
+	iteration := 0
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusWithMutationsGenerator >> minimizeCorpus [
+
+	self feedbacks: (PBTUnweightedMinimizer new minimize: feedbacks).
+	self corpus: (feedbacks collect: #case).
+	
 ]
 
 { #category : 'as yet unclassified' }
