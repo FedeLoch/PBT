@@ -117,10 +117,12 @@ PBTShrinker >> isValidTree: node [
 ]
 
 { #category : 'shrinking' }
-PBTShrinker >> minimize: node [
+PBTShrinker >> minimize: node originalFeedback: originalFeedback [
 	
-	| copy |
-	copy := self parse: node asInput. "TODO: avoid to copy the node"
+	| copy canImprove |
+	copy := self parse: node asInput.
+	
+	"Try the primitive minimize (replace with minimumTree)"
 	(self candidates: copy) do: [ :child |
 		child parent ifNotNil: [ | index |
 			index := child parent children indexOf: child. 
@@ -128,7 +130,85 @@ PBTShrinker >> minimize: node [
 		].
 	].
 
+	"Try divide and conquer on children of the root and recursively"
+	self shrinkChildrenOf: copy original: originalFeedback.
+
 	^ copy
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> shrink: input [
+	
+	| node originalFeedback canImprove |
+	node := self parse: input.
+	node ifNil: [ ^ input ].
+	originalFeedback := self evalInput: input.
+	
+	canImprove := true.
+	[ canImprove ] whileTrue: [ | minimized minimizedInput minimizedFeedback |
+		minimized := self minimize: node originalFeedback: originalFeedback.
+		minimizedInput := minimized asInput.
+		(minimizedInput = node asInput) ifTrue: [ ^ node asInput ].
+		
+		minimizedFeedback := self evalInput: minimizedInput.
+		canImprove := (self isValidTree: minimized) and: [ self isStillValuable: minimizedFeedback original: originalFeedback ].
+	
+		canImprove ifTrue: [ node := minimized ]
+	].
+
+	^ node asInput
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> shrinkChildren: children range: range of: node original: originalFeedback [
+	
+	| start end mid |
+	start := range first.
+	end := range last.
+	(start > end) ifTrue: [ ^ self ].
+
+	"Try removing this chunk"
+	(self tryRemovingChildrenFrom: start to: end in: node original: originalFeedback)
+		ifTrue: [ ^ self ]. "Success! This chunk is gone, no need to recurse inside it"
+
+	"If couldn't remove the whole chunk and there's more than one element, split"
+	(start < end) ifTrue: [
+		mid := start + (end - start // 2).
+		self shrinkChildren: node children range: (start to: mid) of: node original: originalFeedback.
+		self shrinkChildren: node children range: (mid + 1 to: end) of: node original: originalFeedback.
+	].
+
+	"Finally, recurse into children themselves if they weren't removed"
+	(start to: (end min: node children size)) do: [ :i |
+		self shrinkChildrenOf: (node children at: i) original: originalFeedback
+	].
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> shrinkChildrenOf: node original: originalFeedback [
+	
+	node isLeaf ifTrue: [ ^ self ].
+	
+	self shrinkChildren: node children range: (1 to: node children size) of: node original: originalFeedback.
+]
+
+{ #category : 'shrinking' }
+PBTShrinker >> tryRemovingChildrenFrom: start to: end in: node original: originalFeedback [
+	
+	| originalChildren newChildren result |
+	originalChildren := node children copy.
+	newChildren := OrderedCollection new.
+	(1 to: start - 1) do: [ :i | newChildren add: (originalChildren at: i) ].
+	(end + 1 to: originalChildren size) do: [ :i | newChildren add: (originalChildren at: i) ].
+	
+	node children: newChildren.
+	
+	"Validate"
+	result := (self isValidTree: node root) and: [ self isStillValuable: (self evalInput: node root asInput) original: originalFeedback ].
+	
+	result ifFalse: [ node children: originalChildren ].
+	
+	^ result
 ]
 
 { #category : 'testing' }
@@ -147,26 +227,6 @@ PBTShrinker >> programBlock [
 PBTShrinker >> programBlock: aProgramBlock [
 
 	programBlock := aProgramBlock 
-]
-
-{ #category : 'shrinking' }
-PBTShrinker >> shrink: input [
-	
-	| node originalFeedback canImprove |
-	node := self parse: input.
-	node ifNil: [ ^ input ].
-	originalFeedback := self evalInput: input.
-	
-	canImprove := true.
-	[ canImprove ] whileTrue: [ | minimized |
-		minimized := self minimize: node.
-		(minimized asInput = node asInput) ifTrue: [ ^ node asInput ].
-		canImprove := (self isValidTree: minimized) and: [ self isStillValuable: (self evalInput: input) original: originalFeedback ].
-	
-		canImprove ifTrue: [ node := minimized ]
-	].
-
-	^ node asInput
 ]
 
 { #category : 'testing' }

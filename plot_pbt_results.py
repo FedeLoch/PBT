@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def main():
-    directory_path = '/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/PBTTreeGrammarMutator RESULTS'
+    directory_path = '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-grammar-derivations'
     csv_files = glob.glob(os.path.join(directory_path, "*.csv"))
 
     if not csv_files:
