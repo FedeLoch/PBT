@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def main():
-    directory_path = '/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/PBTTreeGrammarMutator RESULTS'
+    directory_path = '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-grammar-derivations'
     csv_files = glob.glob(os.path.join(directory_path, "*.csv"))
 
     if not csv_files:
@@ -31,7 +31,7 @@ def main():
             cum_max_discovery = np.maximum.accumulate(exec_times)
             
             # Graficar corrida individual con transparencia
-            plt.step(range(len(cum_max_discovery)), cum_max_discovery, where='post', color=color, alpha=0.1, linewidth=1)
+            # plt.step(range(len(cum_max_discovery)), cum_max_discovery, where='post', color=color, alpha=0.5, linewidth=1)
             
             all_runs_y.append(cum_max_discovery)
             max_len = max(max_len, len(cum_max_discovery))
@@ -39,7 +39,6 @@ def main():
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
 
-    # Agregación para obtener la media y el "mapa de calor" de la varianza
     if all_runs_y:
         # Padding con el último valor (el mejor encontrado) para promediar
         padded_runs = np.full((len(all_runs_y), max_len), np.nan)
@@ -57,19 +56,19 @@ def main():
         n_bands = 15
         base_color = 'royalblue'
         for i in range(1, n_bands + 1):
-            sigma_level = (i / n_bands) * 2.0 # Mostramos hasta 2 sigmas
-            alpha = (1.0 / n_bands) * 0.4
+            sigma_level = (i / n_bands) * 1.0
+            alpha = (1.0 / n_bands) * 1
             plt.fill_between(x_axis, 
                              np.maximum(1, mean_y - std_y * sigma_level), 
                              mean_y + std_y * sigma_level, 
                              step='post', color=base_color, alpha=alpha)
         
         # Plotear Media en el centro
-        plt.step(x_axis, mean_y, where='post', color='darkblue', linewidth=2, label='Media de Mejor Caso', zorder=10)
+        plt.step(x_axis, mean_y, where='post', color='darkblue', linewidth=2, label='Average of better case', zorder=10)
 
-    plt.title('Mapa de Calor de Descubrimiento de Fallos (Mejor Caso)')
-    plt.xlabel('Número de Iteración (Caso)')
-    plt.ylabel('Microsegundos (Mejor Discovery Encontrado)')
+    plt.title('Heat map (Best case as far)')
+    plt.xlabel('Iteration (Case)')
+    plt.ylabel('Microseconds (Best found as far)')
     
     plt.yscale('log') # Se mantiene escala logarítmica para ver outliers con claridad
     
