@@ -10,12 +10,19 @@ scripts=(
     "run-regexes-weighted-grammar-base.st"
 )
 
+folders=(
+    "regexes-grammar-derivations"
+    "regexes-grammar-literals"
+    "regexes-stochastic-base"
+    "regexes-weighted-grammar-base"
+)
+
 # Base directory for the execution
 BASE_DIR="$(pwd)"
 
 for i in "${!scripts[@]}"; do
     script="${scripts[$i]}"
-    run_dir="run_$i"
+    run_dir="${folders[$i]}"
     
     echo "Queueing $script in isolated directory $run_dir"
     
