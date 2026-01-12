@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def main():
-    directory_path = '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-grammar-derivations'
+    directory_path = '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-weighted-grammar-base'
     csv_files = glob.glob(os.path.join(directory_path, "*.csv"))
 
     if not csv_files:
@@ -53,10 +53,10 @@ def main():
         
         # Crear un efecto de "mapa de calor" usando múltiples bandas de desviación estándar
         # Dibujamos varias capas con alfas bajos para crear el gradiente
-        n_bands = 15
+        n_bands = 20
         base_color = 'royalblue'
         for i in range(1, n_bands + 1):
-            sigma_level = (i / n_bands) * 1.0
+            sigma_level = (i / n_bands) * 0.5
             alpha = (1.0 / n_bands) * 1
             plt.fill_between(x_axis, 
                              np.maximum(1, mean_y - std_y * sigma_level), 
@@ -70,7 +70,7 @@ def main():
     plt.xlabel('Iteration (Case)')
     plt.ylabel('Microseconds (Best found as far)')
     
-    plt.yscale('log') # Se mantiene escala logarítmica para ver outliers con claridad
+    plt.yscale('log')
     
     plt.legend()
     plt.grid(True, which='both', linestyle='--', alpha=0.5)
