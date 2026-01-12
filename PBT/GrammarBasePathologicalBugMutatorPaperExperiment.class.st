@@ -68,8 +68,7 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationMutators [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationsSchema [
 
-	self subclassResponsibility 
-
+	^ self schemaCorpusWith: self grammarDerivationMutators
 ]
 
 { #category : 'running' }
@@ -81,14 +80,14 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> grammarLiteralMutators [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> grammarLiteralsSchema [
 
-	self subclassResponsibility 
+	^ self schemaCorpusWith: self grammarLiteralMutators
 ]
 
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> initialize [ 
 
 	super initialize.
-	experimentTime := 20 seconds.
+	experimentTime := 2 seconds.
 	times := 10.
 	schemas := {
 		'weighted-grammar-base' -> self weightedGrammarSchema.
@@ -158,6 +157,12 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> schema: config [
 ]
 
 { #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> schemaCorpusWith: mutators [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> seeds [
 
 	self subclassResponsibility 
@@ -174,7 +179,7 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> stochasticMutators [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> stochasticSchema [
 
-	self subclassResponsibility 
+	^ self schemaCorpusWith: self stochasticMutators
 ]
 
 { #category : 'running' }

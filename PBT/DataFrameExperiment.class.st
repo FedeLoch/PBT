@@ -25,13 +25,13 @@ DataFrameExperiment >> newGrammar [
 ]
 
 { #category : 'running' }
-DataFrameExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
+DataFrameExperiment >> schemaCorpusWith: mutators [
 
 	| csvGenerator |
 	
 	csvGenerator := PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: n;
+		  seeds: self seeds deepCopy;
+		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
 		  heuristic: PBTPickBestElementDifferenceHeuristic new.
 	
@@ -64,4 +64,25 @@ DataFrameExperiment >> seeds [
 DataFrameExperiment >> targetMethod [
 
 	^ DataFrame class >> #readFromCsv:
+]
+
+{ #category : 'running' }
+DataFrameExperiment >> weightedGrammarSchema [
+
+	| csvGenerator |
+	
+	csvGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+	
+	^ PBTSchema new
+		  receiverConstraint: (PBTObjectConstraint new generator: (PBTConstantGenerator new value: DataFrame));
+		  argumentConstraints: { (PBTObjectConstraint new
+				   generator: csvGenerator;
+				   wrap: [ :input |
+						   | file |
+						   file := FileLocator temp / input hash asString , '.csv'.
+						   file ensureDelete.
+						   file writeStreamDo: [ :stream | stream nextPutAll: input ].
+						   file asFileReference ];
+				   unwrap: #contents) };
+		  assert: [ :regex :input :result | true ]
 ]

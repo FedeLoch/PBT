@@ -7,18 +7,6 @@ Class {
 }
 
 { #category : 'running' }
-RegexExperiment >> grammarDerivationsSchema [
-
-	^ self schemaCorpusWith: self grammarDerivationMutators
-]
-
-{ #category : 'running' }
-RegexExperiment >> grammarLiteralsSchema [
-
-	^ self schemaCorpusWith: self grammarLiteralMutators
-]
-
-{ #category : 'running' }
 RegexExperiment >> maxInputSize [
 
 	^ 41
@@ -97,12 +85,6 @@ RegexExperiment >> schemaCorpusWith: mutators [
 RegexExperiment >> seeds [
 
 	^ { 'a' . 'ac?ab?ab?b?aa.?aaab?c?a(c)?ac?aaab?a?a' }
-]
-
-{ #category : 'running' }
-RegexExperiment >> stochasticSchema [
-
-	^ self schemaCorpusWith: self stochasticMutators
 ]
 
 { #category : 'running' }

@@ -25,13 +25,13 @@ NeoJSONExperiment >> newGrammar [
 ]
 
 { #category : 'running' }
-NeoJSONExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
+NeoJSONExperiment >> schemaCorpusWith: mutators [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
 	jsonGenerator := PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: n;
+		  seeds: self seeds deepCopy;
+		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
 		  heuristic: PBTPickBestElementDifferenceHeuristic new.
 	
@@ -54,4 +54,19 @@ NeoJSONExperiment >> seeds [
 NeoJSONExperiment >> targetMethod [
 
 	^ NeoJSONReader class >> #fromString:
+]
+
+{ #category : 'running' }
+NeoJSONExperiment >> weightedGrammarSchema [
+
+	| receiverConstraint argumentConstraints jsonGenerator |
+	
+	jsonGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+	receiverConstraint := PBTObjectConstraint new generator: (PBTConstantGenerator new value: NeoJSONReader).
+	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: jsonGenerator }.
+
+	^ PBTSchema new
+		receiverConstraint: receiverConstraint;
+		argumentConstraints: argumentConstraints;
+		assert: [ :regex :input :result | true ].
 ]

@@ -25,13 +25,13 @@ MicrodownExperiment >> newGrammar [
 ]
 
 { #category : 'running' }
-MicrodownExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
+MicrodownExperiment >> schemaCorpusWith: mutators [
 
 	| markdownGenerator |
 	
 	markdownGenerator := PBTCorpusWithMutationsGenerator new
-		  seedGenerator: (PBTConstantGenerator new value: seed);
-		  mutationsPerIteration: n;
+		  seeds: self seeds deepCopy;
+		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
 		  heuristic: PBTPickBestElementDifferenceHeuristic new.
 
@@ -66,4 +66,17 @@ MicrodownExperiment >> seeds [
 MicrodownExperiment >> targetMethod [
 
 	^ Microdown class >> #parse:
+]
+
+{ #category : 'running' }
+MicrodownExperiment >> weightedGrammarSchema [
+
+	| markdownGenerator |
+	
+	markdownGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+
+	^ PBTSchema new
+		  receiverConstraint: (PBTObjectConstraint new generator: (PBTConstantGenerator new value: Microdown));
+		  argumentConstraints: { (PBTObjectConstraint new objectClass: String; generator: markdownGenerator) };
+		  assert: [ :regex :input :result | true ]
 ]
