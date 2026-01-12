@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # run.sh <script.st>
-# Self-contained script that downloads Pharo, runs a script, and cleans up.
 
 if [ -z "$1" ]; then
     echo "Usage: ./run.sh <script.st>"

@@ -17,7 +17,6 @@ folders=(
     "regexes-weighted-grammar-base"
 )
 
-# Base directory for the execution
 BASE_DIR="$(pwd)"
 
 for i in "${!scripts[@]}"; do
@@ -26,7 +25,6 @@ for i in "${!scripts[@]}"; do
     
     echo "Queueing $script in isolated directory $run_dir"
     
-    # Create directory and run in background
     mkdir -p "$run_dir"
     (
         cd "$run_dir"
