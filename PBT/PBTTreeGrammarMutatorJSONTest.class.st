@@ -13,7 +13,7 @@ Class {
 PBTTreeGrammarMutatorJSONTest >> setUp [
 
 	super setUp.
-	mutator := PBTTreeGrammarMutator from: JSONGrammar new.
+	mutator := PBTGrammarDerivationMutator from: JSONGrammar new.
 ]
 
 { #category : 'tests' }

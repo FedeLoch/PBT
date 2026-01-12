@@ -1,10 +1,22 @@
 Class {
 	#name : 'RegexExperiment',
-	#superclass : 'GrammarBasePathologicalBugMutatorExperiment',
+	#superclass : 'GrammarBasePathologicalBugMutatorPaperExperiment',
 	#category : 'PBT-Paper Experimentation',
 	#package : 'PBT',
 	#tag : 'Paper Experimentation'
 }
+
+{ #category : 'running' }
+RegexExperiment >> grammarDerivationsSchema [
+
+	^ self schemaCorpusWith: self grammarDerivationMutators
+]
+
+{ #category : 'running' }
+RegexExperiment >> grammarLiteralsSchema [
+
+	^ self schemaCorpusWith: self grammarLiteralMutators
+]
 
 { #category : 'running' }
 RegexExperiment >> maxInputSize [
@@ -44,15 +56,15 @@ RegexExperiment >> regexByProp: props and: feedback [
 ]
 
 { #category : 'running' }
-RegexExperiment >> schema: seed mutators: mutators mutationsPerIteration: n [
+RegexExperiment >> schemaCorpusWith: mutators [
 
-	| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
-	
+| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
+
 	regexConstraint := PBTObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (PBTCorpusWithMutationsGenerator new
-		seedGenerator: (PBTConstantGenerator new value: seed);
-		mutationsPerIteration: n; mutators: mutators;
+		seeds: self seeds deepCopy;
+		mutationsPerIteration: self mpi; mutators: mutators;
 		heuristic: PBTPickBestElementDifferenceHeuristic new).
 	
 	sharedProperties := InternalConstraintProperties
@@ -88,7 +100,48 @@ RegexExperiment >> seeds [
 ]
 
 { #category : 'running' }
+RegexExperiment >> stochasticSchema [
+
+	^ self schemaCorpusWith: self stochasticMutators
+]
+
+{ #category : 'running' }
 RegexExperiment >> targetMethod [
 
 	^ RxMatcher >> #matches:
+]
+
+{ #category : 'running' }
+RegexExperiment >> weightedGrammarSchema [
+
+| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
+
+	regexConstraint := PBTObjectConstraint new
+		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		generator: (PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize).
+	
+	sharedProperties := InternalConstraintProperties
+		from: { ('grammar' -> regexConstraint) } asDictionary.
+	
+	regexGenerator := PBTGenerator do: [ :props :feedback | | regex |
+		regex := self regexByProp: props and: feedback.
+		props at: 'input' put: regex minimalStringMatching.
+		PBTRegex fromString: regex ].
+	
+	receiverConstraint := PBTObjectConstraint new objectClass: RxMatcher;
+		generator: regexGenerator;
+		props: sharedProperties.
+	
+	argumentConstraints := {
+		(PBTObjectConstraint new objectClass: String;
+			props: sharedProperties;
+			generator: (PBTGenerator do: [ :props :feedback | props at: 'input' ]))
+	}.
+	
+	assert := [ :regex :input :result | result ].
+	
+	^ PBTSchema new
+		receiverConstraint: receiverConstraint;
+		argumentConstraints: argumentConstraints;
+		assert: assert
 ]

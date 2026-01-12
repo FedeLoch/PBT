@@ -17,7 +17,7 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 		generator: (PBTCorpusWithMutationsGenerator new
 			   seeds: { self seed };
 			   mutationsPerIteration: 3;
-			   mutators: { (PBTTreeGrammarMutator from: GncRegexGrammar new) maxInputSize: 41 };
+			   mutators: { (PBTGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 41 };
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]
 

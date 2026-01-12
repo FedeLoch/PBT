@@ -1,6 +1,6 @@
 Class {
 	#name : 'NeoJSONExperiment',
-	#superclass : 'GrammarBasePathologicalBugMutatorExperiment',
+	#superclass : 'GrammarBasePathologicalBugMutatorPaperExperiment',
 	#category : 'PBT-Paper Experimentation',
 	#package : 'PBT',
 	#tag : 'Paper Experimentation'

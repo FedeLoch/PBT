@@ -39,14 +39,12 @@ PBTWeightedMinimizer >> minset: fbsWithSatisfiedKeys from: notZeroKeys [
 			uncoveredCount := (assoc value intersection: remainingKeys) size.
 			uncoveredCount > 0 ifTrue: [ 
 				cost := costBlock value: assoc key.
+				
 				"Avoid division by zero"
 				cost = 0 ifTrue: [ cost := 0.000001 ].
 				ratio := uncoveredCount / cost.
-				ratio > bestRatio ifTrue: [ 
-					bestRatio := ratio.
-					bestMatch := assoc ] ] ].
+				ratio > bestRatio ifTrue: [  bestRatio := ratio. bestMatch := assoc ] ] ].
 		
-		"Safety check"
 		bestMatch ifNil: [ ^ minset ].
 		
 		minset add: bestMatch key.

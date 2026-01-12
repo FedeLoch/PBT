@@ -16,7 +16,7 @@ PBTMicrodownPerfuzzWithGrammarMutatorTest >> markdownGenerator [
 		  seeds: { self seed };
 		  mutationsPerIteration: 100;
 		  mutators: {
-				(PBTGrammarMutator from: ExtendedMarkdownGrammar new)
+				(PBTGrammarLiteralsMutator from: ExtendedMarkdownGrammar new)
 			};
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]

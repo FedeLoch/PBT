@@ -1,0 +1,190 @@
+Class {
+	#name : 'GrammarBasePathologicalBugMutatorPaperExperiment',
+	#superclass : 'Object',
+	#instVars : [
+		'experimentTime',
+		'times',
+		'schemas'
+	],
+	#category : 'PBT-Paper Experimentation',
+	#package : 'PBT',
+	#tag : 'Paper Experimentation'
+}
+
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugMutatorPaperExperiment class >> getResults [
+
+	"TODO"
+
+	^ self new allPathNames collect: [ :file | STON fromStream: file asFileReference readStream ]
+]
+
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugMutatorPaperExperiment class >> getResults: sourcePath [
+
+	"TODO"
+
+	^ self new allPathNames collect: [ :file | STON fromStream: (sourcePath, file) asFileReference readStream ]
+]
+
+{ #category : 'as yet unclassified' }
+GrammarBasePathologicalBugMutatorPaperExperiment class >> getResults: sourcePath at: position [
+
+	"TODO"
+
+	^ STON fromStream: (sourcePath, (self new allPathNames at: position)) asFileReference readStream
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment class >> run: confName [
+
+	^ self new runConf: confName
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> csvFileName: config iteration: iteration [
+
+	^ self name, '-', config, '-', iteration asString, '.csv'
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> experimentTime [
+
+	^ experimentTime
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> experimentTime: aDuration [
+
+	experimentTime := aDuration 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationMutators [
+
+	^ { (PBTGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxInputSize }
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationsSchema [
+
+	self subclassResponsibility 
+
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> grammarLiteralMutators [
+
+	^ { (PBTGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxInputSize }
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> grammarLiteralsSchema [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> initialize [ 
+
+	super initialize.
+	experimentTime := 20 seconds.
+	times := 10.
+	schemas := {
+		'weighted-grammar-base' -> self weightedGrammarSchema.
+		'stochastic-base' -> self stochasticSchema.
+		'grammar-literals' -> self grammarLiteralsSchema.
+		'grammar-derivations' -> self grammarDerivationsSchema
+	} asDictionary.
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> maxInputSize [
+
+	^ SmallInteger maxVal 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> mpi [
+
+	^ 3
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> name [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> newGrammar [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> run: config iteration: i [
+
+	| schema runner result fileName |
+	
+	fileName := self csvFileName: config iteration: i.
+
+	schema := self schema: config.
+	
+	runner := PBTRunner test: self targetMethod from: schema for: self experimentTime.
+	
+	"Guided by methods called"
+	runner guidedByMethodsCalls.
+	
+	result := runner run.
+	
+	"We export the result as csv"
+	result exportAsCSV: fileName.
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> runConf: confName [
+
+	(1 to: times) do: [ :i |
+		Smalltalk garbageCollect. "We perform a garbageCollect before each execution"
+		self run: confName iteration: i
+	]
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> schema: config [
+
+	^ schemas at: config
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> seeds [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> stochasticMutators [
+
+	^ { (PBTAddByteMutator new maxInputSize: self maxInputSize).
+		  PBTByteFlipMutator new.
+		  PBTDelByteMutator new }
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> stochasticSchema [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> targetMethod [
+
+	self subclassResponsibility 
+]
+
+{ #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> weightedGrammarSchema [
+
+	self subclassResponsibility 
+]

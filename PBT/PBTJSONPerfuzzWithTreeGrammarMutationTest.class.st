@@ -18,7 +18,7 @@ PBTJSONPerfuzzWithTreeGrammarMutationTest >> jsonGenerator [
 	^ PBTCorpusWithMutationsGenerator new
 		  seeds: seeds;
 		  mutationsPerIteration: 3;
-		  mutators: { (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100 };
+		  mutators: { (PBTGrammarDerivationMutator from: JSONGrammar new) maxInputSize: 100 };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 

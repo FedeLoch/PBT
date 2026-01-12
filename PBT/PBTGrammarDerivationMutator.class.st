@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTTreeGrammarMutator',
+	#name : 'PBTGrammarDerivationMutator',
 	#superclass : 'PBTStringMutator',
 	#instVars : [
 		'maxInputSize',
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTTreeGrammarMutator class >> from: aGrammar [
+PBTGrammarDerivationMutator class >> from: aGrammar [
 
 	^ self new gammar: aGrammar
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> applyMutation: string [
+PBTGrammarDerivationMutator >> applyMutation: string [
 
 	| tree derivation |
 	
@@ -29,7 +29,7 @@ PBTTreeGrammarMutator >> applyMutation: string [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> feed: feedback [
+PBTGrammarDerivationMutator >> feed: feedback [
 
 	feedback ifNotNil: [ | ast improvement |
 		[ ast := self tree: (feedback case) ] on: Error do: [ ^ nil ].
@@ -42,25 +42,25 @@ PBTTreeGrammarMutator >> feed: feedback [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> freshAST [
+PBTGrammarDerivationMutator >> freshAST [
 
 	^ self subNodeFrom: grammar start parentSize: 0 level: 0
 ]
 
 { #category : 'as yet unclassified' }
-PBTTreeGrammarMutator >> gammar: aGrammar [
+PBTGrammarDerivationMutator >> gammar: aGrammar [
 	
 	grammar := aGrammar
 ]
 
 { #category : 'as yet unclassified' }
-PBTTreeGrammarMutator >> grammar [
+PBTGrammarDerivationMutator >> grammar [
 
 	^ grammar 
 ]
 
 { #category : 'initialization' }
-PBTTreeGrammarMutator >> initialize [
+PBTGrammarDerivationMutator >> initialize [
 
 	super initialize.
 	maxInputSize := SmallInteger maxVal.
@@ -71,19 +71,19 @@ PBTTreeGrammarMutator >> initialize [
 ]
 
 { #category : 'testing' }
-PBTTreeGrammarMutator >> isReplace: string [
+PBTGrammarDerivationMutator >> isReplace: string [
 
 	^ string size >= maxInputSize
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> maxInputSize: anInteger [
+PBTGrammarDerivationMutator >> maxInputSize: anInteger [
 
 	maxInputSize := anInteger.
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> minimumNodeRewarded: root [
+PBTGrammarDerivationMutator >> minimumNodeRewarded: root [
 
 	| worst worstReward worstNonTerminal | 
 	worstReward := SmallInteger maxVal.
@@ -102,7 +102,7 @@ PBTTreeGrammarMutator >> minimumNodeRewarded: root [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> mutateAST: ast [
+PBTGrammarDerivationMutator >> mutateAST: ast [
 	
 	| aNode node parentSize newChildren |
 
@@ -119,7 +119,7 @@ PBTTreeGrammarMutator >> mutateAST: ast [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> pickNode: ast [
+PBTGrammarDerivationMutator >> pickNode: ast [
 
 	"10 % of selecting a random node"
 	((1 to: 100) atRandom) <= 10 ifTrue: [ ^ ast at: ((2 to: ast treeSize) atRandom) ].
@@ -129,7 +129,7 @@ PBTTreeGrammarMutator >> pickNode: ast [
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> subNodeFrom: grammarNode parentSize: parentSize level: level [
+PBTGrammarDerivationMutator >> subNodeFrom: grammarNode parentSize: parentSize level: level [
 
 	| maxSize |
 
@@ -140,7 +140,7 @@ PBTTreeGrammarMutator >> subNodeFrom: grammarNode parentSize: parentSize level: 
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> subNodesFrom: grammarRule parentSize: parentSize level: level [
+PBTGrammarDerivationMutator >> subNodesFrom: grammarRule parentSize: parentSize level: level [
 
 	| currentSize |
 	
@@ -153,7 +153,7 @@ PBTTreeGrammarMutator >> subNodesFrom: grammarRule parentSize: parentSize level:
 ]
 
 { #category : 'accessing' }
-PBTTreeGrammarMutator >> tree: word [
+PBTGrammarDerivationMutator >> tree: word [
 
 	^ PBTGrammarParser parse: word from: grammar
 ]

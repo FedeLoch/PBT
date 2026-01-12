@@ -11,7 +11,7 @@ PBTMicrodownGenTest >> argumentGenerators [
 
 	^ {
 		self corpusGenFrom: 'a' mpi: 3 mutators: {
-			(PBTTreeGrammarMutator from: ExtendedMarkdownGrammar new) maxInputSize: 300
+			(PBTGrammarDerivationMutator from: ExtendedMarkdownGrammar new) maxInputSize: 300
 		}
 	}
 ]

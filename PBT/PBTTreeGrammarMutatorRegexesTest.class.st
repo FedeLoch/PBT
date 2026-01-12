@@ -14,7 +14,7 @@ PBTTreeGrammarMutatorRegexesTest >> setUp [
 
 	super setUp.
 	self timeLimit: 5 hours.
-	mutator := (PBTTreeGrammarMutator from: GncRegexGrammar new) maxInputSize: 40.
+	mutator := (PBTGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 40.
 	
 ]
 

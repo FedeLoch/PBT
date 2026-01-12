@@ -15,7 +15,7 @@ PBTDataFramePerfuzzWithGrammarMutationTest >> csvGenerator [
 	^ PBTCorpusWithMutationsGenerator new
 		  seeds: { self seed };
 		  mutationsPerIteration: 10;
-		  mutators: { (PBTGrammarMutator from: CSVGrammar new) };
+		  mutators: { (PBTGrammarLiteralsMutator from: CSVGrammar new) };
 		  heuristic: PBTPickBestElementDifferenceHeuristic new
 ]
 

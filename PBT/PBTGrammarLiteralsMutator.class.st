@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarMutator',
+	#name : 'PBTGrammarLiteralsMutator',
 	#superclass : 'PBTStringMutator',
 	#instVars : [
 		'grammar',
@@ -12,27 +12,27 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGrammarMutator class >> from: aGrammar [
+PBTGrammarLiteralsMutator class >> from: aGrammar [
 
 	^ self new gammar: aGrammar
 ]
 
 { #category : 'accessing' }
-PBTGrammarMutator >> applyMutation: string [
+PBTGrammarLiteralsMutator >> applyMutation: string [
 
 	mutator options: (characterTerminals flatCollect: #values).
 	^ mutator mutate: string
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMutator >> gammar: aGrammar [
+PBTGrammarLiteralsMutator >> gammar: aGrammar [
 	
 	grammar := aGrammar.
 	characterTerminals := grammar terminals.
 ]
 
 { #category : 'initialization' }
-PBTGrammarMutator >> initialize [ 
+PBTGrammarLiteralsMutator >> initialize [ 
 	
 	super initialize.
 	characterTerminals := {}.
@@ -41,13 +41,13 @@ PBTGrammarMutator >> initialize [
 ]
 
 { #category : 'testing' }
-PBTGrammarMutator >> isReplace: string [
+PBTGrammarLiteralsMutator >> isReplace: string [
 
 	^ string size >= maxInputSize
 ]
 
 { #category : 'accessing' }
-PBTGrammarMutator >> maxInputSize: anInteger [
+PBTGrammarLiteralsMutator >> maxInputSize: anInteger [
 
 	maxInputSize := anInteger.
 	mutator maxInputSize: anInteger

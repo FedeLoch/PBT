@@ -61,9 +61,14 @@ PBTResult >> continueFor: time [
 { #category : 'as yet unclassified' }
 PBTResult >> exportAsCSV [
 
-	| writer fileName |
+	self exportAsCSV: (self hash asString, '-results.csv')
+]
+
+{ #category : 'as yet unclassified' }
+PBTResult >> exportAsCSV: fileName [
+
+	| writer |
 	
-	fileName := self hash asString, '-results.csv'.
 	fileName asFileReference writeStreamDo: [ :stream |
 		writer := (NeoCSVWriter on: stream)
 			writeHeader: #( 'time-microseconds' 'improvement' );

@@ -11,7 +11,7 @@ PBTNeoJSONTest >> argumentGenerators [
 
 	^ {
 		self corpusGenFrom: '[]' mpi: 3 mutators: {
-			(PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100
+			(PBTGrammarDerivationMutator from: JSONGrammar new) maxInputSize: 100
 		}
 	}
 ]

@@ -19,7 +19,7 @@ FLSerializerPerformancePBTTest >> argumentGenerators [
 FLSerializerPerformancePBTTest >> associationArrayGenerator [
 
 	^ PBTAssociationParserGenerator from: (self corpusGenFrom: 'a->nil' mpi: 3 mutators: {
-		(PBTTreeGrammarMutator from: AssociationsGrammar new) maxInputSize: 5000"50000"
+		(PBTGrammarDerivationMutator from: AssociationsGrammar new) maxInputSize: 5000"50000"
 	})
 ]
 

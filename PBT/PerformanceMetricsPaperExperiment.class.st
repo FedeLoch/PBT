@@ -62,8 +62,8 @@ PerformanceMetricsPaperExperiment >> mpi [
 PerformanceMetricsPaperExperiment >> mutators [
 
 	^ {
-		(PBTGrammarMutator from: self newGrammar) maxInputSize: self maxSize.
-		(PBTTreeGrammarMutator from: self newGrammar) maxInputSize: self maxSize
+		(PBTGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxSize.
+		(PBTGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxSize
 	}
 ]
 
