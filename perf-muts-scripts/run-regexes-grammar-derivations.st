@@ -1,7 +1,7 @@
 Metacello new
     baseline: 'PBT';
     repository: 'github://FedeLoch/PBT:main';
-	 onConflictUseIncoming;
+	onConflictUseIncoming;
     load.
 
-(Smalltalk at: #DataFrameExperiment) run
+(Smalltalk at: #RegexExperiment) run: 'grammar-derivations'.

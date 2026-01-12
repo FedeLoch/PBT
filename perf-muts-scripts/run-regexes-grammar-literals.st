@@ -1,7 +1,7 @@
 Metacello new
     baseline: 'PBT';
     repository: 'github://FedeLoch/PBT:main';
-	 onConflictUseIncoming;
+	onConflictUseIncoming;
     load.
 
-(Smalltalk at: #MicrodownExperiment) run
+(Smalltalk at: #RegexExperiment) run: 'grammar-literals'.
