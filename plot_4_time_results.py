@@ -56,9 +56,8 @@ def main():
             print(f"Error: Directory not found: {dir_path}")
             sys.exit(1)
     
-    # Paleta profesional: suave, distinguible y agradable a la vista
-    colors = ['#5DADE2', '#F1948A', '#48C9B0', '#BB8FCE']  # Sky Blue, Coral, Teal, Lavender
-    line_colors = ['#3498DB', '#E74C3C', '#16A085', '#8E44AD']  # Versiones más saturadas para líneas
+    colors = ['#5DADE2', '#F1948A', '#48C9B0', '#BB8FCE'] 
+    line_colors = ['#3498DB', '#E74C3C', '#16A085', '#8E44AD']
     
     labels = [os.path.basename(path) for path in directory_paths]
     
