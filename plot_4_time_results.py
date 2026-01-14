@@ -45,10 +45,10 @@ def process_directory(directory_path, color, label):
 
 def main():
     directory_paths = [
-        '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-grammar-literals',
-        '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-grammar-derivations',
-        '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-stochastic-base',
-        '/Users/fede/Documents/Experiments/TEST-PAPER-V2/PBT/perf-muts-scripts/regexes-weighted-grammar-base'
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-grammar-literals',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-grammar-derivations',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-stochastic-base',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-weighted-grammar-base'
     ]
     
     for dir_path in directory_paths:
@@ -95,6 +95,7 @@ def main():
     plt.ylabel('Microseconds (Best found as far)')
     
     plt.yscale('log')
+    plt.xscale('log')
     
     plt.legend(loc='best')
     plt.grid(True, which='both', linestyle='--', alpha=0.5)
