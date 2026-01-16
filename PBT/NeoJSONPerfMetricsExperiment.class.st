@@ -29,7 +29,7 @@ NeoJSONPerfMetricsExperiment >> schema [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
-	jsonGenerator := PBTCorpusWithMutationsGenerator new
+	jsonGenerator := PBTCorpusGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;

@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 PBTDataFramePerfuzzWithTreeGrammarMutationTest >> csvGenerator [
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seeds: { self seed };
 		  mutationsPerIteration: 3;
 		  mutators: { (PBTGrammarDerivationMutator from: CSVGrammar new) maxInputSize: 200 };

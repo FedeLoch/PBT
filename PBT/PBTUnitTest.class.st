@@ -31,7 +31,7 @@ PBTUnitTest >> constantGen: obj [
 { #category : 'running' }
 PBTUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: seed);
 		  mutationsPerIteration: mpi;
 		  mutators: mutators;

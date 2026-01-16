@@ -29,7 +29,7 @@ NeoJSONExperiment >> schemaCorpusWith: mutators [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
-	jsonGenerator := PBTCorpusWithMutationsGenerator new
+	jsonGenerator := PBTCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;

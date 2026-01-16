@@ -15,7 +15,7 @@ PBTJSONPerfuzzWithGrammarMutationTest >> jsonGenerator [
 	| seeds |
 	seeds := { '{"n":true,"n":true,"x":6}' }.
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seeds: seeds;
 		  mutationsPerIteration: 100;
 		  mutators: { (PBTGrammarLiteralsMutator from: JSONGrammar new) };

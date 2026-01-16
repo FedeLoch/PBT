@@ -14,10 +14,13 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 
 	^ PBTObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTCorpusWithMutationsGenerator new
+		generator: (PBTCorpusGenerator new
 			   seeds: { self seed };
 			   mutationsPerIteration: 3;
-			   mutators: { (PBTGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 41 };
+			   mutators: {
+					(PBTGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 41.
+					"(PBTGrammarLiteralsMutator from: GncRegexGrammar new) maxInputSize: 40"
+				};
 			   heuristic: PBTPickBestElementDifferenceHeuristic new)
 ]
 
@@ -26,7 +29,7 @@ PBTRegexPerfuzzWithTreeGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 5 minutes.
+	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 4 hours.
 ]
 
 { #category : 'tests' }

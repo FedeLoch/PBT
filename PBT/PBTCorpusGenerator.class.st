@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTCorpusWithMutationsGenerator',
+	#name : 'PBTCorpusGenerator',
 	#superclass : 'PBTGenerator',
 	#instVars : [
 		'mutators',
@@ -17,20 +17,20 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> addToCorpus: feedback [
+PBTCorpusGenerator >> addToCorpus: feedback [
 
 	corpus add: feedback case.
 	feedbacks add: feedback
 ]
 
 { #category : 'accessing' }
-PBTCorpusWithMutationsGenerator >> corpus: cases [ 
+PBTCorpusGenerator >> corpus: cases [ 
 
 	corpus := cases
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> feed: feedback [
+PBTCorpusGenerator >> feed: feedback [
 
 	mutators do: [ :mutator | mutator feed: feedback ].
 	
@@ -40,13 +40,13 @@ PBTCorpusWithMutationsGenerator >> feed: feedback [
 ]
 
 { #category : 'accessing' }
-PBTCorpusWithMutationsGenerator >> feedbacks: someFeedbacks [ 
+PBTCorpusGenerator >> feedbacks: someFeedbacks [ 
 
 	feedbacks := someFeedbacks
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> gen: constraint [
+PBTCorpusGenerator >> gen: constraint [
 
 	iteration := iteration + 1.
 	
@@ -61,19 +61,19 @@ PBTCorpusWithMutationsGenerator >> gen: constraint [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> genSeed: constraint [
+PBTCorpusGenerator >> genSeed: constraint [
 
 	^ seedGenerator gen: constraint
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> heuristic: aHeuristic [
+PBTCorpusGenerator >> heuristic: aHeuristic [
 
 	heuristic := aHeuristic 
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> initialize [ 
+PBTCorpusGenerator >> initialize [ 
 	
 	super initialize.
 	heuristic := PBTRandomSelectorHeuristic new.
@@ -84,7 +84,7 @@ PBTCorpusWithMutationsGenerator >> initialize [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> minimizeCorpus [
+PBTCorpusGenerator >> minimizeCorpus [
 
 	self feedbacks: (PBTUnweightedMinimizer new minimize: feedbacks).
 	self corpus: (feedbacks collect: #case).
@@ -92,7 +92,7 @@ PBTCorpusWithMutationsGenerator >> minimizeCorpus [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> mutate: seed [
+PBTCorpusGenerator >> mutate: seed [
 
 	| m mutated times |
 	m := (2 to: 12) atRandom. "TODO: The paper recommends powers between 2 and 128"
@@ -104,37 +104,37 @@ PBTCorpusWithMutationsGenerator >> mutate: seed [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> mutateOnce: input [
+PBTCorpusGenerator >> mutateOnce: input [
 
 	^ mutators atRandom mutate: input
 ]
 
 { #category : 'accessing' }
-PBTCorpusWithMutationsGenerator >> mutationsPerIteration [
+PBTCorpusGenerator >> mutationsPerIteration [
 
 	^ mutationsPerIteration
 ]
 
 { #category : 'accessing' }
-PBTCorpusWithMutationsGenerator >> mutationsPerIteration: count [
+PBTCorpusGenerator >> mutationsPerIteration: count [
 
 	mutationsPerIteration := count
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> mutators: someMutators [
+PBTCorpusGenerator >> mutators: someMutators [
 
 	mutators := someMutators 
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> pickOne: constraint [
+PBTCorpusGenerator >> pickOne: constraint [
 	
 	^ heuristic pickOne: corpus feedbacks: feedbacks
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> popSeed [
+PBTCorpusGenerator >> popSeed [
 	| top |
 	
 	top := seeds first.
@@ -144,13 +144,13 @@ PBTCorpusWithMutationsGenerator >> popSeed [
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> seedGenerator: aGenerator [
+PBTCorpusGenerator >> seedGenerator: aGenerator [
 
 	seedGenerator := aGenerator 
 ]
 
 { #category : 'as yet unclassified' }
-PBTCorpusWithMutationsGenerator >> seeds: someSeeds [
+PBTCorpusGenerator >> seeds: someSeeds [
 	
 	seeds := someSeeds 
 ]

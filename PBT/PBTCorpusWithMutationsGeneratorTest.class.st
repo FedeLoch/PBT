@@ -22,7 +22,7 @@ PBTCorpusWithMutationsGeneratorTest >> setUp [
 		PBTMutator mutate: [ :jsonString  | '[', jsonString, ',', (subGenerator gen: nil), ']' ]
 	}.
 	
-	generator := PBTCorpusWithMutationsGenerator new
+	generator := PBTCorpusGenerator new
 		generator: subGenerator;
 		mutators: mutators;
 		heuristic: heuristic.

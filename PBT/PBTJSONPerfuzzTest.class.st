@@ -18,7 +18,7 @@ PBTJSONPerfuzzTest >> jsonGenerator [
 			           mutate: input
 			           with: (randomGenerator gen: nil) ].
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seeds: { '{}' };
 		  mutationsPerIteration: 10;
 		  mutators: { mutator };

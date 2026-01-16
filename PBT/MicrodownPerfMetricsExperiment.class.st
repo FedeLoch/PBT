@@ -29,7 +29,7 @@ MicrodownPerfMetricsExperiment >> schema [
 
 	| markdownGenerator |
 	
-	markdownGenerator := PBTCorpusWithMutationsGenerator new
+	markdownGenerator := PBTCorpusGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;

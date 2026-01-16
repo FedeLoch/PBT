@@ -29,7 +29,7 @@ DataFrameExperiment >> schemaCorpusWith: mutators [
 
 	| csvGenerator |
 	
-	csvGenerator := PBTCorpusWithMutationsGenerator new
+	csvGenerator := PBTCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;

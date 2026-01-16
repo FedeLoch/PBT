@@ -13,7 +13,7 @@ Class {
 PBTRegexPerfuzzWithGrammarMutatorTest >> regexConstraint [
 
 	^ PBTObjectConstraint new generator:
-		  (PBTCorpusWithMutationsGenerator new
+		  (PBTCorpusGenerator new
 			   seedGenerator: (PBTGrammarGenerator new
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;

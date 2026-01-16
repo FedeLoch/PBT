@@ -29,7 +29,7 @@ DataFramePerfMetricsExperiment >> schema [
 
 	| csvGenerator |
 	
-	csvGenerator := PBTCorpusWithMutationsGenerator new
+	csvGenerator := PBTCorpusGenerator new
 		  seedGenerator: (PBTConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;

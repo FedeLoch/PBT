@@ -50,7 +50,7 @@ RegexExperiment >> schemaCorpusWith: mutators [
 
 	regexConstraint := PBTObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTCorpusWithMutationsGenerator new
+		generator: (PBTCorpusGenerator new
 		seeds: self seeds deepCopy;
 		mutationsPerIteration: self mpi; mutators: mutators;
 		heuristic: PBTPickBestElementDifferenceHeuristic new).

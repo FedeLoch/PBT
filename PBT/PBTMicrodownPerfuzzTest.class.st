@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 PBTMicrodownPerfuzzTest >> markdownGenerator [
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seeds: { self seed };
 		  "mutationsPerIteration: 200;"
 		  mutators: {

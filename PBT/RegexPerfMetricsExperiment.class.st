@@ -50,7 +50,7 @@ RegexPerfMetricsExperiment >> schema [
 	
 	regexConstraint := PBTObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTCorpusWithMutationsGenerator new
+		generator: (PBTCorpusGenerator new
 		seedGenerator: (PBTConstantGenerator new value: self seed);
 		mutationsPerIteration: self mpi; mutators: self mutators;
 		heuristic: PBTPickBestElementDifferenceHeuristic new).

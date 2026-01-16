@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 PBTMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 
-	^ PBTCorpusWithMutationsGenerator new
+	^ PBTCorpusGenerator new
 		  seeds: { self seed };
 		  mutationsPerIteration: 100;
 		  mutators: { (PBTGrammarDerivationMutator from: ExtendedMarkdownGrammar new) maxInputSize: 200 };

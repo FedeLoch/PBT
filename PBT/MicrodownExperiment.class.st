@@ -29,7 +29,7 @@ MicrodownExperiment >> schemaCorpusWith: mutators [
 
 	| markdownGenerator |
 	
-	markdownGenerator := PBTCorpusWithMutationsGenerator new
+	markdownGenerator := PBTCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
