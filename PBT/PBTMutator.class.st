@@ -2,7 +2,8 @@ Class {
 	#name : 'PBTMutator',
 	#superclass : 'Object',
 	#instVars : [
-		'mutator'
+		'mutator',
+		'weight'
 	],
 	#category : 'PBT-Mutators',
 	#package : 'PBT',
@@ -15,10 +16,29 @@ PBTMutator class >> mutate: aBlock [
 	^ self new mutator: aBlock.
 ]
 
+{ #category : 'initialization' }
+PBTMutator >> decreaseWeight [
+
+	weight := ( weight -1 ) max: 1
+]
+
 { #category : 'accessing' }
 PBTMutator >> feed: feedback [
 
 	"DO NOTHING"
+]
+
+{ #category : 'initialization' }
+PBTMutator >> increaseWeight [
+
+	weight := weight + 1
+]
+
+{ #category : 'initialization' }
+PBTMutator >> initialize [ 
+	
+	super initialize.
+	weight := 1
 ]
 
 { #category : 'accessing' }
@@ -37,4 +57,10 @@ PBTMutator >> mutator [
 PBTMutator >> mutator: aBlock [
 
 	mutator := aBlock 
+]
+
+{ #category : 'accessing' }
+PBTMutator >> weight [
+
+	^ weight
 ]

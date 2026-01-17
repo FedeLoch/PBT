@@ -9,7 +9,8 @@ Class {
 		'seedGenerator',
 		'mutationsPerIteration',
 		'seeds',
-		'iteration'
+		'iteration',
+		'lastSelectedMutator'
 	],
 	#category : 'PBT-Generators',
 	#package : 'PBT',
@@ -34,9 +35,11 @@ PBTCorpusGenerator >> feed: feedback [
 
 	mutators do: [ :mutator | mutator feed: feedback ].
 	
+	self updateWeight: feedback.
+	
 	((feedback notNil) and: [ feedback isPositive ]) ifTrue: [
 		self addToCorpus: feedback
-	].
+	]
 ]
 
 { #category : 'accessing' }
@@ -95,18 +98,14 @@ PBTCorpusGenerator >> minimizeCorpus [
 PBTCorpusGenerator >> mutate: seed [
 
 	| m mutated times |
-	m := (2 to: 12) atRandom. "TODO: The paper recommends powers between 2 and 128"
+	m := (2 to: 12) atRandom.
 	mutated := seed.
-	times := mutationsPerIteration ifNil: [ (2 ** m) ] ifNotNil: [ mutationsPerIteration ]. 
-	times timesRepeat: [ mutated := self mutateOnce: mutated ].
+	times := mutationsPerIteration ifNil: [ (2 ** m) ] ifNotNil: [ mutationsPerIteration ].
+	lastSelectedMutator := self selectMutator.
+	
+	times timesRepeat: [ mutated := lastSelectedMutator mutate: mutated ].
 	
 	^ mutated
-]
-
-{ #category : 'as yet unclassified' }
-PBTCorpusGenerator >> mutateOnce: input [
-
-	^ mutators atRandom mutate: input
 ]
 
 { #category : 'accessing' }
@@ -129,7 +128,7 @@ PBTCorpusGenerator >> mutators: someMutators [
 
 { #category : 'as yet unclassified' }
 PBTCorpusGenerator >> pickOne: constraint [
-	
+
 	^ heuristic pickOne: corpus feedbacks: feedbacks
 ]
 
@@ -153,4 +152,33 @@ PBTCorpusGenerator >> seedGenerator: aGenerator [
 PBTCorpusGenerator >> seeds: someSeeds [
 	
 	seeds := someSeeds 
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusGenerator >> selectMutator [
+
+	| totalWeights weights indexes random |
+
+	totalWeights := (mutators collect: #weight) sum.
+	weights := OrderedCollection new.
+	
+	indexes := mutators collect: [ :wrapper | | current |
+		current := (weights isEmpty ifTrue: [ 0 ] ifFalse: [ weights last ]).
+		weights add: (current + wrapper weight).
+		mutators indexOf: wrapper
+	].
+	
+	random := (1 to: totalWeights) atRandom.
+	
+	^ mutators at: (indexes detect: [ :index | random <= (weights at: index) ])
+]
+
+{ #category : 'as yet unclassified' }
+PBTCorpusGenerator >> updateWeight: feedback [
+
+	(lastSelectedMutator isNil or: [ feedback isNil ]) ifTrue: [ ^ nil ].
+
+	feedback isPositive
+		ifTrue: [ lastSelectedMutator increaseWeight ]
+		ifFalse: [ lastSelectedMutator decreaseWeight ]
 ]
