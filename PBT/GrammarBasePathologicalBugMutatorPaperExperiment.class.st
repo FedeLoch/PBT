@@ -42,6 +42,12 @@ GrammarBasePathologicalBugMutatorPaperExperiment class >> run: confName [
 ]
 
 { #category : 'running' }
+GrammarBasePathologicalBugMutatorPaperExperiment >> combinedGrammarMutatorsSchema [
+
+	^ self schemaCorpusWith: (self grammarLiteralMutators, self grammarDerivationMutators)
+]
+
+{ #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> csvFileName: config iteration: iteration [
 
 	^ self name, '-', config, '-', iteration asString, '.csv'
@@ -93,7 +99,8 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> initialize [
 		'weighted-grammar-base' -> self weightedGrammarSchema.
 		'stochastic-base' -> self stochasticSchema.
 		'grammar-literals' -> self grammarLiteralsSchema.
-		'grammar-derivations' -> self grammarDerivationsSchema
+		'grammar-derivations' -> self grammarDerivationsSchema.
+		'combined-grammar-mutators' -> self combinedGrammarMutatorsSchema
 	} asDictionary.
 ]
 
