@@ -155,8 +155,8 @@ def main():
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-weighted-grammar-base'
 
         # JSON
-                '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-literals',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-stochastic-base',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-weighted-grammar-base'
     ]
