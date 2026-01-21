@@ -58,16 +58,17 @@ def main():
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-weighted-grammar-base'
 
         # JSON
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-literals',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-stochastic-base',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-weighted-grammar-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-literals',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-stochastic-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-weighted-grammar-base',
 
         # Microdown
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-literals',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-derivations',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-stochastic-base',
         '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-weighted-grammar-base',
+        # '/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/microdown-combined',
     ]
     
     for dir_path in directory_paths:
