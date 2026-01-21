@@ -25,6 +25,7 @@ def process_directory(directory_path, color, label):
             exec_times = pd.to_numeric(df.iloc[:, 0], errors='coerce').fillna(0).values
             
             cum_max_discovery = np.maximum.accumulate(exec_times)
+            cum_max_discovery = np.insert(cum_max_discovery, 0, 0) # 0,0
             
             all_runs_y.append(cum_max_discovery)
             max_len = max(max_len, len(cum_max_discovery))
