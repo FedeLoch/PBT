@@ -77,8 +77,8 @@ def main():
             print(f"Error: Directory not found: {dir_path}")
             sys.exit(1)
     
-    colors = ['#5DADE2', '#F1948A', '#48C9B0', '#BB8FCE'] 
-    line_colors = ['#3498DB', '#E74C3C', '#16A085', '#8E44AD']
+    colors = ['#5DADE2', '#F1948A', '#FFF2CC', '#BB8FCE', '#48C9B0'] 
+    line_colors = ['#3498DB', '#E74C3C', '#C2A028', '#8E44AD', '#16A085']
     
     labels = [os.path.basename(path) for path in directory_paths]
     
