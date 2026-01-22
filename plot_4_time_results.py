@@ -57,19 +57,28 @@ def main():
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-grammar-derivations',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-stochastic-base',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-weighted-grammar-base'
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-combined-mutators'
 
         # JSON
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-literals',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-stochastic-base',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-weighted-grammar-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-combined-mutators',
 
         # Microdown
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-literals',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-derivations',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-stochastic-base',
-        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-weighted-grammar-base',
-        # '/Users/fede/Documents/Pharo/images/PBT-ReplicatingPharoHashProblem/microdown-combined',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-literals',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-derivations',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-stochastic-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-weighted-grammar-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-combined-mutators',
+
+        # DataFrame
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-literals',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-derivations',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-stochastic-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-weighted-grammar-base',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-combined-mutators',
     ]
     
     for dir_path in directory_paths:
