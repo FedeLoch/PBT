@@ -7,7 +7,8 @@ Class {
 		'feedbackEvaluator',
 		'threshold',
 		'programBlock',
-		'classesToProfile'
+		'classesToProfile',
+		'memo'
 	],
 	#category : 'PBT-Shrinking',
 	#package : 'PBT',
@@ -47,15 +48,18 @@ PBTShrinker >> classesToProfile: someClassesToProfile [
 PBTShrinker >> evalInput: input [
 
 	| profilingResult pbtCase program |
-
-	program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
-
-	[
-		profilingResult := evaluator analyzer analyze: program.
-		pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult)
-	] on: Error do: [ ^ nil ].
 	
-	^ feedbackEvaluator eval: pbtCase
+	memo at: input ifAbsentPut: [
+		program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
+
+		[ 	profilingResult := evaluator analyzer analyze: program.
+			pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult)
+		] on: Error do: [ ^ nil ].
+
+		(feedbackEvaluator eval: pbtCase) absoluteImprovement
+	].
+	
+	^ memo at: input
 ]
 
 { #category : 'accessing' }
@@ -96,15 +100,16 @@ PBTShrinker >> initialize [
 	programBlock := nil.
 	classesToProfile := nil.
 	feedbackEvaluator := nil.
+	memo := Dictionary new.
 	grammar := nil.
 ]
 
 { #category : 'testing' }
-PBTShrinker >> isStillValuable: feedback original: originalFeedback [
+PBTShrinker >> isStillValuable: score original: originalScore [
 
-	feedback ifNil: [ ^ false ].
+	score ifNil: [ ^ false ].
 
-	^ feedback score >= (originalFeedback score * threshold)
+	^ score >= (originalScore * threshold)
 ]
 
 { #category : 'testing' }
@@ -125,6 +130,7 @@ PBTShrinker >> minimize: node upperBound: bound [
 	(self candidates: node) do: [ :child | | parent |
 		parent := child parent.
 		parent ifNotNil: [ | index |
+			"TODO: add a memoization to know if the child is removable or not"
 			index := parent children indexOf: child.
 			parent replaceChildAt: index with: child emptyTree.
 

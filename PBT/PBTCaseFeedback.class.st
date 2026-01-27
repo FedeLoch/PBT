@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
+PBTCaseFeedback >> absoluteImprovement [
+	
+	^ self values values sum
+]
+
+{ #category : 'as yet unclassified' }
 PBTCaseFeedback >> argumentFeedbackCase: index [
 	
 	^ PBTFeedback from: (case arguments at: index) improvement: improvement values: values
