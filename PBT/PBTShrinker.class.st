@@ -47,13 +47,14 @@ PBTShrinker >> classesToProfile: someClassesToProfile [
 PBTShrinker >> evalInput: input [
 
 	| profilingResult pbtCase program |
-	
+
 	program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
 
-	profilingResult := evaluator analyzer analyze: program.
+	[
+		profilingResult := evaluator analyzer analyze: program.
+		pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult)
+	] on: Error do: [ ^ nil ].
 	
-	pbtCase := PBTTest new result: (PBTEvalSuccess new profilingResult: profilingResult).
-
 	^ feedbackEvaluator eval: pbtCase
 ]
 
@@ -91,7 +92,7 @@ PBTShrinker >> grammar: aGrammar [
 PBTShrinker >> initialize [ 
 	
 	super initialize.
-	threshold := 0.9.
+	threshold := 0.95.
 	programBlock := nil.
 	classesToProfile := nil.
 	feedbackEvaluator := nil.
@@ -100,6 +101,8 @@ PBTShrinker >> initialize [
 
 { #category : 'testing' }
 PBTShrinker >> isStillValuable: feedback original: originalFeedback [
+
+	feedback ifNil: [ ^ false ].
 
 	^ feedback score >= (originalFeedback score * threshold)
 ]
@@ -117,18 +120,21 @@ PBTShrinker >> isValidTree: node [
 ]
 
 { #category : 'shrinking' }
-PBTShrinker >> minimize: node [
+PBTShrinker >> minimize: node upperBound: bound [
 	
-	| copy |
-	copy := self parse: node asInput. "TODO: avoid to copy the node"
-	(self candidates: copy) do: [ :child |
-		child parent ifNotNil: [ | index |
-			index := child parent children indexOf: child. 
-			child parent replaceChildAt: index with: child minimumTree
+	(self candidates: node) do: [ :child | | parent |
+		parent := child parent.
+		parent ifNotNil: [ | index |
+			index := parent children indexOf: child.
+			parent replaceChildAt: index with: child emptyTree.
+
+			((self isValidTree: node) and: [ self isStillValuable: (self evalInput: node asInput) original: bound ]) ifFalse: [
+				parent replaceChildAt: index with: child.
+			]
 		].
 	].
 
-	^ copy
+	^ node
 ]
 
 { #category : 'testing' }
@@ -152,21 +158,23 @@ PBTShrinker >> programBlock: aProgramBlock [
 { #category : 'shrinking' }
 PBTShrinker >> shrink: input [
 	
-	| node originalFeedback canImprove |
-	node := self parse: input.
-	node ifNil: [ ^ input ].
-	originalFeedback := self evalInput: input.
+	| node minimizedNode feedback currentInput prevValidInput |
 	
-	canImprove := true.
-	[ canImprove ] whileTrue: [ | minimized |
-		minimized := self minimize: node.
-		(minimized asInput = node asInput) ifTrue: [ ^ node asInput ].
-		canImprove := (self isValidTree: minimized) and: [ self isStillValuable: (self evalInput: input) original: originalFeedback ].
-	
-		canImprove ifTrue: [ node := minimized ]
-	].
+	prevValidInput := input.
+	currentInput := input.
 
-	^ node asInput
+	(self parse: input) ifNil: [ ^ input ].
+	feedback := self evalInput: input.
+		
+	[ true ] whileTrue: [
+		node := self parse: currentInput.
+		
+		minimizedNode := self minimize: node upperBound: feedback.
+		(minimizedNode asInput = currentInput) ifTrue: [ ^ currentInput ].
+
+		prevValidInput := currentInput.
+		currentInput := minimizedNode asInput.
+	]
 ]
 
 { #category : 'testing' }

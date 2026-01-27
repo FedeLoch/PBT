@@ -75,6 +75,12 @@ GncAST >> canReplace: aNode [
 ]
 
 { #category : '*PBT' }
+GncAST >> emptyTree [
+
+	^ GncInnerNode new tag: self tag; grammarRule: grammarRule; children: {}.
+]
+
+{ #category : '*PBT' }
 GncAST >> grammarRule [
 
 	^ grammarRule
