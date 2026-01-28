@@ -142,7 +142,7 @@ test_12345678 [
 
 Ume supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `PBTCorpusWithMutationsGenerator`.
 
-![Corpus Generator](pbt-images/corpus-gen.png)
+![Corpus Generator](ume-images/corpus-gen.png)
 
 ### 1. Byte-Level Mutators (Random/Generic)
 Works at the raw string/byte level. Fast and can find "invalid" but interesting inputs (e.g., buffer overflows, encoding issues).
