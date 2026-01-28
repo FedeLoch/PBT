@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ume-images/ume_logo.png" alt="Ume Logo" width="200"/>
+</p>
+
 # Ume - Property-Based Testing & Guided Performance Fuzzing for Pharo
 
 Ume is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
