@@ -49,6 +49,8 @@ PBTShrinker >> evalInput: input [
 
 	| profilingResult pbtCase program |
 	
+	(input = 'aa*a*..') ifTrue: [ 1 halt. ].
+	
 	memo at: input ifAbsentPut: [
 		program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
 
@@ -174,9 +176,10 @@ PBTShrinker >> shrink: input [
 		
 	[ true ] whileTrue: [
 		node := self parse: currentInput.
-		
+
 		minimizedNode := self minimize: node upperBound: feedback.
 		(minimizedNode asInput = currentInput) ifTrue: [ ^ currentInput ].
+		self evalInput: minimizedNode.
 
 		prevValidInput := currentInput.
 		currentInput := minimizedNode asInput.

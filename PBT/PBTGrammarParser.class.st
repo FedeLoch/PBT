@@ -5,9 +5,9 @@ Class {
 		'wordToConsume',
 		'memo'
 	],
-	#category : 'PBT-Grammars',
+	#category : 'PBT-Grammar Parser',
 	#package : 'PBT',
-	#tag : 'Grammars'
+	#tag : 'Grammar Parser'
 }
 
 { #category : 'instance creation' }

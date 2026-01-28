@@ -26,8 +26,22 @@ PBTRegexShrinkerTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTRegexShrinkerTest >> testShrinkCostlyRegex [
+PBTRegexShrinkerTest >> testShrinkCostlyRegex01 [
 
-	self assert: (shrinker shrink: 'aa*a*..*.+(.+.?(.?.*((.b.b.aab)a|)a*))+a') equals: 'aa*a*..'.
+	self assert: (shrinker shrink: 'ac?ab?ab|.b?aa.?aaab?c?a(ca)?ac?aaab?a?a') equals: 'cab?ab.?aa?(a)?c?aaab?a?a'.
+
+]
+
+{ #category : 'tests' }
+PBTRegexShrinkerTest >> testShrinkCostlyRegex02 [
+
+	self assert: (shrinker shrink: 'ac?ab?ab|.b?aa.?aaab?c?a(ca)?ac?aaab?a?a') equals: 'cab?ab.?aa?(a)?c?aaab?a?a'.
+
+]
+
+{ #category : 'tests' }
+PBTRegexShrinkerTest >> testShrinkCostlyRegex03 [
+
+	self assert: (shrinker shrink: 'a+(a+a.?(a*.*a?a*a*b?.*aa?a+|a)+a.a)....a') equals: '((a*.*a?a*a*.*aa)+a.a)....a'.
 
 ]

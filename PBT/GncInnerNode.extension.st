@@ -53,6 +53,12 @@ GncInnerNode >> objectClass [
 ]
 
 { #category : '*PBT' }
+GncInnerNode >> removeChildAt: index [ 
+
+	children removeAt: index.
+]
+
+{ #category : '*PBT' }
 GncInnerNode >> replaceChildAt: index with: newNode [
 
 	children at: index put: newNode.
