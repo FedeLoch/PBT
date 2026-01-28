@@ -1,20 +1,20 @@
-# PBT - Property-Based Testing & Guided Performance Fuzzing for Pharo
+# Ume - Property-Based Testing & Guided Performance Fuzzing for Pharo
 
-PBT is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
+Ume is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
 
 ---
 
 ## Core Objective
 
-The goal of PBT is to automate the discovery of **worst-case scenarios**. Whether you are looking for inputs that break your invariants (Property Testing) or inputs that maximize execution time/memory, PBT guides the search using feedback from the system under test.
+The goal of Ume is to automate the discovery of **worst-case scenarios**. Whether you are looking for inputs that break your invariants (Property Testing) or inputs that maximize execution time/memory, Ume guides the search using feedback from the system under test.
 
 ---
 
 ## Architecture Overview
 
-PBT is built with a highly modular and decoupled architecture, allowing for flexible instrumentation and search strategies.
+Ume is built with a highly modular and decoupled architecture, allowing for flexible instrumentation and search strategies.
 
-![PBT Architecture](pbt-images/pbt.png)
+![Ume Architecture](ume-images/ume.png)
 
 ```mermaid
 graph TD
@@ -62,7 +62,7 @@ PBTRunner test: Integer >> #factorial from: schema.
 
 ## Performance Fuzzing
 
-PBT excels at finding performance bottlenecks. Unlike traditional tools, **the Runner guides the search** toward high-cost inputs.
+Ume excels at finding performance bottlenecks. Unlike traditional tools, **the Runner guides the search** toward high-cost inputs.
 
 ```smalltalk
 runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 1 minute.
@@ -101,7 +101,7 @@ The `PBTResult` object contains the history of the search and tools to identify 
 
 ## Advanced Generation: Tree-Grammar Mutations
 
-For complex inputs like JSON or Regex, PBT uses structural mutations. **`PBTTreeGrammarMutator`** parses inputs into ASTs and uses **Monte Carlo Tree Search (MCTS)** to intelligently explore the grammar space.
+For complex inputs like JSON or Regex, Ume uses structural mutations. **`PBTTreeGrammarMutator`** parses inputs into ASTs and uses **Monte Carlo Tree Search (MCTS)** to intelligently explore the grammar space.
 
 ```smalltalk
 mutator := (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100.
@@ -114,7 +114,7 @@ generator := PBTCorpusWithMutationsGenerator new
 
 ## Automatic Test Generation
 
-One of the most powerful workflows in PBT is the ability to turn discovered bugs into permanent unit tests automatically.
+One of the most powerful workflows in Ume is the ability to turn discovered bugs into permanent unit tests automatically.
 
 ### Using `PBTUnitTest`
 Subclass `PBTUnitTest` to define your search parameters once. You can then run a script to automatically verify and "install" discovered cases as standard Pharo test methods.
@@ -126,7 +126,7 @@ MyRegressionTest >> generateTests [
     super generateTests: 15 minutes.
 ]
 
-"PBT will execute for 15 minutes and automatically compile methods like:"
+"Ume will execute for 15 minutes and automatically compile methods like:"
 test_12345678 [
     self doTest: {
         'method' -> #matches:.
@@ -140,7 +140,7 @@ test_12345678 [
 
 ## Mutator Configurations
 
-PBT supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `PBTCorpusWithMutationsGenerator`.
+Ume supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `PBTCorpusWithMutationsGenerator`.
 
 ![Corpus Generator](pbt-images/corpus-gen.png)
 
