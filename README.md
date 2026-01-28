@@ -192,7 +192,7 @@ generator := PBTCorpusWithMutationsGenerator new
 ## Documentation
 
 - [Getting Started](https://github.com/FedeLoch/PBT/wiki/Getting-Started)
-- [How PBT Works](https://github.com/FedeLoch/PBT/wiki/How-PBT-Works)
+- [How Ume Works](https://github.com/FedeLoch/PBT/wiki/How-Ume-Works)
 - [Generators](https://github.com/FedeLoch/PBT/wiki/Generators)
 - [Examples](https://github.com/FedeLoch/PBT/wiki/Examples)
 - [Defining Custom Grammars](https://github.com/FedeLoch/PBT/wiki/Grammars)
