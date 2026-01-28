@@ -214,8 +214,7 @@ PBTGrammarParserTest >> testParseRegex04 [
 PBTGrammarParserTest >> testParseRegexN [
 
 	| inputs |
-	inputs := {
-				 'ac?ab?ab?b?aa.?aaab?c?a(c)?ac?aaab?a?a'.
+	inputs := { 'ac?ab?ab?b?aa.?aaab?c?a(c)?ac?aaab?a?a'.
 	          'ac?ab?ab|.b?aa.?aaab?c?a(ca)?ac?aaab?a?a'.
 	          'ac?ab?ab?b?aa.?aaab?c?a(c)?abc?aa*ab?a?a'.
 	          'ac?ab?ab?ab?aa.?aaa*b?c?a(c)?ac?aacb?a?a'.
@@ -281,10 +280,15 @@ PBTGrammarParserTest >> testParseRegexN [
 	          'a.?aa?aaa.c?aa.?aaa+a?a?a(c)?aa?|a+a?a?a'.
 	          'ab.a+a+a?.c+aa.?.+a*a?a+a(c)?aa.aa+aaa?a'.
 	          'ac?aa?aaa.b?aa.?aaa+a?a?a(c)?aa?|a+a?a?a'.
-	          'a.?aa?baa.b?aa.?aaa*a?a?a(c)?aa?|a+a?a?a' }.
+	          'a.?aa?baa.b?aa.?aaa*a?a?a(c)?aa?|a+a?a?a'.
+	          'ac.a+a+a?.c?aa.?.+a*a?a+a(c)?aa.aa+a|a?|'.
+	          'aa.a+a+a?.c?a+.?.ca*a?a+a(c)?aa.aa+aaa?a'.
+	          'ac.a+a+c?.c?aa.?.+a*.?a+a(c)?aa.aa+aaa?a'.
+	          'ac.a(a+a?.c?a|.?.+a*a?)+a(c)?aa.aa+aaa?a'.
+	          'ac.a(a+aa.c?a|a?.+a*a?)+a(c)?aa.aa+aaa?a' }.
 
-	inputs do: [ :input | | node |
-		node := PBTGrammarParser parse: input from: GncRegexGrammar new.
-		self assert: node generate equals: input
-	]
+	inputs do: [ :input |
+			| node |
+			node := PBTGrammarParser parse: input from: GncRegexGrammar new.
+			self assert: node generate equals: input ]
 ]
