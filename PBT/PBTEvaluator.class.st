@@ -61,6 +61,12 @@ PBTEvaluator >> eval: receiver method: target from: schema with: args andCoverag
 		  coverageResult: localCoverageResult
 ]
 
+{ #category : 'as yet unclassified' }
+PBTEvaluator >> executionTimeProfiler [
+
+	^ PBACallBacksProfiler new measuringOnlyExecutionTime
+]
+
 { #category : 'initialization' }
 PBTEvaluator >> initialize [
 
@@ -72,31 +78,34 @@ PBTEvaluator >> initialize [
 { #category : 'initialization' }
 PBTEvaluator >> profilingByAllocatedMemory [
 
-	analyzer profilers: { PBACallBacksProfiler new . PBAIllimaniProfiler new }
+	analyzer profilers: { self executionTimeProfiler . PBAIllimaniProfiler new }
 ]
 
 { #category : 'as yet unclassified' }
 PBTEvaluator >> profilingByBytecodes [
 
-	analyzer profilers: { PBACallBacksProfiler new . PBABytecodeProfiler new }
+	analyzer profilers: { self executionTimeProfiler . PBABytecodeProfiler new }
 ]
 
 { #category : 'as yet unclassified' }
 PBTEvaluator >> profilingByCoverage [
 
-	analyzer profilers: { PBACallBacksProfiler new . PBACoverageCollectorProfiler new }
+	analyzer profilers: { self executionTimeProfiler . PBACoverageCollectorProfiler new }
 ]
 
 { #category : 'as yet unclassified' }
 PBTEvaluator >> profilingByExecutionTime [
 
-	analyzer profilers: { PBACallBacksProfiler new }
+	analyzer profilers: { self executionTimeProfiler }
 ]
 
 { #category : 'initialization' }
 PBTEvaluator >> profilingByMethodCalls [
 
-	analyzer profilers: { PBACallBacksProfiler new . PBAMethodProfiler new }
+	analyzer profilers: {
+			self executionTimeProfiler.
+			PBAMethodProfiler new
+	}
 ]
 
 { #category : 'initialization' }
