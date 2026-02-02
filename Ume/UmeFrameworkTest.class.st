@@ -7,10 +7,10 @@ Class {
 }
 
 { #category : 'asserting' }
-UmeFrameworkTest >> assertSuccess: pbtResult [
+UmeFrameworkTest >> assertSuccess: result [
 
-	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) size equals: 1.
-	self assert: (pbtResult tests groupedBy: [ :r | r result class ]) keys first equals: UmeEvalSuccess.
+	self assert: (result tests groupedBy: [ :r | r result class ]) size equals: 1.
+	self assert: (result tests groupedBy: [ :r | r result class ]) keys first equals: UmeEvalSuccess.
 ]
 
 { #category : 'running' }

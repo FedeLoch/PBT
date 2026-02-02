@@ -31,10 +31,10 @@ UmePlusTest >> setUp [
 { #category : 'as yet unclassified' }
 UmePlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: SmallInteger >> #+ from: schema) run.
+	result := (UmeRunner test: SmallInteger >> #+ from: schema) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 100.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 100.
 ]

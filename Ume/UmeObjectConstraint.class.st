@@ -14,11 +14,11 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-UmeObjectConstraint >> feed: pbtFeedback [
+UmeObjectConstraint >> feed: umeFeedback [
 	
 	| unwrappedFeedback |
 	
-	unwrappedFeedback := pbtFeedback ifNil: [ pbtFeedback ] ifNotNil: [ pbtFeedback unWrapCase: unwrapBlock ].
+	unwrappedFeedback := umeFeedback ifNil: [ umeFeedback ] ifNotNil: [ umeFeedback unWrapCase: unwrapBlock ].
 	generator feed: unwrappedFeedback
 ]
 

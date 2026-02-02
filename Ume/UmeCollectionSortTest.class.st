@@ -38,21 +38,21 @@ UmeCollectionSortTest >> setUp [
 { #category : 'tests' }
 UmeCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResult [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: SequenceableCollection >> #sort from: schema times: 100) run.
+	result := (UmeRunner test: SequenceableCollection >> #sort from: schema times: 100) run.
 	
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 100.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 100.
 ]
 
 { #category : 'tests' }
 UmeCollectionSortTest >> testGivingACollectionIntegerSchemaThenValidateSortResultWithoutSchema [
 
-	| pbtResult |
+	| result |
 	"TODO: Not executable until we support schema inference"
-	pbtResult := (UmeRunner test: SequenceableCollection >> #sort) run.
+	result := (UmeRunner test: SequenceableCollection >> #sort) run.
 	
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 100.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 100.
 ]

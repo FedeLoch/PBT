@@ -17,7 +17,7 @@ UmeSimplerBlocBenchsTest >> setUp [
 												"testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new)."
 												testCase element: (props at: 'element') gen.
 												testCase duration: 500 milliSeconds.
-												testCase ] of: BlBBlocPBTCase
+												testCase ] of: BlBBlocUmeCase
 										);
 		                      props: { ('element' -> self blElementConstraint) }.
 
@@ -30,11 +30,11 @@ UmeSimplerBlocBenchsTest >> setUp [
 { #category : 'tests' }
 UmeSimplerBlocBenchsTest >> testGivingASimplerBlocBenchSchemaThenGenerateCasesToAnalyseCoverageAndPerformance [
 
-	| pbtResult |
+	| result |
 
 	self timeLimit: 5 minutes.
-	pbtResult := (UmeRunner test: BlBCase >> #run from: schema times: 10) run.
+	result := (UmeRunner test: BlBCase >> #run from: schema times: 10) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 10.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 10.
 ]

@@ -13,7 +13,7 @@ Class {
 UmeRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 
 	^ UmeObjectConstraint new
-		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		unwrap: [ :case | (case class = UmeRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (UmeCorpusGenerator new
 			   seeds: { self seed };
 			   mutationsPerIteration: 3;
