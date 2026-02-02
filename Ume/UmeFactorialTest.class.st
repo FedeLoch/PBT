@@ -15,9 +15,9 @@ Class {
 UmeFactorialTest >> setUp [
 	super setUp.
 	
-	receiverConstraint := PBTObjectConstraint new generator: (UmeGenerator oneOf: (10 to: 100)).
+	receiverConstraint := UmeObjectConstraint new generator: (UmeGenerator oneOf: (10 to: 100)).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
-	schema := PBTSchema new receiverConstraint: receiverConstraint; assert: assert.
+	schema := UmeSchema new receiverConstraint: receiverConstraint; assert: assert.
 ]
 
 { #category : 'tests' }
@@ -25,7 +25,7 @@ UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResult [
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Integer >> #factorial from: schema) run.
+	pbtResult := (UmeRunner test: Integer >> #factorial from: schema) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.
@@ -36,7 +36,7 @@ UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFrom
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Integer >> #factorial from: schema times: 2542) run.
+	pbtResult := (UmeRunner test: Integer >> #factorial from: schema times: 2542) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 2542.
@@ -47,7 +47,7 @@ UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFrom
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Integer >> #factorial from: schema for: 2 seconds) run.
+	pbtResult := (UmeRunner test: Integer >> #factorial from: schema for: 2 seconds) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult totalTime >= 2 seconds) equals: true.
@@ -58,7 +58,7 @@ UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWith
 	
 	| pbtResult |
 	"TODO: Not executable until we support schema inference"
-	pbtResult := (PBTRunner test: Integer >> #factorial) run.
+	pbtResult := (UmeRunner test: Integer >> #factorial) run.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.

@@ -11,7 +11,7 @@ UmeSimplerBlocBenchsTest >> setUp [
 
 	super setUp.
 
-	receiverConstraint := PBTObjectConstraint new
+	receiverConstraint := UmeObjectConstraint new
 		                      generator:
 			                      (UmeGenerator onceInstance: [ :testCase :props |
 												"testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new)."
@@ -22,7 +22,7 @@ UmeSimplerBlocBenchsTest >> setUp [
 		                      props: { ('element' -> self blElementConstraint) }.
 
 	assert := [ :coll :args :blbResult | blbResult hasError not ].
-	schema := PBTSchema new
+	schema := UmeSchema new
 		          receiverConstraint: receiverConstraint;
 		          assert: assert
 ]
@@ -33,7 +33,7 @@ UmeSimplerBlocBenchsTest >> testGivingASimplerBlocBenchSchemaThenGenerateCasesTo
 	| pbtResult |
 
 	self timeLimit: 5 minutes.
-	pbtResult := (PBTRunner test: BlBCase >> #run from: schema times: 10) run.
+	pbtResult := (UmeRunner test: BlBCase >> #run from: schema times: 10) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 10.

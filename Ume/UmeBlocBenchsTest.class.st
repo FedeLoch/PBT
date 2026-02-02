@@ -14,7 +14,7 @@ Class {
 { #category : 'running' }
 UmeBlocBenchsTest >> blChildConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  generator: (UmeGenerator onceInstance: [ :element :props |
 					   element
 						   background: (props at: 'color') gen;
@@ -34,7 +34,7 @@ UmeBlocBenchsTest >> blChildConstraint [
 { #category : 'running' }
 UmeBlocBenchsTest >> blColorConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  objectClass: Color;
 		  generator: (PBTOptionsGenerator new from: Color indexedColors)
 ]
@@ -42,7 +42,7 @@ UmeBlocBenchsTest >> blColorConstraint [
 { #category : 'running' }
 UmeBlocBenchsTest >> blContainerConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  generator: (UmeGenerator onceInstance: [ :container :props |
 					   container layout:
 							   (BlGridLayout new columnCount: (1 to: 200) atRandom).
@@ -60,7 +60,7 @@ UmeBlocBenchsTest >> blContainerConstraint [
 { #category : 'running' }
 UmeBlocBenchsTest >> blElementConstraint [
 
-	^ 	PBTObjectConstraint new
+	^ 	UmeObjectConstraint new
 		                      generator:
 			                      (UmeGenerator onceInstance: [ :element :props |
 					                       element constraintsDo: [ :c |
@@ -80,14 +80,14 @@ UmeBlocBenchsTest >> blElementConstraint [
 { #category : 'running' }
 UmeBlocBenchsTest >> blGeometryConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  generator: (UmeGenerator oneOf: { BlRectangleGeometry new . BlTriangleGeometry new ". BlCircleGeometry new" })
 ]
 
 { #category : 'running' }
 UmeBlocBenchsTest >> blSpinnerConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  generator: (UmeGenerator onceInstance: [ :spinner :props |
 					   spinner constraintsDo: [ :c |
 							   c frame vertical alignCenter.
@@ -111,7 +111,7 @@ UmeBlocBenchsTest >> blSpinnerConstraint [
 { #category : 'running' }
 UmeBlocBenchsTest >> blTransparentConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  generator: (UmeGenerator onceInstance: [ :transparent :props |
 					   transparent layout: BlFrameLayout new.
 					   transparent background: (props at: 'color') gen.
@@ -129,7 +129,7 @@ UmeBlocBenchsTest >> setUp [
 
 	super setUp.
 	self timeLimit: 5 minutes.
-	receiverConstraint := PBTObjectConstraint new
+	receiverConstraint := UmeObjectConstraint new
 		                      generator:
 			                      (UmeGenerator onceInstance: [ :testCase :props |
 												"testCase runner meters: (OrderedCollection with: BlBBlocRenderingMeter new)."
@@ -140,7 +140,7 @@ UmeBlocBenchsTest >> setUp [
 		                      props: { ('element' -> self blElementConstraint) }.
 
 	assert := [ :coll :args :blbResult | blbResult hasError not ].
-	schema := PBTSchema new
+	schema := UmeSchema new
 		          receiverConstraint: receiverConstraint;
 		          assert: assert
 ]
@@ -150,7 +150,7 @@ UmeBlocBenchsTest >> testGivingABlocBenchSchemaThenGenerateCasesToAnalyseCoverag
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: BlBCase >> #run from: schema times: 2) run.
+	pbtResult := (UmeRunner test: BlBCase >> #run from: schema times: 2) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 10.

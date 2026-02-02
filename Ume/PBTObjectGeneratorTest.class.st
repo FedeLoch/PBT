@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTObjectGeneratorTest',
-	#superclass : 'PBTGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
 	#tag : 'Generators'
@@ -17,8 +17,8 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
 			             instance add: (props at: 'item') gen ].
 		             instance ] of: OrderedCollection.
 
-	constraint := PBTObjectConstraint new
-		              props: { ('item' -> (PBTObjectConstraint new
+	constraint := UmeObjectConstraint new
+		              props: { ('item' -> (UmeObjectConstraint new
 					                objectClass: SmallInteger;
 					                generator: (UmeGenerator always: 42))) }.
 
@@ -36,12 +36,12 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
 			             point: (props at: 'corner') gen.
 		             instance ] of: Rectangle.
 
-	constraint := PBTObjectConstraint new
+	constraint := UmeObjectConstraint new
 		              props: {
-				              ('origin' -> (PBTObjectConstraint new
+				              ('origin' -> (UmeObjectConstraint new
 						                objectClass: Point;
 						                generator: PBTPointGenerator new)).
-				              ('corner' -> (PBTObjectConstraint new
+				              ('corner' -> (UmeObjectConstraint new
 					                objectClass: Point;
 					                generator: PBTPointGenerator new)) }.
 

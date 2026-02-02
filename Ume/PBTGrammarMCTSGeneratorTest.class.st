@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTGrammarMCTSGeneratorTest',
-	#superclass : 'PBTGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
 	#tag : 'Generators'

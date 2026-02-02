@@ -12,18 +12,18 @@ Class {
 { #category : 'running' }
 UmeDataFramePerfuzzWithGrammarMutationTest >> csvGenerator [
 
-	^ PBTCorpusGenerator new
+	^ UmeCorpusGenerator new
 		  seeds: { self seed };
 		  mutationsPerIteration: 10;
-		  mutators: { (PBTGrammarLiteralsMutator from: CSVGrammar new) };
-		  heuristic: PBTPickBestElementDifferenceHeuristic new
+		  mutators: { (UmeGrammarLiteralsMutator from: CSVGrammar new) };
+		  heuristic: UmePickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'running' }
 UmeDataFramePerfuzzWithGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: DataFrame class >> #readFromCsv: from: schema for: 5 minutes.
+	runner := UmeRunner test: DataFrame class >> #readFromCsv: from: schema for: 5 minutes.
 
 ]
 

@@ -23,11 +23,11 @@ UmeJSONTest >> setUp [
 	super setUp.
 	self timeLimit: 5 hours.
 
-	receiverConstraint := PBTObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
+	receiverConstraint := UmeObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
 
-	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: self jsonGenerator }.
+	argumentConstraints := { UmeObjectConstraint new objectClass: String; generator: self jsonGenerator }.
 
-	schema := PBTSchema new
+	schema := UmeSchema new
 		          receiverConstraint: receiverConstraint;
 		          argumentConstraints: argumentConstraints;
 		          score: [ :re :inputs :res | 1 ];

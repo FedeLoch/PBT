@@ -24,16 +24,16 @@ UmeRectangleAreaTest >> setUp [
 			             point: (props at: 'corner') gen.
 		             instance ] of: Rectangle.
 
-	receiverConstraint := PBTObjectConstraint new
+	receiverConstraint := UmeObjectConstraint new
 		                     generator: generator;
 		                     props: {
-				                     ('origin' -> (PBTObjectConstraint new
+				                     ('origin' -> (UmeObjectConstraint new
 						                       generator: PBTPointGenerator new)).
-				                     ('corner' -> (PBTObjectConstraint new
+				                     ('corner' -> (UmeObjectConstraint new
 					                       generator: PBTPointGenerator new)) }.
 	argumentConstraints := {  }.
 	assert := [ :rect :args :result | result >= 0 ].
-	schema := PBTSchema new
+	schema := UmeSchema new
 		          receiverConstraint: receiverConstraint;
 		          argumentConstraints: argumentConstraints;
 		          assert: assert
@@ -44,7 +44,7 @@ UmeRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Rectangle >> #area from: schema times: 1000) run.
+	pbtResult := (UmeRunner test: Rectangle >> #area from: schema times: 1000) run.
 	
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.
@@ -55,7 +55,7 @@ UmeRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResultWithC
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Rectangle >> #area from: schema withCoverageTolerance: 1000) run.
+	pbtResult := (UmeRunner test: Rectangle >> #area from: schema withCoverageTolerance: 1000) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult totalCoverage percentage) equals: 100. 

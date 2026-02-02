@@ -12,22 +12,22 @@ Class {
 { #category : 'running' }
 UmeMicrodownPerfuzzTest >> markdownGenerator [
 
-	^ PBTCorpusGenerator new
+	^ UmeCorpusGenerator new
 		  seeds: { self seed };
 		  "mutationsPerIteration: 200;"
 		  mutators: {
-				  PBTAddByteMutator new.
-				  PBTByteFlipMutator new.
-				  PBTDelByteMutator new
+				  UmeAddByteMutator new.
+				  UmeByteFlipMutator new.
+				  UmeDelByteMutator new
 			};
-		  heuristic: PBTPickBestElementDifferenceHeuristic new
+		  heuristic: UmePickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'running' }
 UmeMicrodownPerfuzzTest >> setUp [
 
 	super setUp.
-	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
+	runner := UmeRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }

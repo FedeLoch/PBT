@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTDyncamicSelectionGeneratorTest',
-	#superclass : 'PBTGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
 	#instVars : [
 		'constTrueGen',
 		'constFalseGen'

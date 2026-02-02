@@ -14,7 +14,7 @@ UmeRegexHillClimbingTest >> regexConstraint [
 
 
 	| randomGenerator |
-	randomGenerator := PBTObjectConstraint new
+	randomGenerator := UmeObjectConstraint new
 		  objectClass: String;
 		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
 
@@ -23,7 +23,7 @@ UmeRegexHillClimbingTest >> regexConstraint [
 		[ re size = 40 ] whileFalse: [ re := randomGenerator gen ].
 		re ] mutating: [ :regexString :constraint :feedback | RxMatcher mutateCharacter: regexString using: randomGenerator gen ].
 
-	^ PBTObjectConstraint new generator: regexGenerator
+	^ UmeObjectConstraint new generator: regexGenerator
 ]
 
 { #category : 'tests' }
@@ -31,7 +31,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByAllocatedMemory; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByAllocatedMemory; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -42,7 +42,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByAllocatedMemory; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByAllocatedMemory; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -53,7 +53,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -64,7 +64,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -75,7 +75,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -86,7 +86,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByExecutionTime; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -97,7 +97,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -108,7 +108,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByScore; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -119,7 +119,7 @@ UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenW
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
+	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -130,7 +130,7 @@ UmeRegexHillClimbingTest >> testGuidedByMethodsCalled [
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
+	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTObjectGrammarGeneratorTest',
-	#superclass : 'PBTGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
 	#instVars : [
 		'generator'
 	],

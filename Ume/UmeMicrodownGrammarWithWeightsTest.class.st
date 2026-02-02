@@ -19,7 +19,7 @@ UmeMicrodownGrammarWithWeightsTest >> markdownGenerator [
 UmeMicrodownGrammarWithWeightsTest >> setUp [
 
 	super setUp.
-	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
+	runner := UmeRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }

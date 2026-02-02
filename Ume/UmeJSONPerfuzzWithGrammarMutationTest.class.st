@@ -15,18 +15,18 @@ UmeJSONPerfuzzWithGrammarMutationTest >> jsonGenerator [
 	| seeds |
 	seeds := { '{"n":true,"n":true,"x":6}' }.
 
-	^ PBTCorpusGenerator new
+	^ UmeCorpusGenerator new
 		  seeds: seeds;
 		  mutationsPerIteration: 100;
-		  mutators: { (PBTGrammarLiteralsMutator from: JSONGrammar new) };
-		  heuristic: PBTPickBestElementDifferenceHeuristic new
+		  mutators: { (UmeGrammarLiteralsMutator from: JSONGrammar new) };
+		  heuristic: UmePickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'tests' }
 UmeJSONPerfuzzWithGrammarMutationTest >> setUp [ 
 
 	super setUp.
-	runner := PBTRunner test: NeoJSONReader class >> #fromString: from: schema for: 5 minutes.
+	runner := UmeRunner test: NeoJSONReader class >> #fromString: from: schema for: 5 minutes.
 
 ]
 

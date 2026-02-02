@@ -68,7 +68,7 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> experimentTime: aDuration [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationMutators [
 
-	^ { (PBTGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxInputSize }
+	^ { (UmeGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxInputSize }
 ]
 
 { #category : 'running' }
@@ -80,7 +80,7 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> grammarDerivationsSchema [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> grammarLiteralMutators [
 
-	^ { (PBTGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxInputSize }
+	^ { (UmeGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxInputSize }
 ]
 
 { #category : 'running' }
@@ -137,7 +137,7 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> run: config iteration: i [
 
 	schema := self schema: config.
 	
-	runner := PBTRunner test: self targetMethod from: schema for: self experimentTime.
+	runner := UmeRunner test: self targetMethod from: schema for: self experimentTime.
 	
 	"Guided by methods called"
 	runner guidedByMethodsCalls.
@@ -178,9 +178,9 @@ GrammarBasePathologicalBugMutatorPaperExperiment >> seeds [
 { #category : 'running' }
 GrammarBasePathologicalBugMutatorPaperExperiment >> stochasticMutators [
 
-	^ { (PBTAddByteMutator new maxInputSize: self maxInputSize).
-		  PBTByteFlipMutator new.
-		  PBTDelByteMutator new }
+	^ { (UmeAddByteMutator new maxInputSize: self maxInputSize).
+		  UmeByteFlipMutator new.
+		  UmeDelByteMutator new }
 ]
 
 { #category : 'running' }

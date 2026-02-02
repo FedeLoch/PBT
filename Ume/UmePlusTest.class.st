@@ -20,12 +20,12 @@ UmePlusTest >> setUp [
 	super setUp.
 	
 	range := (SmallInteger minVal to: SmallInteger maxVal).
-	receiverConstraint := PBTObjectConstraint new generator: (UmeGenerator oneOf: range).
+	receiverConstraint := UmeObjectConstraint new generator: (UmeGenerator oneOf: range).
 	argumentConstraints := {
-		PBTObjectConstraint new generator: (UmeGenerator oneOf: range)
+		UmeObjectConstraint new generator: (UmeGenerator oneOf: range)
 	}.
 	assert := [ :n :args :result | args first + n = result ].
-	schema := PBTSchema new receiverConstraint: receiverConstraint; argumentConstraints: argumentConstraints; assert: assert.
+	schema := UmeSchema new receiverConstraint: receiverConstraint; argumentConstraints: argumentConstraints; assert: assert.
 ]
 
 { #category : 'as yet unclassified' }
@@ -33,7 +33,7 @@ UmePlusTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: SmallInteger >> #+ from: schema) run.
+	pbtResult := (UmeRunner test: SmallInteger >> #+ from: schema) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 100.

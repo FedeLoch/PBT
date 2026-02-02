@@ -29,15 +29,15 @@ DataFrameExperiment >> schemaCorpusWith: mutators [
 
 	| csvGenerator |
 	
-	csvGenerator := PBTCorpusGenerator new
+	csvGenerator := UmeCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 	
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
-		  argumentConstraints: { (PBTObjectConstraint new
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
+		  argumentConstraints: { (UmeObjectConstraint new
 				   generator: csvGenerator;
 				   wrap: [ :input |
 						   | file |
@@ -73,9 +73,9 @@ DataFrameExperiment >> weightedGrammarSchema [
 	
 	csvGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
 	
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
-		  argumentConstraints: { (PBTObjectConstraint new
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
+		  argumentConstraints: { (UmeObjectConstraint new
 				   generator: csvGenerator;
 				   wrap: [ :input |
 						   | file |

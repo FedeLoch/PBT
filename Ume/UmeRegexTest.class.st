@@ -35,7 +35,7 @@ UmeRegexTest >> regexByProp: props and: feedback [
 { #category : 'running' }
 UmeRegexTest >> regexConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		  objectClass: String;
 		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
@@ -54,7 +54,7 @@ UmeRegexTest >> setUp [
 	super setUp.
 	self timeLimit: 5 hours.
 
-	sharedProperties := InternalConstraintProperties from:
+	sharedProperties := UmeInternalConstraintProperties from:
 		                    { ('grammar' -> self regexConstraint) }
 			                    asDictionary.
 
@@ -64,12 +64,12 @@ UmeRegexTest >> setUp [
 		             props at: 'input' put: regex minimalStringMatching.
 						 PBTRegex fromString: regex ].
 
-	receiverConstraint := PBTObjectConstraint new
+	receiverConstraint := UmeObjectConstraint new
 		                      objectClass: RxMatcher;
 		                      generator: generator;
 		                      props: sharedProperties.
 
-	argumentConstraints := { (PBTObjectConstraint new
+	argumentConstraints := { (UmeObjectConstraint new
 		                        objectClass: String;
 		                        props: sharedProperties;
 		                        generator:
@@ -90,7 +90,7 @@ UmeRegexTest >> setUp [
 		] 
 	].
 
-	schema := PBTSchema new
+	schema := UmeSchema new
 		          receiverConstraint: receiverConstraint;
 		          argumentConstraints: argumentConstraints;
 		          score: score;
@@ -102,7 +102,7 @@ UmeRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBug [
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -113,7 +113,7 @@ UmeRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBugByTim
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 ]

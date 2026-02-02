@@ -29,15 +29,15 @@ MicrodownPerfMetricsExperiment >> schema [
 
 	| markdownGenerator |
 	
-	markdownGenerator := PBTCorpusGenerator new
+	markdownGenerator := UmeCorpusGenerator new
 		  seedGenerator: (UmeConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
-		  argumentConstraints: { (PBTObjectConstraint new objectClass: String; generator: markdownGenerator) };
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
+		  argumentConstraints: { (UmeObjectConstraint new objectClass: String; generator: markdownGenerator) };
 		  assert: [ :regex :input :result | true ]
 ]
 

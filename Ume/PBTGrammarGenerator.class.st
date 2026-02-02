@@ -14,7 +14,7 @@ Class {
 { #category : 'accessing' }
 PBTGrammarGenerator >> derivationTree: input [
 
-	^ PBTGrammarParser parse: input from: grammar
+	^ UmeGrammarParser parse: input from: grammar
 ]
 
 { #category : 'accessing' }

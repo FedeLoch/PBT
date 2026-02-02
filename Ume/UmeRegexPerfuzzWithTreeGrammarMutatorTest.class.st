@@ -12,15 +12,15 @@ Class {
 { #category : 'running' }
 UmeRegexPerfuzzWithTreeGrammarMutatorTest >> regexConstraint [
 
-	^ PBTObjectConstraint new
+	^ UmeObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTCorpusGenerator new
+		generator: (UmeCorpusGenerator new
 			   seeds: { self seed };
 			   mutationsPerIteration: 3;
 			   mutators: {
-					(PBTGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 41.
+					(UmeGrammarDerivationMutator from: GncRegexGrammar new) maxInputSize: 41.
 				};
-			   heuristic: PBTPickBestElementDifferenceHeuristic new)
+			   heuristic: UmePickBestElementDifferenceHeuristic new)
 ]
 
 { #category : 'running' }
@@ -28,7 +28,7 @@ UmeRegexPerfuzzWithTreeGrammarMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 4 hours.
+	runner := UmeRunner test: RxMatcher >> #matches: from: schema for: 4 hours.
 ]
 
 { #category : 'tests' }

@@ -13,12 +13,12 @@ UmeRegexPerfuzzTest >> regexConstraint [
 	terminalString := 'abc+|?*.'.
 
 	randomGenerator := PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100.
-	mutator := PBTMutator mutate: [ :regex | RxMatcher mutateCharacter: regex using: terminalString ].
+	mutator := UmeMutator mutate: [ :regex | RxMatcher mutateCharacter: regex using: terminalString ].
 
-	^ PBTObjectConstraint new generator: (PBTCorpusGenerator new
+	^ UmeObjectConstraint new generator: (UmeCorpusGenerator new
 			   seedGenerator: randomGenerator;
 			   mutators: { mutator };
-			   heuristic: PBTPickBestElementDifferenceHeuristic new
+			   heuristic: UmePickBestElementDifferenceHeuristic new
 	)
 ]
 
@@ -27,7 +27,7 @@ UmeRegexPerfuzzTest >> testGuidingByMethodsCalls [
 
 	| runner result |
 	
-	runner := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls.
+	runner := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls.
 	result := runner run.
 	
 	self assert: (result tests size) equals: 10000.

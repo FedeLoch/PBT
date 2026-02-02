@@ -29,15 +29,15 @@ MicrodownExperiment >> schemaCorpusWith: mutators [
 
 	| markdownGenerator |
 	
-	markdownGenerator := PBTCorpusGenerator new
+	markdownGenerator := UmeCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
-		  argumentConstraints: { (PBTObjectConstraint new objectClass: String; generator: markdownGenerator) };
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
+		  argumentConstraints: { (UmeObjectConstraint new objectClass: String; generator: markdownGenerator) };
 		  assert: [ :regex :input :result | true ]
 ]
 
@@ -75,8 +75,8 @@ MicrodownExperiment >> weightedGrammarSchema [
 	
 	markdownGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
 
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
-		  argumentConstraints: { (PBTObjectConstraint new objectClass: String; generator: markdownGenerator) };
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
+		  argumentConstraints: { (UmeObjectConstraint new objectClass: String; generator: markdownGenerator) };
 		  assert: [ :regex :input :result | true ]
 ]

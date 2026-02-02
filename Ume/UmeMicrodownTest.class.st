@@ -42,9 +42,9 @@ UmeMicrodownTest >> setUp [
 	super setUp.
 	self timeLimit: 5 hours.
 
-	schema := PBTSchema new
-		          receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
-		          argumentConstraints: { PBTObjectConstraint new objectClass: String; generator: self markdownGenerator };
+	schema := UmeSchema new
+		          receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));
+		          argumentConstraints: { UmeObjectConstraint new objectClass: String; generator: self markdownGenerator };
 		          score: [ :re :inputs :res | 1 ];
 		          assert: [ :regex :input :result | true ].
 ]

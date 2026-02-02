@@ -29,16 +29,16 @@ NeoJSONExperiment >> schemaCorpusWith: mutators [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
-	jsonGenerator := PBTCorpusGenerator new
+	jsonGenerator := UmeCorpusGenerator new
 		  seeds: self seeds deepCopy;
 		  mutationsPerIteration: self mpi;
 		  mutators: mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 	
-	receiverConstraint := PBTObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
-	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: jsonGenerator }.
+	receiverConstraint := UmeObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
+	argumentConstraints := { UmeObjectConstraint new objectClass: String; generator: jsonGenerator }.
 
-	^ PBTSchema new
+	^ UmeSchema new
 		receiverConstraint: receiverConstraint;
 		argumentConstraints: argumentConstraints;
 		assert: [ :regex :input :result | true ].
@@ -62,10 +62,10 @@ NeoJSONExperiment >> weightedGrammarSchema [
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
 	jsonGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
-	receiverConstraint := PBTObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
-	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: jsonGenerator }.
+	receiverConstraint := UmeObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
+	argumentConstraints := { UmeObjectConstraint new objectClass: String; generator: jsonGenerator }.
 
-	^ PBTSchema new
+	^ UmeSchema new
 		receiverConstraint: receiverConstraint;
 		argumentConstraints: argumentConstraints;
 		assert: [ :regex :input :result | true ].

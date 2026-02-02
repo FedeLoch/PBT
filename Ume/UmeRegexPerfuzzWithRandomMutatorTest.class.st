@@ -12,19 +12,19 @@ Class {
 { #category : 'running' }
 UmeRegexPerfuzzWithRandomMutatorTest >> regexConstraint [
 
-	^ PBTObjectConstraint new generator:
-		  (PBTCorpusGenerator new
+	^ UmeObjectConstraint new generator:
+		  (UmeCorpusGenerator new
 			   seedGenerator: (PBTGrammarGenerator new
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;
 					    maxSize: 100);
 			   mutationsPerIteration: 1;
 			   mutators: {
-					   (PBTAddByteMutator new maxInputSize: 40).
-					   PBTByteFlipMutator new.
-					   PBTDelByteMutator new
+					   (UmeAddByteMutator new maxInputSize: 40).
+					   UmeByteFlipMutator new.
+					   UmeDelByteMutator new
 				};
-			   heuristic: PBTPickBestElementDifferenceHeuristic new)
+			   heuristic: UmePickBestElementDifferenceHeuristic new)
 ]
 
 { #category : 'running' }
@@ -32,7 +32,7 @@ UmeRegexPerfuzzWithRandomMutatorTest >> setUp [
 	
 	super setUp.
 	schema score: nil.
-	runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
+	runner := UmeRunner test: RxMatcher >> #matches: from: schema for: 2 minutes.
 ]
 
 { #category : 'tests' }

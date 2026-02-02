@@ -23,7 +23,7 @@ UmeRegexOptionalGenTest >> regexConstraint [
 		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100
 	}.
 	
-	^ PBTObjectConstraint new generator: regexGenerator
+	^ UmeObjectConstraint new generator: regexGenerator
 ]
 
 { #category : 'tests' }
@@ -31,7 +31,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByAllocatedMemory; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByAllocatedMemory; run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -42,7 +42,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByAllocatedMemory; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByAllocatedMemory; run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -53,7 +53,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -64,7 +64,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -75,7 +75,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -86,7 +86,7 @@ UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeFor
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 1 second) guidedByExecutionTime; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 1 second) guidedByExecutionTime; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 
@@ -97,7 +97,7 @@ UmeRegexOptionalGenTest >> testGuidingByMethodsCalls [
 
 	| pbtResult |
 	
-	pbtResult := (PBTRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls ; run.
+	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls ; run.
 	
 	self assert: (pbtResult tests size) equals: 10000.
 

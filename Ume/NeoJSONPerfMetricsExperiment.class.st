@@ -29,16 +29,16 @@ NeoJSONPerfMetricsExperiment >> schema [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
-	jsonGenerator := PBTCorpusGenerator new
+	jsonGenerator := UmeCorpusGenerator new
 		  seedGenerator: (UmeConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 	
-	receiverConstraint := PBTObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
-	argumentConstraints := { PBTObjectConstraint new objectClass: String; generator: jsonGenerator }.
+	receiverConstraint := UmeObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
+	argumentConstraints := { UmeObjectConstraint new objectClass: String; generator: jsonGenerator }.
 
-	^ PBTSchema new
+	^ UmeSchema new
 		receiverConstraint: receiverConstraint;
 		argumentConstraints: argumentConstraints;
 		assert: [ :regex :input :result | true ].

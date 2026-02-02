@@ -23,10 +23,10 @@ UmeFactorialWithOptionalGenTest >> setUp [
 	
 	super setUp.
 	
-	receiverConstraint := PBTObjectConstraint new generator:
+	receiverConstraint := UmeObjectConstraint new generator:
 		(PBTDyncamicSelectionGenerator new generators: generators).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
-	schema := PBTSchema new receiverConstraint: receiverConstraint; assert: assert.
+	schema := UmeSchema new receiverConstraint: receiverConstraint; assert: assert.
 ]
 
 { #category : 'tests' }
@@ -34,7 +34,7 @@ UmeFactorialWithOptionalGenTest >> testGivingASmallIntegerSchemaWithDynamicGener
 
 	| pbtResult |
 
-	pbtResult := (PBTRunner test: Integer >> #factorial from: schema times: 1000) run.
+	pbtResult := (UmeRunner test: Integer >> #factorial from: schema times: 1000) run.
 
 	self assertSuccess: pbtResult.
 	self assert: (pbtResult tests size) equals: 1000.

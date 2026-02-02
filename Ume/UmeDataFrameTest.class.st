@@ -32,9 +32,9 @@ UmeDataFrameTest >> setUp [
 	super setUp.
 	self timeLimit: 5 hours.
 
-	schema := PBTSchema new
-		          receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
-		          argumentConstraints: { (PBTObjectConstraint new
+	schema := UmeSchema new
+		          receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
+		          argumentConstraints: { (UmeObjectConstraint new
 				           generator: self csvGenerator;
 				           wrap: [ :input | | file |
 						       file := FileLocator temp / input hash asString, '.csv'.

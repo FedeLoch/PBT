@@ -29,15 +29,15 @@ DataFramePerfMetricsExperiment >> schema [
 
 	| csvGenerator |
 	
-	csvGenerator := PBTCorpusGenerator new
+	csvGenerator := UmeCorpusGenerator new
 		  seedGenerator: (UmeConstantGenerator new value: self seed);
 		  mutationsPerIteration: self mpi;
 		  mutators: self mutators;
-		  heuristic: PBTPickBestElementDifferenceHeuristic new.
+		  heuristic: UmePickBestElementDifferenceHeuristic new.
 	
-	^ PBTSchema new
-		  receiverConstraint: (PBTObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
-		  argumentConstraints: { (PBTObjectConstraint new
+	^ UmeSchema new
+		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));
+		  argumentConstraints: { (UmeObjectConstraint new
 				   generator: csvGenerator;
 				   wrap: [ :input |
 						   | file |

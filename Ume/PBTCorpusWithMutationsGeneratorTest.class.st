@@ -1,6 +1,6 @@
 Class {
 	#name : 'PBTCorpusWithMutationsGeneratorTest',
-	#superclass : 'PBTGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
 	#instVars : [
 		'mutators',
 		'heuristic',
@@ -17,12 +17,12 @@ PBTCorpusWithMutationsGeneratorTest >> setUp [
 
 	super setUp.
 	subGenerator := PBTGrammarMCTSGenerator from: JSONGrammar new.
-	heuristic := PBTPickLastSelectorHeuristic new.
+	heuristic := UmePickLastSelectorHeuristic new.
 	mutators := {
-		PBTMutator mutate: [ :jsonString  | '[', jsonString, ',', (subGenerator gen: nil), ']' ]
+		UmeMutator mutate: [ :jsonString  | '[', jsonString, ',', (subGenerator gen: nil), ']' ]
 	}.
 	
-	generator := PBTCorpusGenerator new
+	generator := UmeCorpusGenerator new
 		generator: subGenerator;
 		mutators: mutators;
 		heuristic: heuristic.

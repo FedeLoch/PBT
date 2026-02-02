@@ -12,18 +12,18 @@ Class {
 { #category : 'running' }
 UmeMicrodownPerfuzzWithTreeGrammarMutatorTest >> markdownGenerator [
 
-	^ PBTCorpusGenerator new
+	^ UmeCorpusGenerator new
 		  seeds: { self seed };
 		  mutationsPerIteration: 100;
-		  mutators: { (PBTGrammarDerivationMutator from: ExtendedMarkdownGrammar new) maxInputSize: 200 };
-		  heuristic: PBTPickBestElementDifferenceHeuristic new
+		  mutators: { (UmeGrammarDerivationMutator from: ExtendedMarkdownGrammar new) maxInputSize: 200 };
+		  heuristic: UmePickBestElementDifferenceHeuristic new
 ]
 
 { #category : 'running' }
 UmeMicrodownPerfuzzWithTreeGrammarMutatorTest >> setUp [
 
 	super setUp.
-	runner := PBTRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
+	runner := UmeRunner test: Microdown class >> #parse: from: schema for: 5 minutes.
 ]
 
 { #category : 'tests' }

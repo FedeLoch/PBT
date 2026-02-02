@@ -62,8 +62,8 @@ PerformanceMetricsPaperExperiment >> mpi [
 PerformanceMetricsPaperExperiment >> mutators [
 
 	^ {
-		(PBTGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxSize.
-		(PBTGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxSize
+		(UmeGrammarLiteralsMutator from: self newGrammar) maxInputSize: self maxSize.
+		(UmeGrammarDerivationMutator from: self newGrammar) maxInputSize: self maxSize
 	}
 ]
 
@@ -92,7 +92,7 @@ PerformanceMetricsPaperExperiment >> runGuidingBy: guidingBlock name: guidingStr
 	
 	schema := self schema.
 	
-	runner := PBTRunner test: self targetMethod from: schema for: self experimentTime.
+	runner := UmeRunner test: self targetMethod from: schema for: self experimentTime.
 	
 	"Guided by current strategy"
 	guidingBlock value: runner.

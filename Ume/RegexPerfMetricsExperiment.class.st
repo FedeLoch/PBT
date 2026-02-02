@@ -48,14 +48,14 @@ RegexPerfMetricsExperiment >> schema [
 
 	| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
 	
-	regexConstraint := PBTObjectConstraint new
+	regexConstraint := UmeObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTCorpusGenerator new
+		generator: (UmeCorpusGenerator new
 		seedGenerator: (UmeConstantGenerator new value: self seed);
 		mutationsPerIteration: self mpi; mutators: self mutators;
-		heuristic: PBTPickBestElementDifferenceHeuristic new).
+		heuristic: UmePickBestElementDifferenceHeuristic new).
 	
-	sharedProperties := InternalConstraintProperties
+	sharedProperties := UmeInternalConstraintProperties
 		from: { ('grammar' -> regexConstraint) } asDictionary.
 	
 	regexGenerator := UmeGenerator do: [ :props :feedback | | regex |
@@ -63,19 +63,19 @@ RegexPerfMetricsExperiment >> schema [
 		props at: 'input' put: regex minimalStringMatching.
 		PBTRegex fromString: regex ].
 	
-	receiverConstraint := PBTObjectConstraint new objectClass: RxMatcher;
+	receiverConstraint := UmeObjectConstraint new objectClass: RxMatcher;
 		generator: regexGenerator;
 		props: sharedProperties.
 	
 	argumentConstraints := {
-		(PBTObjectConstraint new objectClass: String;
+		(UmeObjectConstraint new objectClass: String;
 			props: sharedProperties;
 			generator: (UmeGenerator do: [ :props :feedback | props at: 'input' ]))
 	}.
 	
 	assert := [ :regex :input :result | result ].
 	
-	^ PBTSchema new
+	^ UmeSchema new
 		receiverConstraint: receiverConstraint;
 		argumentConstraints: argumentConstraints;
 		assert: assert
