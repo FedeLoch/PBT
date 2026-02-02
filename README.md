@@ -6,13 +6,11 @@
 
 Ume is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
 
----
 
 ## Core Objective
 
 The goal of Ume is to automate the discovery of **worst-case scenarios**. Whether you are looking for inputs that break your invariants (Property Testing) or inputs that maximize execution time/memory, Ume guides the search using feedback from the system under test.
 
----
 
 ## Architecture Overview
 
@@ -20,24 +18,12 @@ Ume is built with a highly modular and decoupled architecture, allowing for flex
 
 ![Ume Architecture](ume-images/ume.png)
 
-```mermaid
-graph TD
-    Runner[PBTRunner] --> Schema[PBTSchema]
-    Runner --> Generator[PBTCaseGenerator]
-    Runner --> Evaluator[PBTEvaluator]
-    Generator --> Mutator[PBTMutator]
-    Evaluator --> FeedbackEval[PBTFeedbackEvaluator]
-    FeedbackEval --> Generator
-    FeedbackEval --> Shrinker[PBTShrinker]
-    Runner --> Result[PBTResult]
-```
-
 ### Key Components
 - **`PBTRunner`**: The engine of the search. Orchestrates execution, chooses the guidance strategy, and manages stop criteria.
-- **`PBTSchema`**: Defines the "shape" of the test. It maps receiver and argument constraints to a target method and defines the **Assert** (the property to maintain).
-- **`PBTEvaluator`**: Instruments the code to measure specific costs (e.g., coverage, execution time, method calls).
-- **`PBTFeedbackEvaluator`**: The "brain" that analyzes results. It uses heuristics like Tournament Selection to feed interesting discoveries back to the generators.
-- **`PBTShrinker`**: (Under development) Designed to work internally within the evaluation loop to automatically minimize each **top case** as it is discovered.
+- **`PBTSchema`**: Defines the "shape" of fuzzing configuration. It maps receiver and argument constraints to a target method and defines the **Assert** (the property to maintain).
+- **`PBTEvaluator`**: Instruments the code to measure specific costs (e.g., coverage, execution time, method calls). Evaluate each UmeCase and provide its results to the feedback evaluator.
+- **`PBTFeedbackEvaluator`**: Analyzes results. It uses profiling metrics to assign a score table to each case.
+- **`PBTShrinker`**: (Work in progress) Designed to work internally within the evaluation loop to automatically shrink each **top case** as it is discovered.
 
 ---
 
