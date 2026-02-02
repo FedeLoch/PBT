@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTRegex',
+	#name : 'UmeRegex',
 	#superclass : 'Object',
 	#instVars : [
 		'regexString',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTRegex class >> fromString: aString [
+UmeRegex class >> fromString: aString [
 
 	^ self new
 		  regexString: aString;
@@ -19,37 +19,37 @@ PBTRegex class >> fromString: aString [
 ]
 
 { #category : 'ston-core' }
-PBTRegex class >> stonAllInstVarNames [ 
+UmeRegex class >> stonAllInstVarNames [ 
 
 	^ super stonAllInstVarNames copyWithout: #regex
 ]
 
 { #category : 'compiling' }
-PBTRegex >> compileRegex [
+UmeRegex >> compileRegex [
 
 	^ regexString asRegex
 ]
 
 { #category : 'testing' }
-PBTRegex >> matches: aString [ 
+UmeRegex >> matches: aString [ 
 	
 	^ self regex matches: aString
 ]
 
 { #category : 'accessing' }
-PBTRegex >> regex [
+UmeRegex >> regex [
 
 	^ regex ifNil: [ regex := regexString asRegex ]
 ]
 
 { #category : 'accessing' }
-PBTRegex >> regexString [
+UmeRegex >> regexString [
 
 	^ regexString
 ]
 
 { #category : 'accessing' }
-PBTRegex >> regexString: anObject [
+UmeRegex >> regexString: anObject [
 
 	regexString := anObject
 ]

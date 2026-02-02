@@ -35,7 +35,7 @@ RegexPerfMetricsExperiment >> regexByProp: props and: feedback [
 
 	[ regex ] whileNil: [ [ | maybe |
 		maybe := grammarConstraint gen.
-		(PBTRegex fromString: maybe) compileRegex.
+		(UmeRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
 			do: [ :e | "1 halt." ] ].
@@ -49,7 +49,7 @@ RegexPerfMetricsExperiment >> schema [
 	| assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
 	
 	regexConstraint := UmeObjectConstraint new
-		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		unwrap: [ :case | (case class = UmeRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (UmeCorpusGenerator new
 		seedGenerator: (UmeConstantGenerator new value: self seed);
 		mutationsPerIteration: self mpi; mutators: self mutators;
@@ -61,7 +61,7 @@ RegexPerfMetricsExperiment >> schema [
 	regexGenerator := UmeGenerator do: [ :props :feedback | | regex |
 		regex := self regexByProp: props and: feedback.
 		props at: 'input' put: regex minimalStringMatching.
-		PBTRegex fromString: regex ].
+		UmeRegex fromString: regex ].
 	
 	receiverConstraint := UmeObjectConstraint new objectClass: RxMatcher;
 		generator: regexGenerator;

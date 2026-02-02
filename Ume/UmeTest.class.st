@@ -95,14 +95,14 @@ UmeTest >> feedback: aFeedback [
 ]
 
 { #category : 'as yet unclassified' }
-UmeTest >> installRegressionUnitTestIn: aPBTUnitTest [
+UmeTest >> installRegressionUnitTestIn: aUmeUnitTest [
 	
 	| selector sourceCode feedbackSystem evaluator expected |
 	
-	selector := (aPBTUnitTest regressionTestName: self) asSymbol.
+	selector := (aUmeUnitTest regressionTestName: self) asSymbol.
 
-	feedbackSystem := STON toString: aPBTUnitTest runner feedbackEvaluator clear.
-	evaluator := STON toString: aPBTUnitTest runner evaluator.
+	feedbackSystem := STON toString: aUmeUnitTest runner feedbackEvaluator clear.
+	evaluator := STON toString: aUmeUnitTest runner evaluator.
 	expected := STON toString: feedback relevantValues.
 
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
@@ -117,18 +117,18 @@ UmeTest >> installRegressionUnitTestIn: aPBTUnitTest [
 		} asDictionary
 	'].
 
-    aPBTUnitTest class
+    aUmeUnitTest class
         compile: sourceCode
-        classified: 'PBT dynamic regression tests'.
+        classified: 'Ume dynamic regression tests'.
 	
     ^ selector
 ]
 
 { #category : 'as yet unclassified' }
-UmeTest >> installUnitTestIn: aPBTUnitTest [
+UmeTest >> installUnitTestIn: aUmeUnitTest [
 	
 	| selector sourceCode |
-	selector := (aPBTUnitTest testName: self) asSymbol.
+	selector := (aUmeUnitTest testName: self) asSymbol.
 
 	sourceCode := String streamContents: [ :s | s  nextPutAll: selector; crtab;
      	nextPutAll: '
@@ -139,9 +139,9 @@ UmeTest >> installUnitTestIn: aPBTUnitTest [
 		} asDictionary
 	'].
 
-    aPBTUnitTest class
+    aUmeUnitTest class
         compile: sourceCode
-        classified: 'PBT dynamic tests'.
+        classified: 'Ume dynamic tests'.
 
     ^ selector
 ]

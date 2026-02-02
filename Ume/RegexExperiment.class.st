@@ -35,7 +35,7 @@ RegexExperiment >> regexByProp: props and: feedback [
 
 	[ regex ] whileNil: [ [ | maybe |
 		maybe := grammarConstraint gen.
-		(PBTRegex fromString: maybe) compileRegex.
+		(UmeRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
 			do: [ :e | "1 halt." ] ].
@@ -49,7 +49,7 @@ RegexExperiment >> schemaCorpusWith: mutators [
 | assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
 
 	regexConstraint := UmeObjectConstraint new
-		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		unwrap: [ :case | (case class = UmeRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (UmeCorpusGenerator new
 		seeds: self seeds deepCopy;
 		mutationsPerIteration: self mpi; mutators: mutators;
@@ -61,7 +61,7 @@ RegexExperiment >> schemaCorpusWith: mutators [
 	regexGenerator := UmeGenerator do: [ :props :feedback | | regex |
 		regex := self regexByProp: props and: feedback.
 		props at: 'input' put: regex minimalStringMatching.
-		PBTRegex fromString: regex ].
+		UmeRegex fromString: regex ].
 	
 	receiverConstraint := UmeObjectConstraint new objectClass: RxMatcher;
 		generator: regexGenerator;
@@ -99,7 +99,7 @@ RegexExperiment >> weightedGrammarSchema [
 | assert sharedProperties argumentConstraints receiverConstraint regexGenerator regexConstraint |
 
 	regexConstraint := UmeObjectConstraint new
-		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
+		unwrap: [ :case | (case class = UmeRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
 		generator: (UmeGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize).
 	
 	sharedProperties := UmeInternalConstraintProperties
@@ -108,7 +108,7 @@ RegexExperiment >> weightedGrammarSchema [
 	regexGenerator := UmeGenerator do: [ :props :feedback | | regex |
 		regex := self regexByProp: props and: feedback.
 		props at: 'input' put: regex minimalStringMatching.
-		PBTRegex fromString: regex ].
+		UmeRegex fromString: regex ].
 	
 	receiverConstraint := UmeObjectConstraint new objectClass: RxMatcher;
 		generator: regexGenerator;

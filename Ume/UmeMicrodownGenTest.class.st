@@ -35,7 +35,7 @@ UmeMicrodownGenTest >> targetMethod [
 	^ Microdown class >> #parse:
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_102246656 [
 	
 		self doTest: {
@@ -46,7 +46,7 @@ UmeMicrodownGenTest >> test_102246656 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_1055700736 [
 	
 		self doTest: {
@@ -57,7 +57,7 @@ UmeMicrodownGenTest >> test_1055700736 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_123604736 [
 	
 		self doTest: {
@@ -68,7 +68,7 @@ UmeMicrodownGenTest >> test_123604736 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_265502976 [
 	
 		self doTest: {
@@ -79,7 +79,7 @@ UmeMicrodownGenTest >> test_265502976 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_285262592 [
 	
 		self doTest: {
@@ -90,7 +90,7 @@ UmeMicrodownGenTest >> test_285262592 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_310533888 [
 	
 		self doTest: {
@@ -101,7 +101,7 @@ UmeMicrodownGenTest >> test_310533888 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_350809344 [
 	
 		self doTest: {
@@ -112,7 +112,7 @@ UmeMicrodownGenTest >> test_350809344 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_39187200 [
 	
 		self doTest: {
@@ -123,7 +123,7 @@ UmeMicrodownGenTest >> test_39187200 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_428228352 [
 	
 		self doTest: {
@@ -134,7 +134,7 @@ UmeMicrodownGenTest >> test_428228352 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_532077312 [
 	
 		self doTest: {
@@ -145,7 +145,7 @@ UmeMicrodownGenTest >> test_532077312 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_539532544 [
 	
 		self doTest: {
@@ -156,7 +156,7 @@ UmeMicrodownGenTest >> test_539532544 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_558823680 [
 	
 		self doTest: {
@@ -167,7 +167,7 @@ UmeMicrodownGenTest >> test_558823680 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_612167936 [
 	
 		self doTest: {
@@ -178,7 +178,7 @@ UmeMicrodownGenTest >> test_612167936 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_647628544 [
 	
 		self doTest: {
@@ -189,7 +189,7 @@ UmeMicrodownGenTest >> test_647628544 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_656077568 [
 	
 		self doTest: {
@@ -200,7 +200,7 @@ UmeMicrodownGenTest >> test_656077568 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_764877056 [
 	
 		self doTest: {
@@ -211,7 +211,7 @@ UmeMicrodownGenTest >> test_764877056 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_766194944 [
 	
 		self doTest: {
@@ -222,7 +222,7 @@ UmeMicrodownGenTest >> test_766194944 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_776948480 [
 	
 		self doTest: {
@@ -233,7 +233,7 @@ UmeMicrodownGenTest >> test_776948480 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_784017152 [
 	
 		self doTest: {
@@ -244,7 +244,7 @@ UmeMicrodownGenTest >> test_784017152 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_806208768 [
 	
 		self doTest: {
@@ -255,7 +255,7 @@ UmeMicrodownGenTest >> test_806208768 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_85236992 [
 	
 		self doTest: {
@@ -266,7 +266,7 @@ UmeMicrodownGenTest >> test_85236992 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_875335936 [
 	
 		self doTest: {
@@ -277,7 +277,7 @@ UmeMicrodownGenTest >> test_875335936 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_883755776 [
 	
 		self doTest: {
@@ -288,7 +288,7 @@ UmeMicrodownGenTest >> test_883755776 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_947127552 [
 	
 		self doTest: {
@@ -299,7 +299,7 @@ UmeMicrodownGenTest >> test_947127552 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_975084288 [
 	
 		self doTest: {
@@ -310,7 +310,7 @@ UmeMicrodownGenTest >> test_975084288 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeMicrodownGenTest >> test_975574272 [
 	
 		self doTest: {

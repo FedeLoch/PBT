@@ -32,10 +32,10 @@ UmeFactorialWithOptionalGenTest >> setUp [
 { #category : 'tests' }
 UmeFactorialWithOptionalGenTest >> testGivingASmallIntegerSchemaWithDynamicGeneratorsThenValidateFactorialResult [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Integer >> #factorial from: schema times: 1000) run.
+	result := (UmeRunner test: Integer >> #factorial from: schema times: 1000) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 1000.
 ]

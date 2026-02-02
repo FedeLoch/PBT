@@ -41,7 +41,7 @@ UmeUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 { #category : 'running' }
 UmeUnitTest >> doRegressionTest: case [
 
-	| receiver arguments targetSelector expectedFeedback profilingResult feedbackEvaluator evaluator program pbtCase |
+	| receiver arguments targetSelector expectedFeedback profilingResult feedbackEvaluator evaluator program umeCase |
 
 	receiver := STON fromString: (case at: 'receiver').
 	arguments := STON fromString: (case at: 'arguments').
@@ -56,9 +56,9 @@ UmeUnitTest >> doRegressionTest: case [
 
 	profilingResult := evaluator analyzer analyze: program.
 	
-	pbtCase := UmeTest new result: (UmeEvalSuccess new profilingResult: profilingResult).
+	umeCase := UmeTest new result: (UmeEvalSuccess new profilingResult: profilingResult).
 
-	self assert: (feedbackEvaluator eval: pbtCase) relevantValues equals: expectedFeedback
+	self assert: (feedbackEvaluator eval: umeCase) relevantValues equals: expectedFeedback
 ]
 
 { #category : 'running' }
@@ -77,13 +77,13 @@ UmeUnitTest >> doTest: case [
 { #category : 'running' }
 UmeUnitTest >> generateRegressionTests: duration [
 
-	self generateRegressionUnitTests: (self runPBT: duration)
+	self generateRegressionUnitTests: (self runUme: duration)
 ]
 
 { #category : 'running' }
-UmeUnitTest >> generateRegressionUnitTests: pbtResult [
+UmeUnitTest >> generateRegressionUnitTests: result [
 
-	pbtResult topCases do: [ :t | t installRegressionUnitTestIn: self ]
+	result topCases do: [ :t | t installRegressionUnitTestIn: self ]
 ]
 
 { #category : 'running' }
@@ -91,19 +91,19 @@ UmeUnitTest >> generateTests [
 
 	<script: 'self new generateTests'>
 	
-	self generateUnitTests: (self runPBT: self generationTime)
+	self generateUnitTests: (self runUme: self generationTime)
 ]
 
 { #category : 'running' }
 UmeUnitTest >> generateTests: duration [
 
-	self generateUnitTests: (self runPBT: duration)
+	self generateUnitTests: (self runUme: duration)
 ]
 
 { #category : 'running' }
-UmeUnitTest >> generateUnitTests: pbtResult [
+UmeUnitTest >> generateUnitTests: result [
 
-	pbtResult topCases do: [ :t | t installUnitTestIn: self ]
+	result topCases do: [ :t | t installUnitTestIn: self ]
 ]
 
 { #category : 'running' }
@@ -170,14 +170,14 @@ UmeUnitTest >> receiverGenerator [
 ]
 
 { #category : 'running' }
-UmeUnitTest >> regressionTestName: pbtTest [
+UmeUnitTest >> regressionTestName: umeTest [
 
 	"TODO: REWRITE ME IF YOU WANT TO CUSTOM ME"
-	^ 'test_regression_', pbtTest name asString
+	^ 'test_regression_', umeTest name asString
 ]
 
 { #category : 'running' }
-UmeUnitTest >> runPBT: duration [
+UmeUnitTest >> runUme: duration [
 
 	self instanceRunner: duration.
 	self guidedBy.
@@ -229,8 +229,8 @@ UmeUnitTest >> targetMethod [
 ]
 
 { #category : 'running' }
-UmeUnitTest >> testName: pbtTest [
+UmeUnitTest >> testName: umeTest [
 
 	"TODO: REWRITE ME IF YOU WANT TO CUSTOM ME"
-	^ 'test_', pbtTest name asString
+	^ 'test_', umeTest name asString
 ]

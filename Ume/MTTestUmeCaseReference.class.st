@@ -7,9 +7,9 @@ Class {
 }
 
 { #category : 'instance creation' }
-MTTestUmeCaseReference class >> for: aPBTCase [
+MTTestUmeCaseReference class >> for: aUmeCase [
 
-	^ self new initializeFor: aPBTCase
+	^ self new initializeFor: aUmeCase
 ]
 
 { #category : 'building suites' }

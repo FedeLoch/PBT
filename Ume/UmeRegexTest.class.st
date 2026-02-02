@@ -24,7 +24,7 @@ UmeRegexTest >> regexByProp: props and: feedback [
 
 	[ regex ] whileNil: [ [ | maybe |
 		maybe := grammarConstraint gen.
-		(PBTRegex fromString: maybe) compileRegex.
+		(UmeRegex fromString: maybe) compileRegex.
 		regex := maybe ]
 			on: Error
 			do: [ :e | "1 halt." ] ].
@@ -62,7 +62,7 @@ UmeRegexTest >> setUp [
 		             | regex |
 		             regex := self regexByProp: props and: feedback.
 		             props at: 'input' put: regex minimalStringMatching.
-						 PBTRegex fromString: regex ].
+						 UmeRegex fromString: regex ].
 
 	receiverConstraint := UmeObjectConstraint new
 		                      objectClass: RxMatcher;
@@ -100,20 +100,20 @@ UmeRegexTest >> setUp [
 { #category : 'tests' }
 UmeRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBug [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexTest >> testGivingARegexFuzzerGeneratorThenWeForceThePerformanceBugByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 ]

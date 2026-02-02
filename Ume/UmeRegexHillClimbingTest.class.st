@@ -29,109 +29,109 @@ UmeRegexHillClimbingTest >> regexConstraint [
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByAllocatedMemory; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 1000) guidedByAllocatedMemory; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByAllocatedMemory; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByAllocatedMemory; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByExecutionTime; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByExecutionTime; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScore [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByScore; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByScore; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByScore; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingTest >> testGuidedByMethodsCalled [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]

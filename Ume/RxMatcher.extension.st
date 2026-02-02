@@ -84,7 +84,7 @@ RxMatcher class >> mutate: stringRegex [
 RxMatcher class >> mutateCharacter: stringRegex using: otherString [
 
 	| result target |
-	target := stringRegex class = PBTRegex
+	target := stringRegex class = UmeRegex
 		          ifTrue: [ stringRegex regexString ]
 		          ifFalse: [ stringRegex ].
 

@@ -20,32 +20,32 @@ UmeRegexGramatronTest >> regexConstraint [
 { #category : 'tests' }
 UmeRegexGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexGramatronTest >> testGivingARegexFuzzerAndAGramatronGeneratorThenWeForceThePerformanceBugGuidedByScoreByTimeWithShallow [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 1 minutes) guidedByScore; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexGramatronTest >> testGuidedByMethodsCalled [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]

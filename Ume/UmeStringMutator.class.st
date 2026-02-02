@@ -18,7 +18,7 @@ UmeStringMutator >> mutate: string [
 	
 	| target |
 	
-	target := string class = PBTRegex ifTrue: [ string regexString ] ifFalse: [ string ].
+	target := string class = UmeRegex ifTrue: [ string regexString ] ifFalse: [ string ].
 		
 	^ self applyMutation: target
 ]

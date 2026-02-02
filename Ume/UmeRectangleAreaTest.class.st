@@ -42,22 +42,22 @@ UmeRectangleAreaTest >> setUp [
 { #category : 'as yet unclassified' }
 UmeRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResult [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Rectangle >> #area from: schema times: 1000) run.
+	result := (UmeRunner test: Rectangle >> #area from: schema times: 1000) run.
 	
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 1000.
 ]
 
 { #category : 'as yet unclassified' }
 UmeRectangleAreaTest >> testGivingASmallIntegerSchemaThenValidatePlusResultWithCoverageChangeTolerance [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Rectangle >> #area from: schema withCoverageTolerance: 1000) run.
+	result := (UmeRunner test: Rectangle >> #area from: schema withCoverageTolerance: 1000) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult totalCoverage percentage) equals: 100. 
-	self assert: (pbtResult tests size < 1000) equals: true.
+	self assertSuccess: result.
+	self assert: (result totalCoverage percentage) equals: 100. 
+	self assert: (result tests size < 1000) equals: true.
 ]

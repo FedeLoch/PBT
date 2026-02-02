@@ -48,7 +48,7 @@ UmeNeoJSONTest >> targetMethod [
 	^ NeoJSONReader class >> #fromString:
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeNeoJSONTest >> test_474231552 [
 	
 		self doTest: {
@@ -59,7 +59,7 @@ UmeNeoJSONTest >> test_474231552 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeNeoJSONTest >> test_594914560 [
 	
 		self doTest: {
@@ -70,7 +70,7 @@ UmeNeoJSONTest >> test_594914560 [
 	
 ]
 
-{ #category : 'PBT dynamic tests' }
+{ #category : 'Ume dynamic tests' }
 UmeNeoJSONTest >> test_774203648 [
 	
 		self doTest: {

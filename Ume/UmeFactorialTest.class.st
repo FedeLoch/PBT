@@ -23,43 +23,43 @@ UmeFactorialTest >> setUp [
 { #category : 'tests' }
 UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResult [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Integer >> #factorial from: schema) run.
+	result := (UmeRunner test: Integer >> #factorial from: schema) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 100.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 100.
 ]
 
 { #category : 'tests' }
 UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromSpecificCountOfIterations [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Integer >> #factorial from: schema times: 2542) run.
+	result := (UmeRunner test: Integer >> #factorial from: schema times: 2542) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 2542.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 2542.
 ]
 
 { #category : 'tests' }
 UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultFromTimeIsnteadOfIterations [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner test: Integer >> #factorial from: schema for: 2 seconds) run.
+	result := (UmeRunner test: Integer >> #factorial from: schema for: 2 seconds) run.
 
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult totalTime >= 2 seconds) equals: true.
+	self assertSuccess: result.
+	self assert: (result totalTime >= 2 seconds) equals: true.
 ]
 
 { #category : 'tests' }
 UmeFactorialTest >> testGivingASmallIntegerSchemaThenValidateFactorialResultWithoutSchema [
 	
-	| pbtResult |
+	| result |
 	"TODO: Not executable until we support schema inference"
-	pbtResult := (UmeRunner test: Integer >> #factorial) run.
+	result := (UmeRunner test: Integer >> #factorial) run.
 	
-	self assertSuccess: pbtResult.
-	self assert: (pbtResult tests size) equals: 1000.
+	self assertSuccess: result.
+	self assert: (result tests size) equals: 1000.
 ]

@@ -47,7 +47,7 @@ UmeShrinker >> classesToProfile: someClassesToProfile [
 { #category : 'shrinking' }
 UmeShrinker >> evalInput: input [
 
-	| profilingResult pbtCase program |
+	| profilingResult umeCase program |
 	
 	(input = 'aa*a*..') ifTrue: [ 1 halt. ].
 	
@@ -55,10 +55,10 @@ UmeShrinker >> evalInput: input [
 		program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
 
 		[ 	profilingResult := evaluator analyzer analyze: program.
-			pbtCase := UmeTest new result: (UmeEvalSuccess new profilingResult: profilingResult)
+			umeCase := UmeTest new result: (UmeEvalSuccess new profilingResult: profilingResult)
 		] on: Error do: [ ^ nil ].
 
-		(feedbackEvaluator eval: pbtCase) absoluteImprovement
+		(feedbackEvaluator eval: umeCase) absoluteImprovement
 	].
 	
 	^ memo at: input

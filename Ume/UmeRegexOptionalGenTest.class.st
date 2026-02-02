@@ -29,76 +29,76 @@ UmeRegexOptionalGenTest >> regexConstraint [
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemory [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByAllocatedMemory; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByAllocatedMemory; run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByAllocatedMemoryByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByAllocatedMemory; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByAllocatedMemory; run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverage [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByCoverage; run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByCoverageByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByCoverage; run.
 
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema times: 10000) guidedByExecutionTime; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGivingARegexFuzzerAndAnOptionalGeneratorThenWeForceThePerformanceBugGuidedByExecutionTimeByTime [
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 1 second) guidedByExecutionTime; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 1 second) guidedByExecutionTime; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> testGuidingByMethodsCalls [ 
 
-	| pbtResult |
+	| result |
 	
-	pbtResult := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls ; run.
+	result := (UmeRunner test: RxMatcher >> #matches: from: schema for: 10 minutes) guidedByMethodsCalls ; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]

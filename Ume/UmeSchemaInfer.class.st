@@ -68,10 +68,10 @@ UmeSchemaInfer class >> receiverConstraint: class calling: methods [
 	"
 "   propConstraints := class instanceVariables flatCollect: [ :ivar |
             ""Add constraints based on instance variables, e.g., their class types""
-            ""constraints add: (PBTSchemaConstraint forVariable: ivar class: (eachClass classPool at: ivar ifAbsent: [ Object ]))""
+            ""constraints add: (UmeSchemaConstraint forVariable: ivar class: (eachClass classPool at: ivar ifAbsent: [ Object ]))""
    ]."
 
-   "^ PBTObjectConstraint new objectClass: methodClass; props: propConstraints; gen: (PBTGenerator genBy: methodClass from: propConstraints)"
+   "^ UmeObjectConstraint new objectClass: methodClass; props: propConstraints; gen: (UmeGenerator genBy: methodClass from: propConstraints)"
 	^ nil
 ]
 

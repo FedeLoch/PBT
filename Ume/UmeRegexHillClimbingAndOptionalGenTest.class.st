@@ -41,21 +41,21 @@ UmeRegexHillClimbingAndOptionalGenTest >> regexConstraint [
 { #category : 'tests' }
 UmeRegexHillClimbingAndOptionalGenTest >> testGivingARegexFuzzerAndAHillClimbingGeneratorThenWeForceThePerformanceBugGuidedScoreByTimeWithShallow [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByScore; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 2 minutes) guidedByScore; run.
 	
-	self assert: (pbtResult tests size) equals: 10000.
+	self assert: (result tests size) equals: 10000.
 
 ]
 
 { #category : 'tests' }
 UmeRegexHillClimbingAndOptionalGenTest >> testGuidingByMethodsCalls [
 
-	| pbtResult |
+	| result |
 
-	pbtResult := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 5 minutes) guidedByMethodsCalls; run.
+	result := (UmeRunner testWithLowCost: RxMatcher >> #matches: from: schema for: 5 minutes) guidedByMethodsCalls; run.
 	
-	self assert: (pbtResult tests size) equals: 1000.
+	self assert: (result tests size) equals: 1000.
 
 ]
