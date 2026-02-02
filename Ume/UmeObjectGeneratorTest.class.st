@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTObjectGeneratorTest',
+	#name : 'UmeObjectGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-PBTObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
+UmeObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
 
 	| generator random constraint |
 	
@@ -27,7 +27,7 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfACollectionOfIntegers [
 ]
 
 { #category : 'tests' }
-PBTObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
+UmeObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
 
 	| generator constraint |
 	generator := UmeGenerator onceInstance: [ :instance :props |
@@ -40,10 +40,10 @@ PBTObjectGeneratorTest >> testGenerateAnInstanceOfAValidRectangle [
 		              props: {
 				              ('origin' -> (UmeObjectConstraint new
 						                objectClass: Point;
-						                generator: PBTPointGenerator new)).
+						                generator: UmePointGenerator new)).
 				              ('corner' -> (UmeObjectConstraint new
 					                objectClass: Point;
-					                generator: PBTPointGenerator new)) }.
+					                generator: UmePointGenerator new)) }.
 
 	self assert: ((generator gen: constraint) class) equals: Rectangle.
 	self assert: ((generator gen: constraint) area >= 0) equals: true.

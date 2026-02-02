@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGeneratorOptionsTest',
+	#name : 'UmeGeneratorOptionsTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,34 +7,34 @@ Class {
 }
 
 { #category : 'tests' }
-PBTGeneratorOptionsTest >> testGenerateAnInstanceOfBoolean [
+UmeGeneratorOptionsTest >> testGenerateAnInstanceOfBoolean [
 
 	| generator options |
 	
 	options := { true . false }.
-	generator := PBTOptionsGenerator new from: options.
+	generator := UmeOptionsGenerator new from: options.
 
 	"it's not necessary to pass it a constraint argument"
 	self assert: (options includes: (generator gen: nil)) equals: true
 ]
 
 { #category : 'tests' }
-PBTGeneratorOptionsTest >> testGenerateAnInstanceOfSmallIntegerByRange [
+UmeGeneratorOptionsTest >> testGenerateAnInstanceOfSmallIntegerByRange [
 
 	| generator |
 	
-	generator := PBTOptionsGenerator new from: (0 to: 100).
+	generator := UmeOptionsGenerator new from: (0 to: 100).
 
 	"it's not necessary to pass it a constraint argument"
 	self assert: ((0 to: 100) includes: (generator gen: nil)) equals: true
 ]
 
 { #category : 'tests' }
-PBTGeneratorOptionsTest >> testGenerateAnInstanceOfStringByArray [
+UmeGeneratorOptionsTest >> testGenerateAnInstanceOfStringByArray [
 
 	| generator options |
 	options := { 'h' . 'o' . 'l' . 'a' . 'k' . 'e' . 'a' . 'z' . 'e' }.
-	generator := PBTOptionsGenerator new from: options.
+	generator := UmeOptionsGenerator new from: options.
 
 	"it's not necessary to pass it a constraint argument"
 	self assert: (options includes: (generator gen: nil)) equals: true

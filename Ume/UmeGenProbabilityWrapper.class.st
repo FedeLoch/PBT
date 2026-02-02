@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGenProbabilityWrapper',
+	#name : 'UmeGenProbabilityWrapper',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'weight',
@@ -11,44 +11,44 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGenProbabilityWrapper class >> from: gen [
+UmeGenProbabilityWrapper class >> from: gen [
 
 	^ self new generator: gen
 ]
 
 { #category : 'as yet unclassified' }
-PBTGenProbabilityWrapper >> decreaseWeight [
+UmeGenProbabilityWrapper >> decreaseWeight [
 
 	weight := ( weight -1 ) max: 1
 ]
 
 { #category : 'accessing' }
-PBTGenProbabilityWrapper >> gen: constaint [
+UmeGenProbabilityWrapper >> gen: constaint [
 
 	^ generator gen: constaint
 ]
 
 { #category : 'accessing' }
-PBTGenProbabilityWrapper >> generator: gen [
+UmeGenProbabilityWrapper >> generator: gen [
 
 	generator := gen
 ]
 
 { #category : 'as yet unclassified' }
-PBTGenProbabilityWrapper >> increaseWeight [
+UmeGenProbabilityWrapper >> increaseWeight [
 
 	weight := weight + 1
 ]
 
 { #category : 'initialization' }
-PBTGenProbabilityWrapper >> initialize [ 
+UmeGenProbabilityWrapper >> initialize [ 
 	
 	super initialize.
 	weight := 1
 ]
 
 { #category : 'initialization' }
-PBTGenProbabilityWrapper >> weight [
+UmeGenProbabilityWrapper >> weight [
 
 	^ weight 
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTOptionsGenerator',
+	#name : 'UmeOptionsGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'range'
@@ -10,19 +10,19 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTOptionsGenerator >> feed: feedback [
+UmeOptionsGenerator >> feed: feedback [
 
 	"do nothing"
 ]
 
 { #category : 'instance creation' }
-PBTOptionsGenerator >> from: aRange [
+UmeOptionsGenerator >> from: aRange [
 
 	range := aRange.
 ]
 
 { #category : 'as yet unclassified' }
-PBTOptionsGenerator >> gen: myConstraint [
+UmeOptionsGenerator >> gen: myConstraint [
 
 	^ range atRandom
 ]

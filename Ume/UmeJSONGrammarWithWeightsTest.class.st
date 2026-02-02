@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 UmeJSONGrammarWithWeightsTest >> jsonGenerator [
 
-	^ PBTGrammarGenerator new grammar: JSONGrammar new; maxSize: 100
+	^ UmeGrammarGenerator new grammar: JSONGrammar new; maxSize: 100
 ]
 
 { #category : 'tests' }

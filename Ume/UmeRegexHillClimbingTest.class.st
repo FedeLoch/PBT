@@ -16,7 +16,7 @@ UmeRegexHillClimbingTest >> regexConstraint [
 	| randomGenerator |
 	randomGenerator := UmeObjectConstraint new
 		  objectClass: String;
-		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
+		  generator: (UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
 
 	regexGenerator := UmeGenerator base: [ | re |
 		re := randomGenerator gen.

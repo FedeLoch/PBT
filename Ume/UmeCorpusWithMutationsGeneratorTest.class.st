@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTCorpusWithMutationsGeneratorTest',
+	#name : 'UmeCorpusWithMutationsGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#instVars : [
 		'mutators',
@@ -13,10 +13,10 @@ Class {
 }
 
 { #category : 'running' }
-PBTCorpusWithMutationsGeneratorTest >> setUp [
+UmeCorpusWithMutationsGeneratorTest >> setUp [
 
 	super setUp.
-	subGenerator := PBTGrammarMCTSGenerator from: JSONGrammar new.
+	subGenerator := UmeGrammarMCTSGenerator from: JSONGrammar new.
 	heuristic := UmePickLastSelectorHeuristic new.
 	mutators := {
 		UmeMutator mutate: [ :jsonString  | '[', jsonString, ',', (subGenerator gen: nil), ']' ]
@@ -29,7 +29,7 @@ PBTCorpusWithMutationsGeneratorTest >> setUp [
 ]
 
 { #category : 'tests' }
-PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithNegativeFeedback [
+UmeCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithNegativeFeedback [
 
 	| first |
 	first := generator gen: nil.
@@ -40,7 +40,7 @@ PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithNegativeFe
 ]
 
 { #category : 'tests' }
-PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedback [
+UmeCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedback [
 
 	| first |
 	first := generator gen: nil.
@@ -51,7 +51,7 @@ PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFe
 ]
 
 { #category : 'tests' }
-PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackFiveTimes [
+UmeCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackFiveTimes [
 
 	5 timesRepeat: [ | case |
 		case := generator gen: nil.
@@ -62,7 +62,7 @@ PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFe
 ]
 
 { #category : 'tests' }
-PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackTwentyTimes [
+UmeCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFeedbackTwentyTimes [
 
 	20 timesRepeat: [ | case |
 		case := generator gen: nil.
@@ -73,7 +73,7 @@ PBTCorpusWithMutationsGeneratorTest >> testGenerateTheAsecondInputWithPositiveFe
 ]
 
 { #category : 'tests' }
-PBTCorpusWithMutationsGeneratorTest >> testGenerateTheFirstInput [
+UmeCorpusWithMutationsGeneratorTest >> testGenerateTheFirstInput [
 	
 	self assert: (generator gen: nil) size equals: 2
 ]

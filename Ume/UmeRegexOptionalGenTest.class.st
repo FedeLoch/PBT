@@ -12,15 +12,15 @@ Class {
 { #category : 'tests' }
 UmeRegexOptionalGenTest >> regexConstraint [
 
-	regexGenerator := PBTDyncamicSelectionGenerator new generators: {
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 1; maxSize: 100.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 5.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 20; maxSize: 20.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 10; maxSize: 40.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 10.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 40.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 80; maxSize: 80.
-		PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100
+	regexGenerator := UmeDyncamicSelectionGenerator new generators: {
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 1; maxSize: 100.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 5.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 20; maxSize: 20.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 10; maxSize: 40.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 10.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 40; maxSize: 40.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 80; maxSize: 80.
+		UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100
 	}.
 	
 	^ UmeObjectConstraint new generator: regexGenerator

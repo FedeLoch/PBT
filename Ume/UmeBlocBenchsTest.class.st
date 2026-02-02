@@ -36,7 +36,7 @@ UmeBlocBenchsTest >> blColorConstraint [
 
 	^ UmeObjectConstraint new
 		  objectClass: Color;
-		  generator: (PBTOptionsGenerator new from: Color indexedColors)
+		  generator: (UmeOptionsGenerator new from: Color indexedColors)
 ]
 
 { #category : 'running' }

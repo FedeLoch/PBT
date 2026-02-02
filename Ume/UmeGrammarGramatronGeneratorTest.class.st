@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarGramatronGeneratorTest',
+	#name : 'UmeGrammarGramatronGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,11 +7,11 @@ Class {
 }
 
 { #category : 'tests' }
-PBTGrammarGramatronGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
+UmeGrammarGramatronGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
 
 	| generator regex |
 	
-	generator := PBTGrammarGramatronGenerator from: GnfRegexGrammar new ofDepth: 10.
+	generator := UmeGrammarGramatronGenerator from: GnfRegexGrammar new ofDepth: 10.
 	
 	regex := generator gen: nil.
 	

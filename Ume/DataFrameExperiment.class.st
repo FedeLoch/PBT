@@ -71,7 +71,7 @@ DataFrameExperiment >> weightedGrammarSchema [
 
 	| csvGenerator |
 	
-	csvGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+	csvGenerator := UmeGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
 	
 	^ UmeSchema new
 		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: DataFrame));

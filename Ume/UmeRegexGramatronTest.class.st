@@ -14,7 +14,7 @@ UmeRegexGramatronTest >> regexConstraint [
 
 	grammarRegex := GnfRegexGrammar new.
 	
-	^ UmeObjectConstraint new generator: (PBTGrammarGramatronGenerator from: grammarRegex ofDepth: 10)
+	^ UmeObjectConstraint new generator: (UmeGrammarGramatronGenerator from: grammarRegex ofDepth: 10)
 ]
 
 { #category : 'tests' }

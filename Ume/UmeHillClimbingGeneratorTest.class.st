@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTHillClimbingGeneratorTest',
+	#name : 'UmeHillClimbingGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationBaseCase [
+UmeHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationBaseCase [
 
 	| generator |
 	
@@ -21,7 +21,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationBa
 ]
 
 { #category : 'tests' }
-PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWithNegativeFeedback [
+UmeHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWithNegativeFeedback [
 
 	| generator |
 	
@@ -40,7 +40,7 @@ PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWi
 ]
 
 { #category : 'tests' }
-PBTHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWithPositiveFeedback [
+UmeHillClimbingGeneratorTest >> testGenerateARandomStringInputGuidedByMutationWithPositiveFeedback [
 
 	| generator |
 	

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarMCTSGenerator',
+	#name : 'UmeGrammarMCTSGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'totalGenerations',
@@ -16,13 +16,13 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGrammarMCTSGenerator class >> from: grammar [
+UmeGrammarMCTSGenerator class >> from: grammar [
 
 	^ self new grammar: grammar
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> aDerivation [
+UmeGrammarMCTSGenerator >> aDerivation [
 	
 	totalGenerations := totalGenerations + 1.
 	generator totalGenerations: totalGenerations.
@@ -31,7 +31,7 @@ PBTGrammarMCTSGenerator >> aDerivation [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> backpropagate: prevFeedback [
+UmeGrammarMCTSGenerator >> backpropagate: prevFeedback [
 
 	| reward |
 	
@@ -46,13 +46,13 @@ PBTGrammarMCTSGenerator >> backpropagate: prevFeedback [
 ]
 
 { #category : 'getter' }
-PBTGrammarMCTSGenerator >> explorationConstant [
+UmeGrammarMCTSGenerator >> explorationConstant [
 
 	^ explorationConstant.
 ]
 
 { #category : 'setter' }
-PBTGrammarMCTSGenerator >> explorationConstant: aNumber [
+UmeGrammarMCTSGenerator >> explorationConstant: aNumber [
 
 	"The C in the formula of UTC"
 
@@ -60,20 +60,20 @@ PBTGrammarMCTSGenerator >> explorationConstant: aNumber [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> feed: feedback [
+UmeGrammarMCTSGenerator >> feed: feedback [
 
 	"We are starting with this step because the feedback is got as a result of the last generation"
 	self backpropagate: feedback
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> gen: constraint [
+UmeGrammarMCTSGenerator >> gen: constraint [
 
 	^ (self genDerivation: constraint) asStringInput
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> genDerivation: constraint [
+UmeGrammarMCTSGenerator >> genDerivation: constraint [
 
 	"We update the production tree selected"
 	lastDerivationTree := self getDerivationTree.
@@ -84,7 +84,7 @@ PBTGrammarMCTSGenerator >> genDerivation: constraint [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> getDerivationTree [
+UmeGrammarMCTSGenerator >> getDerivationTree [
 
 	| result |
 	result := self aDerivation.
@@ -97,14 +97,14 @@ PBTGrammarMCTSGenerator >> getDerivationTree [
 ]
 
 { #category : 'setter' }
-PBTGrammarMCTSGenerator >> grammar: aGrammar [
+UmeGrammarMCTSGenerator >> grammar: aGrammar [
 
 	grammar := aGrammar.
 	totalGenerations := 0.
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> initialize [
+UmeGrammarMCTSGenerator >> initialize [
 
 	super initialize.
 	totalGenerations := 0.
@@ -115,14 +115,14 @@ PBTGrammarMCTSGenerator >> initialize [
 ]
 
 { #category : 'setter' }
-PBTGrammarMCTSGenerator >> maxSize: aSize [
+UmeGrammarMCTSGenerator >> maxSize: aSize [
 
 	maxSize := aSize.
 	generator := self newGenerator: aSize
 ]
 
 { #category : 'setter' }
-PBTGrammarMCTSGenerator >> newGenerator: _maxSize [
+UmeGrammarMCTSGenerator >> newGenerator: _maxSize [
 
 	^ GrammarMCTSGenerator new maxHeight: 20; maxSize: _maxSize;
 		totalGenerations: totalGenerations;
@@ -130,7 +130,7 @@ PBTGrammarMCTSGenerator >> newGenerator: _maxSize [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarMCTSGenerator >> reward: prevFeedback [
+UmeGrammarMCTSGenerator >> reward: prevFeedback [
 
 	prevFeedback ifNil: [ ^ 0 ].
 

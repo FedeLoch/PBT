@@ -14,7 +14,7 @@ UmeRegexPerfuzzWithRandomMutatorTest >> regexConstraint [
 
 	^ UmeObjectConstraint new generator:
 		  (UmeCorpusGenerator new
-			   seedGenerator: (PBTGrammarGenerator new
+			   seedGenerator: (UmeGrammarGenerator new
 					    grammar: GncRegexGrammar new;
 					    maxHeight: 100;
 					    maxSize: 100);

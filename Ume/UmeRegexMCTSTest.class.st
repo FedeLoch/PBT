@@ -14,7 +14,7 @@ UmeRegexMCTSTest >> regexConstraint [
 
 	grammarRegex := GncRegexGrammar new.
 	
-	^ UmeObjectConstraint new generator: (PBTGrammarMCTSGenerator from: grammarRegex)
+	^ UmeObjectConstraint new generator: (UmeGrammarMCTSGenerator from: grammarRegex)
 ]
 
 { #category : 'as yet unclassified' }

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarGeneratorTest',
+	#name : 'UmeGrammarGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,12 +7,12 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
+UmeGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
 
 	| generator grammar |
 
 	grammar := PzDateMDYYYYGrammar new.
-	generator := PBTGrammarGenerator new grammar: grammar.
+	generator := UmeGrammarGenerator new grammar: grammar.
 
 	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
 ]

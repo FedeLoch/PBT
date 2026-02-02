@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarGramatronGenerator',
+	#name : 'UmeGrammarGramatronGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'grammar',
@@ -17,19 +17,19 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGrammarGramatronGenerator class >> from: grammar [
+UmeGrammarGramatronGenerator class >> from: grammar [
 
 	^ self new grammar: grammar; depth: 20;  length: 40
 ]
 
 { #category : 'instance creation' }
-PBTGrammarGramatronGenerator class >> from: grammar ofDepth: depth [
+UmeGrammarGramatronGenerator class >> from: grammar ofDepth: depth [
 
 	^ self new grammar: grammar; depth: depth;  length: 40
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> addTransitionFrom: state on: terminal to: toState [
+UmeGrammarGramatronGenerator >> addTransitionFrom: state on: terminal to: toState [
 
     | key |
 
@@ -40,13 +40,13 @@ PBTGrammarGramatronGenerator >> addTransitionFrom: state on: terminal to: toStat
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> allStates [
+UmeGrammarGramatronGenerator >> allStates [
 
 	^ states
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> backpropagate: previousFeedback [
+UmeGrammarGramatronGenerator >> backpropagate: previousFeedback [
  
 	| reward |
 	
@@ -61,7 +61,7 @@ PBTGrammarGramatronGenerator >> backpropagate: previousFeedback [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> buildAutomaton [
+UmeGrammarGramatronGenerator >> buildAutomaton [
 
 	initialState := grammar start name.
 	states add: initialState.
@@ -77,25 +77,25 @@ PBTGrammarGramatronGenerator >> buildAutomaton [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> depth [
+UmeGrammarGramatronGenerator >> depth [
 
 	^ depth 
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> depth: aDepth [
+UmeGrammarGramatronGenerator >> depth: aDepth [
 
 	depth := aDepth 
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> feed: feedback [
+UmeGrammarGramatronGenerator >> feed: feedback [
 
 	"do nothing"
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> gen: constraint [
+UmeGrammarGramatronGenerator >> gen: constraint [
 
 	| input state nextOptions next |
 	input := ''.
@@ -115,13 +115,13 @@ PBTGrammarGramatronGenerator >> gen: constraint [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> grammar [
+UmeGrammarGramatronGenerator >> grammar [
 
 	^ grammar 
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> grammar: aGrammar [
+UmeGrammarGramatronGenerator >> grammar: aGrammar [
 
 	grammar := aGrammar.
 	transitions := Dictionary new.
@@ -131,31 +131,31 @@ PBTGrammarGramatronGenerator >> grammar: aGrammar [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> initialState [
+UmeGrammarGramatronGenerator >> initialState [
 
 	^ initialState
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> isFinalState: state [
+UmeGrammarGramatronGenerator >> isFinalState: state [
 
 	^ finalStates includes: state
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> length [
+UmeGrammarGramatronGenerator >> length [
 
 	^ length
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> length: aLen [
+UmeGrammarGramatronGenerator >> length: aLen [
 
 	length := aLen
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> reward: prevFeedback [
+UmeGrammarGramatronGenerator >> reward: prevFeedback [
 
 	prevFeedback ifNil: [ ^ 0 ].
 
@@ -163,14 +163,14 @@ PBTGrammarGramatronGenerator >> reward: prevFeedback [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGramatronGenerator >> splice: walk1 with: walk2 at: index [
+UmeGrammarGramatronGenerator >> splice: walk1 with: walk2 at: index [
 
 	^ (walk1 copyFrom: 1 to: index),
 		(walk2 copyFrom: index + 1 to: walk2 size)
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarGramatronGenerator >> transitionsFrom: fromState on: terminal [
+UmeGrammarGramatronGenerator >> transitionsFrom: fromState on: terminal [
 
 	^ transitions at: fromState -> terminal ifAbsent: [ #(  ) ]
 ]

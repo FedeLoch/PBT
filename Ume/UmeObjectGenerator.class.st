@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTObjectGenerator',
+	#name : 'UmeObjectGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'then',
@@ -11,31 +11,31 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTObjectGenerator >> feed: feedback [
+UmeObjectGenerator >> feed: feedback [
 
 	"do nothing"
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectGenerator >> gen: myConstraint [
+UmeObjectGenerator >> gen: myConstraint [
 	
 	^ then value: objectClass new value: myConstraint props
 ]
 
 { #category : 'accessing' }
-PBTObjectGenerator >> objectClass [
+UmeObjectGenerator >> objectClass [
 
 	^ objectClass
 ]
 
 { #category : 'accessing' }
-PBTObjectGenerator >> objectClass: aClass [
+UmeObjectGenerator >> objectClass: aClass [
 
 	objectClass := aClass 
 ]
 
 { #category : 'accessing' }
-PBTObjectGenerator >> then: aBlock [
+UmeObjectGenerator >> then: aBlock [
 
 	then := aBlock 
 ]

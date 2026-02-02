@@ -15,9 +15,9 @@ UmeRegexHillClimbingAndOptionalGenTest >> regexConstraint [
 	| randomGenerator mutationGeneration |
 	randomGenerator := UmeObjectConstraint new
 		  objectClass: String;
-		  generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
+		  generator: (UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100).
 		
-	mutationGeneration := PBTDyncamicSelectionGenerator new generators: {
+	mutationGeneration := UmeDyncamicSelectionGenerator new generators: {
 		"Array of Mutators constant generators"
 		UmeGenerator always: (UmeMutator mutate: [ :regex  | RxMatcher mutateCharacter: regex using: randomGenerator gen ]). "Basic one mutating a random character"
 		UmeGenerator always: (UmeMutator mutate: [ :regex  | RxMatcher mutateCharacter: regex using: randomGenerator gen times: (2 to: 10) atRandom ]).

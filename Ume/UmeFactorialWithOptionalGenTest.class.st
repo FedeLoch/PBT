@@ -24,7 +24,7 @@ UmeFactorialWithOptionalGenTest >> setUp [
 	super setUp.
 	
 	receiverConstraint := UmeObjectConstraint new generator:
-		(PBTDyncamicSelectionGenerator new generators: generators).
+		(UmeDyncamicSelectionGenerator new generators: generators).
 	assert := [ :n :args :result | n * (n - 1) factorial = result ].
 	schema := UmeSchema new receiverConstraint: receiverConstraint; assert: assert.
 ]

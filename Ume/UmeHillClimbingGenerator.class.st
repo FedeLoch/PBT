@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTHillClimbingGenerator',
+	#name : 'UmeHillClimbingGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'base',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> feed: aFeedback [
+UmeHillClimbingGenerator >> feed: aFeedback [
 
 	lastFeedback := aFeedback.
 	
@@ -22,7 +22,7 @@ PBTHillClimbingGenerator >> feed: aFeedback [
 ]
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> gen: aConstraint [
+UmeHillClimbingGenerator >> gen: aConstraint [
 	
 	base ifNil: [ self generateBase ].
 	
@@ -32,13 +32,13 @@ PBTHillClimbingGenerator >> gen: aConstraint [
 ]
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> genBase: aBlock [
+UmeHillClimbingGenerator >> genBase: aBlock [
 
 	genBase := aBlock 
 ]
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> generateBase [
+UmeHillClimbingGenerator >> generateBase [
 
 	base := genBase value.
 	lastMutated := base
@@ -46,7 +46,7 @@ PBTHillClimbingGenerator >> generateBase [
 ]
 
 { #category : 'as yet unclassified' }
-PBTHillClimbingGenerator >> mutate: aBlock [
+UmeHillClimbingGenerator >> mutate: aBlock [
 
 	mutate := aBlock
 ]

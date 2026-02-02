@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 UmeMicrodownGrammarWithWeightsTest >> markdownGenerator [
 
-	^ PBTGrammarGenerator new grammar: ExtendedMarkdownGrammar new; maxSize: 200
+	^ UmeGrammarGenerator new grammar: ExtendedMarkdownGrammar new; maxSize: 200
 ]
 
 { #category : 'running' }

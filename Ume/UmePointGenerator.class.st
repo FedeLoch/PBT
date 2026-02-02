@@ -1,6 +1,6 @@
 Class {
-	#name : 'PBTPointGenerator',
-	#superclass : 'PBTOptionsGenerator',
+	#name : 'UmePointGenerator',
+	#superclass : 'UmeOptionsGenerator',
 	#instVars : [
 		'x',
 		'y'
@@ -11,37 +11,37 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> fixedX: anX [
+UmePointGenerator >> fixedX: anX [
 
 	x := anX.
 ]
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> fixedY: anY [
+UmePointGenerator >> fixedY: anY [
 
 	y := anY.
 ]
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> gen: myConstraint [
+UmePointGenerator >> gen: myConstraint [
 
 	^ self genX @ (self genY)
 ]
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> genX [
+UmePointGenerator >> genX [
 
 	^ x ifNil: [ range atRandom ] ifNotNil: [ x ]
 ]
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> genY [
+UmePointGenerator >> genY [
 
 	^ y ifNil: [ range atRandom ] ifNotNil: [ y ]
 ]
 
 { #category : 'as yet unclassified' }
-PBTPointGenerator >> initialize [ 
+UmePointGenerator >> initialize [ 
 	
 	super initialize.
 	range := (-100 to: 100)

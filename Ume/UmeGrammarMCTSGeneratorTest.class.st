@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarMCTSGeneratorTest',
+	#name : 'UmeGrammarMCTSGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,29 +7,29 @@ Class {
 }
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomDemaProgramFromADemaGrammar [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomDemaProgramFromADemaGrammar [
 
 	| generator generated |
-	generator := PBTGrammarMCTSGenerator from: DemaGrammar new.
+	generator := UmeGrammarMCTSGenerator from: DemaGrammar new.
 	generated := generator gen: nil.
 ]
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
 
 	| generator |
 	
-	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
+	generator := UmeGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
 
 	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
 ]
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammarGuidedByFeedback [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammarGuidedByFeedback [
 
 	| generator |
 	
-	generator := PBTGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
+	generator := UmeGrammarMCTSGenerator from: PzDateMDYYYYGrammar new.
 	
 	generator gen: nil.
 	generator feed: (self feedback: false).
@@ -38,21 +38,21 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammarGu
 ]
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
 
 	| generator |
 	
-	generator := PBTGrammarMCTSGenerator from: GncRegexGrammar new.
+	generator := UmeGrammarMCTSGenerator from: GncRegexGrammar new.
 
 	self assert: (generator gen: nil) asRegex class equals: RxMatcher 
 ]
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammarGuidedByFeedback [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammarGuidedByFeedback [
 
 	| generator |
 	
-	generator := PBTGrammarMCTSGenerator from: GncRegexGrammar new.
+	generator := UmeGrammarMCTSGenerator from: GncRegexGrammar new.
 	
 	generator gen: nil.
 	generator feed: (self feedback: false).
@@ -61,10 +61,10 @@ PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammarG
 ]
 
 { #category : 'tests' }
-PBTGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAStonGrammar [
+UmeGrammarMCTSGeneratorTest >> testGenerateARandomStringFromAGivenAStonGrammar [
 
 	| generator generated result |
-	generator := PBTGrammarMCTSGenerator from: GncStonGrammar new.
+	generator := UmeGrammarMCTSGenerator from: GncStonGrammar new.
 	generated := generator gen: nil.
 
 	result := STON reader on: generated readStream; next.

@@ -73,7 +73,7 @@ MicrodownExperiment >> weightedGrammarSchema [
 
 	| markdownGenerator |
 	
-	markdownGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+	markdownGenerator := UmeGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
 
 	^ UmeSchema new
 		  receiverConstraint: (UmeObjectConstraint new generator: (UmeConstantGenerator new value: Microdown));

@@ -18,7 +18,7 @@ FLSerializerPerformanceUmeTest >> argumentGenerators [
 { #category : 'running' }
 FLSerializerPerformanceUmeTest >> associationArrayGenerator [
 
-	^ PBTAssociationParserGenerator from: (self corpusGenFrom: 'a->nil' mpi: 3 mutators: {
+	^ UmeAssociationParserGenerator from: (self corpusGenFrom: 'a->nil' mpi: 3 mutators: {
 		(UmeGrammarDerivationMutator from: AssociationsGrammar new) maxInputSize: 5000"50000"
 	})
 ]

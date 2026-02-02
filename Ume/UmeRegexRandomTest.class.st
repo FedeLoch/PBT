@@ -12,7 +12,7 @@ Class {
 { #category : 'running' }
 UmeRegexRandomTest >> regexConstraint [
 		
-	^ UmeObjectConstraint new generator: (PBTGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
+	^ UmeObjectConstraint new generator: (UmeGrammarGenerator new grammar: GncRegexGrammar new; maxHeight: 100; maxSize: 100)
 ]
 
 { #category : 'tests' }

@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTDyncamicSelectionGenerator',
+	#name : 'UmeDyncamicSelectionGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'probabilityGenerators',
@@ -11,33 +11,33 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> feed: feedback [
+UmeDyncamicSelectionGenerator >> feed: feedback [
 
 	"P(x) = \frac{\text{weight}(x)}{\text{sum of all weights}}"
 	self updateWeight: feedback.
 ]
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> gen: myConstraint [
+UmeDyncamicSelectionGenerator >> gen: myConstraint [
 
 	lastChosen := self selectOne.
 	^ lastChosen gen: myConstraint
 ]
 
 { #category : 'accessing' }
-PBTDyncamicSelectionGenerator >> generators: gens [
+UmeDyncamicSelectionGenerator >> generators: gens [
 
-	probabilityGenerators := gens collect: [ :gen | PBTGenProbabilityWrapper from: gen ]
+	probabilityGenerators := gens collect: [ :gen | UmeGenProbabilityWrapper from: gen ]
 ]
 
 { #category : 'accessing' }
-PBTDyncamicSelectionGenerator >> probabilityGenerators [
+UmeDyncamicSelectionGenerator >> probabilityGenerators [
 
 	^ probabilityGenerators 
 ]
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> selectOne [
+UmeDyncamicSelectionGenerator >> selectOne [
 
 	| totalWeights weights indexes random |
 
@@ -56,7 +56,7 @@ PBTDyncamicSelectionGenerator >> selectOne [
 ]
 
 { #category : 'as yet unclassified' }
-PBTDyncamicSelectionGenerator >> updateWeight: feedback [
+UmeDyncamicSelectionGenerator >> updateWeight: feedback [
 
 	(lastChosen isNil or: [ feedback isNil ]) ifTrue: [ ^ nil ].
 

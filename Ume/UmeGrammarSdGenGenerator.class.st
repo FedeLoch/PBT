@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarSdGenGenerator',
+	#name : 'UmeGrammarSdGenGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'grammar',
@@ -13,19 +13,19 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTGrammarSdGenGenerator class >> from: grammar [
+UmeGrammarSdGenGenerator class >> from: grammar [
 
 	^ self new grammar: grammar; depth: 20;  length: 40
 ]
 
 { #category : 'instance creation' }
-PBTGrammarSdGenGenerator class >> from: grammar ofDepth: depth [
+UmeGrammarSdGenGenerator class >> from: grammar ofDepth: depth [
 
 	^ self new grammar: grammar; depth: depth;  length: 40
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> backpropagate: previousFeedback [
+UmeGrammarSdGenGenerator >> backpropagate: previousFeedback [
  
 	| reward |
 	
@@ -40,19 +40,19 @@ PBTGrammarSdGenGenerator >> backpropagate: previousFeedback [
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> depth [
+UmeGrammarSdGenGenerator >> depth [
 
 	^ depth 
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> depth: aDepth [
+UmeGrammarSdGenGenerator >> depth: aDepth [
 
 	depth := aDepth 
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> expand: node depth: aDepth [
+UmeGrammarSdGenGenerator >> expand: node depth: aDepth [
 
 	| fragments |
 	
@@ -66,7 +66,7 @@ PBTGrammarSdGenGenerator >> expand: node depth: aDepth [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> expandFragments: fragments depth: aDepth accumulator: acc [
+UmeGrammarSdGenGenerator >> expandFragments: fragments depth: aDepth accumulator: acc [
 
 	| result |
 	
@@ -78,19 +78,19 @@ PBTGrammarSdGenGenerator >> expandFragments: fragments depth: aDepth accumulator
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> feed: feedback [
+UmeGrammarSdGenGenerator >> feed: feedback [
 
 	self backpropagate: feedback
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> gen: constraint [
+UmeGrammarSdGenGenerator >> gen: constraint [
 
 	^ self expand: grammar start depth: 0
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> getUntilTerminal: node [
+UmeGrammarSdGenGenerator >> getUntilTerminal: node [
 
 	node isTerminal ifTrue: [ ^ node aMCTSValue ].
 	
@@ -98,31 +98,31 @@ PBTGrammarSdGenGenerator >> getUntilTerminal: node [
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> grammar [
+UmeGrammarSdGenGenerator >> grammar [
 
 	^ grammar 
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> grammar: aGrammar [
+UmeGrammarSdGenGenerator >> grammar: aGrammar [
 
 	grammar := aGrammar 
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> length [
+UmeGrammarSdGenGenerator >> length [
 
 	^ length
 ]
 
 { #category : 'accessing' }
-PBTGrammarSdGenGenerator >> length: aLen [
+UmeGrammarSdGenGenerator >> length: aLen [
 
 	length := aLen
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> reward: prevFeedback [
+UmeGrammarSdGenGenerator >> reward: prevFeedback [
 
 	prevFeedback ifNil: [ ^ 0 ].
 
@@ -130,7 +130,7 @@ PBTGrammarSdGenGenerator >> reward: prevFeedback [
 ]
 
 { #category : 'as yet unclassified' }
-PBTGrammarSdGenGenerator >> selectRule: node at: level [
+UmeGrammarSdGenGenerator >> selectRule: node at: level [
 
 	| totalWeights weights indexes selected |
 

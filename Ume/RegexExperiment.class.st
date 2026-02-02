@@ -100,7 +100,7 @@ RegexExperiment >> weightedGrammarSchema [
 
 	regexConstraint := UmeObjectConstraint new
 		unwrap: [ :case | (case class = PBTRegex) ifTrue: [ case regexString ] ifFalse: [ case ] ];
-		generator: (PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize).
+		generator: (UmeGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize).
 	
 	sharedProperties := UmeInternalConstraintProperties
 		from: { ('grammar' -> regexConstraint) } asDictionary.

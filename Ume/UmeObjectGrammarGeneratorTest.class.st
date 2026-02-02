@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTObjectGrammarGeneratorTest',
+	#name : 'UmeObjectGrammarGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#instVars : [
 		'generator'
@@ -10,14 +10,14 @@ Class {
 }
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> setUp [ 
+UmeObjectGrammarGeneratorTest >> setUp [ 
 
 	super setUp.
-	generator := PBTObjectGrammarGenerator from: nil
+	generator := UmeObjectGrammarGenerator from: nil
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
+UmeObjectGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
 
 
 	generator grammar: PzDateMDYYYYGrammar new.
@@ -26,7 +26,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateARandomStringInputByGrammar [
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateAlwaysTheSameValue [
+UmeObjectGrammarGeneratorTest >> testGenerateAlwaysTheSameValue [
 
 	generator grammar: ConstantGrammar new.
 
@@ -34,7 +34,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAlwaysTheSameValue [
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfBoolean [
+UmeObjectGrammarGeneratorTest >> testGenerateAnInstanceOfBoolean [
 
 	generator grammar: BooleanGrammar new.
 
@@ -42,7 +42,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfBoolean [
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfPerson [
+UmeObjectGrammarGeneratorTest >> testGenerateAnInstanceOfPerson [
 
 	generator grammar: PersonGrammar new.
 
@@ -50,7 +50,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfPerson [
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfRectangle [
+UmeObjectGrammarGeneratorTest >> testGenerateAnInstanceOfRectangle [
 
 	generator grammar: RectangleGrammar new.
 
@@ -58,7 +58,7 @@ PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfRectangle [
 ]
 
 { #category : 'tests' }
-PBTObjectGrammarGeneratorTest >> testGenerateAnInstanceOfSmallIntegerByRange [
+UmeObjectGrammarGeneratorTest >> testGenerateAnInstanceOfSmallIntegerByRange [
 
 	generator grammar: DecimalGrammar new.
 

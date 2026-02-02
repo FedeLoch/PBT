@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGenericGeneratorTest',
+	#name : 'UmeGenericGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'as yet unclassified' }
-PBTGenericGeneratorTest >> testGenerateAConstantString [
+UmeGenericGeneratorTest >> testGenerateAConstantString [
 
 	| generator |
 

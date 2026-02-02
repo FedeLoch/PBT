@@ -61,7 +61,7 @@ NeoJSONExperiment >> weightedGrammarSchema [
 
 	| receiverConstraint argumentConstraints jsonGenerator |
 	
-	jsonGenerator := PBTGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
+	jsonGenerator := UmeGrammarGenerator new grammar: self newGrammar; maxSize: self maxInputSize.
 	receiverConstraint := UmeObjectConstraint new generator: (UmeConstantGenerator new value: NeoJSONReader).
 	argumentConstraints := { UmeObjectConstraint new objectClass: String; generator: jsonGenerator }.
 

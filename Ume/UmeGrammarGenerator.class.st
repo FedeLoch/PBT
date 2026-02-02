@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGrammarGenerator',
+	#name : 'UmeGrammarGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'grammar',
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> derivationTree: input [
+UmeGrammarGenerator >> derivationTree: input [
 
 	^ UmeGrammarParser parse: input from: grammar
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> feed: feedback [
+UmeGrammarGenerator >> feed: feedback [
 	
 	feedback ifNotNil: [ | ast |
 		[ ast := self derivationTree: (feedback case) ] on: Error do: [ ^ nil ].
@@ -31,7 +31,7 @@ PBTGrammarGenerator >> feed: feedback [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> gen: myConstraint [
+UmeGrammarGenerator >> gen: myConstraint [
 
 	"Gen a random string that matchs with the instance variable grammar"
 	lastInput := grammar generate: generator.
@@ -40,26 +40,26 @@ PBTGrammarGenerator >> gen: myConstraint [
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> grammar: aGrammar [
+UmeGrammarGenerator >> grammar: aGrammar [
 
 	grammar := aGrammar.
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> initialize [ 
+UmeGrammarGenerator >> initialize [ 
 
 	super initialize.
 	generator := GncGrammarGenerator newUnbounded maxHeight: SmallInteger maxVal; maxSize: 20
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> maxHeight: aHeight [
+UmeGrammarGenerator >> maxHeight: aHeight [
 
 	generator maxHeight: aHeight
 ]
 
 { #category : 'accessing' }
-PBTGrammarGenerator >> maxSize: aSize [
+UmeGrammarGenerator >> maxSize: aSize [
 
 	generator maxSize: aSize 
 ]

@@ -10,7 +10,7 @@ Class {
 UmeJSONPerfuzzTest >> jsonGenerator [
 
 	| mutator randomGenerator |
-	randomGenerator := (PBTGrammarMCTSGenerator from: JSONGrammar new)
+	randomGenerator := (UmeGrammarMCTSGenerator from: JSONGrammar new)
 		                   maxSize: Float infinity.
 
 	mutator := UmeMutator mutate: [ :input |

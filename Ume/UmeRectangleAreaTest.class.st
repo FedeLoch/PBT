@@ -28,9 +28,9 @@ UmeRectangleAreaTest >> setUp [
 		                     generator: generator;
 		                     props: {
 				                     ('origin' -> (UmeObjectConstraint new
-						                       generator: PBTPointGenerator new)).
+						                       generator: UmePointGenerator new)).
 				                     ('corner' -> (UmeObjectConstraint new
-					                       generator: PBTPointGenerator new)) }.
+					                       generator: UmePointGenerator new)) }.
 	argumentConstraints := {  }.
 	assert := [ :rect :args :result | result >= 0 ].
 	schema := UmeSchema new

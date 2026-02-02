@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTParserGenerator',
+	#name : 'UmeParserGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'inputGenerator'
@@ -10,37 +10,37 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTParserGenerator class >> from: grammarInputGenerator [
+UmeParserGenerator class >> from: grammarInputGenerator [
 
 	^ self new inputGenerator: grammarInputGenerator
 ]
 
 { #category : 'as yet unclassified' }
-PBTParserGenerator >> feed: feedback [
+UmeParserGenerator >> feed: feedback [
 
 	inputGenerator feed: feedback 
 ]
 
 { #category : 'as yet unclassified' }
-PBTParserGenerator >> gen: myConstraint [
+UmeParserGenerator >> gen: myConstraint [
 
 	^ self parse: (inputGenerator gen: myConstraint)
 ]
 
 { #category : 'accessing' }
-PBTParserGenerator >> inputGenerator [
+UmeParserGenerator >> inputGenerator [
 
 	^ inputGenerator
 ]
 
 { #category : 'accessing' }
-PBTParserGenerator >> inputGenerator: generator [
+UmeParserGenerator >> inputGenerator: generator [
 
 	inputGenerator := generator
 ]
 
 { #category : 'as yet unclassified' }
-PBTParserGenerator >> parse: grammarBasedInput [
+UmeParserGenerator >> parse: grammarBasedInput [
 
 	self subclassResponsibility 
 ]

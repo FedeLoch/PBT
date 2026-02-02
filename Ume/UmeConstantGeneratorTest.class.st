@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTConstantGeneratorTest',
+	#name : 'UmeConstantGeneratorTest',
 	#superclass : 'UmeGeneratorTest',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : 'tests' }
-PBTConstantGeneratorTest >> testGenerateAlwaysTheSameValue [
+UmeConstantGeneratorTest >> testGenerateAlwaysTheSameValue [
 
 	"it's not necessary to pass it a constraint argument"
 	self assert: ((UmeConstantGenerator new value: { 42 }) gen: nil) equals: { 42 }

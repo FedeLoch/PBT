@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTGenericGenerator',
+	#name : 'UmeGenericGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'do',
@@ -11,31 +11,31 @@ Class {
 }
 
 { #category : 'ston-core' }
-PBTGenericGenerator class >> stonAllInstVarNames [
+UmeGenericGenerator class >> stonAllInstVarNames [
 
 	^ super stonAllInstVarNames copyWithoutAll: #( do )
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> do [
+UmeGenericGenerator >> do [
 
 	^ do
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> do: aBlock [
+UmeGenericGenerator >> do: aBlock [
 
 	do := aBlock
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> feed: feedback [
+UmeGenericGenerator >> feed: feedback [
 
 	prevFeedback := feedback 
 ]
 
 { #category : 'accessing' }
-PBTGenericGenerator >> gen: constraint [
+UmeGenericGenerator >> gen: constraint [
 
 	^ do value: (constraint ifNotNil: [ constraint props ] ifNil: nil) value: prevFeedback
 ]

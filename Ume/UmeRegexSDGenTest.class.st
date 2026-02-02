@@ -14,7 +14,7 @@ UmeRegexSDGenTest >> regexConstraint [
 
 	grammarRegex := GncRegexGrammar new.
 	
-	^ UmeObjectConstraint new generator: (PBTGrammarSdGenGenerator from: grammarRegex ofDepth: 10)
+	^ UmeObjectConstraint new generator: (UmeGrammarSdGenGenerator from: grammarRegex ofDepth: 10)
 ]
 
 { #category : 'tests' }

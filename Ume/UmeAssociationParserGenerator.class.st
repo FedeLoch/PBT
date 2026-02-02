@@ -1,19 +1,19 @@
 Class {
-	#name : 'PBTAssociationParserGenerator',
-	#superclass : 'PBTParserGenerator',
+	#name : 'UmeAssociationParserGenerator',
+	#superclass : 'UmeParserGenerator',
 	#category : 'Ume-Generators',
 	#package : 'Ume',
 	#tag : 'Generators'
 }
 
 { #category : 'as yet unclassified' }
-PBTAssociationParserGenerator >> parse: grammarBasedInput [
+UmeAssociationParserGenerator >> parse: grammarBasedInput [
 
 	^ grammarBasedInput lines collect: [ :assoc | self parseAssoc: assoc ]
 ]
 
 { #category : 'parsing' }
-PBTAssociationParserGenerator >> parseAssoc: assoc [
+UmeAssociationParserGenerator >> parseAssoc: assoc [
 
 	| splited |
 	splited := assoc substrings: '->'.
@@ -24,13 +24,13 @@ PBTAssociationParserGenerator >> parseAssoc: assoc [
 ]
 
 { #category : 'parsing' }
-PBTAssociationParserGenerator >> parseKey: key [ 
+UmeAssociationParserGenerator >> parseKey: key [ 
 
 	^ key = 'nil' ifTrue: [ nil ] ifFalse: [ key ] 
 ]
 
 { #category : 'parsing' }
-PBTAssociationParserGenerator >> parseValue: stringValue [ 
+UmeAssociationParserGenerator >> parseValue: stringValue [ 
 	  
 	| value |
     value := stringValue trim.

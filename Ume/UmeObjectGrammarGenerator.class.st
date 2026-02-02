@@ -1,5 +1,5 @@
 Class {
-	#name : 'PBTObjectGrammarGenerator',
+	#name : 'UmeObjectGrammarGenerator',
 	#superclass : 'UmeGenerator',
 	#instVars : [
 		'grammar',
@@ -11,41 +11,41 @@ Class {
 }
 
 { #category : 'instance creation' }
-PBTObjectGrammarGenerator class >> from: anObjectGrammar [
+UmeObjectGrammarGenerator class >> from: anObjectGrammar [
 
 	| generator |
-	generator := PBTGrammarMCTSGenerator from: anObjectGrammar.
+	generator := UmeGrammarMCTSGenerator from: anObjectGrammar.
 
 	^ self new grammarGenerator: generator; grammar: anObjectGrammar
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectGrammarGenerator >> feed: feedback [
+UmeObjectGrammarGenerator >> feed: feedback [
 
 	grammarGenerator feed: feedback 
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectGrammarGenerator >> gen: constraint [
+UmeObjectGrammarGenerator >> gen: constraint [
 
 	^ self generateObject: (grammarGenerator genDerivation: constraint) children first
 ]
 
 { #category : 'as yet unclassified' }
-PBTObjectGrammarGenerator >> generateObject: grammarNode [
+UmeObjectGrammarGenerator >> generateObject: grammarNode [
  
 	^ grammarNode asPharoObject
 ]
 
 { #category : 'accessing' }
-PBTObjectGrammarGenerator >> grammar: anObjectGrammar [
+UmeObjectGrammarGenerator >> grammar: anObjectGrammar [
 
 	grammar := anObjectGrammar.
 	grammarGenerator grammar: anObjectGrammar.
 ]
 
 { #category : 'accessing' }
-PBTObjectGrammarGenerator >> grammarGenerator: generator [
+UmeObjectGrammarGenerator >> grammarGenerator: generator [
 
 	grammarGenerator :=  generator
 ]
