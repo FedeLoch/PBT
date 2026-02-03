@@ -104,7 +104,7 @@ generator := UmeCorpusWithMutationsGenerator new
 
 ## Automatic Test Generation
 
-One of the most powerful workflows in Ume is the ability to turn discovered bugs into permanent unit tests automatically.
+One of the most powerful workflows in Ume is the ability to automatically turn discovered bugs into permanent unit tests.
 
 ### Using `UmeUnitTest`
 Subclass `UmeUnitTest` to define your search parameters once. You can then run a script to automatically verify and "install" discovered cases as standard Pharo test methods.
@@ -130,11 +130,11 @@ test_12345678 [
 
 ## Mutator Configurations
 
-Ume supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `UmeCorpusWithMutationsGenerator`.
+Ume supports three primary mutation levels, allowing you to choose the right balance between search speed and structural validity. These are typically used with `UmeCorpusWithMutationsGenerator`.
 
 ![Corpus Generator](ume-images/corpus-gen.png)
 
-### 1. Byte-Level Mutators (Random/Generic)
+### 1. Stochastic Byte-Level Mutators
 Works at the raw string/byte level. Fast and can find "invalid" but interesting inputs (e.g., buffer overflows, encoding issues).
 
 ```smalltalk
@@ -160,7 +160,7 @@ generator := UmeCorpusWithMutationsGenerator new
     mutators: { mutator }.
 ```
 
-### 3. Tree-Grammar Mutators (Advanced)
+### 3. Tree-Grammar Mutators
 Parses the input into an AST and performs structural rotations, node replacements, and sub-tree generation using **Monte Carlo Tree Search (MCTS)**. This is the most powerful way to explore complex deeply-nested structures.
 
 ```smalltalk
