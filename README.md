@@ -19,11 +19,11 @@ Ume is built with a highly modular and decoupled architecture, allowing for flex
 ![Ume Architecture](ume-images/ume.png)
 
 ### Key Components
-- **`PBTRunner`**: The engine of the search. Orchestrates execution, chooses the guidance strategy, and manages stop criteria.
-- **`PBTSchema`**: Defines the "shape" of fuzzing configuration. It maps receiver and argument constraints to a target method and defines the **Assert** (the property to maintain).
-- **`PBTEvaluator`**: Instruments the code to measure specific costs (e.g., coverage, execution time, method calls). Evaluate each UmeCase and provide its results to the feedback evaluator.
-- **`PBTFeedbackEvaluator`**: Analyzes results. It uses profiling metrics to assign a score table to each case.
-- **`PBTShrinker`**: (Work in progress) Designed to work internally within the evaluation loop to automatically shrink each **top case** as it is discovered.
+- **`UmeRunner`**: The engine of the search. Orchestrates execution, chooses the guidance strategy, and manages stop criteria.
+- **`UmeSchema`**: Defines the "shape" of fuzzing configuration. It maps receiver and argument constraints to a target method and defines the **Assert** (the property to maintain).
+- **`UmeEvaluator`**: Instruments the code to measure specific costs (e.g., coverage, execution time, method calls). Evaluate each UmeCase and provide its results to the feedback evaluator.
+- **`UmeFeedbackEvaluator`**: Analyzes results. It uses profiling metrics to assign a score table to each case.
+- **`UmeShrinker`**: (Work in progress) Designed to work internally within the evaluation loop to automatically shrink each **top case** as it is discovered.
 
 ---
 
@@ -33,19 +33,19 @@ To test a method, you define a **Schema** and run it through the **Runner**.
 
 ```smalltalk
 "1. Define how to generate the receiver"
-receiverConstraint := PBTObjectConstraint new 
-    generator: (PBTGenerator oneOf: (1 to: 100)).
+receiverConstraint := UmeObjectConstraint new 
+    generator: (UmeGenerator oneOf: (1 to: 100)).
 
 "2. Define the property (Assertion)"
 assert := [ :n :args :result | n * (n - 1) factorial = result ].
 
 "3. Create the Schema"
-schema := PBTSchema new 
+schema := UmeSchema new 
     receiverConstraint: receiverConstraint; 
     assert: assert.
 
 "4. Run the tests"
-PBTRunner test: Integer >> #factorial from: schema.
+UmeRunner test: Integer >> #factorial from: schema.
 ```
 
 ---
@@ -55,7 +55,7 @@ PBTRunner test: Integer >> #factorial from: schema.
 Ume excels at finding performance bottlenecks. Unlike traditional tools, **the Runner guides the search** toward high-cost inputs.
 
 ```smalltalk
-runner := PBTRunner test: RxMatcher >> #matches: from: schema for: 1 minute.
+runner := UmeRunner test: RxMatcher >> #matches: from: schema for: 1 minute.
 
 "Guide the search to maximize execution time"
 runner guidedByExecutionTime.
@@ -72,7 +72,7 @@ result := runner run.
 
 ## Analyzing Results
 
-The `PBTResult` object contains the history of the search and tools to identify outliers.
+The `UmeResult` object contains the history of the search and tools to identify outliers.
 
 - **`topCases`**: Access the most interesting cases found (the "best" discoveries).
 - **`tests`**: Inspect every single execution case.
@@ -91,12 +91,12 @@ The `PBTResult` object contains the history of the search and tools to identify 
 
 ## Advanced Generation: Tree-Grammar Mutations
 
-For complex inputs like JSON or Regex, Ume uses structural mutations. **`PBTTreeGrammarMutator`** parses inputs into ASTs and uses **Monte Carlo Tree Search (MCTS)** to intelligently explore the grammar space.
+For complex inputs like JSON or Regex, Ume uses structural mutations. **`UmeTreeGrammarMutator`** parses inputs into ASTs and uses **Monte Carlo Tree Search (MCTS)** to intelligently explore the grammar space.
 
 ```smalltalk
-mutator := (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100.
-generator := PBTCorpusWithMutationsGenerator new
-    seedGenerator: (PBTConstantGenerator new value: '[]');
+mutator := (UmeTreeGrammarMutator from: JSONGrammar new) maxInputSize: 100.
+generator := UmeCorpusWithMutationsGenerator new
+    seedGenerator: (UmeConstantGenerator new value: '[]');
     mutators: { mutator }.
 ```
 
@@ -106,11 +106,11 @@ generator := PBTCorpusWithMutationsGenerator new
 
 One of the most powerful workflows in Ume is the ability to turn discovered bugs into permanent unit tests automatically.
 
-### Using `PBTUnitTest`
-Subclass `PBTUnitTest` to define your search parameters once. You can then run a script to automatically verify and "install" discovered cases as standard Pharo test methods.
+### Using `UmeUnitTest`
+Subclass `UmeUnitTest` to define your search parameters once. You can then run a script to automatically verify and "install" discovered cases as standard Pharo test methods.
 
 ```smalltalk
-"Inside your PBTUnitTest subclass"
+"Inside your UmeUnitTest subclass"
 MyRegressionTest >> generateTests [
     <script: 'self new generateTests'> "Run this in Pharo"
     super generateTests: 15 minutes.
@@ -130,7 +130,7 @@ test_12345678 [
 
 ## Mutator Configurations
 
-Ume supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `PBTCorpusWithMutationsGenerator`.
+Ume supports three primary levels of mutation, allowing you to choose the right balance between search speed and structural validity. These are typically used with `UmeCorpusWithMutationsGenerator`.
 
 ![Corpus Generator](ume-images/corpus-gen.png)
 
@@ -139,13 +139,13 @@ Works at the raw string/byte level. Fast and can find "invalid" but interesting 
 
 ```smalltalk
 mutators := {
-    (PBTAddByteMutator new maxInputSize: 100).
-    PBTByteFlipMutator new.
-    PBTDelByteMutator new
+    (UmeAddByteMutator new maxInputSize: 100).
+    UmeByteFlipMutator new.
+    UmeDelByteMutator new
 }.
 
-generator := PBTCorpusWithMutationsGenerator new
-    seedGenerator: (PBTConstantGenerator new value: '{"a":1}');
+generator := UmeCorpusWithMutationsGenerator new
+    seedGenerator: (UmeConstantGenerator new value: '{"a":1}');
     mutators: mutators.
 ```
 
@@ -153,10 +153,10 @@ generator := PBTCorpusWithMutationsGenerator new
 Uses a grammar to ensure that any mutation results in a **structurally valid** string. Slower than byte-level but much more effective for deep logic testing.
 
 ```smalltalk
-mutator := PBTGrammarMutator from: JSONGrammar new.
+mutator := UmeGrammarMutator from: JSONGrammar new.
 
-generator := PBTCorpusWithMutationsGenerator new
-    seedGenerator: (PBTConstantGenerator new value: '{"key": "value"}');
+generator := UmeCorpusWithMutationsGenerator new
+    seedGenerator: (UmeConstantGenerator new value: '{"key": "value"}');
     mutators: { mutator }.
 ```
 
@@ -164,23 +164,23 @@ generator := PBTCorpusWithMutationsGenerator new
 Parses the input into an AST and performs structural rotations, node replacements, and sub-tree generation using **Monte Carlo Tree Search (MCTS)**. This is the most powerful way to explore complex deeply-nested structures.
 
 ```smalltalk
-mutator := (PBTTreeGrammarMutator from: JSONGrammar new) maxInputSize: 200.
+mutator := (UmeTreeGrammarMutator from: JSONGrammar new) maxInputSize: 200.
 
-generator := PBTCorpusWithMutationsGenerator new
-    seedGenerator: (PBTConstantGenerator new value: '[]'); "Initial seed"
+generator := UmeCorpusWithMutationsGenerator new
+    seedGenerator: (UmeConstantGenerator new value: '[]'); "Initial seed"
     mutationsPerIteration: 3;
     mutators: { mutator };
-    heuristic: PBTPickBestElementDifferenceHeuristic new.
+    heuristic: UmePickBestElementDifferenceHeuristic new.
 ```
 
 ---
 
 ## Documentation
 
-- [Getting Started](https://github.com/FedeLoch/PBT/wiki/Getting-Started)
-- [How Ume Works](https://github.com/FedeLoch/PBT/wiki/How-Ume-Works)
-- [Generators](https://github.com/FedeLoch/PBT/wiki/Generators)
-- [Examples](https://github.com/FedeLoch/PBT/wiki/Examples)
-- [Defining Custom Grammars](https://github.com/FedeLoch/PBT/wiki/Grammars)
-- [Performance Analysis with Charts](https://github.com/FedeLoch/PBT/wiki/Charts)
-- [Low-Cost instrumentation API](https://github.com/FedeLoch/PBT/wiki/Low-Cost-API)
+- [Getting Started](https://github.com/FedeLoch/Ume/wiki/Getting-Started)
+- [How Ume Works](https://github.com/FedeLoch/Ume/wiki/How-Ume-Works)
+- [Generators](https://github.com/FedeLoch/Ume/wiki/Generators)
+- [Examples](https://github.com/FedeLoch/Ume/wiki/Examples)
+- [Defining Custom Grammars](https://github.com/FedeLoch/Ume/wiki/Grammars)
+- [Performance Analysis with Charts](https://github.com/FedeLoch/Ume/wiki/Charts)
+- [Low-Cost instrumentation API](https://github.com/FedeLoch/Ume/wiki/Low-Cost-API)

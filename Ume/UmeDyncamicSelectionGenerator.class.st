@@ -1,0 +1,64 @@
+Class {
+	#name : 'UmeDyncamicSelectionGenerator',
+	#superclass : 'UmeGenerator',
+	#instVars : [
+		'probabilityGenerators',
+		'lastChosen'
+	],
+	#category : 'Ume-Generators',
+	#package : 'Ume',
+	#tag : 'Generators'
+}
+
+{ #category : 'as yet unclassified' }
+UmeDyncamicSelectionGenerator >> feed: feedback [
+
+	"P(x) = \frac{\text{weight}(x)}{\text{sum of all weights}}"
+	self updateWeight: feedback.
+]
+
+{ #category : 'as yet unclassified' }
+UmeDyncamicSelectionGenerator >> gen: myConstraint [
+
+	lastChosen := self selectOne.
+	^ lastChosen gen: myConstraint
+]
+
+{ #category : 'accessing' }
+UmeDyncamicSelectionGenerator >> generators: gens [
+
+	probabilityGenerators := gens collect: [ :gen | UmeGenProbabilityWrapper from: gen ]
+]
+
+{ #category : 'accessing' }
+UmeDyncamicSelectionGenerator >> probabilityGenerators [
+
+	^ probabilityGenerators 
+]
+
+{ #category : 'as yet unclassified' }
+UmeDyncamicSelectionGenerator >> selectOne [
+
+	| totalWeights weights indexes random |
+
+	totalWeights := (probabilityGenerators collect: #weight) sum.
+	weights := OrderedCollection new.
+	
+	indexes := probabilityGenerators collect: [ :wrapper | | current |
+		current := (weights isEmpty ifTrue: [0] ifFalse: [ weights last ]).
+		weights add: (current + wrapper weight).
+		probabilityGenerators indexOf: wrapper
+	].
+	
+	random := (1 to: totalWeights) atRandom.
+	
+	^ probabilityGenerators at: (indexes detect: [ :index | random <= (weights at: index) ])
+]
+
+{ #category : 'as yet unclassified' }
+UmeDyncamicSelectionGenerator >> updateWeight: feedback [
+
+	(lastChosen isNil or: [ feedback isNil ]) ifTrue: [ ^ nil ].
+
+	feedback feedback ifTrue: [ lastChosen increaseWeight ] ifFalse: [ lastChosen decreaseWeight ]
+]

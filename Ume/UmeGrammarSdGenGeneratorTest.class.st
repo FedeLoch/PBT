@@ -1,0 +1,37 @@
+Class {
+	#name : 'UmeGrammarSdGenGeneratorTest',
+	#superclass : 'UmeGeneratorTest',
+	#category : 'Ume-Generators',
+	#package : 'Ume',
+	#tag : 'Generators'
+}
+
+{ #category : 'as yet unclassified' }
+UmeGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenADateGrammar [
+
+	| generator |
+	
+	generator := UmeGrammarSdGenGenerator from: PzDateMDYYYYGrammar new ofDepth: 10.
+	
+	self assert: (Date readFrom: (generator gen: nil) pattern: 'm-d-y') class equals: Date
+]
+
+{ #category : 'tests' }
+UmeGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenAJSONGrammar [
+
+	| generator generated |
+	
+	generator := UmeGrammarSdGenGenerator from: JSONGrammar new ofDepth: 10.
+	generated := generator gen: nil.
+	self assert: ({ Array . SmallInteger . True . False . Dictionary . UndefinedObject } includes: (NeoJSONReader fromString: generated) class) equals: true 
+]
+
+{ #category : 'tests' }
+UmeGrammarSdGenGeneratorTest >> testGenerateARandomStringFromAGivenARegexGrammar [
+
+	| generator |
+	
+	generator := UmeGrammarSdGenGenerator from: GncRegexGrammar new ofDepth: 10.
+	
+	self assert: (generator gen: nil) asRegex class equals: RxMatcher
+]

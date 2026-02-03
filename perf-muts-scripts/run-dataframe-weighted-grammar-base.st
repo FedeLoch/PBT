@@ -1,6 +1,6 @@
 Metacello new
-    baseline: 'PBT';
-    repository: 'github://FedeLoch/PBT:main';
+    baseline: 'Ume';
+    repository: 'github://FedeLoch/Ume:main';
 	onConflictUseIncoming;
     load.
 
