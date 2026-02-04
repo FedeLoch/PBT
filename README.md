@@ -4,7 +4,15 @@
 
 # Ume - Property-Based Testing & Guided Performance Fuzzing for Pharo
 
-Ume is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation.
+Ume is a framework for Pharo designed to discover both functional bugs and performance outliers (Perfuzzing). It combines traditional random generation with grammar-based mutations, feedback-oriented exploration, and automatic regression test generation. To know more about Ume:
+
+- [Getting Started](https://github.com/FedeLoch/Ume/wiki/Getting-Started)
+- [How Ume Works](https://github.com/FedeLoch/Ume/wiki/How-Ume-Works)
+- [Generators](https://github.com/FedeLoch/Ume/wiki/Generators)
+- [Examples](https://github.com/FedeLoch/Ume/wiki/Examples)
+- [Defining Custom Grammars](https://github.com/FedeLoch/Ume/wiki/Grammars)
+- [Performance Analysis with Charts](https://github.com/FedeLoch/Ume/wiki/Charts)
+- [Low-Cost instrumentation API](https://github.com/FedeLoch/Ume/wiki/Low-Cost-API)
 
 
 ## Core Objective
@@ -173,14 +181,3 @@ generator := UmeCorpusWithMutationsGenerator new
     heuristic: UmePickBestElementDifferenceHeuristic new.
 ```
 
----
-
-## Documentation
-
-- [Getting Started](https://github.com/FedeLoch/Ume/wiki/Getting-Started)
-- [How Ume Works](https://github.com/FedeLoch/Ume/wiki/How-Ume-Works)
-- [Generators](https://github.com/FedeLoch/Ume/wiki/Generators)
-- [Examples](https://github.com/FedeLoch/Ume/wiki/Examples)
-- [Defining Custom Grammars](https://github.com/FedeLoch/Ume/wiki/Grammars)
-- [Performance Analysis with Charts](https://github.com/FedeLoch/Ume/wiki/Charts)
-- [Low-Cost instrumentation API](https://github.com/FedeLoch/Ume/wiki/Low-Cost-API)
