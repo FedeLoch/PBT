@@ -5,6 +5,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
+# ============================================================
+# SCALE PARAMETER - Adjust this to resize all labels
+# ============================================================
+SCALE = 2  # 1.0 = default size, 1.5 = 50% larger, 2.0 = double, etc.
+
+# Base font sizes (will be multiplied by SCALE)
+BASE_TITLE_SIZE = 14
+BASE_LABEL_SIZE = 12
+BASE_LEGEND_SIZE = 10
+BASE_TICK_SIZE = 10
+
 def process_directory(directory_path, color, label):
     """Process all CSV files in a directory and return the padded runs and max_len."""
     csv_files = glob.glob(os.path.join(directory_path, "*.csv"))
@@ -120,15 +131,19 @@ def main():
         
         plt.step(x_axis, mean_y, where='post', color=line_color, linewidth=2.5, label=label, zorder=10)
     
-    plt.title('Heat map comparison (Best case as far)')
-    plt.xlabel('Iteration (Case)')
-    plt.ylabel('Microseconds (Best found as far)')
+    plt.title('Heat map comparison (Best case as far)', fontsize=BASE_TITLE_SIZE * SCALE)
+    plt.xlabel('Iteration (Case)', fontsize=BASE_LABEL_SIZE * SCALE)
+    plt.ylabel('Microseconds (Best found as far)', fontsize=BASE_LABEL_SIZE * SCALE)
     
     plt.yscale('log')
     plt.xscale('log')
     
-    plt.legend(loc='best')
+    plt.legend(loc='best', fontsize=BASE_LEGEND_SIZE * SCALE)
     plt.grid(True, which='both', linestyle='--', alpha=0.5)
+    
+    # Apply scaled tick label sizes
+    plt.tick_params(axis='both', which='major', labelsize=BASE_TICK_SIZE * SCALE)
+    plt.tick_params(axis='both', which='minor', labelsize=BASE_TICK_SIZE * SCALE * 0.85)
     
     plt.tight_layout()
     plt.show()
