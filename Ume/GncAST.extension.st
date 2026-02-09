@@ -81,18 +81,6 @@ GncAST >> emptyTree [
 ]
 
 { #category : '*Ume' }
-GncAST >> grammarRule [
-
-	^ grammarRule
-]
-
-{ #category : '*Ume' }
-GncAST >> grammarRule: gncRule [
-
-	grammarRule := gncRule.
-]
-
-{ #category : '*Ume' }
 GncAST >> isTypeVariable [
 
 	^ false
