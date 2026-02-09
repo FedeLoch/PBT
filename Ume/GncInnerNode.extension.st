@@ -64,9 +64,3 @@ GncInnerNode >> replaceChildAt: index with: newNode [
 	children at: index put: newNode.
 	newNode parent: self.
 ]
-
-{ #category : '*Ume' }
-GncInnerNode >> updateWeightToChildren: reward [ 
-
-	self children do: [ :child | child updateWeightRecursive: reward ]
-]

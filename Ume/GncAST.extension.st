@@ -99,20 +99,6 @@ GncAST >> tag [
 ]
 
 { #category : '*Ume' }
-GncAST >> updateWeightRecursive: reward [
-
-	grammarRule ifNotNil: [ grammarRule updateWeightWith: reward ].
-	
-	self updateWeightToChildren: reward.
-]
-
-{ #category : '*Ume' }
-GncAST >> updateWeightToChildren: reward [
-
-	self subclassResponsibility 
-]
-
-{ #category : '*Ume' }
 GncAST >> visited [
 	
 	^ false 
