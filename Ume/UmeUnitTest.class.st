@@ -32,7 +32,7 @@ UmeUnitTest >> constantGen: obj [
 UmeUnitTest >> corpusGenFrom: seed mpi: mpi mutators: mutators [
 
 	^ UmeCorpusGenerator new
-		  seedGenerator: (UmeConstantGenerator new value: seed);
+		  seeds: { seed };
 		  mutationsPerIteration: mpi;
 		  mutators: mutators;
 		  heuristic: UmePickBestElementDifferenceHeuristic new
@@ -82,7 +82,7 @@ UmeUnitTest >> generateRegressionTests: duration [
 
 { #category : 'running' }
 UmeUnitTest >> generateRegressionUnitTests: result [
-
+	1 halt.
 	result topCases do: [ :t | t installRegressionUnitTestIn: self ]
 ]
 
