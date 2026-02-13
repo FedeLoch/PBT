@@ -25,5 +25,7 @@ UmePickBestElementDifferenceHeuristic >> pickOne: candidates feedbacks: feedback
 		dict
 	].
 
+	bestForKey ifEmpty: [ ^ feedbacks atRandom case ].
+
 	^ bestForKey atRandom
 ]

@@ -31,14 +31,13 @@ UmeBlocTest >> assert: receiver arguments: arguments result: result [
 UmeBlocTest >> generateTests [
 
 	<script: 'self new generateTests'>
-	super generateTests: 10 minutes
+	super generateTests: 5 minutes
 ]
 
 { #category : 'running' }
 UmeBlocTest >> guidedBy [
 
-"	self guidedByMethodsCalls"
-	self guidedByExecutionTime
+	self guidedByMethodsCalls
 	"self guidedByBytecodes" 
 ]
 

@@ -20,6 +20,8 @@ UmeOGGrammarDerivationMutatorTest >> doMutateTest: description times: n [
 		grammar parse: object
 	].
 
+	^ object
+
 ]
 
 { #category : 'tests' }
