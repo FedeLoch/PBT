@@ -23,7 +23,7 @@ UmeMatePlayerTest >> assert: receiver arguments: arguments result: result [
 UmeMatePlayerTest >> generateTests [
 
 	<script: 'self new generateTests'>
-	super generateTests: 30 minutes
+	super generateTests: 10 minutes
 ]
 
 { #category : 'running' }
@@ -53,4 +53,26 @@ UmeMatePlayerTest >> receiverGenerator [
 UmeMatePlayerTest >> targetMethod [
 
 	^ Player >> #damage 
+]
+
+{ #category : 'Ume dynamic tests' }
+UmeMatePlayerTest >> test_299655424 [
+	
+		self doTest: {
+			'method' -> (Player>>#damage) selector.
+			'receiver' -> 'Player{#name:''fede'',#characterClass:Rogue{},#level:1,#missingExperienceForNextLevel:0}'.
+			'arguments' -> '[]'.
+		} asDictionary
+	
+]
+
+{ #category : 'Ume dynamic tests' }
+UmeMatePlayerTest >> test_692162816 [
+	
+		self doTest: {
+			'method' -> (Player>>#damage) selector.
+			'receiver' -> 'Player{#name:''odqi'',#characterClass:Rogue{},#level:1,#missingExperienceForNextLevel:542890132034813952}'.
+			'arguments' -> '[]'.
+		} asDictionary
+	
 ]
