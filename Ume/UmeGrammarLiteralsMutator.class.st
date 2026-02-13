@@ -14,7 +14,7 @@ Class {
 { #category : 'instance creation' }
 UmeGrammarLiteralsMutator class >> from: aGrammar [
 
-	^ self new gammar: aGrammar
+	^ self new grammar: aGrammar
 ]
 
 { #category : 'accessing' }
@@ -25,7 +25,7 @@ UmeGrammarLiteralsMutator >> applyMutation: string [
 ]
 
 { #category : 'as yet unclassified' }
-UmeGrammarLiteralsMutator >> gammar: aGrammar [
+UmeGrammarLiteralsMutator >> grammar: aGrammar [
 	
 	grammar := aGrammar.
 	characterTerminals := grammar terminals.

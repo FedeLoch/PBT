@@ -29,7 +29,7 @@ UmeMatePlayerTest >> generateTests [
 { #category : 'running' }
 UmeMatePlayerTest >> guidedBy [
 
-	self guidedByMethodsCalls
+	self guidedByExecutionTime
 	"self guidedByBytecodes" 
 ]
 
@@ -46,7 +46,7 @@ UmeMatePlayerTest >> receiverGenerator [
 	^ self
 		  corpusGenFrom: seedElement
 		  mpi: 3
-		  mutators: { (UmeGrammarDerivationMutator from: MatePlayerGrammarByLang new) }
+		  mutators: { (UmeOGGrammarDerivationMutator from: MatePlayerGrammarByLang new) }
 ]
 
 { #category : 'running' }

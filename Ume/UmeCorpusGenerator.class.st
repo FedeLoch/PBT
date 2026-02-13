@@ -37,7 +37,7 @@ UmeCorpusGenerator >> feed: feedback [
 	
 	self updateWeight: feedback.
 	
-	((feedback notNil) and: [ feedback isPositive ]) ifTrue: [
+	((feedback notNil) and: [ feedback isPositive or: [ corpus isEmpty ] ]) ifTrue: [
 		self addToCorpus: feedback
 	]
 ]

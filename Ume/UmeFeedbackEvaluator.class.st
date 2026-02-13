@@ -95,7 +95,7 @@ UmeFeedbackEvaluator >> customMetricsTable: dict [
 UmeFeedbackEvaluator >> eval: case [
 	
 	| improvement caseValues |
-	
+
 	caseValues := self values: case.
 	improvement := self compareAndUpdateValues: caseValues.
 	improvement > 0 ifTrue: [ topCases add: case ].

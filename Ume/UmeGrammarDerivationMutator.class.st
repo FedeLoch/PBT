@@ -1,3 +1,6 @@
+"
+Deprecated
+"
 Class {
 	#name : 'UmeGrammarDerivationMutator',
 	#superclass : 'UmeStringMutator',
@@ -14,7 +17,7 @@ Class {
 { #category : 'instance creation' }
 UmeGrammarDerivationMutator class >> from: aGrammar [
 
-	^ self new gammar: aGrammar
+	^ self new grammar: aGrammar
 ]
 
 { #category : 'accessing' }
@@ -48,15 +51,15 @@ UmeGrammarDerivationMutator >> freshAST [
 ]
 
 { #category : 'as yet unclassified' }
-UmeGrammarDerivationMutator >> gammar: aGrammar [
-	
-	grammar := aGrammar
-]
-
-{ #category : 'as yet unclassified' }
 UmeGrammarDerivationMutator >> grammar [
 
 	^ grammar 
+]
+
+{ #category : 'as yet unclassified' }
+UmeGrammarDerivationMutator >> grammar: aGrammar [
+	
+	grammar := aGrammar
 ]
 
 { #category : 'initialization' }
