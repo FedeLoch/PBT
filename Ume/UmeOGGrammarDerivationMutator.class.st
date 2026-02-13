@@ -54,8 +54,10 @@ UmeOGGrammarDerivationMutator >> mutateDerivation: derivation [
 
 	| node |
 	
+	"Select a node reward-based to mutate"
 	node := self pickNode: derivation.
-	1 halt.
+
+	"Replace the node with a new variant"
 	grammar replace: node by: (grammar genVariant: node).
 	
 	^ derivation	
