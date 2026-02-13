@@ -52,13 +52,15 @@ UmeOGGrammarDerivationMutator >> mutate: objectGraph [
 { #category : 'as yet unclassified' }
 UmeOGGrammarDerivationMutator >> mutateDerivation: derivation [
 
-	| node |
+	| node variant |
 	
 	"Select a node reward-based to mutate"
 	node := self pickNode: derivation.
 
 	"Replace the node with a new variant"
-	grammar replace: node by: (grammar genVariant: node).
+	variant := grammar genVariant: node.
+
+	grammar replace: node by: variant.
 	
 	^ derivation	
 ]

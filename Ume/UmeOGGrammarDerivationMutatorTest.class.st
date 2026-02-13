@@ -13,13 +13,20 @@ UmeOGGrammarDerivationMutatorTest >> doMutateTest: description times: n [
 
 	grammar := description asDictionary at: 'grammar'.
 	object := description asDictionary at: 'object'.
-			
+	
 	mutator := UmeOGGrammarDerivationMutator new grammar: grammar.
-	1000 timesRepeat: [
+	n timesRepeat: [
 		object := mutator mutate: object.
 		grammar parse: object
 	].
 
+]
+
+{ #category : 'tests' }
+UmeOGGrammarDerivationMutatorTest >> setUp [ 
+
+	super setUp.
+	self timeLimit: 1 minute.
 ]
 
 { #category : 'tests' }
