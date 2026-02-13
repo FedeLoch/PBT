@@ -11,11 +11,11 @@ UmeBlocTest >> argumentGenerators [
 
 	| seedElement |
 	
-	seedElement := BlElement new background: Color blue; extent: 50@50.
+	seedElement := BlElement new background: Color blue; extent: 1000@1000.
 
 	^ {
 		self corpusGenFrom: seedElement mpi: 3 mutators: {
-			UmeGrammarDerivationMutator from: MateBlocGrammarByLang new
+			UmeOGGrammarDerivationMutator from: MateBlocGrammarByLang new
 		}
 	}
 ]
@@ -31,13 +31,14 @@ UmeBlocTest >> assert: receiver arguments: arguments result: result [
 UmeBlocTest >> generateTests [
 
 	<script: 'self new generateTests'>
-	super generateTests: 30 minutes
+	super generateTests: 10 minutes
 ]
 
 { #category : 'running' }
 UmeBlocTest >> guidedBy [
 
-	self guidedByMethodsCalls
+"	self guidedByMethodsCalls"
+	self guidedByExecutionTime
 	"self guidedByBytecodes" 
 ]
 

@@ -44,7 +44,7 @@ UmeOGGrammarDerivationMutator >> mutate: objectGraph [
 
 	| derivation |
 
-	derivation := grammar parse: (objectGraph deepCopy).
+	derivation := grammar parse: (objectGraph veryDeepCopy).
 	
 	^ (self mutateDerivation: derivation) instance
 ]
