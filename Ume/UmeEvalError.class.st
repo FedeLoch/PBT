@@ -29,6 +29,12 @@ UmeEvalError >> message: aMessage [
 ]
 
 { #category : 'accessing' }
+UmeEvalError >> stack [
+
+	^ stack
+]
+
+{ #category : 'accessing' }
 UmeEvalError >> stack: aStack [
 
 	stack := aStack 
