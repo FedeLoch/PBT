@@ -16,6 +16,16 @@ UmeOGGrammarDerivationMutator class >> from: aGrammar [
 ]
 
 { #category : 'accessing' }
+UmeOGGrammarDerivationMutator >> feed: feedback [
+
+	feedback ifNotNil: [ | derivation improvement |
+		[ derivation := grammar parse: feedback case ] on: Error do: [ ^ nil ].
+
+		grammar backpropagate: derivation improvement: feedback improvement.
+	]
+]
+
+{ #category : 'accessing' }
 UmeOGGrammarDerivationMutator >> grammar: aGrammar [
 
 	grammar := aGrammar 
