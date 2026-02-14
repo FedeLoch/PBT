@@ -31,7 +31,7 @@ UmeBlocTest >> assert: receiver arguments: arguments result: result [
 UmeBlocTest >> generateTests [
 
 	<script: 'self new generateTests'>
-	super generateTests: 5 minutes
+	super generateTests: 15 minutes
 ]
 
 { #category : 'running' }

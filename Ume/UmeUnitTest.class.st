@@ -102,7 +102,7 @@ UmeUnitTest >> generateTests: duration [
 
 { #category : 'running' }
 UmeUnitTest >> generateUnitTests: result [
-
+1 halt.
 	result topCases do: [ :t | t installUnitTestIn: self ]
 ]
 
