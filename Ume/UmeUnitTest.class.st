@@ -82,7 +82,7 @@ UmeUnitTest >> generateRegressionTests: duration [
 
 { #category : 'running' }
 UmeUnitTest >> generateRegressionUnitTests: result [
-	1 halt.
+
 	result topCases do: [ :t | t installRegressionUnitTestIn: self ]
 ]
 
@@ -102,7 +102,7 @@ UmeUnitTest >> generateTests: duration [
 
 { #category : 'running' }
 UmeUnitTest >> generateUnitTests: result [
-1 halt.
+
 	result topCases do: [ :t | t installUnitTestIn: self ]
 ]
 
