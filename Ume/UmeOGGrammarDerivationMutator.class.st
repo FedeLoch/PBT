@@ -18,7 +18,7 @@ UmeOGGrammarDerivationMutator class >> from: aGrammar [
 { #category : 'accessing' }
 UmeOGGrammarDerivationMutator >> feed: feedback [
 
-	feedback ifNotNil: [ | derivation improvement |
+	feedback ifNotNil: [ | derivation |
 		[ derivation := grammar parse: feedback case ] on: Error do: [ ^ nil ].
 
 		grammar backpropagate: derivation improvement: feedback improvement.
@@ -77,6 +77,9 @@ UmeOGGrammarDerivationMutator >> mutateDerivation: derivation [
 
 { #category : 'as yet unclassified' }
 UmeOGGrammarDerivationMutator >> pickNode: derivation [
+
+	"10 % of selecting a random node"
+	((1 to: 100) atRandom) <= 10 ifTrue: [ ^ derivation allNodes atRandom ].
 
 	^ self minimumRewardedNode: derivation
 ]
