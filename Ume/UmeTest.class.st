@@ -45,7 +45,7 @@ UmeTest >> arguments: inputs [
 { #category : 'as yet unclassified' }
 UmeTest >> argumentsString [
 
-	^ (STON toString: arguments) printString
+	^ (STON toString: arguments) fullPrintString
 ]
 
 { #category : 'accessing' }
@@ -186,7 +186,7 @@ UmeTest >> receiver: anObject [
 { #category : 'as yet unclassified' }
 UmeTest >> receiverString [
 
-	^ (STON toString: receiver) printString
+	^ (STON toString: receiver) fullPrintString
 ]
 
 { #category : 'as yet unclassified' }
