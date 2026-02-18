@@ -44,8 +44,8 @@ UmeFeedbackEvaluator >> bytecodesTable: aBytecodesTable [
 UmeFeedbackEvaluator >> category: value [
 	
 	value == 0 ifTrue: [ ^ 0 ].
-
-	^ value ln rounded
+	
+	^ (value ln rounded) max: 1
 ]
 
 { #category : 'as yet unclassified' }
