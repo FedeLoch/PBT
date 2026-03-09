@@ -68,28 +68,28 @@ def main():
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-grammar-derivations',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-stochastic-base',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-weighted-grammar-base',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-combined-mutators',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Regexes/regexes-dynamic-scheduling',
 
         # JSON
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-literals',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-grammar-derivations',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-stochastic-base',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-weighted-grammar-base',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-combined-mutators',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/JSON/json-dynamic-scheduling',
 
         # Microdown
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-literals',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-grammar-derivations',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-stochastic-base',
         # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-weighted-grammar-base',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-combined-mutators',
+        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/Microdown/microdown-dynamic-scheduling',
 
         # DataFrame
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-literals',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-derivations',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-stochastic-base',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-weighted-grammar-base',
-        # '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-combined-mutators',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-literals',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-grammar-derivations',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-stochastic-base',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-weighted-grammar-base',
+        '/Users/fede/Documents/PhD/2025-generating-pathological-performance-mutations/Experiment results/New experiments/DataFrame/dataframe-dynamic-scheduling',
     ]
     
     for dir_path in directory_paths:
@@ -129,9 +129,11 @@ def main():
                              mean_y + std_y * sigma_level, 
                              step='post', color=color, alpha=alpha)
         
+        label = '-'.join(label.split('-')[1:])
+        label = label[0].upper() + label[1:]
         plt.step(x_axis, mean_y, where='post', color=line_color, linewidth=2.5, label=label, zorder=10)
     
-    plt.title('Heat map comparison (Best case as far)', fontsize=BASE_TITLE_SIZE * SCALE)
+    plt.title('DataFrame', fontsize=BASE_TITLE_SIZE * SCALE)
     plt.xlabel('Iteration (Case)', fontsize=BASE_LABEL_SIZE * SCALE)
     plt.ylabel('Microseconds (Best found as far)', fontsize=BASE_LABEL_SIZE * SCALE)
     
