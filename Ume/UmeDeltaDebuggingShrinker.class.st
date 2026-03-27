@@ -39,10 +39,10 @@ UmeDeltaDebuggingShrinker >> shrinkWithDD: current from: granularity to: bestSco
 			granularity = 2
 				ifTrue: [ ^ self ].
 			self shrinkWithDD: current from: (granularity // 2 max: 2) to: bestScore ]
-		ifFalse: [ 
-			current := candidates join.
-			bestScore := self evalInput: current.
-			self shrinkWithDD: current from: (granularity // 2 max: 2) to: bestScore ]
+		ifFalse: [  | newCurrent |
+			newCurrent := candidates join.
+			bestScore := self evalInput: newCurrent.
+			self shrinkWithDD: newCurrent from: (granularity // 2 max: 2) to: bestScore ]
 ]
 
 { #category : 'shrinking' }
