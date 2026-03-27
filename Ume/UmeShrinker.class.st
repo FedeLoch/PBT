@@ -1,16 +1,6 @@
 Class {
 	#name : 'UmeShrinker',
-	#superclass : 'Object',
-	#instVars : [
-		'grammar',
-		'evaluator',
-		'feedbackEvaluator',
-		'threshold',
-		'programBlock',
-		'classesToProfile',
-		'memo',
-		'maxIterations'
-	],
+	#superclass : 'UmeBaseShrinker',
 	#category : 'Ume-Shrinking',
 	#package : 'Ume',
 	#tag : 'Shrinking'
@@ -33,10 +23,57 @@ UmeShrinker >> candidates: root [
 
 ]
 
-{ #category : 'testing' }
-UmeShrinker >> classesToProfile [
+{ #category : 'shrinking' }
+UmeShrinker >> shrink: input [
+	
+	| node minimizedNode feedback currentInput prevValidInput |
+	
+	prevValidInput := input.
+	currentInput := input.
 
-	^ classesToProfile 
+	(self parse: input) ifNil: [ ^ input ].
+	feedback := self evalInput: input.
+		
+	[ true ] whileTrue: [
+		node := self parse: currentInput.
+
+		minimizedNode := self minimize: node upperBound: feedback.
+		(minimizedNode asInput = currentInput) ifTrue: [ ^ currentInput ].
+		self evalInput: minimizedNode.
+
+		prevValidInput := currentInput.
+		currentInput := minimizedNode asInput.
+	]
+]
+
+{ #category : 'testing' }
+UmeShrinker >> isValidTree: node [
+
+	| input derivation |
+	input := node asInput.
+
+	[ derivation := self parse: input ] on: Error do: [ ^ false ].
+	derivation ifNil: [ ^ false ].
+
+	^ derivation asInput = input
+]
+
+{ #category : 'shrinking' }
+UmeShrinker >> minimize: node upperBound: bound [
+	
+	(self candidates: node) do: [ :child | | parent |
+		parent := child parent.
+		parent ifNotNil: [ | index |
+			index := parent children indexOf: child.
+			parent replaceChildAt: index with: child emptyTree.
+
+			((self isValidTree: node) and: [ self isStillValuable: (self evalInput: node asInput) original: bound ]) ifFalse: [
+				parent replaceChildAt: index with: child.
+			]
+		].
+	].
+
+	^ node
 ]
 
 { #category : 'testing' }
