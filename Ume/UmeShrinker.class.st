@@ -50,8 +50,6 @@ UmeShrinker >> evalInput: input [
 
 	| profilingResult umeCase program |
 	
-	(input = 'aa*a*..') ifTrue: [ 1 halt. ].
-	
 	memo at: input ifAbsentPut: [
 		program := PBAProgram from: [ programBlock value: input ] forClasses: classesToProfile.
 
@@ -163,6 +161,12 @@ UmeShrinker >> programBlock [
 UmeShrinker >> programBlock: aProgramBlock [
 
 	programBlock := aProgramBlock 
+]
+
+{ #category : 'shrinking' }
+UmeShrinker >> resetMemoization [
+
+	memo := Dictionary new.
 ]
 
 { #category : 'shrinking' }
