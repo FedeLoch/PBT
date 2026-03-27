@@ -260,8 +260,8 @@ UmeRunner >> reRun: result [
 UmeRunner >> reachableMethods [
 
 	^ methodsToInstrument reject: [ :method |
-		  method pragmas anySatisfy: [ :pragma |
-			  pragma selector = #noInstrumentation ] ]
+		  method pragmas anySatisfy: [ :pragma | pragma selector = #noInstrumentation ]
+	]
 ]
 
 { #category : 'tests' }

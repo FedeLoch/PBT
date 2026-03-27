@@ -8,7 +8,8 @@ Class {
 		'threshold',
 		'programBlock',
 		'classesToProfile',
-		'memo'
+		'memo',
+		'maxIterations'
 	],
 	#category : 'Ume-Shrinking',
 	#package : 'Ume',
@@ -99,6 +100,7 @@ UmeShrinker >> initialize [
 	
 	super initialize.
 	threshold := 0.95.
+	maxIterations := 1000.
 	programBlock := nil.
 	classesToProfile := nil.
 	feedbackEvaluator := nil.
@@ -166,24 +168,23 @@ UmeShrinker >> programBlock: aProgramBlock [
 { #category : 'shrinking' }
 UmeShrinker >> shrink: input [
 	
-	| node minimizedNode feedback currentInput prevValidInput |
-	
-	prevValidInput := input.
-	currentInput := input.
+    | node minimizedNode feedback currentInput |
+    
+    currentInput := input.
 
-	(self parse: input) ifNil: [ ^ input ].
-	feedback := self evalInput: input.
-		
-	[ true ] whileTrue: [
-		node := self parse: currentInput.
-
-		minimizedNode := self minimize: node upperBound: feedback.
-		(minimizedNode asInput = currentInput) ifTrue: [ ^ currentInput ].
-		self evalInput: minimizedNode.
-
-		prevValidInput := currentInput.
-		currentInput := minimizedNode asInput.
-	]
+    (self parse: input) ifNil: [ ^ input ].
+    feedback := self evalInput: input.
+        
+    maxIterations timesRepeat: [
+        node := self parse: currentInput.
+        minimizedNode := self minimize: node upperBound: feedback.
+        
+        (minimizedNode asInput = currentInput) ifTrue: [ ^ currentInput ].
+        self evalInput: minimizedNode.
+        currentInput := minimizedNode asInput.
+    ].
+    
+    ^ currentInput
 ]
 
 { #category : 'testing' }

@@ -170,7 +170,7 @@ UmeCorpusGenerator >> selectMutator [
 	
 	random := (1 to: totalWeights) atRandom.
 	
-	^ mutators at: (weights findFirst: [ :w | random <= w ])
+	^ mutators at: (weights findFirst: [ :weight | random <= weight ])
 ]
 
 { #category : 'as yet unclassified' }
