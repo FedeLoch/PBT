@@ -157,20 +157,20 @@ UmeCorpusGenerator >> seeds: someSeeds [
 { #category : 'as yet unclassified' }
 UmeCorpusGenerator >> selectMutator [
 
-	| totalWeights weights indexes random |
+	| totalWeights weights random cumulative |
 
 	totalWeights := (mutators collect: #weight) sum.
 	weights := OrderedCollection new.
-	
-	indexes := mutators collect: [ :wrapper | | current |
-		current := (weights isEmpty ifTrue: [ 0 ] ifFalse: [ weights last ]).
-		weights add: (current + wrapper weight).
-		mutators indexOf: wrapper
-	].
+	cumulative := 0.
+    
+    mutators do: [ :wrapper |
+        cumulative := cumulative + wrapper weight.
+        weights add: cumulative
+    ].
 	
 	random := (1 to: totalWeights) atRandom.
 	
-	^ mutators at: (indexes detect: [ :index | random <= (weights at: index) ])
+	^ mutators at: (weights findFirst: [ :w | random <= w ])
 ]
 
 { #category : 'as yet unclassified' }
