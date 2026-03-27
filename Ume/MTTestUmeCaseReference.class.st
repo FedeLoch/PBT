@@ -1,9 +1,9 @@
 Class {
 	#name : 'MTTestUmeCaseReference',
 	#superclass : 'MTTestCaseReference',
-	#category : 'Ume-Test generation',
+	#category : 'Ume-Test Generation',
 	#package : 'Ume',
-	#tag : 'Test generation'
+	#tag : 'Test Generation'
 }
 
 { #category : 'instance creation' }

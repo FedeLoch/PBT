@@ -14,9 +14,9 @@ Class {
 		'id',
 		'targetSelector'
 	],
-	#category : 'Ume-Test generation',
+	#category : 'Ume-Test Generation',
 	#package : 'Ume',
-	#tag : 'Test generation'
+	#tag : 'Test Generation'
 }
 
 { #category : 'ston-core' }

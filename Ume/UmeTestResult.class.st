@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'result'
 	],
-	#category : 'Ume-Test generation',
+	#category : 'Ume-Test Generation',
 	#package : 'Ume',
-	#tag : 'Test generation'
+	#tag : 'Test Generation'
 }
 
 { #category : 'accessing' }
